@@ -78,3 +78,10 @@ body {
     justify-content: center;
     margin-bottom: 20px;
   }
+
+#td1{
+    width: 25%;
+  }
+#table{
+    width:100%;
+}

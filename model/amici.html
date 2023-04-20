@@ -5,6 +5,7 @@
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>PomoChallenge</title>
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css" integrity="sha512-Q7ZuBtZFN44wVgbKpq2Rd8iJGQOaO7sXSwEZsT3NYrTpr3fsZZ89jynjpjcbde4pKdtG6UqGzL01TvMH1nSOfA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
 
 
@@ -15,37 +16,58 @@
 
 
 
-    <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown button
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
+ 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <!-- Icon dropdown -->
+      <button class="nav-item dropdown" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+        <span class="flag-icon flag-icon-it"></span>
+  Italiano      </a> </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLanguage">
+          <li>
+            <a class="dropdown-item" href="#">
+            <i class="flag-united-kingdom flag"></i>English
+              <i class="fa fa-check text-success ms-2"></i
+            ></a>
+          </li>
+          <li><hr class="dropdown-divider" /></li>
+          <li>
+            <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
+          </li>
         </ul>
-      </div>
-      <div class="dropdown">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown link
-        </a>
-      
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Dropdown button
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-  
+      </li>
+    </ul>
+  </div>
+</nav>
 </body>
   </html>
