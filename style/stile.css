@@ -3,16 +3,7 @@ body {
     background-size: cover;
   }
   
-  .pomodoro {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    padding-top: 15px;
-    padding-bottom: 25px;
-  }
-  
+
   p {
     text-align: center;
   }
@@ -27,6 +18,7 @@ body {
   .col-md-4 {
     display: flex;
     justify-content: center;
+    width: 10%;
   }
   
   .col-md-2 {
@@ -74,11 +66,11 @@ body {
   
   #stats {
     background-color: #333333;
-    width: 220px;
+    width: 230px;
     height: 70px;
     border-radius: 10px;
     color: #CCCCCC;
-    font-size: 45px;
+    font-size: 35px;
     text-align: center;
   }
   
@@ -87,3 +79,11 @@ body {
     justify-content: center;
     margin-bottom: 20px;
   }
+
+
+  #td1{
+    width: 25%;
+  }
+#table{
+    width:100%;
+}
