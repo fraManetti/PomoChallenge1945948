@@ -79,9 +79,16 @@ body {
     margin-bottom: 20px;
   }
 
-#td1{
-    width: 25%;
+
+.container {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    /*height: 100vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
   }
-#table{
-    width:100%;
-}
+  
+  .center-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
