@@ -18,6 +18,7 @@ body {
   .col-md-4 {
     display: flex;
     justify-content: center;
+    width: 10%;
   }
   
   .col-md-2 {
@@ -80,15 +81,9 @@ body {
   }
 
 
-.container {
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
-    /*height: 100vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
+  #td1{
+    width: 25%;
   }
-  
-  .center-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+#table{
+    width:100%;
+}
