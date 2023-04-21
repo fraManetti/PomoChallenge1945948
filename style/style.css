@@ -20,6 +20,9 @@
   .box {
   border-color: #bd0101;
   }
+  .navbar {
+    background: rgba(255, 255, 255, 0.7);
+  }
 
   #taskBox{
 
