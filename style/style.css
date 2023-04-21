@@ -77,13 +77,16 @@
 
 .task{
     border-radius: 5px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     border: 1px solid #939697;
     cursor: pointer;
     background-color: #c5e1e6;
     height: 50px;
     margin-bottom: 8px;
     padding: 5px 10px;
+    align-content: space-between;
+    display: grid;
+    grid-template-columns: 15% 70% 5% 10%;
 }
 .task span{
     font-family: 'Poppins',sans-serif;
@@ -99,4 +102,6 @@
     width: 40px;
     border-radius: 5px;
 }
-  
+.hiddenOption{
+     display: none; 
+}
