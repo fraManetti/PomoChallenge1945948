@@ -19,6 +19,7 @@ body {
     display: flex;
     justify-content: center;
     width: 10%;
+    margin-bottom: 5%;
   }
   
   .col-md-2 {
@@ -37,7 +38,7 @@ body {
     margin-top: 30px;
   }
   
-  .container {
+  #buttonsArea {
     width: 500px;
   }
   
@@ -81,9 +82,3 @@ body {
   }
 
 
-  #td1{
-    width: 25%;
-  }
-#table{
-    width:100%;
-}

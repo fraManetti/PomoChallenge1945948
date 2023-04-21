@@ -6,12 +6,13 @@
     <title>PomoChallenge</title>
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.css" >
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
-    <link rel="stylesheet" href="../style/stile.css">
+    <link rel="stylesheet" href="../style/clockStyle.css">
+    <link rel="stylesheet" href="../style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
-    <script  src="../script/script.js"></script>
+    <script  src="../script/clockScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
 
     <script>
@@ -25,13 +26,17 @@
 <body>
     
     <div id="mynavbar"></div>
-    <table id="table">        
-        <tr>
-        <td align=LEFT id="td1">
-            box1
-        </td>
-        <td align=CENTER >
+    <div class="container">
+      <div class="box">box1</div>
+        <div class="center-box">
+          <div class="box">
             <div class="pomodoro">
+              <div class="row" id="statRow">
+                <div id="stats"></div>
+              </div>                  
+                <div id="clock" class="row">
+                  <div class="timer"><div class="middle"></div></div>
+                </div>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="row"><p>session length<p></div>
@@ -47,7 +52,6 @@
                       </div>
                     </div>
                   </div>
-              
                   <div class="col-md-6">
                     <div class="row"><p>break length<p></div>
                     <div class="row counter">
@@ -63,14 +67,7 @@
                     </div>
                   </div>
                 </div>
-                  
-                <div id="clock" class="row">
-                  <div class="timer"><div class="middle"></div></div>
-                </div>
-                <div class="row" id="statRow">
-                  <div id="stats"></div>
-                </div>
-                <div class="container">
+                <div id="buttonsArea">
                   <div class="row" id="btns">
                     <button class="btn btn-default btn-lg" id="start">start</button>
                     <button class="btn btn-default btn-lg" id="stop">stop</button>
@@ -79,15 +76,9 @@
                 </div>
                    
               </div>
-
-        </td>
-        <td align=RIGHT id="td1">
-            box3            
-        </td>
-
-
-        </tr>
-    </table>
-
+      </div>
+    </div>
+    <div class="box">box3</div>
+      </div>
 </body>
 </html>
