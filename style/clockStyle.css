@@ -19,6 +19,7 @@ body {
     display: flex;
     justify-content: center;
     width: 10%;
+    margin-bottom: 5%;
   }
   
   .col-md-2 {
@@ -81,31 +82,3 @@ body {
   }
 
 
-  #td1{
-    width: 25%;
-  }
-#table{
-    width:100%;
-}
-.container {
-  display: grid;
-  grid-template-columns: 25% 50% 25%;
-  height: 100vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
-}
-
-.center-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Imposta i margini sui lati del box centrale per mantenere la distanza dalla colonna laterale */
-.center-box > * {
-  margin: 0 20px;
-}
-
-/* Imposta lo sfondo dei box per distinguerli */
-.box {
-border-color: #bd0101;
-}
