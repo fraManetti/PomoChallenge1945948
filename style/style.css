@@ -22,15 +22,10 @@
   }
 
   #taskBox{
-    width: 40%;
-    top: 50%;
-    left: 50%;
-    background: white;
+
+    background: white; 
     border-radius: 10px;
-    min-width: 450px;
-    position: absolute;
-    min-height: 100px;
-    transform: translate(-50%,-50%);
+    
 }
 #newtask{
     position: relative;
