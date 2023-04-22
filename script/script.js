@@ -1,25 +1,30 @@
 function updateTaskBox (taskItems,  cond){
   if (!cond){
     taskItems[1].setAttribute("readonly","readonly");
+    taskItems[2].removeAttribute("readonly");
+
   }
   else{
     taskItems[1].removeAttribute("readonly");
+    taskItems[2].removeAttribute("readonly");
+
   }
 }
 function addTask(){
     if(document.querySelector('#newtask input').value.length == 0){
       alert("Kindly Enter Task Name!!!!")
   }else{
-    var number= parseInt(document.getElementById("pomoTaskNumber").value);
+    const xElements = document.getElementsByClassName("x");
+    const inputValues = Array.from(xElements).map(element => element.value);
+    var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
     console.log(typeof number);
       document.querySelector('#tasks').innerHTML += `
-          <div class="task">
-              <button class="delete">
-                  <i class="far fa-trash-alt"></i>
-              </button>
+          <div  class="task">
+              <button style='font-size:24px' class="delete">
+              <i class="fa-solid fa-trash-can"></i>
+                            </button>
               <input type="text" readOnly id="taskname" value=" ${document.querySelector('#newtask input').value}">
-                 
-              <input type="number" value="" min=0 id="x" >
+              <input type="number" value="" class="x" readonly >
               <button type="button" class="taskOption" >
               </button>
             <div class="hiddenOption">
@@ -27,7 +32,18 @@ function addTask(){
             </div>
             </div>
       `;
-      document.getElementById("x").value=number;
+          // recupera gli elementi `x` e li riempie con i valori precedentemente salvati
+    const newXElements = document.getElementsByClassName("x");
+    Array.from(newXElements).forEach((element, index) => {
+      element.value = inputValues[index] || "";
+    });
+
+    // aggiunge il valore dell'attributo `value` dell'ultimo input creato all'array
+    const lastXElement = newXElements[newXElements.length - 1];
+    lastXElement.value = number;
+      // var z =document.getElementsByClassName("x")
+      // var y =document.getElementsByClassName("x").length;
+      // z[y-1].value=JSON.parse(document.getElementById("pomoTaskNumber").value);
       document.getElementById("taskFieldInput").value="";
       var current_tasks = document.querySelectorAll(".delete");
       for(var i=0; i<current_tasks.length; i++){
