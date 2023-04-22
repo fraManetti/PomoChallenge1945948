@@ -106,4 +106,16 @@
      display: none; 
 }
 
-  
+.taskShowed{
+    border-radius: 5px;
+    /* justify-content: space-between; */
+    border: 1px solid #939697;
+    cursor: pointer;
+    background-color: #c5e1e6;
+    height: 100px;
+    margin-bottom: 8px;
+    padding: 5px 10px;
+    align-content: space-between;
+    display: grid;
+    grid-template-columns: 15% 70% 5% 10%;
+} 

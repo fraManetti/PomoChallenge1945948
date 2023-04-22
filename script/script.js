@@ -1,18 +1,4 @@
-// function taskOptions() {
-//     var current_tasks = document.querySelectorAll(".taskOption");
-//     for (var i=0; i<current_tasks.length; i++) {
-//       current_tasks[i].addEventListener("click", function() {
-//         this.classList.toggle("active"); // aggiunto
-//         var content = this.nextElementSibling;
-//         if (content.style.display === "block") {
-//           content.style.display = "none";
-//         } else {
-//           content.style.display = "block";
-//         }
-//       });
-//     }
-//   }
-  
+ 
 function addTask(){
     if(document.querySelector('#newtask input').value.length == 0){
       alert("Kindly Enter Task Name!!!!")
@@ -29,10 +15,9 @@ function addTask(){
               ${document.getElementById("pomoTaskNumber").value}</span>
               <button type="button" class="taskOption" >
               </button>
-              </div>
-            <br>
             <div class="hiddenOption">
               <p>  Hello world!</p>
+            </div>
             </div>
       `;
       document.getElementById("taskFieldInput").value="";
@@ -42,27 +27,22 @@ function addTask(){
               this.parentNode.remove();
           }
       }
-    //   var current_tasks = document.querySelectorAll(".taskOption");
-    //   for(var i=0; i<current_tasks.length; i++){
-    //     current_tasks[i].onclick = function(){
-    //          this.nextElementSibling.remove();
-            
-    //     }
-    // }
+
     var coll = document.getElementsByClassName("taskOption");
 var i;
 for (i = 0; i < coll.length;i++) {
-  console.log(i)
-console.log(coll[i])
   coll[i].addEventListener("click", function() {
-    //this.classList.toggle("active");
-    console.log(i)
-    console.log(coll);
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
+    var taskBox = this.parentNode;
+    //console.log(taskBox);
+    var hiddenBox = this.nextElementSibling;
+    //console.log(hiddenBox);
+    if (hiddenBox.style.display === "block") {
+        taskBox.classList.toggle("taskShowed");
+        hiddenBox.style.display = "none";
     } else {
-      content.style.display = "block";
+      hiddenBox.style.display = "block";
+      //taskBox.height("100px");
+      taskBox.classList.toggle("taskShowed");
     }
   });
 }
