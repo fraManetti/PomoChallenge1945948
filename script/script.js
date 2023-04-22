@@ -8,9 +8,8 @@ function addTask(){
               <button class="delete">
                   <i class="far fa-trash-alt"></i>
               </button>
-              <span id="taskname">
-                  ${document.querySelector('#newtask input').value}
-              </span>
+              <input type="text" readOnly id="taskname" value=" ${document.querySelector('#newtask input').value}">
+                 
               <span  >
               ${document.getElementById("pomoTaskNumber").value}</span>
               <button type="button" class="taskOption" >
@@ -43,6 +42,7 @@ for (i = 0; i < coll.length;i++) {
       hiddenBox.style.display = "block";
       //taskBox.height("100px");
       taskBox.classList.toggle("taskShowed");
+      taskBox
     }
   });
 }

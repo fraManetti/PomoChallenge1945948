@@ -75,7 +75,7 @@
     margin-top: 10px;
 }
 
-.task{
+.task:hover{
     border-radius: 5px;
     /* justify-content: space-between; */
     border: 1px solid #939697;
@@ -106,7 +106,7 @@
      display: none; 
 }
 
-.taskShowed{
+.taskShowed:hoover{
     border-radius: 5px;
     /* justify-content: space-between; */
     border: 1px solid #939697;
