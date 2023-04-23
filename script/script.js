@@ -17,6 +17,7 @@ function addTask(){
     const xElements = document.getElementsByClassName("x");
     const inputValues = Array.from(xElements).map(element => element.value);
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
+    var text = document.getElementById("taskNote").value;
     console.log(typeof number);
       document.querySelector('#tasks').innerHTML += `
           <div  class="task">
@@ -24,10 +25,12 @@ function addTask(){
               <i class="fa-solid fa-trash-can"></i>
                             </button>
               <input type="text" readOnly id="taskname" value=" ${document.querySelector('#newtask input').value}">
-              <input type="number" value="" class="x" readonly >
+              <input type="number" value="" class="x" readonly  min="1">
               <button type="button" class="taskOption" >
               </button>
             <div class="hiddenOption">
+            <textarea name="taskNote" id="" cols="40" rows="3" value="text"></textarea>
+
               <p>  Hello world!</p>
             </div>
             </div>
