@@ -82,6 +82,7 @@
     cursor: pointer;
     background-color: #c5e1e6;
     height: 50px;
+    width: 470px;
     margin-bottom: 8px;
     padding: 5px 10px;
     align-content: space-between;
@@ -113,6 +114,7 @@
     cursor: pointer;
     background-color: #c5e1e6;
     height: 150px;
+    width: 470px;
     margin-bottom: 10px;
     padding: 5px 10px;
     align-content: space-between;
