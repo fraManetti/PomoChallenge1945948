@@ -14,8 +14,7 @@ function timeUpdate(time){
   var date = new Date();
   var dateMillis = date.getTime();
 
-  //JavaScript doesn't have a "time period" object, so I'm assuming you get it as a string
-  var timePeriod = "00:"+time+":00"; //I assume this is 15 minutes, so the format is HH:MM:SS
+  var timePeriod = "00:"+time+":00"; 
 
   var parts = timePeriod.split(/:/);
   var timePeriodMillis = (parseInt(parts[0], 10) * 60 * 60 * 1000) +
@@ -82,9 +81,6 @@ function addTask(){
     // aggiunge il valore dell'attributo `value` dell'ultimo input creato all'array
     const lastXElement = newXElements[newXElements.length - 1];
     lastXElement.value = number;
-      // var z =document.getElementsByClassName("x")
-      // var y =document.getElementsByClassName("x").length;
-      // z[y-1].value=JSON.parse(document.getElementById("pomoTaskNumber").value);
       document.getElementById("taskFieldInput").value="";
       document.getElementById("taskNote").value="";
       document.getElementById("pomoTaskNumber").value = "1";
@@ -103,16 +99,13 @@ for (i = 0; i < coll.length;i++) {
   coll[i].addEventListener("click", function() {
     var taskBox = this.parentNode;
     var taskItems =taskBox.children
-    //console.log(taskBox);
     var hiddenBox = this.nextElementSibling;
-    //console.log(hiddenBox);
     if (hiddenBox.style.display === "block") {
         taskBox.classList.toggle("taskShowed");
         hiddenBox.style.display = "none";
         updateTaskBox(taskItems,false);
     } else {
       hiddenBox.style.display = "block";
-      //taskBox.height("100px");
       taskBox.classList.toggle("taskShowed");
       updateTaskBox(taskItems,true);
     }

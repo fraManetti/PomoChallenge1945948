@@ -133,9 +133,12 @@ input[type='text']{
     width:320px;
 } 
 
+
 input[type='number']{
     width:45px;
 } 
+
+
 
 .task:hover {
     background-color:  #bfc1c2;
