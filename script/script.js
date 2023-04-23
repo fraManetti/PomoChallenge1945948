@@ -17,8 +17,6 @@ function addTask(){
     const xElements = document.getElementsByClassName("x");
     const inputValues = Array.from(xElements).map(element => element.value);
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
-    var text = document.getElementById("taskNote").value;
-    console.log(typeof number);
       document.querySelector('#tasks').innerHTML += `
           <div  class="task">
               <button style='font-size:24px' class="delete">
@@ -29,9 +27,8 @@ function addTask(){
               <button type="button" class="taskOption" >
               </button>
             <div class="hiddenOption">
-            <textarea name="taskNote" id="" cols="40" rows="3" value="text"></textarea>
+            <textarea name="taskNote" id="" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
 
-              <p>  Hello world!</p>
             </div>
             </div>
       `;
