@@ -1,7 +1,7 @@
 function updateTaskBox (taskItems,  cond){
   if (!cond){
     taskItems[1].setAttribute("readonly","readonly");
-    taskItems[2].removeAttribute("readonly");
+    taskItems[2].setAttribute("readonly","readonly");
 
   }
   else{
