@@ -39,6 +39,7 @@ $(document).ready(function(){
         //clock.setTime(countS*60);
       }
     });
+    
     $("#sessDec").on("click", function(){
       if ($("#session").html() > 1){
         countS = parseInt($("#session").html());
@@ -63,26 +64,46 @@ $(document).ready(function(){
       }
     });  
     $("#start").on("click", function(){
-      if (count != countS || clock.getTime()==0){
-        clock.setTime(countS*60);
-        pos="session";
-        $("#stats").html(pos);
+      if(clock.running){
+        clock.stop();
+        countLama = clock.getTime();
+        posLama = $("#stats").html();
+        $(this).text("START");
       } else {
-        pos = posLama;
-        $("#stats").html(pos);
+        if (count != countS || clock.getTime()==0){
+          clock.setTime(countS*60);
+          pos="session";
+          $("#stats").html(pos);
+        } else {
+          pos = posLama;
+          $("#stats").html(pos);
+        }
+        count = countS;    
+        clock.start();    
+        $(this).text("PAUSE");
       }
-      count = countS;    
-      clock.start();    
     });
-    $("#stop").on("click", function(){
-      clock.stop();
-      countLama = clock.getTime();
-      posLama = $("#stats").html();
+
+    $("#skip").on("click", function(){
+        if (pos == "session"){
+          clock.setTime(countB*60);
+          clock.start();
+          pos = "break";
+          $("#stats").html(pos);
+        } else if (pos == "break"){
+          clock.setTime(countS*60);
+          clock.start();
+          pos = "session";
+          $("#stats").html(pos);
+        }
     });
+    
     $("#clear").on("click", function(){
       clock.stop();
       pos = "pomodoro";
       $("#stats").html(pos);
       clock.setTime(0);
+      $('#start').text('START');
     });
   });
+  
