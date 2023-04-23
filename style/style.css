@@ -71,7 +71,7 @@
     width: 100%;
     position: relative;
     background-color: #ffffff;
-    padding: 30px 20px;
+    padding: 30px 25px;
     margin-top: 10px;
 }
 
@@ -109,11 +109,11 @@
 .taskShowed{
     border-radius: 5px;
     /* justify-content: space-between; */
-    border: 1px solid #939697;
+    border: 5px solid #939697;
     cursor: pointer;
     background-color: #c5e1e6;
-    height: 100px;
-    margin-bottom: 8px;
+    height: 150px;
+    margin-bottom: 10px;
     padding: 5px 10px;
     align-content: space-between;
     display: grid;
