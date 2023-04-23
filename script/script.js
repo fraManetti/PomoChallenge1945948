@@ -10,6 +10,47 @@ function updateTaskBox (taskItems,  cond){
 
   }
 }
+function timeUpdate(time){
+  var date = new Date();
+  var dateMillis = date.getTime();
+
+  //JavaScript doesn't have a "time period" object, so I'm assuming you get it as a string
+  var timePeriod = "00:"+time+":00"; //I assume this is 15 minutes, so the format is HH:MM:SS
+
+  var parts = timePeriod.split(/:/);
+  var timePeriodMillis = (parseInt(parts[0], 10) * 60 * 60 * 1000) +
+                        (parseInt(parts[1], 10) * 60 * 1000) + 
+                        (parseInt(parts[2], 10) * 1000);
+
+  var newDate = new Date();
+  newDate.setTime(dateMillis + timePeriodMillis);
+
+  return newDate.toJSON().slice(11, 16);
+
+}
+function updateTaskTag(){
+  var tasks = document.getElementsByClassName("task");
+  var len = tasks.length;
+  var pomoCount =0;
+  var time=0;
+  var longBreak =15;
+  var shortBreak =5;
+  var pomoTime = 25;
+  for ( i = len-1; i>=0;i--){
+    pomoCount += JSON.parse(tasks[i].children[2].value);
+  }
+  for ( i = pomoCount; i>0;i--){
+    if(i%4 ==0)
+      time+=longBreak;
+    else
+      time+=shortBreak;
+    time+=pomoTime;
+  }
+  var textToAppend  = "Pomodori Complessivi: "+JSON.stringify(pomoCount);
+  document.getElementById("pomoCount").innerText=textToAppend;
+  textToAppend ="Fine Prevista Per: "+timeUpdate(time);
+  document.getElementById("timeEstimated").innerText=textToAppend;
+}
 function addTask(){
     if(document.querySelector('#newtask input').value.length == 0){
       alert("Kindly Enter Task Name!!!!")
@@ -47,6 +88,8 @@ function addTask(){
       document.getElementById("taskFieldInput").value="";
       document.getElementById("taskNote").value="";
       document.getElementById("pomoTaskNumber").value = "1";
+      updateTaskTag();
+
       var current_tasks = document.querySelectorAll(".delete");
       for(var i=0; i<current_tasks.length; i++){
           current_tasks[i].onclick = function(){
