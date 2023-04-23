@@ -106,7 +106,7 @@
      display: none; 
 }
 
-.taskShowed:hoover{
+.taskShowed:hover{
     border-radius: 5px;
     /* justify-content: space-between; */
     border: 1px solid #939697;
