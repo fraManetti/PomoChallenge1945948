@@ -86,7 +86,10 @@ function addTask(){
       // var y =document.getElementsByClassName("x").length;
       // z[y-1].value=JSON.parse(document.getElementById("pomoTaskNumber").value);
       document.getElementById("taskFieldInput").value="";
+      document.getElementById("taskNote").value="";
+      document.getElementById("pomoTaskNumber").value = "1";
       updateTaskTag();
+
       var current_tasks = document.querySelectorAll(".delete");
       for(var i=0; i<current_tasks.length; i++){
           current_tasks[i].onclick = function(){

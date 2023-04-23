@@ -32,9 +32,16 @@
 }
 #newtask{
     position: relative;
-    padding: 30px 20px;
+    padding: 15px 20px;
+    width: 500px;
+    
 }
-#newtask input{
+
+#pomoTaskNumber {
+    width: 45;
+}
+
+/* #newtask input{
     width: 75%;
     height: 45px;
     padding: 12px;
@@ -45,7 +52,7 @@
     font-family: 'Poppins',sans-serif;
     font-size: 15px;
     border: 2px solid #d1d3d4;
-}
+} */
 
 #newtask input:focus{
     outline: none;
@@ -68,10 +75,10 @@
 }
 #tasks{
     border-radius: 10px;
-    width: 100%;
+    width: 470p;
     position: relative;
     background-color: #ffffff;
-    padding: 30px 25px;
+    padding: 5px 15px;
     margin-top: 10px;
 }
 
@@ -82,11 +89,12 @@
     cursor: pointer;
     background-color: #c5e1e6;
     height: 50px;
+    width: 470px;
     margin-bottom: 8px;
-    padding: 5px 10px;
+    padding: 5px 1px;
     align-content: space-between;
     display: grid;
-    grid-template-columns: 15% 70% 5% 10%;
+    grid-template-columns: 10% 70% 10% 10%;
 }
 .task span{
     font-family: 'Poppins',sans-serif;
@@ -109,13 +117,21 @@
 .taskShowed{
     border-radius: 5px;
     /* justify-content: space-between; */
-    border: 5px solid #939697;
+    border: 1px solid #939697;
     cursor: pointer;
     background-color: #c5e1e6;
     height: 150px;
-    margin-bottom: 10px;
-    padding: 5px 10px;
+    width: 470px;
+    margin-bottom: 8px;
+    padding: 5px 1px;
     align-content: space-between;
     display: grid;
-    grid-template-columns: 15% 70% 5% 10%;
+    grid-template-columns: 10% 70% 10% 10%;
+} 
+
+input[type='text']{
+    width:320px;
+} 
+input[type='number']{
+    width:45px;
 } 
