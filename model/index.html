@@ -25,7 +25,7 @@
         });
 
     </script>
-        
+
 </head>
 <body>
     
@@ -82,13 +82,20 @@
       </div>
       
       <div id="taskBox">
+        <div id="taskTag">
+          <h3> Task: </h3>
+          <p id="pomoCount">Pomodori Complessivi: 0/0</p>
+          <p id="timeEstimated"> Fine per: xx:yy</p>
+        </div>
         <div id="newtask">
             <input type="text" placeholder="Add text title" id="taskFieldInput">
             <button id="push" onclick="addTask();">Add</button>
             Quanti Pomodori?<br>
             <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
             Note: <br>
-            <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea>
+
+            <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea
+            <textarea id="taskNote" cols="40" rows="3"></textarea>
           </div>
         <div id="tasks"></div>
       </div>
