@@ -1,3 +1,10 @@
+function setParams(){
+  var ret=new Array();
+  ret[0]=JSON.parse(document.getElementById("session").textContent);
+  ret[1]=JSON.parse(document.getElementById("break").textContent);
+  ret[2]=JSON.parse(document.getElementById("longBreak").textContent);
+  return ret;
+}
 function updateTaskBox (taskItems,  cond){
   if (!cond){
     taskItems[1].setAttribute("readonly","readonly");
@@ -51,7 +58,6 @@ function timeUpdate(time){
 
   console.log(date);
   var timePeriod = "00:"+time+":00"; 
-
   var parts = timePeriod.split(/:/);
   var timePeriodMillis = (parseInt(parts[0], 10) * 60 * 60 * 1000) +
                         (parseInt(parts[1], 10) * 60 * 1000) + 
@@ -59,9 +65,9 @@ function timeUpdate(time){
 
   var newDate = new Date();
   newDate.setTime(dateMillis + timePeriodMillis);
-
-  return newDate.toJSON().slice(11, 16);
-
+  var ret = JSON.stringify(newDate.getHours())+":"+JSON.stringify(newDate.getMinutes());
+  //console.log(newDate.toLocaleString("it-IT",{timeStyle:"long"}));
+  return ret;
 }
 
 function updateTaskTag(){
@@ -69,9 +75,11 @@ function updateTaskTag(){
   var len = tasks.length;
   var pomoCount =0;
   var time=0;
-  var longBreak =15;
-  var shortBreak =5;
-  var pomoTime = 25;
+  //console.log(document.getElementById("longBreak").textContent);
+  var params = setParams();
+  var longBreak =params[2];
+  var shortBreak =params[1];
+  var pomoTime = params[0];
   for ( i = len-1; i>=0;i--){
     pomoCount += JSON.parse(tasks[i].children[2].value);
   }
