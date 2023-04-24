@@ -14,6 +14,7 @@ function timeUpdate(time){
   var date = new Date();
   var dateMillis = date.getTime();
 
+  console.log(date);
   var timePeriod = "00:"+time+":00"; 
 
   var parts = timePeriod.split(/:/);

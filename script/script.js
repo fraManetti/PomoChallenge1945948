@@ -11,6 +11,7 @@ function updateTaskBox (taskItems,  cond){
   }
 }
 
+function openTaskBar() {}
 
 
 function addTask(){

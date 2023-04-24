@@ -82,12 +82,23 @@
               </div>
       </div>
       
+      <div id = "taskUseSection">
+          
+      </div>
+
+
       <div id="taskBox">
         <div id="taskTag">
-          <h3> Task: </h3>
+          <h3> 
+            Task: 
+            <button id="taskUse" onclick="openTaskBar();">
+              Plan a task
+            </button>
+          </h3>
+        </div>
           <p id="pomoCount">Pomodori Complessivi: 0/0</p>
           <p id="timeEstimated"> Fine per: xx:yy</p>
-        </div>
+        
         <div id="newtask">
             <input type="text" placeholder="Add task title" id="taskFieldInput">
             <button id="push" onclick="addTask();">Add</button>
