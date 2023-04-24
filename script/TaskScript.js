@@ -15,7 +15,6 @@ function timeUpdate(time){
   var dateMillis = date.getTime();
 
   var timePeriod = "00:"+time+":00"; 
-
   var parts = timePeriod.split(/:/);
   var timePeriodMillis = (parseInt(parts[0], 10) * 60 * 60 * 1000) +
                         (parseInt(parts[1], 10) * 60 * 1000) + 
@@ -23,9 +22,9 @@ function timeUpdate(time){
 
   var newDate = new Date();
   newDate.setTime(dateMillis + timePeriodMillis);
-
-  return newDate.toJSON().slice(11, 16);
-
+  var ret = JSON.stringify(newDate.getHours())+":"+JSON.stringify(newDate.getMinutes());
+  //console.log(newDate.toLocaleString("it-IT",{timeStyle:"long"}));
+  return ret;
 }
 function updateTaskTag(){
   var tasks = document.getElementsByClassName("task");
