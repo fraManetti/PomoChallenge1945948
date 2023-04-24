@@ -102,7 +102,7 @@ function addTask(){
     const inputValues = Array.from(xElements).map(element => element.value);
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
       document.querySelector('#tasks').innerHTML += `
-          <div  class="task">
+          <div  class="task draggable = true>
               <button style='font-size:24px' class="delete">
               <i class="fa-solid fa-trash-can"></i>
                             </button>
