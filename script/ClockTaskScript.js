@@ -8,7 +8,7 @@ let pomodoroCount = 0;
 let breakTime = 300;
 let onBreak = false;
 
-document.getElementById("addTodoButton").addEventListener("click", function() {
+document.getElementById("push").addEventListener("click", function() {
     let todoText = document.getElementById("todoInput").value;
     let pomodoroCount = document.getElementById("pomodoroInput").value;
     let todoItem = document.createElement("li");

@@ -10,6 +10,9 @@ function updateTaskBox (taskItems,  cond){
 
   }
 }
+
+
+
 function addTask(){
     if(document.querySelector('#newtask input').value.length == 0){
       alert("Kindly Enter Task Name!!!!")
