@@ -10,6 +10,28 @@ function updateTaskBox (taskItems,  cond){
 
   }
 }
+
+function openTaskBar() {
+  document.querySelector('#selectTaskArea').innerHTML += `
+      <p id="pomoCount">Pomodori Complessivi: 0/0</p>
+      <p id="timeEstimated"> Fine per: xx:yy</p>
+    
+      <div id="newtask">
+          <input type="text" placeholder="Add task title" id="taskFieldInput">
+          <button id="push" onclick="addTask();">Add</button>
+          Quanti Pomodori?<br>
+          <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
+          Note: <br>
+
+          <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea
+          <textarea id="taskNote" cols="40" rows="3"></textarea>
+      </div>
+
+      <div id="tasks">
+      </div>
+    `;
+}
+
 function timeUpdate(time){
   var date = new Date();
   var dateMillis = date.getTime();
