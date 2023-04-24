@@ -8,8 +8,17 @@ body {
 
   p {
     text-align: center;
+    margin-bottom: 1%;
   }
-  
+  .row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-0.5 * var(--bs-gutter-x));
+    margin-left: calc(-0.5 * var(--bs-gutter-x));
+  }
   .flip-clock-wrapper {
     max-width: 460px;
     margin: 3em auto 2em;
@@ -34,6 +43,8 @@ body {
     justify-content: center;
     height: 34px;
     align-items: center;
+    margin-left: 1%;
+    margin-right: 3%;
   }
   
   .counter {
@@ -46,7 +57,8 @@ body {
   }
   
   #buttonsArea {
-    width: 500px;
+    width: 100px;
+    display: flex;
   }
   
   .middle {
@@ -54,8 +66,13 @@ body {
   }
   
   #btns {
-    display: flex;
     justify-content: center;
+    margin-bottom: 5%;
+    align-self: center;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    margin-left: 80%;
+    margin-top: 10%;
   }
   
   #skip {
@@ -66,6 +83,7 @@ body {
   .btn {
     background-color: #333333;
     color: #CCCCCC;
+    margin-bottom: 5%;
   }
   
   #sessInc, #sessDec, #breakInc, #breakDec {
