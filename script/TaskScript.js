@@ -24,6 +24,7 @@ function openTaskBar() {
   if(!planning) {
     planning = true;
     document.querySelector('#selectTaskArea').innerHTML += `
+    <div id="toggleTaskPanel">
       <p id="pomoCount">Pomodori Complessivi: 0/0</p>
       <p id="timeEstimated"> Fine per: xx:yy</p>
     
@@ -39,12 +40,12 @@ function openTaskBar() {
       </div>
 
       <div id="tasks">
-      </div>
+      </div></div>
     `;
   }
   else {
     planning = false;
-    document.querySelector('#selectTaskArea').innerHTML += ``;
+    document.querySelector('#toggleTaskPanel').remove();
   }
   
 }
