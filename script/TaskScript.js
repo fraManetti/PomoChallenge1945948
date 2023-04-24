@@ -17,10 +17,43 @@ function updateTaskBox (taskItems,  cond){
 
   }
 }
+
+var planning = false;
+
+function openTaskBar() {
+  if(!planning) {
+    planning = true;
+    document.querySelector('#selectTaskArea').innerHTML += `
+      <p id="pomoCount">Pomodori Complessivi: 0/0</p>
+      <p id="timeEstimated"> Fine per: xx:yy</p>
+    
+      <div id="newtask">
+          <input type="text" placeholder="Add task title" id="taskFieldInput">
+          <button id="push" onclick="addTask();">Add</button>
+          Quanti Pomodori?<br>
+          <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
+          Note: <br>
+
+          <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea
+          <textarea id="taskNote" cols="40" rows="3"></textarea>
+      </div>
+
+      <div id="tasks">
+      </div>
+    `;
+  }
+  else {
+    planning = false;
+    document.querySelector('#selectTaskArea').innerHTML += ``;
+  }
+  
+}
+
 function timeUpdate(time){
   var date = new Date();
   var dateMillis = date.getTime();
 
+  console.log(date);
   var timePeriod = "00:"+time+":00"; 
   var parts = timePeriod.split(/:/);
   var timePeriodMillis = (parseInt(parts[0], 10) * 60 * 60 * 1000) +
@@ -33,6 +66,7 @@ function timeUpdate(time){
   //console.log(newDate.toLocaleString("it-IT",{timeStyle:"long"}));
   return ret;
 }
+
 function updateTaskTag(){
   var tasks = document.getElementsByClassName("task");
   var len = tasks.length;
@@ -58,6 +92,7 @@ function updateTaskTag(){
   textToAppend ="Fine Prevista Per: "+timeUpdate(time);
   document.getElementById("timeEstimated").innerText=textToAppend;
 }
+
 function addTask(){
     if(document.querySelector('#newtask input').value.length == 0){
       alert("Kindly Enter Task Name!!!!")

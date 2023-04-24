@@ -27,7 +27,9 @@
   #taskBox{
 
     background: white; 
-    border-radius: 10px;
+    border-radius: 5px;
+    width: 500px;
+    
     
 }
 #newtask{
@@ -113,6 +115,8 @@
 .hiddenOption{
      display: none; 
 }
+   
+
 
 .taskShowed{
     border-radius: 5px;
@@ -132,6 +136,18 @@
 input[type='text']{
     width:320px;
 } 
+
+
 input[type='number']{
     width:45px;
 } 
+
+
+
+.task:hover {
+    background-color:  #bfc1c2;
+}
+
+.taskShowed:hover {
+    background-color:  #bfc1c2;
+}
