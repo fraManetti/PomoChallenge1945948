@@ -102,25 +102,28 @@ function addTask(){
     const inputValues = Array.from(xElements).map(element => element.value);
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
       document.querySelector('#tasks').innerHTML += `
-          <div  class="task draggable = true>
+          <div  class="task">
+            
               <button style='font-size:24px' class="delete">
-              <i class="fa-solid fa-trash-can"></i>
-                            </button>
+                <i class="fa-solid fa-trash-can"></i>
+              </button>
               <input type="text" readOnly id="taskname" value=" ${document.querySelector('#newtask input').value}">
               <input type="number" value="" class="x" readonly  min="1">
               <button type="button" class="taskOption" >
               </button>
-            <div class="hiddenOption">
-            <textarea name="taskNote" id="" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
+              <div class="hiddenOption">
+                <textarea name="taskNote" id="" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
+              </div>
 
-            </div>
-            </div>
+          </div>
       `;
           // recupera gli elementi `x` e li riempie con i valori precedentemente salvati
     const newXElements = document.getElementsByClassName("x");
     Array.from(newXElements).forEach((element, index) => {
       element.value = inputValues[index] || "";
     });
+
+  
 
     // aggiunge il valore dell'attributo `value` dell'ultimo input creato all'array
     const lastXElement = newXElements[newXElements.length - 1];
@@ -157,3 +160,53 @@ for (i = 0; i < coll.length;i++) {
 }
   }
 }
+
+
+
+$(document).ready(function () {
+
+    var task = $(".task");
+    var container = $(".tasks");
+
+    box.draggable({
+        containment: container,
+        helper: "clone",
+
+        start: function () {
+            $(this).css({
+                opacity: 0
+            });
+
+            $(".task").css("z-index", "0");
+        },
+
+        stop: function () {
+            $(this).css({
+                opacity: 1
+            });
+        }
+    });
+
+    task.droppable({
+        accept: task,
+
+        drop: function (event, ui) {
+            var draggable = ui.draggable;
+            var droppable = $(this);
+            var dragPos = draggable.position();
+            var dropPos = droppable.position();
+
+            draggable.css({
+                left: dropPos.left + "px",
+                top: dropPos.top + "px",
+                "z-index": 20
+            });
+
+            droppable.css("z-index", 10).animate({
+                left: dragPos.left,
+                top: dragPos.top
+            });
+        }
+    });
+
+});

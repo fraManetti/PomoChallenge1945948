@@ -75,7 +75,7 @@
     border-radius: 5px;
     font-family: 'Poppins',sans-serif;
 }
-#tasks{
+.tasks{
     border-radius: 10px;
     width: 470p;
     position: relative;
