@@ -11,8 +11,12 @@ function updateTaskBox (taskItems,  cond){
   }
 }
 
+var planning = false;
+
 function openTaskBar() {
-  document.querySelector('#selectTaskArea').innerHTML += `
+  if(!planning) {
+    planning = true;
+    document.querySelector('#selectTaskArea').innerHTML += `
       <p id="pomoCount">Pomodori Complessivi: 0/0</p>
       <p id="timeEstimated"> Fine per: xx:yy</p>
     
@@ -30,6 +34,12 @@ function openTaskBar() {
       <div id="tasks">
       </div>
     `;
+  }
+  else {
+    planning = false;
+    document.querySelector('#selectTaskArea').innerHTML += ``;
+  }
+  
 }
 
 function timeUpdate(time){
@@ -50,6 +60,7 @@ function timeUpdate(time){
   return newDate.toJSON().slice(11, 16);
 
 }
+
 function updateTaskTag(){
   var tasks = document.getElementsByClassName("task");
   var len = tasks.length;
@@ -73,6 +84,7 @@ function updateTaskTag(){
   textToAppend ="Fine Prevista Per: "+timeUpdate(time);
   document.getElementById("timeEstimated").innerText=textToAppend;
 }
+
 function addTask(){
     if(document.querySelector('#newtask input').value.length == 0){
       alert("Kindly Enter Task Name!!!!")
