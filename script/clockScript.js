@@ -2,7 +2,9 @@ $(document).ready(function(){
     var countS = 25;
     $("#session").html(countS);
     var countB = 5;
+    var countC = 15;
     $("#break").html(countB);
+    $("#longBreak").html(countC);
     var pos = "pomodoro";
     var countLama;
     var posLama;
@@ -61,6 +63,21 @@ $(document).ready(function(){
         countB = parseInt($("#break").html());
         countB-=1;
         $("#break").html(countB);
+      }
+    });
+     // LONG BREAK
+    $("#longInc").on("click", function(){
+      if ($("#longBreak").html() > 0){
+        countC = parseInt($("#longBreak").html());
+        countC+=1;
+        $("#longBreak").html(countC);
+      }    
+    });
+    $("#longDec").on("click", function(){
+      if ($("#longBreak").html() > 1){
+        countC = parseInt($("#longBreak").html());
+        countC-=1;
+        $("#longBreak").html(countC);
       }
     });  
     $("#start").on("click", function(){

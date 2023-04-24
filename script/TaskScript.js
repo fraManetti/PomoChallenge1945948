@@ -1,3 +1,10 @@
+function setParams(){
+  var ret=new Array();
+  ret[0]=JSON.parse(document.getElementById("session").textContent);
+  ret[1]=JSON.parse(document.getElementById("break").textContent);
+  ret[2]=JSON.parse(document.getElementById("longBreak").textContent);
+  return ret;
+}
 function updateTaskBox (taskItems,  cond){
   if (!cond){
     taskItems[1].setAttribute("readonly","readonly");
@@ -31,9 +38,11 @@ function updateTaskTag(){
   var len = tasks.length;
   var pomoCount =0;
   var time=0;
-  var longBreak =15;
-  var shortBreak =5;
-  var pomoTime = 25;
+  //console.log(document.getElementById("longBreak").textContent);
+  var params = setParams();
+  var longBreak =params[2];
+  var shortBreak =params[1];
+  var pomoTime = params[0];
   for ( i = len-1; i>=0;i--){
     pomoCount += JSON.parse(tasks[i].children[2].value);
   }
