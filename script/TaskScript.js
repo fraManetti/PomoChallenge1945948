@@ -14,9 +14,9 @@ function updateTaskBox (taskItems,  cond){
 var planning = false;
 
 function openTaskBar() {
-  if(!planning) {
-    planning = true;
-    document.querySelector('#selectTaskArea').innerHTML += `
+  document.querySelector('#selectTaskArea').innerHTML += `
+  <div class="taskArea">
+    <div id = "hiddenTaskArea">
       <p id="pomoCount">Pomodori Complessivi: 0/0</p>
       <p id="timeEstimated"> Fine per: xx:yy</p>
     
@@ -33,11 +33,14 @@ function openTaskBar() {
 
       <div id="tasks">
       </div>
-    `;
+    </div>
+  </div>
+  `;
+  if(hiddenTaskArea.style.display === "block") {
+    hiddenTaskArea.style.display = "none";
   }
   else {
-    planning = false;
-    document.querySelector('#selectTaskArea').innerHTML += ``;
+    hiddenTaskArea.style.display = "block";
   }
   
 }

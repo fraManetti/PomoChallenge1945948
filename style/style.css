@@ -151,3 +151,20 @@ input[type='number']{
 .taskShowed:hover {
     background-color:  #bfc1c2;
 }
+
+.taskArea {
+    background: white; 
+    border-radius: 5px;
+    width: 500px;
+    
+}
+
+.showedTaskArea {
+    background: white; 
+    border-radius: 5px;
+    width: 500px;
+}
+
+#hiddenTaskArea {
+    display: none; 
+}
