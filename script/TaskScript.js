@@ -37,15 +37,14 @@ function openTaskBar() {
 
           <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea
           <textarea id="taskNote" cols="40" rows="3"></textarea>
-      </div>
-
-      <div id="tasks">
-      </div>
-    `;
-  }
+          </div>
+          <div id="tasks">
+          </div></div>
+        `;
+      }
   else {
     planning = false;
-    document.querySelector('#selectTaskArea').innerHTML += ``;
+    document.querySelector('#toggleTaskPanel').remove();
   }
   
 }
