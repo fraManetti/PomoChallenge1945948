@@ -44,6 +44,11 @@ function openTaskBar() {
   }
 }
 
+
+function modalitaTask() {
+  
+}
+
 function timeUpdate(time){
   var date = new Date();
   var dateMillis = date.getTime();

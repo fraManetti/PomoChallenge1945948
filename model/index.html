@@ -114,15 +114,23 @@
             <h3> 
               Task: 
               <button id="taskUse" onclick="openTaskBar();">
-                Plan a task
+                Open task panel
               </button>
             </h3>
           </div>
-          <div id = "selectTaskArea">
 
+          <div id = modalitaTaskRow>
+            <p>
+              Attivare task? 
+              <label class="switch">
+                <input type="checkbox" id = "customCheckbox" onclick="modalitaTask()">
+                <span class="slider round"></span>
+              </label>
+            </p>
             
+          </div>
 
-
+          <div id = "selectTaskArea">
             <div id="toggleTaskPanel">
               <p id="pomoCount">Pomodori Complessivi: 0/0</p>
               <p id="timeEstimated"> Fine per: xx:yy</p>
@@ -137,9 +145,9 @@
                   <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea
                   <textarea id="taskNote" cols="40" rows="3"></textarea>
               </div>
-        
               <div id="tasks">
-              </div></div>
+              </div>
+            </div>
 
 
 
