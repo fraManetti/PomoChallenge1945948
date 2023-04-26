@@ -18,36 +18,30 @@ function updateTaskBox (taskItems,  cond){
   }
 }
 
-var planning = false;
 
-function openTaskBar() {
-  if(!planning) {
-    planning = true;
-    document.querySelector('#selectTaskArea').innerHTML += `
-    <div id="toggleTaskPanel">
-      <p id="pomoCount">Pomodori Complessivi: 0/0</p>
-      <p id="timeEstimated"> Fine per: xx:yy</p>
-    
-      <div id="newtask">
-          <input type="text" placeholder="Add task title" id="taskFieldInput">
-          <button id="push" onclick="addTask();">Add</button>
-          Quanti Pomodori?<br>
-          <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
-          Note: <br>
-
-          <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea
-          <textarea id="taskNote" cols="40" rows="3"></textarea>
-      </div>
-
-      <div id="tasks">
-      </div></div>
-    `;
+var checkedCustom = false
+function checkCustom() {
+  if(hiddenCustom.style.display === "block") {
+    checkedCustom = false;
+    hiddenCustom.style.display = "none"
   }
   else {
-    planning = false;
-    document.querySelector('#toggleTaskPanel').remove();
+    checkedCustom = true;
+    hiddenCustom.style.display = "block";
   }
-  
+}
+
+
+var opened = false;
+function openTaskBar() {
+  if(selectTaskArea.style.display === "block") {
+    opened = false;
+    selectTaskArea.style.display = "none"
+  }
+  else {
+    opened = true;
+    selectTaskArea.style.display = "block";
+  }
 }
 
 function timeUpdate(time){

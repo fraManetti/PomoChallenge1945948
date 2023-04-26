@@ -152,6 +152,17 @@ input[type='number']{
     background-color:  #bfc1c2;
 }
 
+#hiddenCustom {
+    display: none;
+}
+
+#selectTaskArea {
+    display: none;
+}
+
+
+
+
 
 
 
