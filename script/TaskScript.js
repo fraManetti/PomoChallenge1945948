@@ -44,6 +44,7 @@ function openTaskBar() {
       }
   else {
     planning = false;
+    //$("#toggleTaskPanel").hide();
     document.querySelector('#toggleTaskPanel').remove();
   }
   
@@ -53,7 +54,6 @@ function timeUpdate(time){
   var date = new Date();
   var dateMillis = date.getTime();
 
-  console.log(date);
   var timePeriod = "00:"+time+":00"; 
   var parts = timePeriod.split(/:/);
   var timePeriodMillis = (parseInt(parts[0], 10) * 60 * 60 * 1000) +
@@ -162,50 +162,50 @@ for (i = 0; i < coll.length;i++) {
 
 
 
-$(document).ready(function () {
+// $(document).ready(function () {
 
-    var task = $(".task");
-    var container = $(".tasks");
+//     var task = $(".task");
+//     var container = $(".tasks");
 
-    box.draggable({
-        containment: container,
-        helper: "clone",
+//     box.draggable({
+//         containment: container,
+//         helper: "clone",
 
-        start: function () {
-            $(this).css({
-                opacity: 0
-            });
+//         start: function () {
+//             $(this).css({
+//                 opacity: 0
+//             });
 
-            $(".task").css("z-index", "0");
-        },
+//             $(".task").css("z-index", "0");
+//         },
 
-        stop: function () {
-            $(this).css({
-                opacity: 1
-            });
-        }
-    });
+//         stop: function () {
+//             $(this).css({
+//                 opacity: 1
+//             });
+//         }
+//     });
 
-    task.droppable({
-        accept: task,
+//     task.droppable({
+//         accept: task,
 
-        drop: function (event, ui) {
-            var draggable = ui.draggable;
-            var droppable = $(this);
-            var dragPos = draggable.position();
-            var dropPos = droppable.position();
+//         drop: function (event, ui) {
+//             var draggable = ui.draggable;
+//             var droppable = $(this);
+//             var dragPos = draggable.position();
+//             var dropPos = droppable.position();
 
-            draggable.css({
-                left: dropPos.left + "px",
-                top: dropPos.top + "px",
-                "z-index": 20
-            });
+//             draggable.css({
+//                 left: dropPos.left + "px",
+//                 top: dropPos.top + "px",
+//                 "z-index": 20
+//             });
 
-            droppable.css("z-index", 10).animate({
-                left: dragPos.left,
-                top: dragPos.top
-            });
-        }
-    });
+//             droppable.css("z-index", 10).animate({
+//                 left: dragPos.left,
+//                 top: dragPos.top
+//             });
+//         }
+//     });
 
-});
+// });
