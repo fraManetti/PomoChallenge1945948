@@ -22,6 +22,7 @@ var planning = false;
 
 function openTaskBar() {
   if(!planning) {
+    taskOn=true;
     planning = true;
     document.querySelector('#selectTaskArea').innerHTML += `
     <div id="toggleTaskPanel">
@@ -43,6 +44,7 @@ function openTaskBar() {
         `;
       }
   else {
+    taskOn=false;
     planning = false;
     //$("#toggleTaskPanel").hide();
     document.querySelector('#toggleTaskPanel').remove();
@@ -100,6 +102,10 @@ function addTask(){
     const xElements = document.getElementsByClassName("x");
     const inputValues = Array.from(xElements).map(element => element.value);
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
+    var title=$('#newtask input').val();
+    var newTask = { title: title, pomodori: number };
+    // aggiungi la nuova task all'elenco delle task
+    taskList.push(newTask);
       document.querySelector('#tasks').innerHTML += `
           <div  class="task">
             

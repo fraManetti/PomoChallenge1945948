@@ -1,3 +1,6 @@
+  //Variabili per le task:
+  var taskOn = false;
+  var taskList = [];
 $(document).ready(function(){
 
   var countTimes = 0; 
@@ -41,9 +44,7 @@ $(document).ready(function(){
           }        
         }
       })
-  //Variabili per le task:
-  var taskOn = true;
-  var taskList = [];
+
   
   $("#start").on("click", function(){
     if(clock.running){
@@ -79,17 +80,21 @@ $(document).ready(function(){
     // scorri tutte le task
     for (var i = 0; i < taskList.length; i++) {
       var task = taskList[i];
+      console.log(task);
       // esegui il numero di pomodori previsti per la task corrente
-      for (var j = 0; j < task.pomodori; j++) {
+      for (var j = 1; j <= task.pomodori; j++) {
         // esegui un pomodoro
+        console.log(task.pomodori,j);
         clock.setTime(countS*60);
         clock.start();
         pos="Session";
-        $("#stats").html(pos)
+        $("#stats").html(pos)    
+        console.log("ciao");
+
         // attendi che il timer raggiunga lo zero
         while (clock.getTime() > 0) {}
         // esegui una pausa breve o lunga a seconda del numero di pomodori completati
-        if ((j + 1) % 4 == 0) {
+        if (j % 4 == 0) {
           clock.setTime(countL*60);
           clock.start();
           pos = "Long Break";
@@ -187,15 +192,15 @@ $(document).ready(function(){
     $("#break").html("5");
   });
   $("#selectTaskArea").on("click","#push", function() {
-    // ottieni il titolo della task dall'input dell'utente
-    var title = JSON.stringify($("#taskFieldInput").value());
-    console.log(title);
-    // ottieni il numero di pomodori previsti per la task dall'input dell'utente
-    var pomodori = parseInt($("#pomoTaskNumber").val());
-    // crea una nuova task con i valori inseriti dall'utente
-    var newTask = { title: title, pomodori: pomodori };
-    // aggiungi la nuova task all'elenco delle task
-    taskList.push(newTask);
-    console.log(taskList[0].title);
+    // // ottieni il titolo della task dall'input dell'utente
+    // var title = $("#taskname").val();
+
+    // // ottieni il numero di pomodori previsti per la task dall'input dell'utente
+    // // var pomodori = $(".x").val();
+    // // // crea una nuova task con i valori inseriti dall'utente
+    // // var newTask = { title: title, pomodori: pomodori };
+    // // // aggiungi la nuova task all'elenco delle task
+    // // taskList.push(newTask);
+    // // console.log(pomodori);
   });
 })
