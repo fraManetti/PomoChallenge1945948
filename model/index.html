@@ -42,15 +42,6 @@
                   <span class="slider round"></span>
                 </label>
               </div> 
-
-              <div id="switchRow"> 
-                Modalità custom
-                <label class="switch">
-                  <input type="checkbox" id = "customCheckbox" onclick="checkCustom()">
-                  <span class="slider round"></span>
-                </label>
-              </div> 
-
               <div class="row" id="statRow">
                 <div id="stats"></div>
               </div>                  
@@ -124,7 +115,34 @@
               </button>
             </h3>
           </div>
+          <div id = modalitaTaskRow>
+            <p>
+              Attivare task? 
+              <label class="switch">
+                <input type="checkbox" id = "customCheckbox" onclick="modalitaTask()">
+                <span class="slider round"></span>
+              </label>
+            </p>
+            
+          </div>
           <div id = "selectTaskArea">
+            <div id="toggleTaskPanel">
+              <p id="pomoCount">Pomodori Complessivi: 0/0</p>
+              <p id="timeEstimated"> Fine per: xx:yy</p>
+            
+              <div id="newtask">
+                  <input type="text" placeholder="Add task title" id="taskFieldInput">
+                  <button id="push" onclick="addTask();">Add</button>
+                  Quanti Pomodori?<br>
+                  <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
+                  Note: <br>
+        
+                  <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea
+                  <textarea id="taskNote" cols="40" rows="3"></textarea>
+              </div>
+              <div id="tasks">
+              </div>
+            </div>
           </div>
         
         </div>

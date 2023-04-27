@@ -33,32 +33,16 @@ function checkCustom() {
 
 var opened = false;
 function openTaskBar() {
-  if(!planning) {
-    planning = true;
-    document.querySelector('#selectTaskArea').innerHTML += `
-    <div id="toggleTaskPanel">
-      <p id="pomoCount">Pomodori Complessivi: 0/0</p>
-      <p id="timeEstimated"> Fine per: xx:yy</p>
-    
-      <div id="newtask">
-          <input type="text" placeholder="Add task title" id="taskFieldInput">
-          <button id="push" onclick="addTask();">Add</button>
-          Quanti Pomodori?<br>
-          <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
-          Note: <br>
-
-          <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea
-          <textarea id="taskNote" cols="40" rows="3"></textarea>
-      </div>
-
-      <div id="tasks">
-      </div></div>
-    `;
+  if(selectTaskArea.style.display === "block") {
+    opened = false;
+    selectTaskArea.style.display = "none"
   }
   else {
     opened = true;
     selectTaskArea.style.display = "block";
   }
+}
+function modalitaTask() {
   
 }
 function timeUpdate(time){
@@ -128,7 +112,6 @@ function addTask(){
               <div class="hiddenOption">
                 <textarea name="taskNote" id="" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
               </div>
-
           </div>
       `;
           // recupera gli elementi `x` e li riempie con i valori precedentemente salvati
