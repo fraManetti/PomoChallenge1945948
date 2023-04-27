@@ -36,10 +36,12 @@ var opened = false;
 function openTaskBar() {
   if(selectTaskArea.style.display === "block") {
     opened = false;
-    selectTaskArea.style.display = "none"
+    //document.getElementById("taskUsed").value = "Close Task Bar";
+    selectTaskArea.style.display = "none";
   }
   else {
     opened = true;
+    //document.getElementById("taskUsed").value = "Open Task Bar";
     selectTaskArea.style.display = "block";
   }
 }
