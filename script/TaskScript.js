@@ -108,12 +108,20 @@ function addTask(){
           <div  class="task">
             
               <button style='font-size:24px' class="delete">
-                <i class="fa-solid fa-trash-can"></i>
+                <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
+                </img>
               </button>
               <input type="text" readOnly id="taskname" value=" ${document.querySelector('#newtask input').value}">
               <input type="number" value="" class="x" readonly  min="1">
+              
               <button type="button" class="taskOption" >
+                <label>
+                  <img class = "taskImg" src  = "../style/img/sliders-solid.png">
+                  </img>
+                </label>
               </button>
+              
+              
               <div class="hiddenOption">
                 <textarea name="taskNote" id="" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
               </div>

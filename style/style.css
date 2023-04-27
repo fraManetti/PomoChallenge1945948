@@ -108,7 +108,7 @@ border-color: #bd0101;
   font-size: 15px;
 }
 .task button{
-  background-color: #6583e5;
+  background-color: transparent;
   color: #ffffff;
   border: none;
   cursor: pointer;
@@ -117,9 +117,7 @@ border-color: #bd0101;
   width: 40px;
   border-radius: 5px;
 }
-.hiddenOption{
-   display: none; 
-}
+
  
 
 
@@ -180,6 +178,7 @@ input[type='number']{
   width: 10px;
   cursor: pointer;
   margin-left: 6px;
+  
 }
 
 #settingsImg {
@@ -188,6 +187,25 @@ input[type='number']{
   cursor: pointer;
 }
 
+
+.taskOption {
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.taskImg {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+.hiddenOption{
+  display: none; 
+} 
+
+.container-fluid {
+  height: 50px;
+}
 
 
 
@@ -212,13 +230,6 @@ input:checked + .slider:after
   color: white;
   
 }
-
-
-
-
-
-
-
 
 .switch {
   position: relative;
