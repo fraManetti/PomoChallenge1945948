@@ -18,7 +18,7 @@ function updateTaskBox (taskItems,  cond){
   }
 }
 
-var planning = false;
+
 var checkedCustom = false
 function checkCustom() {
   if(hiddenCustom.style.display === "block") {
@@ -31,40 +31,29 @@ function checkCustom() {
   }
 }
 
+
 var opened = false;
 function openTaskBar() {
-  if(!planning) {
-    planning = true;
-    document.querySelector('#selectTaskArea').innerHTML += `
-    <div id="toggleTaskPanel">
-      <p id="pomoCount">Pomodori Complessivi: 0/0</p>
-      <p id="timeEstimated"> Fine per: xx:yy</p>
-    
-      <div id="newtask">
-          <input type="text" placeholder="Add task title" id="taskFieldInput">
-          <button id="push" onclick="addTask();">Add</button>
-          Quanti Pomodori?<br>
-          <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
-          Note: <br>
-
-          <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea
-          <textarea id="taskNote" cols="40" rows="3"></textarea>
-      </div>
-
-      <div id="tasks">
-      </div></div>
-    `;
+  if(selectTaskArea.style.display === "block") {
+    opened = false;
+    selectTaskArea.style.display = "none"
   }
   else {
     opened = true;
     selectTaskArea.style.display = "block";
   }
+}
+
+
+function modalitaTask() {
   
 }
+
 function timeUpdate(time){
   var date = new Date();
   var dateMillis = date.getTime();
 
+  console.log(date);
   var timePeriod = "00:"+time+":00"; 
   var parts = timePeriod.split(/:/);
   var timePeriodMillis = (parseInt(parts[0], 10) * 60 * 60 * 1000) +
@@ -111,33 +100,26 @@ function addTask(){
     const xElements = document.getElementsByClassName("x");
     const inputValues = Array.from(xElements).map(element => element.value);
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
-    var title=$('#newtask input').val();
-    var newTask = { title: title, pomodori: number };
-    // aggiungi la nuova task all'elenco delle task
-    taskList.push(newTask);
       document.querySelector('#tasks').innerHTML += `
           <div  class="task">
-            
               <button style='font-size:24px' class="delete">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
+              <i class="fa-solid fa-trash-can"></i>
+                            </button>
               <input type="text" readOnly id="taskname" value=" ${document.querySelector('#newtask input').value}">
               <input type="number" value="" class="x" readonly  min="1">
               <button type="button" class="taskOption" >
               </button>
-              <div class="hiddenOption">
-                <textarea name="taskNote" id="" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
-              </div>
+            <div class="hiddenOption">
+            <textarea name="taskNote" id="" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
 
-          </div>
+            </div>
+            </div>
       `;
           // recupera gli elementi `x` e li riempie con i valori precedentemente salvati
     const newXElements = document.getElementsByClassName("x");
     Array.from(newXElements).forEach((element, index) => {
       element.value = inputValues[index] || "";
     });
-
-  
 
     // aggiunge il valore dell'attributo `value` dell'ultimo input creato all'array
     const lastXElement = newXElements[newXElements.length - 1];
@@ -174,53 +156,3 @@ for (i = 0; i < coll.length;i++) {
 }
   }
 }
-
-
-
-// $(document).ready(function () {
-
-//     var task = $(".task");
-//     var container = $(".tasks");
-
-//     box.draggable({
-//         containment: container,
-//         helper: "clone",
-
-//         start: function () {
-//             $(this).css({
-//                 opacity: 0
-//             });
-
-//             $(".task").css("z-index", "0");
-//         },
-
-//         stop: function () {
-//             $(this).css({
-//                 opacity: 1
-//             });
-//         }
-//     });
-
-//     task.droppable({
-//         accept: task,
-
-//         drop: function (event, ui) {
-//             var draggable = ui.draggable;
-//             var droppable = $(this);
-//             var dragPos = draggable.position();
-//             var dropPos = droppable.position();
-
-//             draggable.css({
-//                 left: dropPos.left + "px",
-//                 top: dropPos.top + "px",
-//                 "z-index": 20
-//             });
-
-//             droppable.css("z-index", 10).animate({
-//                 left: dragPos.left,
-//                 top: dragPos.top
-//             });
-//         }
-//     });
-
-// });

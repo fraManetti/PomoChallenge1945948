@@ -141,6 +141,9 @@ $(document).ready(function(){
       clock.setTime(0);
       $('#start').text('START');
       countTimes=0;
+      $("#session").html("25");
+      $("#longBreak").html("15");
+      $("#break").html("5");
     });
   });
   
