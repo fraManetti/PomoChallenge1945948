@@ -21,7 +21,7 @@ body {
  }
  .flip-clock-wrapper {
    max-width: 460px;
-   margin: 3em auto 2em;
+   margin: 2em auto 2em;
    display: flex;
    justify-content: center;
  }
@@ -95,7 +95,7 @@ body {
   #statRow {
     display: flex;
     justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
   }
 
 
