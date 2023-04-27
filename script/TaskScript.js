@@ -18,6 +18,10 @@ function updateTaskBox (taskItems,  cond){
   }
 }
 
+function infoPopUp() {
+  console.log("jaso");
+}
+
 var planning = false;
 var checkedCustom = false
 function checkCustom() {
