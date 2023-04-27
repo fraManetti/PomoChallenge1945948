@@ -6,7 +6,7 @@ function setParams(){
   ret[2]=JSON.parse(document.getElementById("longBreak").textContent);
   return ret;
 }
-function updateTaskBox (taskItems,  cond){
+function updateTaskBox (taskItems,  cond){ //funzione per rendere scrivibili o leggibili i campi delle task
   if (!cond){
     taskItems[1].setAttribute("readonly","readonly");
     taskItems[2].setAttribute("readonly","readonly");
@@ -21,6 +21,16 @@ function updateTaskBox (taskItems,  cond){
 
 var planning = false;
 var checkedCustom = false
+function updateTaskMap() {
+  var tasks = document.getElementsByClassName("taskNames");
+  for (var j= 0; j<tasks.length; j++){
+    console.log(tasks[j].value);
+    console.log(tasks[j].parentNode.children[2].value);
+    taskList.forEach(function(triple){
+
+    });
+  }
+}
 function checkCustom() {
   if(hiddenCustom.style.display === "flex") {
     checkedCustom = false;
@@ -111,7 +121,7 @@ function addTask(){
               <button style='font-size:24px' class="delete">
                 <i class="fa-solid fa-trash-can"></i>
               </button>
-              <input type="text" readOnly id="taskname" value=" ${document.querySelector('#newtask input').value}">
+              <input type="text" readOnly class="taskNames" value=" ${document.querySelector('#newtask input').value}">
               <input type="number" value="" class="x" readonly  min="1">
               <button type="button" class="taskOption" >
               </button>
@@ -144,21 +154,22 @@ function addTask(){
           }
       }
 
-    var coll = document.getElementsByClassName("taskOption");
+    var coll = document.getElementsByClassName("taskOption");//mi collego al bottone di custom task
 var i;
 for (i = 0; i < coll.length;i++) {
   coll[i].addEventListener("click", function() {
-    var taskBox = this.parentNode;
-    var taskItems =taskBox.children
-    var hiddenBox = this.nextElementSibling;
+    var taskBox = this.parentNode; //prendo tutto il suo rettangolo
+    var taskItems =taskBox.children //prendo elementi del rettangolo
+    var hiddenBox = this.nextElementSibling; //il blocco a comparsa
     if (hiddenBox.style.display === "block") {
-        taskBox.classList.toggle("taskShowed");
+        taskBox.classList.toggle("taskShowed"); 
         hiddenBox.style.display = "none";
         updateTaskBox(taskItems,false);
     } else {
       hiddenBox.style.display = "block";
       taskBox.classList.toggle("taskShowed");
       updateTaskBox(taskItems,true);
+      updateTaskMap();
     }
   });
 }

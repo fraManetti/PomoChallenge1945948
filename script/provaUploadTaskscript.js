@@ -4,7 +4,6 @@
   var countCurrPom =0;
   var clock;
 function resetClock() {
-  console.log("check");
   clock.stop();
   pos = "Pomodoro";
   $("#stats").html(pos);
