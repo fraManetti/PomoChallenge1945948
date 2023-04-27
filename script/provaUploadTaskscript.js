@@ -2,6 +2,16 @@
   var taskOn = false;
   var taskList = [];
   var countCurrPom =0;
+  var clock;
+function resetClock() {
+  console.log("check");
+  clock.stop();
+  pos = "Pomodoro";
+  $("#stats").html(pos);
+  clock.setTime(0);
+  $('#start').text('START');
+  countTimes=0;
+}
 $(document).ready(function(){
 
   var countTimes = 0; 
@@ -31,7 +41,7 @@ $(document).ready(function(){
       })
     }
   }
-    var clock = $(".timer").FlipClock(0, {
+     clock = $(".timer").FlipClock(0, {
       countdown: true,
       clockFace: 'MinuteCounter',
       autoStart: false,
@@ -207,15 +217,15 @@ $(document).ready(function(){
     $("#break").html("5");
   });
 //da sistemare con il fatto che ora è nascosto!
-  $("#customCheckBoxx").on("click",function(){
-    console.log("check");
-    clock.stop();
-    pos = "Pomodoro";
-    $("#stats").html(pos);
-    clock.setTime(0);
-    $('#start').text('START');
-    countTimes=0;
-  });
+  // $("#customCheckBoxx").on("click",function(){
+  //   console.log("check");
+  //   clock.stop();
+  //   pos = "Pomodoro";
+  //   $("#stats").html(pos);
+  //   clock.setTime(0);
+  //   $('#start').text('START');
+  //   countTimes=0;
+  // });
 
 
   $("#selectTaskArea").on("click","#push", function() {
