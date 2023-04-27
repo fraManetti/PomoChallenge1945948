@@ -14,8 +14,9 @@
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
-    <script  src="../script/provaUploadTaskscript.js"></script>
+    <script  src="../script/clockScript.js"></script>
     <script  src="../script/TaskScript.js"></script>
+    <script  src="../script/ClockTaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!--<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script> -->
 
@@ -35,6 +36,7 @@
         <div class="center-box">
           <div class="box">
             <div class="pomodoro">
+
               <div id="switchRow"> 
                 Modalità custom
                 <label class="switch">
@@ -42,6 +44,7 @@
                   <span class="slider round"></span>
                 </label>
               </div> 
+
               <div class="row" id="statRow">
                 <div id="stats"></div>
               </div>                  
@@ -51,7 +54,7 @@
                 <!------------------------------------------------------------------------------->
                 <div  class="row" id = "hiddenCustom">
                   <div class="col-md-6">
-                    <div class="row"><p>Durata Pomodoro<p></div>
+                    <div class="row"><p>session<p></div>
                     <div class="row counter">
                       <div class="col-md-4">
                         <button class="btn btn-default" id="sessDec">-</button>        
@@ -65,7 +68,7 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="row"><p>Short Break<p></div>
+                    <div class="row"><p>short break<p></div>
                     <div class="row counter">
                       <div class="col-md-4">
                         <button class="btn btn-default" id="breakDec">-</button>
@@ -79,7 +82,7 @@
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="row"><p>Long Break<p></div>
+                    <div class="row"><p>long break<p></div>
                     <div class="row counter">
                       <div class="col-md-4">
                         <button class="btn btn-default" id="longDec">-</button>        
@@ -94,7 +97,7 @@
                   </div>
                 </div>
                 <div id="buttonsArea">
-                  <div class="" id="btns">
+                  <div class="row" id="btns">
                     <button class="btn btn-default btn-lg" id="start">START</button>
                     <button class="btn btn-default btn-lg" id="skip">SKIP</button>
                     <button class="btn btn-default btn-lg" id="clear">CLEAR</button>
@@ -115,6 +118,7 @@
               </button>
             </h3>
           </div>
+
           <div id = modalitaTaskRow>
             <p>
               Attivare task? 
@@ -125,6 +129,7 @@
             </p>
             
           </div>
+
           <div id = "selectTaskArea">
             <div id="toggleTaskPanel">
               <p id="pomoCount">Pomodori Complessivi: 0/0</p>
@@ -143,6 +148,9 @@
               <div id="tasks">
               </div>
             </div>
+
+
+
           </div>
         
         </div>
