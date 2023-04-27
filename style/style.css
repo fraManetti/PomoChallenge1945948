@@ -175,6 +175,15 @@ input[type='number']{
   text-align: center;
 }
 
+#settingsBtn {
+  height: 20px;
+  width: 20px;
+}
+
+#settingsImg {
+  height: 20px;
+  width: 20px;
+}
 
 
 

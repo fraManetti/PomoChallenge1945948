@@ -17,7 +17,7 @@
     <script  src="../script/provaUploadTaskscript.js"></script>
     <script  src="../script/TaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
-    <!--<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script> -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script> 
 
     <script>
         $(function(){
@@ -36,11 +36,17 @@
           <div class="box">
             <div class="pomodoro">
               <div id="switchRow"> 
-                Modalità custom
-                <label class="switch">
-                  <input type="checkbox" id = "customCheckbox" onclick="checkCustom()">
-                  <span class="slider round"></span>
-                </label>
+                
+
+                  <button id="settingsBtn" name ="stocazzo">
+                    <label for id="settingsBtn">
+                      <img id = "settingsImg" src  = "../style/img/gearsolid.png" >
+                      </img>
+                    </label>
+                  </button>
+
+                  
+                
               </div> 
               <div class="row" id="statRow">
                 <div id="stats"></div>
