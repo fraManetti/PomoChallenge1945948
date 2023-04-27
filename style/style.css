@@ -84,6 +84,7 @@ border-color: #bd0101;
   margin-top: 10px;
 }
 
+
 .task{
   border-radius: 5px;
   /* justify-content: space-between;  */
@@ -153,6 +154,7 @@ input[type='number']{
 }
 #hiddenCustom {
   display: none;
+  padding-bottom: 2%;
 }
 
 #selectTaskArea {

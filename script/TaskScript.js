@@ -21,13 +21,14 @@ function updateTaskBox (taskItems,  cond){
 var planning = false;
 var checkedCustom = false
 function checkCustom() {
-  if(hiddenCustom.style.display === "block") {
+  if(hiddenCustom.style.display === "flex") {
     checkedCustom = false;
-    hiddenCustom.style.display = "none"
+    hiddenCustom.style.display = "none";
+    
   }
   else {
     checkedCustom = true;
-    hiddenCustom.style.display = "block";
+    hiddenCustom.style.display = "flex";
   }
 }
 
