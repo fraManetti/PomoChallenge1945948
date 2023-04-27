@@ -161,7 +161,16 @@ input[type='number']{
   display: none;
 }
 
+#taskUse {
+  text-align: justify;
+}
 
+#taskTag {
+  height: 50px;
+  padding-left: 5%;
+  padding-top: 2%;
+  text-align: center;
+}
 
 
 
