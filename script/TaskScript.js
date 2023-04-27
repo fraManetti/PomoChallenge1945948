@@ -1,3 +1,4 @@
+var index=1;
 function setParams(){
   var ret=new Array();
   ret[0]=JSON.parse(document.getElementById("session").textContent);
@@ -21,13 +22,13 @@ function updateTaskBox (taskItems,  cond){
 var planning = false;
 var checkedCustom = false
 function checkCustom() {
-  if(hiddenCustom.style.display === "block") {
+  if(hiddenCustom.style.display === "flex") {
     checkedCustom = false;
     hiddenCustom.style.display = "none"
   }
   else {
     checkedCustom = true;
-    hiddenCustom.style.display = "block";
+    hiddenCustom.style.display = "flex";
   }
 }
 
@@ -43,7 +44,11 @@ function openTaskBar() {
   }
 }
 function modalitaTask() {
-  
+  $("#clock").stop();
+  if(!taskOn)
+    taskOn=true;
+  else 
+    taskOn=false;
 }
 function timeUpdate(time){
   var date = new Date();
@@ -96,7 +101,8 @@ function addTask(){
     const inputValues = Array.from(xElements).map(element => element.value);
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
     var title=$('#newtask input').val();
-    var newTask = { title: title, pomodori: number };
+    var newTask = { title: title, pomodori: number,index: index };
+    index+=1;
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask);
       document.querySelector('#tasks').innerHTML += `
