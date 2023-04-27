@@ -29,9 +29,13 @@ border-color: #bd0101;
   background: white; 
   border-radius: 5px;
   width: 500px;
-  
-  
 }
+
+#modalitaTaskSwitch {
+  text-align: left;
+  padding-bottom: 2%;
+}
+
 #newtask{
   position: relative;
   padding: 15px 20px;
@@ -167,10 +171,38 @@ input[type='number']{
 
 #taskTag {
   height: 50px;
-  padding-left: 5%;
   padding-top: 2%;
   text-align: center;
 }
+
+
+
+
+
+
+.slider:after
+{
+ content:'OFF';
+ color: black;
+ display: block;
+ position: absolute;
+ transform: translate(-50%,-50%);
+ top: 50%;
+ left: 70%;
+ font-size: 10px;
+ font-family: Verdana, sans-serif;
+}
+
+input:checked + .slider:after
+{  
+  content:'ON';
+  left: 20%;
+  color: white;
+  
+}
+
+
+
 
 
 
@@ -205,6 +237,7 @@ input[type='number']{
 
 .slider:before {
   position: absolute;
+  content: "no";
   content: "";
   height: 26px;
   width: 26px;
@@ -213,6 +246,7 @@ input[type='number']{
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
+  
 }
 
 input:checked + .slider {
@@ -227,6 +261,7 @@ input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
+  
 }
 
 /* Rounded sliders */
@@ -236,6 +271,7 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+  
 }
 
 #switchRow {
@@ -281,6 +317,7 @@ bottom: 4px;
 background-color: white;
 -webkit-transition: .4s;
 transition: .4s;
+
 }
 
 input:checked + .slider {
@@ -295,6 +332,7 @@ input:checked + .slider:before {
 -webkit-transform: translateX(26px);
 -ms-transform: translateX(26px);
 transform: translateX(26px);
+
 }
 
 /* Rounded sliders */
@@ -304,6 +342,7 @@ border-radius: 34px;
 
 .slider.round:before {
 border-radius: 50%;
+
 }
 
 #switchRow {

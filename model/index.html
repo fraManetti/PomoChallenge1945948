@@ -113,22 +113,26 @@
             </button>
             
           </div>
-          <div id = modalitaTaskRow>
-            <p>
-              Attivare task? 
-              <label class="switch">
-                <input type="checkbox" id = "customCheckbox" onclick="modalitaTask()">
-                <span class="slider round"></span>
-              </label>
-            </p>
-            
-          </div>
+          
           <div id = "selectTaskArea">
+
             <div id="toggleTaskPanel">
               <p id="pomoCount">Pomodori Complessivi: 0/0</p>
               <p id="timeEstimated"> Fine per: xx:yy</p>
             
               <div id="newtask">
+
+                <div id = modalitaTaskRow>
+                  <p id="modalitaTaskSwitch">
+                    Attivare task? 
+                    <label class="switch" data-on="ON" data-off="OFF">
+                      <input type="checkbox" id = "customCheckbox" onclick="modalitaTask()">
+                      <span class="slider round"></span>
+                      
+                    </label>
+                  </p>
+                </div>
+
                   <input type="text" placeholder="Add task title" id="taskFieldInput">
                   <button id="push" onclick="addTask();">Add</button>
                   Quanti Pomodori?<br>
