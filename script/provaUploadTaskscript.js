@@ -214,6 +214,9 @@ $(document).ready(function(){
     $("#session").html("25");
     $("#longBreak").html("15");
     $("#break").html("5");
+    countB=5;
+    countL=15;
+    countS=25;
   });
 //da sistemare con il fatto che ora è nascosto!
   // $("#customCheckBoxx").on("click",function(){

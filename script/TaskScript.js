@@ -127,8 +127,7 @@ function addTask(){
                 <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
                 </img>
               </button>
-              //<input type="text" readOnly id="taskname" value=" ${document.getElementById("taskFieldInput").value}">
-              <input type="text" readOnly class="taskNames" value=" ${document.querySelector('#newtask input').value}">
+              <input type="text" readOnly id="taskname" value=" ${document.getElementById("taskFieldInput").value}">
               <input type="number" value="" class="x" readonly  min="1">
               
               <button type="button" class="taskOption" >
