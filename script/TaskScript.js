@@ -19,6 +19,10 @@ function updateTaskBox (taskItems,  cond){ //funzione per rendere scrivibili o l
   }
 }
 
+function infoPopUp() {
+  console.log("jaso");
+}
+
 var planning = false;
 var checkedCustom = false
 function updateTaskMap() {
@@ -34,7 +38,8 @@ function updateTaskMap() {
 function checkCustom() {
   if(hiddenCustom.style.display === "flex") {
     checkedCustom = false;
-    hiddenCustom.style.display = "none"
+    hiddenCustom.style.display = "none";
+    
   }
   else {
     checkedCustom = true;
@@ -119,16 +124,24 @@ function addTask(){
           <div  class="task">
             
               <button style='font-size:24px' class="delete">
-                <i class="fa-solid fa-trash-can"></i>
+                <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
+                </img>
               </button>
+              //<input type="text" readOnly id="taskname" value=" ${document.getElementById("taskFieldInput").value}">
               <input type="text" readOnly class="taskNames" value=" ${document.querySelector('#newtask input').value}">
               <input type="number" value="" class="x" readonly  min="1">
+              
               <button type="button" class="taskOption" >
+                <label>
+                  <img class = "taskImg" src  = "../style/img/sliders-solid.png">
+                  </img>
+                </label>
               </button>
+              
+              
               <div class="hiddenOption">
                 <textarea name="taskNote" id="" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
               </div>
-
           </div>
       `;
           // recupera gli elementi `x` e li riempie con i valori precedentemente salvati
@@ -175,6 +188,8 @@ for (i = 0; i < coll.length;i++) {
 }
   }
 }
+
+
 
 
 

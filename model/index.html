@@ -17,7 +17,7 @@
     <script  src="../script/provaUploadTaskscript.js"></script>
     <script  src="../script/TaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
-    <!--<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script> -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script> 
 
     <script>
         $(function(){
@@ -36,11 +36,19 @@
           <div class="box">
             <div class="pomodoro">
               <div id="switchRow"> 
-                Modalità custom
-                <label class="switch">
-                  <input type="checkbox" id = "customCheckbox" onclick="checkCustom()">
-                  <span class="slider round"></span>
-                </label>
+                
+
+                    <label>
+                      <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
+                      </img>
+                    </label>
+
+                    <label>
+                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
+                      </img>
+                    </label>
+                  
+                
               </div> 
               <div class="row" id="statRow">
                 <div id="stats"></div>
@@ -108,30 +116,45 @@
 
         <div id="taskBox">
           <div id="taskTag">
-            <h3> 
-              Task: 
-              <button id="taskUse" onclick="openTaskBar();">
-                Open task panel
-              </button>
-            </h3>
-          </div>
-          <div id = modalitaTaskRow>
-            <p>
-              Attivare task? 
-              <label class="switch">
-                <input type="checkbox" id = "customCheckbox" onclick="modalitaTask(); resetClock();">
-                <span class="slider round"></span>
-              </label>
-            </p>
+
+<button id="taskUse" onclick="openTaskBar();">
+              Open task panel
+            </button>
+
             
           </div>
+          
           <div id = "selectTaskArea">
+
             <div id="toggleTaskPanel">
               <p id="pomoCount">Pomodori Complessivi: 0/0</p>
               <p id="timeEstimated"> Fine per: xx:yy</p>
             
               <div id="newtask">
+
+                <div id = modalitaTaskRow>
+                  <p id="modalitaTaskSwitch">
+                    Attivare task? 
+                    <label class="switch" data-on="ON" data-off="OFF">
+                      <input type="checkbox" id = "customCheckbox" onclick="modalitaTask()">
+                      <span class="slider round"></span>
+                      
+                    </label>
+                  </p>
+                </div>
+
                   <input type="text" placeholder="Add task title" id="taskFieldInput">
+
+                  <script>
+                    var input = document.getElementById("taskFieldInput");
+                    input.addEventListener("keypress", function(event) {
+                      if (event.key === "Enter") {
+                        event.preventDefault();
+                        document.getElementById("push").click();
+                      }
+                    });
+                    </script>
+
                   <button id="push" onclick="addTask();">Add</button>
                   Quanti Pomodori?<br>
                   <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
