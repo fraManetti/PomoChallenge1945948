@@ -1,3 +1,4 @@
+var index=1;
 function setParams(){
   var ret=new Array();
   ret[0]=JSON.parse(document.getElementById("session").textContent);
@@ -5,7 +6,7 @@ function setParams(){
   ret[2]=JSON.parse(document.getElementById("longBreak").textContent);
   return ret;
 }
-function updateTaskBox (taskItems,  cond){
+function updateTaskBox (taskItems,  cond){ //funzione per rendere scrivibili o leggibili i campi delle task
   if (!cond){
     taskItems[1].setAttribute("readonly","readonly");
     taskItems[2].setAttribute("readonly","readonly");
@@ -24,6 +25,16 @@ function infoPopUp() {
 
 var planning = false;
 var checkedCustom = false
+function updateTaskMap() {
+  var tasks = document.getElementsByClassName("taskNames");
+  for (var j= 0; j<tasks.length; j++){
+    console.log(tasks[j].value);
+    console.log(tasks[j].parentNode.children[2].value);
+    taskList.forEach(function(triple){
+
+    });
+  }
+}
 function checkCustom() {
   if(hiddenCustom.style.display === "flex") {
     checkedCustom = false;
@@ -48,7 +59,11 @@ function openTaskBar() {
   }
 }
 function modalitaTask() {
-  
+  $("#clock").stop();
+  if(!taskOn)
+    taskOn=true;
+  else 
+    taskOn=false;
 }
 function timeUpdate(time){
   var date = new Date();
@@ -101,7 +116,8 @@ function addTask(){
     const inputValues = Array.from(xElements).map(element => element.value);
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
     var title=$('#newtask input').val();
-    var newTask = { title: title, pomodori: number };
+    var newTask = { title: title, pomodori: number,index: index };
+    index+=1;
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask);
       document.querySelector('#tasks').innerHTML += `
@@ -111,7 +127,8 @@ function addTask(){
                 <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
                 </img>
               </button>
-              <input type="text" readOnly id="taskname" value=" ${document.getElementById("taskFieldInput").value}">
+              //<input type="text" readOnly id="taskname" value=" ${document.getElementById("taskFieldInput").value}">
+              <input type="text" readOnly class="taskNames" value=" ${document.querySelector('#newtask input').value}">
               <input type="number" value="" class="x" readonly  min="1">
               
               <button type="button" class="taskOption" >
@@ -150,21 +167,22 @@ function addTask(){
           }
       }
 
-    var coll = document.getElementsByClassName("taskOption");
+    var coll = document.getElementsByClassName("taskOption");//mi collego al bottone di custom task
 var i;
 for (i = 0; i < coll.length;i++) {
   coll[i].addEventListener("click", function() {
-    var taskBox = this.parentNode;
-    var taskItems =taskBox.children
-    var hiddenBox = this.nextElementSibling;
+    var taskBox = this.parentNode; //prendo tutto il suo rettangolo
+    var taskItems =taskBox.children //prendo elementi del rettangolo
+    var hiddenBox = this.nextElementSibling; //il blocco a comparsa
     if (hiddenBox.style.display === "block") {
-        taskBox.classList.toggle("taskShowed");
+        taskBox.classList.toggle("taskShowed"); 
         hiddenBox.style.display = "none";
         updateTaskBox(taskItems,false);
     } else {
       hiddenBox.style.display = "block";
       taskBox.classList.toggle("taskShowed");
       updateTaskBox(taskItems,true);
+      updateTaskMap();
     }
   });
 }
