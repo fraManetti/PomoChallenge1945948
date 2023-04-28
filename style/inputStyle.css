@@ -1,0 +1,75 @@
+/*----- container totale della parte task -----*/
+#taskBox{
+
+    background: white; 
+    border-radius: 5px;
+    width: 500px;
+    }
+
+
+
+
+/*-------- container di input --------*/
+#newtask{
+    position: relative;
+    padding: 15px 20px;
+    width: 500px;
+    
+    }
+
+    #newtask input:focus{
+        outline: none;
+        border-color: #0d75ec;
+      }
+
+
+    /*settaggio input text (box di input titolo task)*/
+    input[type='text']{
+        width:300px;
+    } 
+
+    /*settaggio input number (box di input numero pomodori)*/
+    input[type='number']{
+        width:45px;
+    } 
+
+    /*button del pannello di input task*/
+    #newtask button{
+    position: relative;
+    float: right;
+    font-weight: 500;
+    font-size: 16px;
+    background-color: #0d75ec;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    outline: none;
+    width: 20%;
+    height: 45px;
+    border-radius: 5px;
+    font-family: 'Poppins',sans-serif;
+    }
+
+    /*----- container switch modalità task -----*/
+    #modalitaTaskSwitch {
+        text-align: left;
+        padding-bottom: 2%;
+        }
+
+        
+    /*----- numero pomodori in input ------*/
+    #pomoTaskNumber {
+        width: 45;
+      }
+    /*----- pannello nuove task -----*/
+    #tasks{
+    border-radius: 10px;
+    width: 470p;
+    position: relative;
+    background-color: #ffffff;
+    padding: 5px 15px;
+    margin-top: 10px;
+    
+    overflow-y: auto;
+    max-height: 300px;
+    }

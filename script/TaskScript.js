@@ -139,7 +139,7 @@ function addTask(){
               
               
               <div class="hiddenOption">
-                <textarea name="taskNote" id="" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
+                <textarea name="taskNote" id="hiddenNote" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
               </div>
           </div>
       `;
