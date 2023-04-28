@@ -1,6 +1,16 @@
   //Variabili per le task:
   var taskOn = false;
   var taskList = [];
+  var countCurrPom =0;
+  var clock;
+function resetClock() {
+  clock.stop();
+  pos = "Pomodoro";
+  $("#stats").html(pos);
+  clock.setTime(0);
+  $('#start').text('START');
+  countTimes=0;
+}
 $(document).ready(function(){
 
   var countTimes = 0; 
@@ -15,7 +25,22 @@ $(document).ready(function(){
   var posLama;
   var count;
     $("#stats").html(pos);
-    var clock = $(".timer").FlipClock(0, {
+  function checkCurrentTask() {
+    var pomTarget;
+    countCurrPom++;
+    taskList.forEach(function(triple){
+      if (triple.index==1)
+        pomTarget=triple.pomodori;
+    })
+    if (pomTarget == countCurrPom){
+      alert("Task Finita!");
+      countCurrPom=0;
+      taskList.forEach(function(triple){
+          triple.index--;
+      })
+    }
+  }
+     clock = $(".timer").FlipClock(0, {
       countdown: true,
       clockFace: 'MinuteCounter',
       autoStart: false,
@@ -23,6 +48,7 @@ $(document).ready(function(){
         interval: function(){
           if (clock.getTime() == 0 )
               if (pos == "Session"){
+                if(taskOn)checkCurrentTask();
                 if(countTimes%4!=0){
                 clock.setTime(countB*60);
                 clock.start();
@@ -53,16 +79,12 @@ $(document).ready(function(){
       posLama = $("#stats").html();
       $(this).text("START");
     } else {
-      if (taskOn) {
-        // esegui le task
-        goTasks();
-      } else {
         if (count != countS || clock.getTime()==0){
           clock.setTime(countS*60);
           countTimes++;
           pos="Session";
           $("#stats").html(pos)
-          console.log(countTimes);
+         // console.log(countTimes);
         } else {
           pos = posLama;
           $("#stats").html(pos);
@@ -70,45 +92,45 @@ $(document).ready(function(){
         count = countS;    
         clock.start();    
         $(this).text("PAUSE");
-      }
+      
     }
   });
   
   // implementa le funzioni stop e skip in modo simile
   
   function goTasks() {
-    // scorri tutte le task
-    for (var i = 0; i < taskList.length; i++) {
-      var task = taskList[i];
-      console.log(task);
-      // esegui il numero di pomodori previsti per la task corrente
-      for (var j = 1; j <= task.pomodori; j++) {
-        // esegui un pomodoro
-        console.log(task.pomodori,j);
-        clock.setTime(countS*60);
-        clock.start();
-        pos="Session";
-        $("#stats").html(pos)    
-        console.log("ciao");
+    // // scorri tutte le task
+    // for (var i = 0; i < taskList.length; i++) {
+    //   var task = taskList[i];
+    //   console.log(task);
+    //   // esegui il numero di pomodori previsti per la task corrente
+    //   for (var j = 1; j <= task.pomodori; j++) {
+    //     // esegui un pomodoro
+    //     console.log(task.pomodori,j);
+    //     clock.setTime(countS*60);
+    //     clock.start();
+    //     pos="Session";
+    //     $("#stats").html(pos)    
+    //     console.log("ciao");
 
-        // attendi che il timer raggiunga lo zero
-        while (clock.getTime() > 0) {}
-        // esegui una pausa breve o lunga a seconda del numero di pomodori completati
-        if (j % 4 == 0) {
-          clock.setTime(countL*60);
-          clock.start();
-          pos = "Long Break";
-          $("#stats").html(pos);
-        } else {
-          clock.setTime(countB*60);
-          clock.start();
-          pos = "Short Break";
-          $("#stats").html(pos);
-        }
-        // attendi che il timer raggiunga lo zero
-        while (clock.getTime() > 0) {}
-      }
-    }
+    //     // attendi che il timer raggiunga lo zero
+    //     while (clock.getTime() > 0) {}
+    //     // esegui una pausa breve o lunga a seconda del numero di pomodori completati
+    //     if (j % 4 == 0) {
+    //       clock.setTime(countL*60);
+    //       clock.start();
+    //       pos = "Long Break";
+    //       $("#stats").html(pos);
+    //     } else {
+    //       clock.setTime(countB*60);
+    //       clock.start();
+    //       pos = "Short Break";
+    //       $("#stats").html(pos);
+    //     }
+    //     // attendi che il timer raggiunga lo zero
+    //     while (clock.getTime() > 0) {}
+    //   }
+    // }
   }
      //SESSION
      $("#sessInc").on("click", function(){
@@ -161,6 +183,8 @@ $(document).ready(function(){
   
     $("#skip").on("click", function(){
       if (pos == "Session"){
+        if(taskOn)checkCurrentTask();
+
         if(countTimes%4!=0){
         clock.setTime(countB*60);
         clock.start();
@@ -191,6 +215,18 @@ $(document).ready(function(){
     $("#longBreak").html("15");
     $("#break").html("5");
   });
+//da sistemare con il fatto che ora è nascosto!
+  // $("#customCheckBoxx").on("click",function(){
+  //   console.log("check");
+  //   clock.stop();
+  //   pos = "Pomodoro";
+  //   $("#stats").html(pos);
+  //   clock.setTime(0);
+  //   $('#start').text('START');
+  //   countTimes=0;
+  // });
+
+
   $("#selectTaskArea").on("click","#push", function() {
     // // ottieni il titolo della task dall'input dell'utente
     // var title = $("#taskname").val();
@@ -202,5 +238,7 @@ $(document).ready(function(){
     // // // aggiungi la nuova task all'elenco delle task
     // // taskList.push(newTask);
     // // console.log(pomodori);
+
+
   });
 })
