@@ -4,6 +4,7 @@
   var countCurrPom =0;
   var clock;
 function resetClock() {
+  //if(taskList.length == 0) alert("Inserisci delle task!")
   clock.stop();
   pos = "Pomodoro";
   $("#stats").html(pos);
@@ -89,10 +90,15 @@ $(document).ready(function(){
           pos = posLama;
           $("#stats").html(pos);
         }
-        count = countS;    
-        clock.start();    
-        $(this).text("PAUSE");
-      
+        if(!(taskOn && taskList.length == 0)){
+          count = countS;    
+          clock.start();    
+          $(this).text("PAUSE");
+        }
+        else{
+          alert("Non hai ancora inserito task!");
+          clock.stop();
+        }
     }
   });
   
