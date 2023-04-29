@@ -97,7 +97,7 @@ $(document).ready(function(){
         }
         else{
           alert("Non hai ancora inserito task!");
-          clock.stop();
+          //clock.stop();
         }
     }
   });
