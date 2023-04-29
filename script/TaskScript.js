@@ -1,4 +1,20 @@
 var index=1;
+var oldTitle="";
+var oldPomos = 0;
+var currentKey;
+
+function hashCode(string) {
+  let hash = 0;
+  for (let i = 0; i < string.length; i++) {
+      let character = string.charCodeAt(i);
+      hash = ((hash << 5) - hash) + character;
+      hash = hash & hash; 
+  }
+  return hash;
+}
+function showOptions(s) {
+  
+}
 function setParams(){
   var ret=new Array();
   ret[0]=JSON.parse(document.getElementById("session").textContent);
@@ -25,15 +41,17 @@ function infoPopUp() {
 
 var planning = false;
 var checkedCustom = false
-function updateTaskMap() {
-  var tasks = document.getElementsByClassName("taskNames");
-  for (var j= 0; j<tasks.length; j++){
-    console.log(tasks[j].value);
-    console.log(tasks[j].parentNode.children[2].value);
-    taskList.forEach(function(triple){
-
-    });
-  }
+function updateTaskMap(newTitle, newPomos) {
+  taskList.forEach(function(tuple) {
+    if (tuple.key == currentKey){
+        tuple.title = newTitle;
+        tuple.pomodori = newPomos;
+        console.log(tuple);
+        console.log(taskList);
+        console.log(currentKey);
+      }
+    }
+  )
 }
 function checkCustom() {
   if(hiddenCustom.style.display === "flex") {
@@ -46,6 +64,22 @@ function checkCustom() {
     hiddenCustom.style.display = "flex";
   }
 }
+
+// function showOptions() {
+//   var button = event.target
+//   var hiddenBox = button.nextElementSibling;
+//   if (hiddenBox.style.display === "block") {
+//       taskBox.classList.toggle("taskShowed");
+//       hiddenBox.style.display = "none";
+//       updateTaskBox(taskItems,false);
+//   } else {
+//     hiddenBox.style.display = "block";
+//     taskBox.classList.toggle("taskShowed");
+//     updateTaskBox(taskItems,true);
+//   }
+// }
+
+
 
 var opened = false;
 function openTaskBar() {
@@ -77,7 +111,13 @@ function timeUpdate(time){
 
   var newDate = new Date();
   newDate.setTime(dateMillis + timePeriodMillis);
-  var ret = JSON.stringify(newDate.getHours())+":"+JSON.stringify(newDate.getMinutes());
+  var min =newDate.getMinutes();
+  var hour = newDate.getHours();
+  if (min<10)
+    min = "0"+JSON.stringify(min);
+  if (hour<10)  
+    hour ="0"+ JSON.stringify(hour);
+  var ret = hour+":"+min;
   //console.log(newDate.toLocaleString("it-IT",{timeStyle:"long"}));
   return ret;
 }
@@ -109,25 +149,26 @@ function updateTaskTag(){
 }
 
 function addTask(){
-    if(document.querySelector('#newtask input').value.length == 0){
-      alert("Kindly Enter Task Name!!!!")
+    if(document.querySelector('#taskFieldInput').value.length == 0){
+      alert("Inserire un nome per la Task!")
   }else{
     const xElements = document.getElementsByClassName("x");
     const inputValues = Array.from(xElements).map(element => element.value);
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
-    var title=$('#newtask input').val();
-    var newTask = { title: title, pomodori: number,index: index };
+    var title=$('#taskFieldInput').val();
+    var key =hashCode(title+JSON.stringify(number));
+    var newTask = { key:key, title: title, pomodori: number,index: index };
     index+=1;
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask);
-      document.querySelector('#tasks').innerHTML += `
-          <div  class="task">
+      document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
+          <div  class="task" data-value="${key}">
             
               <button style='font-size:24px' class="delete">
                 <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
                 </img>
               </button>
-              <input type="text" readOnly id="taskname" value=" ${document.getElementById("taskFieldInput").value}">
+              <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}">
               <input type="number" value="" class="x" readonly  min="1">
               
               <button type="button" class="taskOption" >
@@ -136,13 +177,11 @@ function addTask(){
                   </img>
                 </label>
               </button>
-              
-              
               <div class="hiddenOption">
                 <textarea name="taskNote" id="hiddenNote" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
               </div>
           </div>
-      `;
+      `)
           // recupera gli elementi `x` e li riempie con i valori precedentemente salvati
     const newXElements = document.getElementsByClassName("x");
     Array.from(newXElements).forEach((element, index) => {
@@ -166,23 +205,35 @@ function addTask(){
           }
       }
 
-    var coll = document.getElementsByClassName("taskOption");//mi collego al bottone di custom task
+var coll = document.getElementsByClassName("taskOption");
 var i;
 for (i = 0; i < coll.length;i++) {
-  coll[i].addEventListener("click", function() {
-    var taskBox = this.parentNode; //prendo tutto il suo rettangolo
-    var taskItems =taskBox.children //prendo elementi del rettangolo
-    var hiddenBox = this.nextElementSibling; //il blocco a comparsa
+  // Rimuovi eventuali eventi click esistenti
+  var old_element = coll[i];
+  var new_element = old_element.cloneNode(true);
+  old_element.parentNode.replaceChild(new_element, old_element);
 
+  // Aggiungi un nuovo evento click
+  new_element.addEventListener("click", function() {
+    var taskBox = this.parentNode;
+    var taskItems =taskBox.children
+    var hiddenBox = this.nextElementSibling;
     if (hiddenBox.style.display === "block") {
-        taskBox.classList.toggle("taskShowed"); 
+        taskBox.classList.toggle("taskShowed");
         hiddenBox.style.display = "none";
         updateTaskBox(taskItems,false);
+        var newTitle = taskItems[1].value;
+        var newPomos = taskItems[2].value;
+        if  (newTitle!= oldTitle || newPomos!=oldPomos )  
+          updateTaskMap(newTitle,newPomos );
+        updateTaskTag();
     } else {
       hiddenBox.style.display = "block";
       taskBox.classList.toggle("taskShowed");
       updateTaskBox(taskItems,true);
-      updateTaskMap();
+      oldTitle= taskItems[1].value;
+      oldPomos= taskItems[2].value;
+      currentKey=taskBox.getAttribute("data-value");
     }
   });
 }
