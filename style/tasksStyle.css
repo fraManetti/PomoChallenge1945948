@@ -30,6 +30,11 @@
     grid-template-columns: 10% 70% 10% 10%;
 } 
 
+
+
+  .taskShowed:has(#taskFieldInput) {
+    cursor: default;
+  }
     /*----- hover tasks -----*/
     .task:hover {
         background-color:  #bfc1c2;

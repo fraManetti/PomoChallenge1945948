@@ -173,6 +173,7 @@ for (i = 0; i < coll.length;i++) {
     var taskBox = this.parentNode; //prendo tutto il suo rettangolo
     var taskItems =taskBox.children //prendo elementi del rettangolo
     var hiddenBox = this.nextElementSibling; //il blocco a comparsa
+
     if (hiddenBox.style.display === "block") {
         taskBox.classList.toggle("taskShowed"); 
         hiddenBox.style.display = "none";
