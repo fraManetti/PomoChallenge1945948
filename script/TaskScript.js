@@ -280,7 +280,7 @@ function addTask(){
           <label> Con task: 
           <input type="number" id="index2" required></label><br>
 
-          <button type="submit">Swap</button>
+          <button>Swap</button>
         </form>
       </div>
     `;
