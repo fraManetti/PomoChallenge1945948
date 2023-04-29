@@ -1,9 +1,18 @@
+//#################################################################
+//##########             VARIABILI:                  ##############
+//#################################################################
 var index=1;
 var oldTitle="";
 var oldPomos = 0;
 var currentKey;
-var anyTaskOpen = false;
-
+var opened = false;
+var planning = false;
+var checkedCustom = false;
+var anyTaskOpen=false;
+//#################################################################
+//##########             FUNZIONI AUSILIARIE:        ##############
+//#################################################################
+//Definisco funzione di hash, ogni hash sarà la chiave che mi identifica univocamente una task
 function hashCode(string) {
   let hash = 0;
   for (let i = 0; i < string.length; i++) {
@@ -13,9 +22,7 @@ function hashCode(string) {
   }
   return hash;
 }
-function showOptions(s) {
-  
-}
+
 function setParams(){
   var ret=new Array();
   ret[0]=JSON.parse(document.getElementById("session").textContent);
@@ -23,7 +30,28 @@ function setParams(){
   ret[2]=JSON.parse(document.getElementById("longBreak").textContent);
   return ret;
 }
-function updateTaskBox (taskItems,  cond){ //funzione per rendere scrivibili o leggibili i campi delle task
+
+//Serve per sapere se sono in modalità task o meno:
+function modalitaTask() {
+  if(!taskOn)
+    taskOn=true;
+  else 
+    taskOn=false;
+}
+
+// Funzione per eliminare una task:
+function deleteTask(e) {
+  var button = e.currentTarget;
+  button.parentNode.remove();
+}
+
+
+//#################################################################
+//##########  FUNZIONI PER GESTIRE AGGIORNAMENTI:    ##############
+//#################################################################
+
+//Funzione per rendere scrivibili o leggibili i campi delle task
+function updateTaskBox (taskItems,  cond){ 
   if (!cond){
     taskItems[1].setAttribute("readonly","readonly");
     taskItems[2].setAttribute("readonly","readonly");
@@ -36,12 +64,7 @@ function updateTaskBox (taskItems,  cond){ //funzione per rendere scrivibili o l
   }
 }
 
-function infoPopUp() {
-  console.log("jaso");
-}
-
-var planning = false;
-var checkedCustom = false
+//Aggiorno la lista delle task con le modifiche :
 function updateTaskMap(newTitle, newPomos) {
   taskList.forEach(function(tuple) {
     if (tuple.key == currentKey){
@@ -54,71 +77,8 @@ function updateTaskMap(newTitle, newPomos) {
     }
   )
 }
-function checkCustom() {
-  if(hiddenCustom.style.display === "flex") {
-    checkedCustom = false;
-    hiddenCustom.style.display = "none";
-    
-  }
-  else {
-    checkedCustom = true;
-    hiddenCustom.style.display = "flex";
-  }
-}
 
-// function showOptions() {
-//   var button = event.target
-//   var hiddenBox = button.nextElementSibling;
-//   if (hiddenBox.style.display === "block") {
-//       taskBox.classList.toggle("taskShowed");
-//       hiddenBox.style.display = "none";
-//       updateTaskBox(taskItems,false);
-//   } else {
-//     hiddenBox.style.display = "block";
-//     taskBox.classList.toggle("taskShowed");
-//     updateTaskBox(taskItems,true);
-//   }
-// }
-
-
-
-var opened = false;
-function openTaskBar() {
-  if(selectTaskArea.style.display === "block") {
-    opened = false;
-    selectTaskArea.style.display = "none"
-  }
-  else {
-    opened = true;
-    selectTaskArea.style.display = "block";
-  }
-}
-function modalitaTask() {
-  $("#clock").stop();
-  if(!taskOn)
-    taskOn=true;
-  else 
-    taskOn=false;
-}
-
-function showOption(e) {
-  var button = e.currentTarget;
-  var hiddenBox = button.nextElementSibling;
-  var computedStyle = window.getComputedStyle(hiddenBox);
-  if (computedStyle.display === "block") {
-      //taskBox.classList.toggle("taskShowed");
-      hiddenBox.style.display = "none";
-      anyTaskOpen = false;
-      //updateTaskBox(taskItems,false);
-  } 
-  else if(computedStyle.display === "none" && !anyTaskOpen) {
-    hiddenBox.style.display = "block";
-    anyTaskOpen = true;
-    //taskBox.classList.toggle("taskShowed");
-    //updateTaskBox(taskItems,true);
-  }
-}
-
+//Aggiorno orario stimato per la fine:
 function timeUpdate(time){
   var date = new Date();
   var dateMillis = date.getTime();
@@ -142,6 +102,7 @@ function timeUpdate(time){
   return ret;
 }
 
+// Aggiorno il tag con pomodori rimasti e tempo rimasto:
 function updateTaskTag(){
   var tasks = document.getElementsByClassName("task");
   var len = tasks.length;
@@ -157,10 +118,10 @@ function updateTaskTag(){
   }
   for ( i = pomoCount; i>0;i--){
     if(i%4 ==0)
-      time+=longBreak;
+      time+=countL;
     else
-      time+=shortBreak;
-    time+=pomoTime;
+      time+=countB;
+    time+=countS;
   }
   var textToAppend  = "Pomodori Complessivi: "+JSON.stringify(pomoCount);
   document.getElementById("pomoCount").innerText=textToAppend;
@@ -168,6 +129,70 @@ function updateTaskTag(){
   document.getElementById("timeEstimated").innerText=textToAppend;
 }
 
+//#################################################################
+//##########FUNZIONI PER GESTIRE ELEMENTI A COMPARSA: ##############
+//#################################################################
+
+// Gestire i pulsanti per customizzare il timer:
+function checkCustom() {
+  if(hiddenCustom.style.display === "flex") {
+    checkedCustom = false;
+    hiddenCustom.style.display = "none";
+    
+  }
+  else {
+    checkedCustom = true;
+    hiddenCustom.style.display = "flex";
+  }
+}
+
+//Appare il pannello per modificare una task:
+function showOption(e) {
+  var button = e.currentTarget;
+  var hiddenBox = button.nextElementSibling;
+  var computedStyle = window.getComputedStyle(hiddenBox);
+  var taskBox = button.parentNode;
+  var taskItems =taskBox.children
+  if (computedStyle.display === "block") {
+      hiddenBox.style.display = "none";
+      anyTaskOpen = false;
+      //       taskBox.classList.toggle("taskShowed");
+      updateTaskBox(taskItems,false);
+      var newTitle = taskItems[1].value;
+      var newPomos = taskItems[2].value;
+      if  (newTitle!= oldTitle || newPomos!=oldPomos )  
+        updateTaskMap(newTitle,newPomos);
+      updateTaskTag();
+  } else if(computedStyle.display === "none" && !anyTaskOpen) {
+    hiddenBox.style.display = "block";
+    anyTaskOpen = true;
+    //       taskBox.classList.toggle("taskShowed");
+    updateTaskBox(taskItems,true);
+    oldTitle= taskItems[1].value;
+    oldPomos= taskItems[2].value;
+    currentKey=taskBox.getAttribute("data-value");
+  }
+}
+
+
+// Aprire la taskBar 
+function openTaskBar() {
+  if(selectTaskArea.style.display === "block") {
+    opened = false;
+    selectTaskArea.style.display = "none"
+  }
+  else {
+    opened = true;
+    selectTaskArea.style.display = "block";
+  }
+}
+
+// Apre il pannello delle info:
+function infoPopUp() {
+  console.log("jaso");
+}
+
+// Aggiunge una nuova task:
 function addTask(){
     if(document.querySelector('#taskFieldInput').value.length == 0){
       alert("Inserire un nome per la Task!")
@@ -184,14 +209,14 @@ function addTask(){
       document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
           <div  class="task" data-value="${key}">
             
-              <button style='font-size:24px' class="delete">
+              <button style='font-size:24px' class="delete" onClick="deleteTask(event);">
                 <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
                 </img>
               </button>
               <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}">
               <input type="number" value="" class="x" readonly  min="1">
               
-              <button type="button" class="taskOption" onclick="showOption(event)">
+              <button type="button" class="taskOption" onClick= "showOption(event);" >
                 <label>
                   <img class = "taskImg" src  = "../style/img/sliders-solid.png">
                   </img>
@@ -218,11 +243,11 @@ function addTask(){
       document.getElementById("pomoTaskNumber").value = "1";
       updateTaskTag();
 
-      var current_tasks = document.querySelectorAll(".delete");
-      for(var i=0; i<current_tasks.length; i++){
-          current_tasks[i].onclick = function(){
-              this.parentNode.remove();
-          }
+      // var current_tasks = document.querySelectorAll(".delete");
+      // for(var i=0; i<current_tasks.length; i++){
+      //     current_tasks[i].onclick = function(){
+      //         this.parentNode.remove();
+      //     }
       }
 
 // var coll = document.getElementsByClassName("taskOption");
@@ -258,7 +283,7 @@ function addTask(){
 //   });
 // }
   }
-}
+
 
 
 
@@ -311,3 +336,4 @@ function addTask(){
 //     });
 
 // });
+
