@@ -2,6 +2,7 @@ var index=1;
 var oldTitle="";
 var oldPomos = 0;
 var currentKey;
+var anyTaskOpen = false;
 
 function hashCode(string) {
   let hash = 0;
@@ -99,6 +100,25 @@ function modalitaTask() {
   else 
     taskOn=false;
 }
+
+function showOption(e) {
+  var button = e.currentTarget;
+  var hiddenBox = button.nextElementSibling;
+  var computedStyle = window.getComputedStyle(hiddenBox);
+  if (computedStyle.display === "block") {
+      //taskBox.classList.toggle("taskShowed");
+      hiddenBox.style.display = "none";
+      anyTaskOpen = false;
+      //updateTaskBox(taskItems,false);
+  } 
+  else if(computedStyle.display === "none" && !anyTaskOpen) {
+    hiddenBox.style.display = "block";
+    anyTaskOpen = true;
+    //taskBox.classList.toggle("taskShowed");
+    //updateTaskBox(taskItems,true);
+  }
+}
+
 function timeUpdate(time){
   var date = new Date();
   var dateMillis = date.getTime();
@@ -171,13 +191,13 @@ function addTask(){
               <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}">
               <input type="number" value="" class="x" readonly  min="1">
               
-              <button type="button" class="taskOption" >
+              <button type="button" class="taskOption" onclick="showOption(event)">
                 <label>
                   <img class = "taskImg" src  = "../style/img/sliders-solid.png">
                   </img>
                 </label>
               </button>
-              <div class="hiddenOption">
+              <div class="hiddenOption" display = none>
                 <textarea name="taskNote" id="hiddenNote" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
               </div>
           </div>
@@ -205,38 +225,38 @@ function addTask(){
           }
       }
 
-var coll = document.getElementsByClassName("taskOption");
-var i;
-for (i = 0; i < coll.length;i++) {
-  // Rimuovi eventuali eventi click esistenti
-  var old_element = coll[i];
-  var new_element = old_element.cloneNode(true);
-  old_element.parentNode.replaceChild(new_element, old_element);
+// var coll = document.getElementsByClassName("taskOption");
+// var i;
+// for (i = 0; i < coll.length;i++) {
+//   // Rimuovi eventuali eventi click esistenti
+//   var old_element = coll[i];
+//   var new_element = old_element.cloneNode(true);
+//   old_element.parentNode.replaceChild(new_element, old_element);
 
-  // Aggiungi un nuovo evento click
-  new_element.addEventListener("click", function() {
-    var taskBox = this.parentNode;
-    var taskItems =taskBox.children
-    var hiddenBox = this.nextElementSibling;
-    if (hiddenBox.style.display === "block") {
-        taskBox.classList.toggle("taskShowed");
-        hiddenBox.style.display = "none";
-        updateTaskBox(taskItems,false);
-        var newTitle = taskItems[1].value;
-        var newPomos = taskItems[2].value;
-        if  (newTitle!= oldTitle || newPomos!=oldPomos )  
-          updateTaskMap(newTitle,newPomos );
-        updateTaskTag();
-    } else {
-      hiddenBox.style.display = "block";
-      taskBox.classList.toggle("taskShowed");
-      updateTaskBox(taskItems,true);
-      oldTitle= taskItems[1].value;
-      oldPomos= taskItems[2].value;
-      currentKey=taskBox.getAttribute("data-value");
-    }
-  });
-}
+//   // Aggiungi un nuovo evento click
+//   new_element.addEventListener("click", function() {
+//     var taskBox = this.parentNode;
+//     var taskItems =taskBox.children
+//     var hiddenBox = this.nextElementSibling;
+//     if (hiddenBox.style.display === "block") {
+//         taskBox.classList.toggle("taskShowed");
+//         hiddenBox.style.display = "none";
+//         updateTaskBox(taskItems,false);
+//         var newTitle = taskItems[1].value;
+//         var newPomos = taskItems[2].value;
+//         if  (newTitle!= oldTitle || newPomos!=oldPomos )  
+//           updateTaskMap(newTitle,newPomos );
+//         updateTaskTag();
+//     } else {
+//       hiddenBox.style.display = "block";
+//       taskBox.classList.toggle("taskShowed");
+//       updateTaskBox(taskItems,true);
+//       oldTitle= taskItems[1].value;
+//       oldPomos= taskItems[2].value;
+//       currentKey=taskBox.getAttribute("data-value");
+//     }
+//   });
+// }
   }
 }
 
