@@ -4,7 +4,6 @@
   var countCurrPom =0;
   var clock;
 function resetClock() {
-  //if(taskList.length == 0) alert("Inserisci delle task!")
   clock.stop();
   pos = "Pomodoro";
   $("#stats").html(pos);
