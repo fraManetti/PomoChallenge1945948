@@ -9,6 +9,7 @@ var opened = false;
 var planning = false;
 var checkedCustom = false;
 var anyTaskOpen=false;
+
 //#################################################################
 //##########             FUNZIONI AUSILIARIE:        ##############
 //#################################################################
@@ -23,14 +24,6 @@ function hashCode(string) {
   return hash;
 }
 
-function setParams(){
-  var ret=new Array();
-  ret[0]=JSON.parse(document.getElementById("session").textContent);
-  ret[1]=JSON.parse(document.getElementById("break").textContent);
-  ret[2]=JSON.parse(document.getElementById("longBreak").textContent);
-  return ret;
-}
-
 //Serve per sapere se sono in modalità task o meno:
 function modalitaTask() {
   if(!taskOn)
@@ -39,10 +32,16 @@ function modalitaTask() {
     taskOn=false;
 }
 
-// Funzione per eliminare una task:
+// Funzione per eliminare una task da tutto con il bottone delete:
 function deleteTask(e) {
   var button = e.currentTarget;
+  var key = button.parentNode.getAttribute("data-value");
   button.parentNode.remove();
+  for (var i=0; i<taskList.length;i++){
+    if (taskList[i].key == key)
+      taskList.splice(i,1);
+  }
+  updateTaskTag(false);
 }
 
 
@@ -50,6 +49,16 @@ function deleteTask(e) {
 //##########  FUNZIONI PER GESTIRE AGGIORNAMENTI:    ##############
 //#################################################################
 
+//Funzione per eliminare la task da lista e marcarca come completata
+function removeTaskItem() {
+  var key = taskList[0].key;
+  taskList.shift();
+  var tasks= document.getElementsByClassName("task");
+  for (var i=0; i<tasks.length;i++){
+    if (tasks[i].getAttribute("data-value")==key){
+      tasks[i].style.backgroundColor="grey";
+    }}
+}
 //Funzione per rendere scrivibili o leggibili i campi delle task
 function updateTaskBox (taskItems,  cond){ 
   if (!cond){
@@ -103,32 +112,31 @@ function timeUpdate(time){
 }
 
 // Aggiorno il tag con pomodori rimasti e tempo rimasto:
-function updateTaskTag(){
-  var tasks = document.getElementsByClassName("task");
-  var len = tasks.length;
-  var pomoCount =0;
-  var time=0;
-  //console.log(document.getElementById("longBreak").textContent);
-  var params = setParams();
-  var longBreak =params[2];
-  var shortBreak =params[1];
-  var pomoTime = params[0];
-  for ( i = len-1; i>=0;i--){
-    pomoCount += JSON.parse(tasks[i].children[2].value);
-  }
+function updateTaskTag(isRunning){
+  var pomoCount =0; //conta il numero di pomodori nelle task aggiunte
+  taskList.forEach(function(tuple){
+    pomoCount+=JSON.parse(tuple.pomodori);
+  });
+  var textToAppend  = "Pomodori Complessivi: "+JSON.parse(pomoCount); 
+  if (isRunning){  
+    var nPomo=taskList[0].pomodori;
+    textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
+    var time=0;
+
   for ( i = pomoCount; i>0;i--){
     if(i%4 ==0)
       time+=countL;
     else
       time+=countB;
     time+=countS;
-  }
-  var textToAppend  = "Pomodori Complessivi: "+JSON.stringify(pomoCount);
+  } timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
+  document.getElementById("timeEstimated").innerText=timeToAppend;
+  } else 
+    document.getElementById("timeEstimated").innerText="";
   document.getElementById("pomoCount").innerText=textToAppend;
-  textToAppend ="Fine Prevista Per: "+timeUpdate(time);
-  document.getElementById("timeEstimated").innerText=textToAppend;
-}
+  
 
+}
 //#################################################################
 //##########FUNZIONI PER GESTIRE ELEMENTI A COMPARSA: ##############
 //#################################################################
@@ -162,12 +170,12 @@ function showOption(e) {
       var newPomos = taskItems[2].value;
       if  (newTitle!= oldTitle || newPomos!=oldPomos )  
         updateTaskMap(newTitle,newPomos);
-      updateTaskTag();
+      updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0);
   } else if(computedStyle.display === "none" && !anyTaskOpen) {
     hiddenBox.style.display = "block";
     anyTaskOpen = true;
     //       taskBox.classList.toggle("taskShowed");
-    updateTaskBox(taskItems,true);
+    updateTaskBox(taskItems,taskBox.style.backgroundColor!="grey");
     oldTitle= taskItems[1].value;
     oldPomos= taskItems[2].value;
     currentKey=taskBox.getAttribute("data-value");
@@ -241,99 +249,9 @@ function addTask(){
       document.getElementById("taskFieldInput").value="";
       document.getElementById("taskNote").value="";
       document.getElementById("pomoTaskNumber").value = "1";
-      updateTaskTag();
+      updateTaskTag(false);
 
-      // var current_tasks = document.querySelectorAll(".delete");
-      // for(var i=0; i<current_tasks.length; i++){
-      //     current_tasks[i].onclick = function(){
-      //         this.parentNode.remove();
-      //     }
       }
-
-// var coll = document.getElementsByClassName("taskOption");
-// var i;
-// for (i = 0; i < coll.length;i++) {
-//   // Rimuovi eventuali eventi click esistenti
-//   var old_element = coll[i];
-//   var new_element = old_element.cloneNode(true);
-//   old_element.parentNode.replaceChild(new_element, old_element);
-
-//   // Aggiungi un nuovo evento click
-//   new_element.addEventListener("click", function() {
-//     var taskBox = this.parentNode;
-//     var taskItems =taskBox.children
-//     var hiddenBox = this.nextElementSibling;
-//     if (hiddenBox.style.display === "block") {
-//         taskBox.classList.toggle("taskShowed");
-//         hiddenBox.style.display = "none";
-//         updateTaskBox(taskItems,false);
-//         var newTitle = taskItems[1].value;
-//         var newPomos = taskItems[2].value;
-//         if  (newTitle!= oldTitle || newPomos!=oldPomos )  
-//           updateTaskMap(newTitle,newPomos );
-//         updateTaskTag();
-//     } else {
-//       hiddenBox.style.display = "block";
-//       taskBox.classList.toggle("taskShowed");
-//       updateTaskBox(taskItems,true);
-//       oldTitle= taskItems[1].value;
-//       oldPomos= taskItems[2].value;
-//       currentKey=taskBox.getAttribute("data-value");
-//     }
-//   });
-// }
   }
 
-
-
-
-
-
-// $(document).ready(function () {
-
-//     var task = $(".task");
-//     var container = $(".tasks");
-
-//     box.draggable({
-//         containment: container,
-//         helper: "clone",
-
-//         start: function () {
-//             $(this).css({
-//                 opacity: 0
-//             });
-
-//             $(".task").css("z-index", "0");
-//         },
-
-//         stop: function () {
-//             $(this).css({
-//                 opacity: 1
-//             });
-//         }
-//     });
-
-//     task.droppable({
-//         accept: task,
-
-//         drop: function (event, ui) {
-//             var draggable = ui.draggable;
-//             var droppable = $(this);
-//             var dragPos = draggable.position();
-//             var dropPos = droppable.position();
-
-//             draggable.css({
-//                 left: dropPos.left + "px",
-//                 top: dropPos.top + "px",
-//                 "z-index": 20
-//             });
-
-//             droppable.css("z-index", 10).animate({
-//                 left: dragPos.left,
-//                 top: dragPos.top
-//             });
-//         }
-//     });
-
-// });
 
