@@ -158,6 +158,7 @@ function showOption(e) {
       anyTaskOpen = false;
       //       taskBox.classList.toggle("taskShowed");
       updateTaskBox(taskItems,false);
+      button.children[0].setAttribute("src","../style/img/sliders-solid.png");
       var newTitle = taskItems[1].value;
       var newPomos = taskItems[2].value;
       if  (newTitle!= oldTitle || newPomos!=oldPomos )  
@@ -166,6 +167,7 @@ function showOption(e) {
   } else if(computedStyle.display === "none" && !anyTaskOpen) {
     hiddenBox.style.display = "block";
     anyTaskOpen = true;
+    button.children[0].setAttribute("src", "../style/img/floppy-disk-solid.png");
     //       taskBox.classList.toggle("taskShowed");
     updateTaskBox(taskItems,true);
     oldTitle= taskItems[1].value;
@@ -217,10 +219,8 @@ function addTask(){
               <input type="number" value="" class="x" readonly  min="1">
               
               <button type="button" class="taskOption" onClick= "showOption(event);" >
-                <label>
                   <img class = "taskImg" src  = "../style/img/sliders-solid.png">
                   </img>
-                </label>
               </button>
               <div class="hiddenOption" display = none>
                 <textarea name="taskNote" id="hiddenNote" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
