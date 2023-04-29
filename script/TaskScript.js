@@ -65,19 +65,29 @@ function checkCustom() {
   }
 }
 
-// function showOptions() {
-//   var button = event.target
-//   var hiddenBox = button.nextElementSibling;
-//   if (hiddenBox.style.display === "block") {
-//       taskBox.classList.toggle("taskShowed");
-//       hiddenBox.style.display = "none";
-//       updateTaskBox(taskItems,false);
-//   } else {
-//     hiddenBox.style.display = "block";
-//     taskBox.classList.toggle("taskShowed");
-//     updateTaskBox(taskItems,true);
-//   }
-// }
+function showOption(e) {
+  var button = e.currentTarget;
+  var hiddenBox = button.nextElementSibling;
+  var taskBox = button.parentNode;
+  var taskItems =taskBox.children
+  if (hiddenBox.style.display === "block") {
+      hiddenBox.style.display = "none";
+      //       taskBox.classList.toggle("taskShowed");
+      updateTaskBox(taskItems,false);
+      var newTitle = taskItems[1].value;
+      var newPomos = taskItems[2].value;
+      if  (newTitle!= oldTitle || newPomos!=oldPomos )  
+        updateTaskMap(newTitle,newPomos);
+      updateTaskTag();
+  } else {
+    hiddenBox.style.display = "block";
+    //       taskBox.classList.toggle("taskShowed");
+    updateTaskBox(taskItems,true);
+    oldTitle= taskItems[1].value;
+    oldPomos= taskItems[2].value;
+    currentKey=taskBox.getAttribute("data-value");
+  }
+}
 
 
 
@@ -171,7 +181,7 @@ function addTask(){
               <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}">
               <input type="number" value="" class="x" readonly  min="1">
               
-              <button type="button" class="taskOption" >
+              <button type="button" class="taskOption" onClick= "showOption(event);" >
                 <label>
                   <img class = "taskImg" src  = "../style/img/sliders-solid.png">
                   </img>
@@ -205,38 +215,38 @@ function addTask(){
           }
       }
 
-var coll = document.getElementsByClassName("taskOption");
-var i;
-for (i = 0; i < coll.length;i++) {
-  // Rimuovi eventuali eventi click esistenti
-  var old_element = coll[i];
-  var new_element = old_element.cloneNode(true);
-  old_element.parentNode.replaceChild(new_element, old_element);
+// var coll = document.getElementsByClassName("taskOption");
+// var i;
+// for (i = 0; i < coll.length;i++) {
+//   // Rimuovi eventuali eventi click esistenti
+//   var old_element = coll[i];
+//   var new_element = old_element.cloneNode(true);
+//   old_element.parentNode.replaceChild(new_element, old_element);
 
-  // Aggiungi un nuovo evento click
-  new_element.addEventListener("click", function() {
-    var taskBox = this.parentNode;
-    var taskItems =taskBox.children
-    var hiddenBox = this.nextElementSibling;
-    if (hiddenBox.style.display === "block") {
-        taskBox.classList.toggle("taskShowed");
-        hiddenBox.style.display = "none";
-        updateTaskBox(taskItems,false);
-        var newTitle = taskItems[1].value;
-        var newPomos = taskItems[2].value;
-        if  (newTitle!= oldTitle || newPomos!=oldPomos )  
-          updateTaskMap(newTitle,newPomos );
-        updateTaskTag();
-    } else {
-      hiddenBox.style.display = "block";
-      taskBox.classList.toggle("taskShowed");
-      updateTaskBox(taskItems,true);
-      oldTitle= taskItems[1].value;
-      oldPomos= taskItems[2].value;
-      currentKey=taskBox.getAttribute("data-value");
-    }
-  });
-}
+//   // Aggiungi un nuovo evento click
+//   new_element.addEventListener("click", function() {
+//     var taskBox = this.parentNode;
+//     var taskItems =taskBox.children
+//     var hiddenBox = this.nextElementSibling;
+//     if (hiddenBox.style.display === "block") {
+//         taskBox.classList.toggle("taskShowed");
+//         hiddenBox.style.display = "none";
+//         updateTaskBox(taskItems,false);
+//         var newTitle = taskItems[1].value;
+//         var newPomos = taskItems[2].value;
+//         if  (newTitle!= oldTitle || newPomos!=oldPomos )  
+//           updateTaskMap(newTitle,newPomos );
+//         updateTaskTag();
+//     } else {
+//       hiddenBox.style.display = "block";
+//       taskBox.classList.toggle("taskShowed");
+//       updateTaskBox(taskItems,true);
+//       oldTitle= taskItems[1].value;
+//       oldPomos= taskItems[2].value;
+//       currentKey=taskBox.getAttribute("data-value");
+//     }
+//   });
+// }
   }
 }
 
