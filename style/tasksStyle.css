@@ -74,3 +74,12 @@
   align-items: center;
 }
 
+#closePopup {
+  position: absolute;
+  top: 0px;
+  right: 1px;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 50%;
+}
+

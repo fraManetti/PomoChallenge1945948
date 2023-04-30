@@ -274,10 +274,11 @@ function addTask(){
   
     popupContainer.innerHTML = `
       <div class="popupSwap">
-          <label> Scambia task: 
-          <input type="number" id="index1" required></label><br>
-          <label> Con task: 
-          <input type="number" id="index2" required></label><br>
+          <div id="closePopup">&times;</div>
+          <label> Scambia task n° 
+          <input type="number" id="index1" required min=1></label><br>
+          <label> Con task n°
+          <input type="number" id="index2" required min=1></label><br>
 
           <button id = "swapclick" >Swap</button>
       </div>
@@ -295,13 +296,26 @@ function addTask(){
       i2 = document.getElementById("index2").value;
       swapTasks(i1,i2);  
     });
+
+    document.querySelector("#closePopup").addEventListener("click", function() {
+    popupContainer.innerHTML = "";
+    });
   }
 
   function swapTasks(i1, i2) {
+    i1-=1;
+    i2-=1;
     if (i1 >= 0 && i1 < taskList.length && i2 >= 0 && i2 < taskList.length) {
       var temp = taskList[i1];
       taskList[i1] = taskList[i2];
       taskList[i2] = temp;
+
+      var tasks = document.getElementsByClassName("task");
+      tasks[i1].children[1].value = taskList[i1].title;
+      tasks[i1].children[2].value = taskList[i1].pomodori;
+      tasks[i2].children[1].value = taskList[i2].title;
+      tasks[i2].children[2].value = taskList[i2].pomodori;
+
     }
     else{
       alert("Inserisci degli indici validi");
