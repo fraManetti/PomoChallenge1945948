@@ -10,42 +10,44 @@
 </head>
 
 <body>
-    <div id="loginPanel">
-        <FORM method="post" id="submitForm" action=""> 
-            <div class="imgContainer">
-                <INPUT type="IMAGE" class="imgAvatar" SRC="../style/img/pomo.png">
-                </input>
-            </div>
+    <div class="container">
+        <div id="loginPanel">
+            <FORM method="post" id="submitForm" action=""> 
+                <div class="imgContainer">
+                    <INPUT type="IMAGE" class="imgAvatar" SRC="../style/img/pomo.png">
+                    </input>
+                </div>
 
-            <div class="infoPanel">
-            
-                <fieldset name="infoField">
-                    <legend>  Submit information </legend>
-                        <b>Mail</b>
+                <div class="infoPanel">
+                
+                    <fieldset name="infoField">
+                        <legend>  Submit information </legend>
+                            <b>Mail</b>
+                            <br>
+                        <input type="text" name="mailInput" id="mailInput" placeholder="Insert mail" required="true">
                         <br>
-                    <input type="text" name="mailInput" id="mailInput" placeholder="Insert mail" required="true">
-                    <br>
 
-                        <b>Password</b>  
+                            <b>Password</b>  
+                            <br>
+                        <input type="password" name="passInput" id="passwordInput" placeholder="Insert password" required="true">
+                        <img id="visiblePassword" src ="../style/img/eye-slash-solid.png" onclick="showPassword()">
+                        </img>
                         <br>
-                    <input type="password" name="passInput" id="passwordInput" placeholder="Insert password" required="true">
-                    <img id="visiblePassword" src ="../style/img/eye-slash-solid.png" onclick="showPassword()">
-                    </img>
-                    <br>
-                    
-                    <input type="submit" id="submitBtn" class="loginButton" value="Submit">
-                    <button id="clearBtn" class="loginButton" onclick="resetField()">
-                        Clear 
-                    </button>
-                    
-                    <br>
-                    <label>
-                        <input type="checkbox" name="remember" id="rememberCheckbox"> 
-                        Remember me
-                    </label>
-                </fieldset>
-            </div>
-        </FORM>
+                        
+                        <input type="submit" id="submitBtn" class="loginButton" value="Submit">
+                        <button id="clearBtn" class="loginButton" onclick="resetField()">
+                            Clear 
+                        </button>
+                        
+                        <br>
+                        <label>
+                            <input type="checkbox" name="remember" id="rememberCheckbox"> 
+                            Remember me
+                        </label>
+                    </fieldset>
+                </div>
+            </FORM>
+        </div>
     </div>
 </body>
 </html>
