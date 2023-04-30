@@ -75,18 +75,24 @@ function removeTaskItem() {
   for (var i=0; i<tasks.length;i++){
     if (tasks[i].getAttribute("data-value")==key){
       tasks[i].style.backgroundColor="grey";
-    }}
+      tasks[i].children[1].textContent="0)"
+      index--;
+    }
+    else if (tasks[i].style.backgroundColor!="grey"){
+      tasks[i].children[1].textContent=JSON.stringify(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1))-1)+")"; 
+    }
+  }
 }
 //Funzione per rendere scrivibili o leggibili i campi delle task
 function updateTaskBox (taskItems,  cond){ 
   if (!cond){
-    taskItems[1].setAttribute("readonly","readonly");
     taskItems[2].setAttribute("readonly","readonly");
+    taskItems[3].setAttribute("readonly","readonly");
 
   }
   else{
-    taskItems[1].removeAttribute("readonly");
     taskItems[2].removeAttribute("readonly");
+    taskItems[3].removeAttribute("readonly");
 
   }
 }
@@ -184,8 +190,8 @@ function showOption(e) {
       //       taskBox.classList.toggle("taskShowed");
       updateTaskBox(taskItems,false);
       button.children[0].setAttribute("src","../style/img/sliders-solid.png");
-      var newTitle = taskItems[1].value;
-      var newPomos = taskItems[2].value;
+      var newTitle = taskItems[2].value;
+      var newPomos = taskItems[3].value;
       var newNote = hiddenBox.children[0].value;
       if  (newTitle!= oldTitle || newPomos!=oldPomos || newNote!=oldNote )  
         updateTaskMap(newTitle,newPomos,newNote);
@@ -196,8 +202,8 @@ function showOption(e) {
     button.children[0].setAttribute("src", "../style/img/floppy-disk-solid.png");
     //       taskBox.classList.toggle("taskShowed");
     updateTaskBox(taskItems,taskBox.style.backgroundColor!="grey");
-    oldTitle= taskItems[1].value;
-    oldPomos= taskItems[2].value;
+    oldTitle= taskItems[2].value;
+    oldPomos= taskItems[3].value;
     oldNote = hiddenBox.children[0].value;
     currentKey=taskBox.getAttribute("data-value");
   }
@@ -265,7 +271,7 @@ function addTask(){
                 <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
                 </img>
               </button>   
-              <span>${index})</span>
+              <span class="indexTasks">${index})</span>
               <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}" onkeypress="handleKeyPress(event, 'options')">
 
 
@@ -353,7 +359,6 @@ function addTask(){
       taskList[i2] = temp;
 
       var tasks = document.getElementsByClassName("task");
-      tasks[i1].children[1].value = "ciao";
       tasks[i1].children[2].value = taskList[i1].title;
       tasks[i1].children[3].value = taskList[i1].pomodori;
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
@@ -378,6 +383,7 @@ function addTask(){
     }
   }
 function deleteAllTask() {
+  index=1;
   taskList=[];
   $('.task').remove();
 }
