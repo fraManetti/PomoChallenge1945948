@@ -154,8 +154,8 @@
                   </p>
                 </div>
 
-                  <input type="text" placeholder="Add task title" id="taskFieldInput">
-
+                  <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')">
+<!--
                   <script>
                     var input = document.getElementById("taskFieldInput");
                     input.addEventListener("keypress", function(event) {
@@ -165,14 +165,14 @@
                       }
                     });
                     </script>
-
+-->
                   <button id="push" onclick="addTask();">Add</button>
                   <br>
                   Quanti Pomodori?<br>
                   <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
                   Note: <br>
         
-                  <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3"></textarea>
+                  <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')"></textarea>
               </div>
               <div id="tasks">
               </div>
