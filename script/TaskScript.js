@@ -191,7 +191,13 @@ function openTaskBar() {
 
 // Apre il pannello delle info:
 function infoPopUp() {
-  console.log("jaso");
+  var overlay = document.getElementById("infoOverlay");
+  var computedStyle = window.getComputedStyle(overlay);
+  overlay.style.display = "block";
+}
+
+function closeInfo() {
+  document.getElementById("infoOverlay").style.display="none";
 }
 
 // Aggiunge una nuova task:
