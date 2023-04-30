@@ -179,14 +179,23 @@
                 <button name = "swapTasksButton" class = roundBtn id="defaultOrderButton" disabled onclick="openSwapPopup()">
                   Swap tasks </button>
                   <button name = "reverseTasksButton" class = roundBtn id="defaultOrderButton" disabled onclick="reverseTask();">
-                    Reverse tasks </button> 
-                    <button name = "deleteAllTaskButton" class = roundBtn id="defaultOrderButton" disabled onclick="deleteAllTask();">
-                      Delete All Tasks </button>                    
-              </div> 
+                    Reverse tasks </button>                           
+              </div>
+              <div id="taskTag">
+                <button name = "deleteAllTaskButton" class = roundBtn id="defaultOrderButton" disabled onclick="deleteAllTask();">
+                  Delete all tasks </button>  
+                <button name = "deleteEndedTaskButton" class = roundBtn id="defaultOrderButton" onclick="deleteEndedTask();">
+                  Delete ended tasks </button>  
+                <label>
+                  Automatic delete for ended tasks
+                </label>
+                  <input type="checkbox"> 
+              </div>
               <div id="tasks">
               </div>
               <div id="popupContainer"></div>
-
+              <!-- Crea un elemento div per l'overlay > se lo vogliamo fare -->
+              <div id="overlay"></div>
           </div>
         
         </div>

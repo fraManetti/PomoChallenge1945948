@@ -249,20 +249,7 @@ function addTask(){
 
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask); 
-    if(taskList.length==1){
-      document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
-      document.getElementsByName("swapTasksButton")[0].disabled = true;
-      document.getElementsByName("reverseTasksButton")[0].disabled = true;}
-    else if (taskList.length >= 2) {
-      document.getElementsByName("swapTasksButton")[0].disabled = false;
-      document.getElementsByName("reverseTasksButton")[0].disabled = false;
-      document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
-    }
-    else{
-      document.getElementsByName("deleteAllTaskButton")[0].disabled=true;
-      document.getElementsByName("swapTasksButton")[0].disabled = true;
-      document.getElementsByName("reverseTasksButton")[0].disabled = true;
-    }
+    updateTaskButtons();
 
       document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
           <div  class="task" data-value="${key}">
@@ -386,4 +373,35 @@ function deleteAllTask() {
   index=1;
   taskList=[];
   $('.task').remove();
+}
+
+/*function removeTaskItem() {
+  var key = taskList[0].key;
+  taskList.shift();
+  var tasks= document.getElementsByClassName("task");
+  for (var i=0; i<tasks.length;i++){
+    if (tasks[i].getAttribute("data-value")==key){
+      tasks[i].style.backgroundColor="grey";
+    }}
+}*/
+
+function deleteEndedTask(){
+  removeTaskItem();
+}
+
+function updateTaskButtons(){
+  if(taskList.length==1){
+    document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
+    document.getElementsByName("swapTasksButton")[0].disabled = true;
+    document.getElementsByName("reverseTasksButton")[0].disabled = true;}
+  else if (taskList.length >= 2) {
+    document.getElementsByName("swapTasksButton")[0].disabled = false;
+    document.getElementsByName("reverseTasksButton")[0].disabled = false;
+    document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
+  }
+  else{
+    document.getElementsByName("deleteAllTaskButton")[0].disabled=true;
+    document.getElementsByName("swapTasksButton")[0].disabled = true;
+    document.getElementsByName("reverseTasksButton")[0].disabled = true;
+  }
 }

@@ -75,9 +75,10 @@
 }
 
 #closePopup {
-  position: absolute;
-  top: 0px;
-  right: 1px;
+  position: fixed;
+  top: 5%;
+  left: 95%;
+  transform: translate(-50%, -50%);
   cursor: pointer;
   font-size: 24px;
   border-radius: 50%;
