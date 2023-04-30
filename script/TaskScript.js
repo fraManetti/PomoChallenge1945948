@@ -292,8 +292,7 @@ function addTask(){
 
     document.querySelector("#swapclick").addEventListener("click", function() {
       i1 = document.getElementById("index1").value;
-      i2 = document.getElementById("index2").value;
-      
+      i2 = document.getElementById("index2").value;  
   });
   }
 
