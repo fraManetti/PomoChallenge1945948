@@ -308,3 +308,7 @@ function addTask(){
     }
   }
 
+  function reverseTask() {
+    
+  }
+
