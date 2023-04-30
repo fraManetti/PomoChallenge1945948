@@ -202,6 +202,7 @@ function infoPopUp() {
   console.log("jaso");
 }
 
+
 // Aggiunge una nuova task:
 function addTask(){
     if(document.querySelector('#taskFieldInput').value.length == 0){
@@ -216,6 +217,9 @@ function addTask(){
     index+=1;
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask);
+    if (taskList.length >= 2) {
+      document.getElementsByName("swapTasksButton")[0].disabled = false;
+    }
       document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
           <div  class="task" data-value="${key}">
             
@@ -254,4 +258,53 @@ function addTask(){
       }
   }
 
+  // gestisce click fuori dal popup
+  function handleOutClick(event) {
+    popupContainer = document.getElementById("popupContainer");
+    if (!popupContainer.contains(event.target)) {
+      popupContainer.innerHTML = "";
+
+      //document.getElementById("overlay").style.display = "none";
+      document.removeEventListener("mousedown", handleOutClick);
+    }
+  }
+  
+  function openSwapPopup() {
+    popupContainer = document.getElementById("popupContainer");
+  
+    popupContainer.innerHTML = `
+      <div class="popupSwap">
+          <label> Scambia task: 
+          <input type="number" id="index1" required></label><br>
+          <label> Con task: 
+          <input type="number" id="index2" required></label><br>
+
+          <button id = "swapclick" >Swap</button>
+      </div>
+    `;
+    //document.getElementById("overlay").style.display = "block";
+    
+    document.addEventListener("mousedown", handleOutClick);
+  
+    //CONTINUA QUI
+    var i1;
+    var i2;
+
+    document.querySelector("#swapclick").addEventListener("click", function() {
+      i1 = document.getElementById("index1").value;
+      i2 = document.getElementById("index2").value;
+      swapTasks(i1,i2);  
+    });
+  }
+
+  function swapTasks(i1, i2) {
+    if (i1 >= 0 && i1 < taskList.length && i2 >= 0 && i2 < taskList.length) {
+      var temp = taskList[i1];
+      taskList[i1] = taskList[i2];
+      taskList[i2] = temp;
+    }
+    else{
+      alert("Inserisci degli indici validi");
+    }
+  }
 
