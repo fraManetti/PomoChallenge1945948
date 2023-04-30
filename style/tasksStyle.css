@@ -87,3 +87,7 @@
 .indexTasks{
   width: 3px;
 }
+.endedTasks{
+
+  background-color:grey;
+}

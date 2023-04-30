@@ -189,7 +189,9 @@
                 <label>
                   Automatic delete for ended tasks
                 </label>
-                  <input type="checkbox"> 
+                  <input type="checkbox" id="automaticDel" onclick="(function () {
+                    delEnded=event.currentTarget.checked;
+                  })()"> 
               </div>
               <div id="tasks">
               </div>

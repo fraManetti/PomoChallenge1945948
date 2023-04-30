@@ -10,7 +10,7 @@ var opened = false;
 var planning = false;
 var checkedCustom = false;
 var anyTaskOpen=false;
-
+var delEnded=false;
 //#################################################################
 //##########             FUNZIONI AUSILIARIE:        ##############
 //#################################################################
@@ -74,9 +74,12 @@ function removeTaskItem() {
   var tasks= document.getElementsByClassName("task");
   for (var i=0; i<tasks.length;i++){
     if (tasks[i].getAttribute("data-value")==key){
-      tasks[i].style.backgroundColor="grey";
       tasks[i].children[1].textContent="0)"
       index--;
+      tasks[i].classList.add("endedTasks");
+      if(delEnded)
+        deleteEndedTask();
+
     }
     else if (tasks[i].style.backgroundColor!="grey"){
       tasks[i].children[1].textContent=JSON.stringify(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1))-1)+")"; 
@@ -375,18 +378,10 @@ function deleteAllTask() {
   $('.task').remove();
 }
 
-/*function removeTaskItem() {
-  var key = taskList[0].key;
-  taskList.shift();
-  var tasks= document.getElementsByClassName("task");
-  for (var i=0; i<tasks.length;i++){
-    if (tasks[i].getAttribute("data-value")==key){
-      tasks[i].style.backgroundColor="grey";
-    }}
-}*/
+
 
 function deleteEndedTask(){
-  removeTaskItem();
+  $('.endedTasks').remove();
 }
 
 function updateTaskButtons(){
