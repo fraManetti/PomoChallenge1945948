@@ -1,0 +1,82 @@
+.navbar {
+    background: rgba(255, 255, 255, 0.7);
+    position: fixed;
+    }
+
+
+.container {
+    margin-top: 66px;
+    height: 100vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
+    padding: 80px;
+    text-align: center;
+    width: 100%;
+  }
+
+#loginPanel {
+    width: 378px;
+    height: 390px;
+    text-align: center;
+}
+
+#submitForm {
+    text-align: center;
+    margin-top: 150px;
+    margin-left: 700px;
+    width: 100%;
+}
+
+.imgContainer {
+    text-align: center;
+    justify-content: center;
+    width: 376px;
+}
+
+.imgAvatar {
+    border-radius: 100%;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+  }
+
+.loginButton {
+    color: white;
+    padding: 10px 10px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+  }
+
+#clearBtn {
+    background-color: rgb(233, 44, 44);
+}
+
+#submitBtn {
+    background-color: #04AA6D;
+}
+
+.loginButton:hover {
+    opacity: 0.7;
+}
+
+input[name="mailInput"] {
+    margin-bottom: 7px;
+    margin-top: 5px;
+}
+
+
+
+input[type=text], input[type=password] {
+    width: 250px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+#visiblePassword {
+    margin-left: 4px;
+    width: 20px;
+    height: 17px;
+    cursor: pointer;
+}
