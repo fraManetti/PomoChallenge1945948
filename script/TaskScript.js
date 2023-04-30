@@ -274,14 +274,12 @@ function addTask(){
   
     popupContainer.innerHTML = `
       <div class="popupSwap">
-        <form>
           <label> Scambia task: 
           <input type="number" id="index1" required></label><br>
           <label> Con task: 
           <input type="number" id="index2" required></label><br>
 
           <button>Swap</button>
-        </form>
       </div>
     `;
     //document.getElementById("overlay").style.display = "block";
