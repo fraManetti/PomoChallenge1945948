@@ -290,13 +290,12 @@ function addTask(){
     var i1;
     var i2;
 
-    //document.getElementById("index1").addEventListener("blur", function() {
-    //  i1 = this.value;
-    //});
-  
-    //document.getElementById("index2").addEventListener("blur", function() {
-    //  i2 = this.value;
-    //});
+    document.querySelector("button").addEventListener("click", function(event) {
+      event.preventDefault();
+      i1 = document.getElementById("index1").value;
+      i2 = document.getElementById("index2").value;
+      // qui puoi aggiungere il codice per gestire lo scambio dei task
+  });
   }
 
   function swapTasks(i1, i2) {
