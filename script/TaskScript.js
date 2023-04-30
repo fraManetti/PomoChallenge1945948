@@ -288,8 +288,13 @@ function addTask(){
   
     //CONTINUA QUI
 
-    //form = popupContainer.querySelector("form");
-    //...
+    document.getElementById("index1").addEventListener("blur", function() {
+      i1 = this.value;
+  });
+  
+  document.getElementById("index2").addEventListener("blur", function() {
+      i2 = this.value;
+  });
   }
 
   function swapTasks(i1, i2) {
