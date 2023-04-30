@@ -123,7 +123,7 @@ function updateTaskTag(isRunning){
     textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
     var time=0;
 
-  for ( i = pomoCount; i>0;i--){
+  for ( i = pomoCount-countCurrPom; i>0;i--){
     if(i%4 ==0)
       time+=countL;
     else
