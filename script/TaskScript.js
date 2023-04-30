@@ -290,8 +290,7 @@ function addTask(){
     var i1;
     var i2;
 
-    document.querySelector("swapclick").addEventListener("click", function(event) {
-      event.preventDefault();
+    document.querySelector("swapclick").addEventListener("click", function() {
       i1 = document.getElementById("index1").value;
       i2 = document.getElementById("index2").value;
       
