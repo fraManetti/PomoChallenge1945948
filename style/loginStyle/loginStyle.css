@@ -9,7 +9,7 @@
     height: 95vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
     text-align: center;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: rgba(0, 0, 0, 0.938);
     z-index: 1;
     position: absolute;
   }
@@ -23,7 +23,7 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 150px;
-    border-color: black;
+    border-color: rgba(0, 0, 0, 0.9);
     border-style: solid;
 
     
@@ -47,6 +47,7 @@
     border-color: black;
     border-style: solid;
     cursor: default;
+    box-shadow: 3px 3px 7px  rgba(0, 0, 0, 0.712);
   }
 
 .loginButton {
