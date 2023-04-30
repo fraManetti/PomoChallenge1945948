@@ -224,19 +224,29 @@ function addTask(){
     var newTask = { key:key, title: title, pomodori: number,note: note };
 
     // aggiungi la nuova task all'elenco delle task
-    taskList.push(newTask);
-    if (taskList.length >= 2) {
+    taskList.push(newTask); 
+    if(taskList.length==1){
+      document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
+      document.getElementsByName("swapTasksButton")[0].disabled = true;
+      document.getElementsByName("reverseTasksButton")[0].disabled = true;}
+    else if (taskList.length >= 2) {
       document.getElementsByName("swapTasksButton")[0].disabled = false;
       document.getElementsByName("reverseTasksButton")[0].disabled = false;
-
+      document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
     }
+    else{
+      document.getElementsByName("deleteAllTaskButton")[0].disabled=true;
+      document.getElementsByName("swapTasksButton")[0].disabled = true;
+      document.getElementsByName("reverseTasksButton")[0].disabled = true;
+    }
+
       document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
           <div  class="task" data-value="${key}">
             
               <button style='font-size:24px' class="delete" onClick="deleteTask(event);">
                 <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
-                </img>
-              </button>
+                </img> 
+              </button> ${index}
               <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}">
               <input type="number" value="" class="x" readonly  min="1">
               
@@ -323,9 +333,10 @@ function addTask(){
       var tasks = document.getElementsByClassName("task");
       tasks[i1].children[1].value = taskList[i1].title;
       tasks[i1].children[2].value = taskList[i1].pomodori;
+      tasks[i1].children[3].nextElementSibling.children[0].value=taskList[i1].note;
       tasks[i2].children[1].value = taskList[i2].title;
       tasks[i2].children[2].value = taskList[i2].pomodori;
-
+      tasks[i1].children[3].nextElementSibling.children[0].value=taskList[i1].note;
 
     }
     else{
@@ -342,4 +353,7 @@ function addTask(){
       tasks[i].children[3].nextElementSibling.children[0].value=taskList[i].note;
     }
   }
-
+function deleteAllTask() {
+  taskList=[];
+  $('.task').remove();
+}
