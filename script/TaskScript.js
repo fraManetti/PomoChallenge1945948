@@ -246,7 +246,8 @@ function addTask(){
               <button style='font-size:24px' class="delete" onClick="deleteTask(event);">
                 <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
                 </img> 
-              </button> ${index}
+              </button> 
+              <span>${index})</span>
               <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}">
               <input type="number" value="" class="x" readonly  min="1">
               
@@ -265,7 +266,8 @@ function addTask(){
       element.value = inputValues[index] || "";
     });
 
-  
+      index++;
+
 
     // aggiunge il valore dell'attributo `value` dell'ultimo input creato all'array
     const lastXElement = newXElements[newXElements.length - 1];
@@ -331,12 +333,14 @@ function addTask(){
       taskList[i2] = temp;
 
       var tasks = document.getElementsByClassName("task");
-      tasks[i1].children[1].value = taskList[i1].title;
-      tasks[i1].children[2].value = taskList[i1].pomodori;
-      tasks[i1].children[3].nextElementSibling.children[0].value=taskList[i1].note;
-      tasks[i2].children[1].value = taskList[i2].title;
-      tasks[i2].children[2].value = taskList[i2].pomodori;
-      tasks[i1].children[3].nextElementSibling.children[0].value=taskList[i1].note;
+      tasks[i1].children[1].value = "ciao";
+      tasks[i1].children[2].value = taskList[i1].title;
+      tasks[i1].children[3].value = taskList[i1].pomodori;
+      tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
+      tasks[i2].children[1].value = i1;
+      tasks[i2].children[2].value = taskList[i2].title;
+      tasks[i2].children[3].value = taskList[i2].pomodori;
+      tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
 
     }
     else{
@@ -348,9 +352,9 @@ function addTask(){
     taskList.reverse();
     var tasks = document.getElementsByClassName("task");
     for (var i=0; i<tasks.length;i++){
-      tasks[i].children[1].value=taskList[i].title;
-      tasks[i].children[2].value=taskList[i].pomodori;
-      tasks[i].children[3].nextElementSibling.children[0].value=taskList[i].note;
+      tasks[i].children[2].value=taskList[i].title;
+      tasks[i].children[3].value=taskList[i].pomodori;
+      tasks[i].children[4].nextElementSibling.children[0].value=taskList[i].note;
     }
   }
 function deleteAllTask() {
