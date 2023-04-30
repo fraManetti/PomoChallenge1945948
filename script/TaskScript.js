@@ -4,6 +4,7 @@
 var index=1;
 var oldTitle="";
 var oldPomos = 0;
+var oldNote="";
 var currentKey;
 var opened = false;
 var planning = false;
@@ -74,14 +75,12 @@ function updateTaskBox (taskItems,  cond){
 }
 
 //Aggiorno la lista delle task con le modifiche :
-function updateTaskMap(newTitle, newPomos) {
+function updateTaskMap(newTitle, newPomos,newNote) {
   taskList.forEach(function(tuple) {
     if (tuple.key == currentKey){
         tuple.title = newTitle;
         tuple.pomodori = newPomos;
-        console.log(tuple);
-        console.log(taskList);
-        console.log(currentKey);
+        tuple.note = newNote;
       }
     }
   )
@@ -169,8 +168,9 @@ function showOption(e) {
       button.children[0].setAttribute("src","../style/img/sliders-solid.png");
       var newTitle = taskItems[1].value;
       var newPomos = taskItems[2].value;
-      if  (newTitle!= oldTitle || newPomos!=oldPomos )  
-        updateTaskMap(newTitle,newPomos);
+      var newNote = hiddenBox.children[0].value;
+      if  (newTitle!= oldTitle || newPomos!=oldPomos || newNote!=oldNote )  
+        updateTaskMap(newTitle,newPomos,newNote);
       updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0);
   } else if(computedStyle.display === "none" && !anyTaskOpen) {
     hiddenBox.style.display = "block";
@@ -180,6 +180,7 @@ function showOption(e) {
     updateTaskBox(taskItems,taskBox.style.backgroundColor!="grey");
     oldTitle= taskItems[1].value;
     oldPomos= taskItems[2].value;
+    oldNote = hiddenBox.children[0].value;
     currentKey=taskBox.getAttribute("data-value");
   }
 }
@@ -219,12 +220,15 @@ function addTask(){
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
     var title=$('#taskFieldInput').val();
     var key =hashCode(title+JSON.stringify(number));
-    var newTask = { key:key, title: title, pomodori: number,index: index };
-    index+=1;
+    var note = document.getElementById("taskNote").value;
+    var newTask = { key:key, title: title, pomodori: number,note: note };
+
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask);
     if (taskList.length >= 2) {
       document.getElementsByName("swapTasksButton")[0].disabled = false;
+      document.getElementsByName("reverseTasksButton")[0].disabled = false;
+
     }
       document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
           <div  class="task" data-value="${key}">
@@ -308,6 +312,7 @@ function addTask(){
       var temp = taskList[i1];
       taskList[i1] = taskList[i2];
       taskList[i2] = temp;
+      
     }
     else{
       alert("Inserisci degli indici validi");
@@ -315,6 +320,12 @@ function addTask(){
   }
 
   function reverseTask() {
-    
+    taskList.reverse();
+    var tasks = document.getElementsByClassName("task");
+    for (var i=0; i<tasks.length;i++){
+      tasks[i].children[1].value=taskList[i].title;
+      tasks[i].children[2].value=taskList[i].pomodori;
+      tasks[i].children[3].nextElementSibling.children[0].value=taskList[i].note;
+    }
   }
 
