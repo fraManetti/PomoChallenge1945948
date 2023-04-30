@@ -40,16 +40,24 @@
             <div class="pomodoro">
               <div id="switchRow"> 
                 
-
-                    <label>
                       <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
                       </img>
-                    </label>
-
-                    <label>
+                  
                       <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
                       </img>
-                    </label>
+
+                      
+                      <div class="overlay" id="infoOverlay">
+                        <div class = "popup" id="infoPop">
+                          <p>
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
+                          </p>
+                          <span class = "close" id="infoClose" onclick="closeInfo()">
+                            X
+                          </span>
+                        </div>
+                      </div>
+                      
                   
                 
               </div> 
@@ -170,7 +178,9 @@
               </div>
               <div id="taskTag">
                 <button name = "swapTasksButton" class = roundBtn id="defaultOrderButton" disabled onclick="openSwapPopup()">
-                  Swap tasks
+                  Swap tasks </button>
+                  <button name = "reverseTasksButton" class = roundBtn id="defaultOrderButton" disabled onclick="reverseTask();">
+                    Reverse tasks </button>                  
               </div>
               <div id="popupContainer"></div>
               <!-- Crea un elemento div per l'overlay > se lo vogliamo fare -->

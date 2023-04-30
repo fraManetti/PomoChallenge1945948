@@ -4,6 +4,7 @@
 var index=1;
 var oldTitle="";
 var oldPomos = 0;
+var oldNote="";
 var currentKey;
 var opened = false;
 var planning = false;
@@ -74,14 +75,12 @@ function updateTaskBox (taskItems,  cond){
 }
 
 //Aggiorno la lista delle task con le modifiche :
-function updateTaskMap(newTitle, newPomos) {
+function updateTaskMap(newTitle, newPomos,newNote) {
   taskList.forEach(function(tuple) {
     if (tuple.key == currentKey){
         tuple.title = newTitle;
         tuple.pomodori = newPomos;
-        console.log(tuple);
-        console.log(taskList);
-        console.log(currentKey);
+        tuple.note = newNote;
       }
     }
   )
@@ -123,7 +122,7 @@ function updateTaskTag(isRunning){
     textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
     var time=0;
 
-  for ( i = pomoCount; i>0;i--){
+  for ( i = pomoCount-countCurrPom; i>0;i--){
     if(i%4 ==0)
       time+=countL;
     else
@@ -166,18 +165,22 @@ function showOption(e) {
       anyTaskOpen = false;
       //       taskBox.classList.toggle("taskShowed");
       updateTaskBox(taskItems,false);
+      button.children[0].setAttribute("src","../style/img/sliders-solid.png");
       var newTitle = taskItems[1].value;
       var newPomos = taskItems[2].value;
-      if  (newTitle!= oldTitle || newPomos!=oldPomos )  
-        updateTaskMap(newTitle,newPomos);
+      var newNote = hiddenBox.children[0].value;
+      if  (newTitle!= oldTitle || newPomos!=oldPomos || newNote!=oldNote )  
+        updateTaskMap(newTitle,newPomos,newNote);
       updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0);
   } else if(computedStyle.display === "none" && !anyTaskOpen) {
     hiddenBox.style.display = "block";
     anyTaskOpen = true;
+    button.children[0].setAttribute("src", "../style/img/floppy-disk-solid.png");
     //       taskBox.classList.toggle("taskShowed");
     updateTaskBox(taskItems,taskBox.style.backgroundColor!="grey");
     oldTitle= taskItems[1].value;
     oldPomos= taskItems[2].value;
+    oldNote = hiddenBox.children[0].value;
     currentKey=taskBox.getAttribute("data-value");
   }
 }
@@ -197,7 +200,13 @@ function openTaskBar() {
 
 // Apre il pannello delle info:
 function infoPopUp() {
-  console.log("jaso");
+  var overlay = document.getElementById("infoOverlay");
+  var computedStyle = window.getComputedStyle(overlay);
+  overlay.style.display = "block";
+}
+
+function closeInfo() {
+  document.getElementById("infoOverlay").style.display="none";
 }
 
 
@@ -211,12 +220,15 @@ function addTask(){
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
     var title=$('#taskFieldInput').val();
     var key =hashCode(title+JSON.stringify(number));
-    var newTask = { key:key, title: title, pomodori: number,index: index };
-    index+=1;
+    var note = document.getElementById("taskNote").value;
+    var newTask = { key:key, title: title, pomodori: number,note: note };
+
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask);
     if (taskList.length >= 2) {
       document.getElementsByName("swapTasksButton")[0].disabled = false;
+      document.getElementsByName("reverseTasksButton")[0].disabled = false;
+
     }
       document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
           <div  class="task" data-value="${key}">
@@ -229,12 +241,10 @@ function addTask(){
               <input type="number" value="" class="x" readonly  min="1">
               
               <button type="button" class="taskOption" onClick= "showOption(event);" >
-                <label>
                   <img class = "taskImg" src  = "../style/img/sliders-solid.png">
                   </img>
-                </label>
               </button>
-              <div class="hiddenOption">
+              <div class="hiddenOption" display = none>
                 <textarea name="taskNote" id="hiddenNote" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
               </div>
           </div>
@@ -316,9 +326,20 @@ function addTask(){
       tasks[i2].children[1].value = taskList[i2].title;
       tasks[i2].children[2].value = taskList[i2].pomodori;
 
+
     }
     else{
       alert("Inserisci degli indici validi");
+    }
+  }
+
+  function reverseTask() {
+    taskList.reverse();
+    var tasks = document.getElementsByClassName("task");
+    for (var i=0; i<tasks.length;i++){
+      tasks[i].children[1].value=taskList[i].title;
+      tasks[i].children[2].value=taskList[i].pomodori;
+      tasks[i].children[3].nextElementSibling.children[0].value=taskList[i].note;
     }
   }
 
