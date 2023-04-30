@@ -25,6 +25,23 @@ function hashCode(string) {
   return hash;
 }
 
+function handleKeyPress(event, string) {
+  if (event.key === "Enter") {
+      event.preventDefault();
+      // esegui qui le azioni quando l'utente preme il tasto "Invio"
+      // ad esempio, puoi leggere il valore del campo di input e aggiungere il compito a una lista
+      if(string== 'add') {
+        document.getElementById("push").click();
+      }
+      else if(string = 'option') {
+        var field = event.currentTarget;
+        var optionBtn = field.nextElementSibling.nextElementSibling;
+        showOption({currentTarget: optionBtn});
+      }
+  }
+}
+
+
 //Serve per sapere se sono in modalità task o meno:
 function modalitaTask() {
   if(!taskOn)
@@ -155,6 +172,7 @@ function checkCustom() {
 
 //Appare il pannello per modificare una task:
 function showOption(e) {
+  console.log(e);
   var button = e.currentTarget;
   var hiddenBox = button.nextElementSibling;
   var computedStyle = window.getComputedStyle(hiddenBox);
@@ -245,10 +263,12 @@ function addTask(){
             
               <button style='font-size:24px' class="delete" onClick="deleteTask(event);">
                 <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
-                </img> 
-              </button> 
+                </img>
+              </button>   
               <span>${index})</span>
-              <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}">
+              <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}" onkeypress="handleKeyPress(event, 'options')">
+
+
               <input type="number" value="" class="x" readonly  min="1">
               
               <button type="button" class="taskOption" onClick= "showOption(event);" >
