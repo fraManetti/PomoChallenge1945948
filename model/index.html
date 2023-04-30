@@ -138,8 +138,8 @@
           <div id = "selectTaskArea">
 
 
-              <p id="pomoCount">Pomodori Complessivi: 0/0</p>
-              <p id="timeEstimated"> Fine per: xx:yy</p>
+              <p id="pomoCount">Pomodori Complessivi: 0</p>
+              <p id="timeEstimated"> </p>
             
               <div id="newtask">
 
@@ -174,8 +174,19 @@
         
                   <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')"></textarea>
               </div>
+
+              <div id="taskTag">
+                <button name = "swapTasksButton" class = roundBtn id="defaultOrderButton" disabled onclick="openSwapPopup()">
+                  Swap tasks </button>
+                  <button name = "reverseTasksButton" class = roundBtn id="defaultOrderButton" disabled onclick="reverseTask();">
+                    Reverse tasks </button> 
+                    <button name = "deleteAllTaskButton" class = roundBtn id="defaultOrderButton" disabled onclick="deleteAllTask();">
+                      Delete All Tasks </button>                    
+              </div> 
               <div id="tasks">
               </div>
+              <div id="popupContainer"></div>
+
           </div>
         
         </div>

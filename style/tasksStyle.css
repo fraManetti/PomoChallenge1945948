@@ -59,3 +59,27 @@
     width: 40px;
     border-radius: 5px;
   }
+
+.popupSwap {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  border-radius: 10px; 
+  padding: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#closePopup {
+  position: absolute;
+  top: 0px;
+  right: 1px;
+  cursor: pointer;
+  font-size: 24px;
+  border-radius: 50%;
+}
+
