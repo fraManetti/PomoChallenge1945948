@@ -279,7 +279,7 @@ function addTask(){
           <label> Con task: 
           <input type="number" id="index2" required></label><br>
 
-          <button>Swap</button>
+          <button id = "swapclick" >Swap</button>
       </div>
     `;
     //document.getElementById("overlay").style.display = "block";
@@ -290,11 +290,11 @@ function addTask(){
     var i1;
     var i2;
 
-    document.querySelector("button").addEventListener("click", function(event) {
+    document.querySelector("swapclick").addEventListener("click", function(event) {
       event.preventDefault();
       i1 = document.getElementById("index1").value;
       i2 = document.getElementById("index2").value;
-      // qui puoi aggiungere il codice per gestire lo scambio dei task
+      
   });
   }
 
