@@ -77,8 +77,21 @@ input[name="mailInput"] {
     margin-top: 5px;
 }
 
+.icon-mail {
+    background-image: url('../img/eye-solid.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-left: 25px;
+}
+
 #passwordInput{
     margin-left: 42px;
+    background-image: url('../img/eye-slash-solid.png');
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    background-size: 19px 16px;
+    padding-left: 40px;
+    opacity: 0.8;
 }
 
 
