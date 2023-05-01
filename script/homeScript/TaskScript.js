@@ -53,11 +53,22 @@ function modalitaTask() {
 // Funzione per eliminare una task da tutto con il bottone delete:
 function deleteTask(e) {
   var button = e.currentTarget;
+  var deleted=false;
   var key = button.parentNode.getAttribute("data-value");
   button.parentNode.remove();
+  var deletedIndex;
   for (var i=0; i<taskList.length;i++){
-    if (taskList[i].key == key)
+    if (taskList[i].key == key){
       taskList.splice(i,1);
+      deletedIndex=i;
+      index--;
+    }}
+  var tasks = document.querySelectorAll('.task:not(.endedTasks)');
+  for(var i=0; i<tasks.length;i++){
+    if (i>=deletedIndex){
+      console.log(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1)));
+        tasks[i].children[1].textContent=JSON.stringify(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1))-1)+")"; 
+      }
   }
   updateTaskTag(false,false);
   updateTaskButtons();

@@ -6,6 +6,7 @@
   var countS;
   var countB;
   var countL;
+  var countTimes = 0; 
 function resetClock() {
   clock.stop();
   pos = "Pomodoro";
@@ -16,7 +17,7 @@ function resetClock() {
 }
 $(document).ready(function(){
 
-  var countTimes = 0; 
+  countTimes = 0; 
   countS = 25;
   $("#session").html(countS);
   countB = 5;
@@ -31,8 +32,25 @@ $(document).ready(function(){
 
 
   function checkCurrentTask() {
+
+  if(taskList.length==1){
     countCurrPom++;
-    if(taskList.length>0){
+    updateTaskTag(true,false);
+    if (taskList[0].pomodori == countCurrPom){
+    alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
+      countCurrPom=0;
+      index--;
+      removeTaskItem();
+      updateTaskTag(false,false);
+      updateTaskButtons();
+      var tmp=countTimes;
+      //resetClock();
+      document.getElementById("customCheckbox").checked=false;
+      taskOn = false;
+      countTimes=tmp;
+      return true;
+}}    if(taskList.length>0){
+      countCurrPom++;
       updateTaskTag(true,false);
       if (taskList[0].pomodori == countCurrPom){
       alert("Task Finita!");
@@ -42,9 +60,7 @@ $(document).ready(function(){
         updateTaskTag(false,false);
         updateTaskButtons();
         return true;
-  }}
-
-  else 
+  }}  else 
     updateTaskTag(false,false);
     return false;
   
@@ -55,19 +71,24 @@ $(document).ready(function(){
       autoStart: false,
       callbacks: {
         interval: function(){
+          var isEnded;
           if (clock.getTime() == 0 )
               if (pos == "Session"){
-                if(taskOn)checkCurrentTask();
+                if(taskOn)isEnded=checkCurrentTask();
                 if(countTimes%4!=0){
                 clock.setTime(countB*60);
                 clock.start();
                 pos = "Short Break";
                 $("#stats").html(pos);
+                if(taskOn && taskList.length>0)updateTaskTag(true,isEnded);
+                else updateTaskTag(false,false);
               } else{
                 clock.setTime(countL*60);
                 clock.start();
                 pos = "Long Break";
                 $("#stats").html(pos);
+                if(taskOn && taskList.length>0)updateTaskTag(true,isEnded);
+      else updateTaskTag(false,false);
               } 
             } 
             else if (pos == "Short Break" || pos=="Long Break"){
@@ -75,6 +96,8 @@ $(document).ready(function(){
               clock.start();
               pos = "Session";
               $("#stats").html(pos);
+              if(taskOn && taskList.length>0)updateTaskTag(true,false);
+              else updateTaskTag(false,false);
             }
           }        
         }
@@ -171,7 +194,8 @@ $(document).ready(function(){
         pos = "Short Break";
         $("#stats").html(pos);      
       if(taskOn && taskList.length>0)updateTaskTag(true,isEnded);
-      else updateTaskTag(false,false);}
+      else updateTaskTag(false,false);
+    }
         else{
           clock.setTime(countL*60);
           clock.start();
