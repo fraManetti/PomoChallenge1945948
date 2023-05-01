@@ -13,6 +13,7 @@ function resetClock() {
   clock.setTime(0);
   $('#start').text('START');
   countTimes=0;
+  titleTimer(clock)
 }
 $(document).ready(function(){
 
@@ -70,6 +71,7 @@ $(document).ready(function(){
               pos = "Session";
               $("#stats").html(pos);
             }
+            titleTimer(clock)
           }        
         }
       })
@@ -192,6 +194,7 @@ $(document).ready(function(){
     countB=5;
     countL=15;
     countS=25;
+    titleTimer(clock)
   });
 
   $("#selectTaskArea").on("click","#push", function() {
