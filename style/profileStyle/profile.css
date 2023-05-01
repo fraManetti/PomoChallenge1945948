@@ -1,0 +1,23 @@
+.navbar {
+    background: rgba(255, 255, 255, 0.7);
+    position: fixed;
+    }
+
+
+.container {
+    margin-top: 66px;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    height: 100vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
+  
+  }
+
+#levelPanel {
+    border-width:1px;
+    border-style:solid;
+    border-color: black;
+    height: 250px;
+    width: 250px;
+    margin-right: 50px;
+    margin-top: 200px;
+}
