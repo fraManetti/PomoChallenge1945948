@@ -59,7 +59,8 @@ function deleteTask(e) {
     if (taskList[i].key == key)
       taskList.splice(i,1);
   }
-  updateTaskTag(false);
+  updateTaskTag(false,false);
+  updateTaskButtons();
 }
 
 
@@ -75,13 +76,12 @@ function removeTaskItem() {
   for (var i=0; i<tasks.length;i++){
     if (tasks[i].getAttribute("data-value")==key){
       tasks[i].children[1].textContent="0)"
-      index--;
       tasks[i].classList.add("endedTasks");
       if(delEnded)
         deleteEndedTask();
 
     }
-    else if (tasks[i].style.backgroundColor!="grey"){
+    else if (!tasks[i].classList.contains("endedTasks")){
       tasks[i].children[1].textContent=JSON.stringify(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1))-1)+")"; 
     }
   }
@@ -137,7 +137,7 @@ function timeUpdate(time){
 }
 
 // Aggiorno il tag con pomodori rimasti e tempo rimasto:
-function updateTaskTag(isRunning){
+function updateTaskTag(isRunning,isEnded){
   var pomoCount =0; //conta il numero di pomodori nelle task aggiunte
   taskList.forEach(function(tuple){
     pomoCount+=JSON.parse(tuple.pomodori);
@@ -145,9 +145,12 @@ function updateTaskTag(isRunning){
   var textToAppend  = "Pomodori Complessivi: "+JSON.parse(pomoCount); 
   if (isRunning){  
     var nPomo=taskList[0].pomodori;
-    textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
+    if(!isEnded)
+      textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
+    else
+      textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
     var time=0;
-
+    console.log(textToAppend);
   for ( i = pomoCount-countCurrPom; i>0;i--){
     if(i%4 ==0)
       time+=countL;
@@ -159,9 +162,35 @@ function updateTaskTag(isRunning){
   } else 
     document.getElementById("timeEstimated").innerText="";
   document.getElementById("pomoCount").innerText=textToAppend;
-  
-
 }
+
+function updateTaskButtons(){
+  if(taskList.length==1){
+    document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
+    document.getElementsByName("swapTasksButton")[0].disabled = true;
+    document.getElementsByName("reverseTasksButton")[0].disabled = true;
+  }
+  else if (taskList.length >= 2) {
+    document.getElementsByName("swapTasksButton")[0].disabled = false;
+    document.getElementsByName("reverseTasksButton")[0].disabled = false;
+    document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
+  }
+  else{
+    document.getElementsByName("swapTasksButton")[0].disabled = true;
+    document.getElementsByName("reverseTasksButton")[0].disabled = true;
+  }
+  if (document.getElementsByClassName("endedTasks").length>0){
+    document.getElementsByName("deleteEndedTaskButton")[0].disabled = false;
+    document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
+  }
+  else{
+    document.getElementsByName("deleteEndedTaskButton")[0].disabled = true;
+    if (taskList.length==0)
+      document.getElementsByName("deleteAllTaskButton")[0].disabled=true;
+ }
+}
+
+
 //#################################################################
 //##########FUNZIONI PER GESTIRE ELEMENTI A COMPARSA: ##############
 //#################################################################
@@ -198,7 +227,7 @@ function showOption(e) {
       var newNote = hiddenBox.children[0].value;
       if  (newTitle!= oldTitle || newPomos!=oldPomos || newNote!=oldNote )  
         updateTaskMap(newTitle,newPomos,newNote);
-      updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0);
+      updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
   } else if(computedStyle.display === "none" && !anyTaskOpen) {
     hiddenBox.style.display = "block";
     anyTaskOpen = true;
@@ -246,7 +275,7 @@ function addTask(){
     const inputValues = Array.from(xElements).map(element => element.value);
     var number= JSON.parse(document.getElementById("pomoTaskNumber").value);
     var title=$('#taskFieldInput').val();
-    var key =hashCode(title+JSON.stringify(number));
+    var key =hashCode(title+JSON.stringify(number)+JSON.stringify(Math.random(1000000000)));
     var note = document.getElementById("taskNote").value;
     var newTask = { key:key, title: title, pomodori: number,note: note };
 
@@ -291,7 +320,7 @@ function addTask(){
       document.getElementById("taskFieldInput").value="";
       document.getElementById("taskNote").value="";
       document.getElementById("pomoTaskNumber").value = "1";
-      updateTaskTag(false);
+      updateTaskTag(false,false);
 
       }
   }
@@ -340,6 +369,11 @@ function addTask(){
     });
   }
 
+
+//#################################################################
+//##########  FUNZIONI PER GESTIRE I BOTTONI:        ##############
+//#################################################################
+
   function swapTasks(i1, i2) {
     i1-=1;
     i2-=1;
@@ -348,15 +382,17 @@ function addTask(){
       taskList[i1] = taskList[i2];
       taskList[i2] = temp;
 
-      var tasks = document.getElementsByClassName("task");
+      var tasks = document.querySelectorAll('.task:not(.endedTasks)');
+      tasks[i1].setAttribute("data-value",taskList[i1].key);
       tasks[i1].children[2].value = taskList[i1].title;
       tasks[i1].children[3].value = taskList[i1].pomodori;
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
+      tasks[i2].setAttribute("data-value",taskList[i2].key);
       tasks[i2].children[1].value = i1;
       tasks[i2].children[2].value = taskList[i2].title;
       tasks[i2].children[3].value = taskList[i2].pomodori;
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
-
+      updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
     }
     else{
       alert("Inserisci degli indici validi");
@@ -365,38 +401,30 @@ function addTask(){
 
   function reverseTask() {
     taskList.reverse();
-    var tasks = document.getElementsByClassName("task");
+    var tasks = document.querySelectorAll('.task:not(.endedTasks)');
     for (var i=0; i<tasks.length;i++){
-      tasks[i].children[2].value=taskList[i].title;
-      tasks[i].children[3].value=taskList[i].pomodori;
-      tasks[i].children[4].nextElementSibling.children[0].value=taskList[i].note;
-    }
+        tasks[i].setAttribute("data-value",taskList[i].key);
+        tasks[i].children[2].value=taskList[i].title;
+        tasks[i].children[3].value=taskList[i].pomodori;
+        tasks[i].children[4].nextElementSibling.children[0].value=taskList[i].note;
+  }
+  updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
+
   }
 function deleteAllTask() {
   index=1;
   taskList=[];
   $('.task').remove();
+  updateTaskButtons();
+  updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
 }
 
 
 
 function deleteEndedTask(){
   $('.endedTasks').remove();
+  updateTaskButtons();
+  updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
 }
 
-function updateTaskButtons(){
-  if(taskList.length==1){
-    document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
-    document.getElementsByName("swapTasksButton")[0].disabled = true;
-    document.getElementsByName("reverseTasksButton")[0].disabled = true;}
-  else if (taskList.length >= 2) {
-    document.getElementsByName("swapTasksButton")[0].disabled = false;
-    document.getElementsByName("reverseTasksButton")[0].disabled = false;
-    document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
-  }
-  else{
-    document.getElementsByName("deleteAllTaskButton")[0].disabled=true;
-    document.getElementsByName("swapTasksButton")[0].disabled = true;
-    document.getElementsByName("reverseTasksButton")[0].disabled = true;
-  }
-}
+

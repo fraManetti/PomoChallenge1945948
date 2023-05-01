@@ -28,19 +28,25 @@ $(document).ready(function(){
   var posLama;
   var count;
     $("#stats").html(pos);
+
+
   function checkCurrentTask() {
     countCurrPom++;
     if(taskList.length>0){
-      updateTaskTag(true);
+      updateTaskTag(true,false);
       if (taskList[0].pomodori == countCurrPom){
       alert("Task Finita!");
         countCurrPom=0;
+        index--;
         removeTaskItem();
-        updateTaskTag(false);
+        updateTaskTag(false,false);
+        updateTaskButtons();
+        return true;
   }}
 
   else 
-    updateTaskTag(false);
+    updateTaskTag(false,false);
+    return false;
   
 }
      clock = $(".timer").FlipClock(0, {
@@ -76,9 +82,8 @@ $(document).ready(function(){
 
   
   $("#start").on("click", function(){
-    console.log(countCurrPom);
-    if(taskOn && taskList.length>0)updateTaskTag(true);
-    else updateTaskTag(false);
+    if(taskOn && taskList.length>0)updateTaskTag(true,false);
+    else updateTaskTag(false,false);
     if(clock.running){
       clock.stop();
       countLama = clock.getTime();
@@ -157,18 +162,23 @@ $(document).ready(function(){
     });
   
     $("#skip").on("click", function(){
+      var isEnded;
       if (pos == "Session"){
-        if(taskOn)checkCurrentTask();
+        if(taskOn)isEnded=checkCurrentTask();
         if(countTimes%4!=0){
         clock.setTime(countB*60);
         clock.start();
         pos = "Short Break";
-        $("#stats").html(pos);}
+        $("#stats").html(pos);      
+      if(taskOn && taskList.length>0)updateTaskTag(true,isEnded);
+      else updateTaskTag(false,false);}
         else{
           clock.setTime(countL*60);
           clock.start();
           pos = "Long Break";
-          $("#stats").html(pos);          
+          $("#stats").html(pos);   
+          if(taskOn && taskList.length>0)updateTaskTag(true,isEnded);
+          else updateTaskTag(false,false);       
         }
       } else if (pos == "Short Break" || pos=="Long Break"){
         countTimes++;
@@ -176,10 +186,12 @@ $(document).ready(function(){
         clock.start();
         pos = "Session";
         $("#stats").html(pos);
+        if(taskOn && taskList.length>0)updateTaskTag(true,false);
+        else updateTaskTag(false,false);
       }
   });
   $("#clear").on("click", function(){
-    updateTaskTag(false);
+    updateTaskTag(false,false);
     clock.stop();
     pos = "Pomodoro";
     $("#stats").html(pos);
@@ -194,18 +206,4 @@ $(document).ready(function(){
     countS=25;
   });
 
-  $("#selectTaskArea").on("click","#push", function() {
-    // // ottieni il titolo della task dall'input dell'utente
-    // var title = $("#taskname").val();
-
-    // // ottieni il numero di pomodori previsti per la task dall'input dell'utente
-    // // var pomodori = $(".x").val();
-    // // // crea una nuova task con i valori inseriti dall'utente
-    // // var newTask = { title: title, pomodori: pomodori };
-    // // // aggiungi la nuova task all'elenco delle task
-    // // taskList.push(newTask);
-    // // console.log(pomodori);
-
-
-  });
 })
