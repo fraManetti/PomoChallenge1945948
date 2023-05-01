@@ -43,36 +43,38 @@ $(document).ready(function(){
     updateTaskTag(false);
   
 }
-     clock = $(".timer").FlipClock(0, {
-      countdown: true,
-      clockFace: 'MinuteCounter',
-      autoStart: false,
-      callbacks: {
-        interval: function(){
-          if (clock.getTime() == 0 )
-              if (pos == "Session"){
-                if(taskOn)checkCurrentTask();
-                if(countTimes%4!=0){
-                clock.setTime(countB*60);
-                clock.start();
-                pos = "Short Break";
-                $("#stats").html(pos);
-              } else{
-                clock.setTime(countL*60);
-                clock.start();
-                pos = "Long Break";
-                $("#stats").html(pos);
-              } 
-            } 
-            else if (pos == "Short Break" || pos=="Long Break"){
-              clock.setTime(countS*60);
-              clock.start();
-              pos = "Session";
-              $("#stats").html(pos);
-            }
-          }        
-        }
-      })
+clock = $(".timer").FlipClock(0, {
+  countdown: true,
+  clockFace: 'MinuteCounter',
+  autoStart: false,
+  callbacks: {
+      interval: function() {
+          if (clock.getTime() == 0) {
+              $('#endDing')[0].play();
+              if (pos == "Session") {
+                  if (taskOn) checkCurrentTask();
+                  if (countTimes % 4 != 0) {
+                      clock.setTime(countB * 60);
+                      clock.start();
+                      pos = "Short Break";
+                      $("#stats").html(pos);
+                  } else {
+                      clock.setTime(countL * 60);
+                      clock.start();
+                      pos = "Long Break";
+                      $("#stats").html(pos);
+                  }
+              } else if (pos == "Short Break" || pos == "Long Break") {
+                  clock.setTime(countS * 60);
+                  clock.start();
+                  pos = "Session";
+                  $("#stats").html(pos);
+              }
+          }
+      }
+  }
+})
+
 
   
   $("#start").on("click", function(){
