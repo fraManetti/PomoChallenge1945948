@@ -84,6 +84,15 @@ input[name="mailInput"] {
   padding-left: 25px;
 }
 
+#mailInput {
+    background-image: url('../img/user-solid.png');
+    background-position: 220px center;
+    background-repeat: no-repeat;
+    background-size: 15px 16px;
+    padding-left: 20px;
+    opacity: 0.8;
+}
+
 #passwordInput{
     margin-left: 42px;
     background-image: url('../img/lock-solid.png');
