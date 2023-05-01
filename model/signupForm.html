@@ -5,14 +5,14 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>Profile</title>
-    <link rel="stylesheet" href="../style/loginStyle/loginStyle.css" >
+    <link rel="stylesheet" href="../style/loginStyle/signupStyle.css" >
     <script  src="../script/loginScript/loginScript.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <div id="loginPanel">
-            <FORM method="post" id="submitForm" action=""> 
+        <div id="signupPanel">
+            <FORM method="post" id="submitSignForm" action=""> 
                 <div class="imgContainer">
                     <INPUT type="IMAGE" class="imgAvatar" SRC="../style/img/pomo.png">
                     </input>
@@ -20,34 +20,34 @@
 
                 <div class="infoPanel">
                 
-                    <fieldset name="infoField">
+                    <fieldset name="infoSignField">
                         <legend>  Submit information </legend>
                             <b>Mail</b>
                             <br>
-                        <input type="text" name="mailInput" id="mailInput" placeholder=" Insert mail" required="true">
+                        <input type="text" name="mailSignInput" id="mailSignInput" placeholder=" Insert mail" required="true">
                         <br>
 
                             <b>Password</b>  
                             <br>
-                        <input type="password" name="passInput" id="passwordInput" placeholder="Insert password" required="true">
-                        <img id="visiblePassword" src ="../style/img/eye-slash-solid.png" onclick="showPassword()">
+                        <input type="password" name="passSignInput" id="passwordSignInput" placeholder="Insert password" required="true">
+                        <img id="visibleSignPassword" src ="../style/img/eye-slash-solid.png" onclick="showPassword()">
                         </img>
                         <br>
                         
-                        <input type="submit" id="submitBtn" class="loginButton" value="Log in">
-                        <button id="clearBtn" class="loginButton" onclick="resetField()">
+                        <input type="submit" id="submitSignBtn" class="loginButton" value="Sign up">
+                        <button id="clearSignBtn" class="loginButton" onclick="resetField()">
                             Clear 
                         </button>
                         
                         <br>
                         <label>
-                            <input type="checkbox" name="remember" id="rememberCheckbox"> 
+                            <input type="checkbox" name="remember" id="rememberSignCheckbox"> 
                             Remember me
                         </label>
                         <p>
-                            Don't have an account yet?
-                            <a href="./signupForm.html">
-                            Sign up
+                            Already signed up?
+                            <a href="./loginForm.html">
+                            Log in
                             </a>
                         </p>
                     </fieldset>
