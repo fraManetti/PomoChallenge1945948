@@ -38,6 +38,8 @@ $(document).ready(function(){
     updateTaskTag(true,false);
     console.log(countCurrPom);
     if (taskList[0].pomodori == countCurrPom){
+      $('#endDing')[0].play();
+
     alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
       countCurrPom=0;
       index--;
@@ -54,6 +56,8 @@ $(document).ready(function(){
       countCurrPom++;
       updateTaskTag(true,false);
       if (taskList[0].pomodori == countCurrPom){
+        $('#endDing')[0].play();
+
       alert("Task Finita!");
         countCurrPom=0;
         index--;
@@ -73,7 +77,8 @@ $(document).ready(function(){
       callbacks: {
         interval: function(){
           var isEnded;
-          if (clock.getTime() == 0 )
+          if (clock.getTime() == 0 ){
+            $('#endDing')[0].play();
               if (pos == "Session"){
                 if(taskOn)isEnded=checkCurrentTask();
                 if(countTimes%4!=0){
@@ -100,7 +105,7 @@ $(document).ready(function(){
               if(taskOn && taskList.length>0)updateTaskTag(true,false);
               else updateTaskTag(false,false);
             }
-          }        
+          }     }   
         }
       })
 
