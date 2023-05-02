@@ -103,6 +103,19 @@ function removeTaskItem() {
     }
   }
 }
+
+
+function titleTimer(clock) {
+  var timeInSeconds = clock.getTime();
+  var minutes = Math.floor(timeInSeconds / 60);
+  var seconds = timeInSeconds % 60;
+  var timeString = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  document.title = timeString + " - PC";
+}
+
+
+
+
 //Funzione per rendere scrivibili o leggibili i campi delle task
 function updateTaskBox (taskItems,  cond){ 
   if (!cond){
@@ -175,6 +188,7 @@ function updateTaskTag(isRunning,isEnded){
       time+=countB;
     time+=countS;
   } timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
+
   document.getElementById("timeEstimated").innerText=timeToAppend;
   } else 
     document.getElementById("timeEstimated").innerText="";

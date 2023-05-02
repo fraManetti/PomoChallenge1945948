@@ -14,6 +14,7 @@ function resetClock() {
   clock.setTime(0);
   $('#start').text('START');
   countTimes=0;
+  titleTimer(clock)
 }
 $(document).ready(function(){
 
@@ -105,7 +106,8 @@ $(document).ready(function(){
               if(taskOn && taskList.length>0)updateTaskTag(true,false);
               else updateTaskTag(false,false);
             }
-          }     }   
+            titleTimer(clock)
+          }        
         }
       })
 
@@ -234,6 +236,7 @@ $(document).ready(function(){
     countB=5;
     countL=15;
     countS=25;
+    titleTimer(clock)
   });
 
 })

@@ -14,7 +14,7 @@
     position: absolute;
   }
 
-#loginPanel {
+#signupPanel {
     z-index: 2;
     position: relative;
     background-color: white;
@@ -28,7 +28,7 @@
     
 }
 
-#submitForm {
+#submitSignForm {
     text-align: center;
     width: 100%;
     flex-direction: row;
@@ -58,11 +58,11 @@
     box-shadow: 3px 3px 7px  rgba(0, 0, 0, 0.712);
   }
 
-#clearBtn {
+#clearSignBtn {
     background-color: rgb(233, 44, 44);
 }
 
-#submitBtn {
+#submitSignBtn {
     background-color: #04AA6D;
     margin-right: 10px;
 }
@@ -83,7 +83,7 @@ input[name="mailInput"] {
   padding-left: 25px;
 }
 
-#mailInput {
+#mailSignInput {
     background-image: url('../img/user-solid.png');
     background-position: 220px center;
     background-repeat: no-repeat;
@@ -92,7 +92,7 @@ input[name="mailInput"] {
     opacity: 0.8;
 }
 
-#passwordInput{
+#passwordSignInput{
     margin-left: 42px;
     background-image: url('../img/lock-solid.png');
     background-position: 220px center;
@@ -112,7 +112,7 @@ input[type=text], input[type=password] {
     box-sizing: border-box;
   }
 
-#visiblePassword {
+#visibleSignPassword {
     margin-left: 12px;
     width: 27px;
     height: 22px;
