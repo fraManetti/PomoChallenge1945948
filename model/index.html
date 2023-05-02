@@ -38,14 +38,11 @@
           <div class="box">
             <div class="pomodoro">
               <div id="switchRow"> 
-                
                       <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
                       </img>
                   
                       <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
                       </img>
-
-                      
                       <div class="overlay" id="infoOverlay">
                         <div class = "popup" id="infoPop">
                           <p>
@@ -56,9 +53,6 @@
                           </span>
                         </div>
                       </div>
-                      
-                  
-                
               </div> 
               <div class="row" id="statRow">
                 <div id="stats"></div>
@@ -130,29 +124,20 @@
 <button id="taskUse" onclick="openTaskBar();">
               Open task panel
             </button>
-
-            
           </div>
-          
           <div id = "selectTaskArea">
-
-
               <p id="pomoCount">Pomodori Complessivi: 0</p>
               <p id="timeEstimated"> </p>
-            
               <div id="newtask">
-
                 <div id = modalitaTaskRow>
                   <p id="modalitaTaskSwitch">
                     Attivare task? 
                     <label class="switch" data-on="ON" data-off="OFF">
                       <input type="checkbox" id = "customCheckbox" onclick="modalitaTask(); resetClock();">
                       <span class="slider round"></span>
-                      
                     </label>
                   </p>
                 </div>
-
                   <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')">
 <!--
                   <script>
