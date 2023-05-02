@@ -66,10 +66,16 @@ function deleteTask(e) {
   var tasks = document.querySelectorAll('.task:not(.endedTasks)');
   for(var i=0; i<tasks.length;i++){
     if (i>=deletedIndex){
-      console.log(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1)));
+      //console.log(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1)));
         tasks[i].children[1].textContent=JSON.stringify(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1))-1)+")"; 
       }
   }
+  if(taskList.length==0){
+    resetClock();
+    document.getElementById("customCheckbox").checked=false;
+    alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
+      countCurrPom=0;
+      }
   updateTaskTag(false,false);
   updateTaskButtons();
 }
@@ -161,7 +167,7 @@ function updateTaskTag(isRunning,isEnded){
     else
       textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
     var time=0;
-    console.log(textToAppend);
+    //console.log(textToAppend);
   for ( i = pomoCount-countCurrPom; i>0;i--){
     if(i%4 ==0)
       time+=countL;
@@ -221,7 +227,7 @@ function checkCustom() {
 
 //Appare il pannello per modificare una task:
 function showOption(e) {
-  console.log(e);
+  //console.log(e);
   var button = e.currentTarget;
   var hiddenBox = button.nextElementSibling;
   var computedStyle = window.getComputedStyle(hiddenBox);

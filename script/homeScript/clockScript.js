@@ -36,6 +36,7 @@ $(document).ready(function(){
   if(taskList.length==1){
     countCurrPom++;
     updateTaskTag(true,false);
+    console.log(countCurrPom);
     if (taskList[0].pomodori == countCurrPom){
     alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
       countCurrPom=0;
@@ -49,7 +50,7 @@ $(document).ready(function(){
       taskOn = false;
       countTimes=tmp;
       return true;
-}}    if(taskList.length>0){
+}}    if(taskList.length>0 && taskList.length!=1){
       countCurrPom++;
       updateTaskTag(true,false);
       if (taskList[0].pomodori == countCurrPom){
