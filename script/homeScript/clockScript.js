@@ -106,9 +106,9 @@ $(document).ready(function(){
               if(taskOn && taskList.length>0)updateTaskTag(true,false);
               else updateTaskTag(false,false);
             }
-            titleTimer(clock)
-          }        
-        }
+            
+          }     titleTimer(clock)   
+        }}
       })
 
   
