@@ -25,14 +25,15 @@
 
     /*settaggio input text (box di input titolo task)*/
     input[type='text']{
-        width:300px;
+        width:293px;
         
     } 
 
     /*settaggio input number (box di input numero pomodori)*/
     input[type='number']{
-        width:45px;
+        width:35px;
         cursor:default;
+        margin-left: 7px;
     } 
 
     /*button del pannello di input task*/
