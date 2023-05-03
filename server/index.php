@@ -23,14 +23,28 @@
 
     <script>
         $(function(){
-          $("#mynavbar").load("./oldnavbar.html");
+          $("#mynavbar").load("../model/newNavbar.html");
         });
 
     </script>
 
 </head>
 <body>
-    
+<?php 
+            $db_conn = pg_connect("host=localhost port=5432 dbname=pomochallenge 
+            user=postgres password=pomodoro") or die ('Connection error-impossibile connettersi al server' . pg_last_error());
+        
+session_start(); 
+    $query = "select keyhash,title,pomodori,note,donepomodori from task where task.username=$1";
+    $res = pg_query_params ($db_conn,$query,array($_SESSION["username"]));
+    while ($tuple=pg_fetch_array($res,null,PGSQL_ASSOC)){
+            echo $tuple["title"];
+            echo $tuple["pomodori"];
+            echo $tuple["note"];
+            echo $tuple["donepomodori"];
+        echo '<br>';
+    }
+?>
     <div id="mynavbar"></div>
     <div class="container">
       <div class="box">box1</div>
@@ -174,10 +188,9 @@
           </div>
         
         </div>
-      </div>
-      <div class="box">
-        box3
-      </div>
-    </div>
+      </div><?php 
+echo $_SESSION["username"];
+
+    ?>
 </body>
 </html>
