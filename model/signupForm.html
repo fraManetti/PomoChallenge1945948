@@ -47,12 +47,17 @@
 
                             <b>Password</b>  
                             <br>
-                        <input type="password" name="passwordSignInput" id="passwordSignInput" placeholder="Insert password" required="true" onkeypress="handleKeyPress(event)">
+                        <input type="password" name="passwordSignInput" id="passwordSignInput" placeholder="Insert password" required="true" >
                         <img id="visibleSignPassword" src ="../style/img/eye-slash-solid.png" onclick="showPassword()">
                         </img>
                         <br>
-                        
-                        <input type="submit" id="submitSignBtn" class="loginButton" >
+
+                        <b>Confirm password</b>  
+                            <br>
+                        <input type="password" name="confirmPasswordSignInput" id="confirmPasswordSignInput" placeholder="Insert password" required="true" onkeypress="handleKeyPress(event)">
+                        <br>
+
+                        <input type="submit" id="submitSignBtn" class="loginButton" onclick="handleSubmit(event)">
                         <button id="clearSignBtn" class="loginButton" onclick="resetField()">
                             Clear 
                         </button>
@@ -68,6 +73,7 @@
                             Log in
                             </a>
                         </p>
+
                     </fieldset>
                 </div>
             </FORM>
