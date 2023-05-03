@@ -10,6 +10,13 @@ function showPassword() {
   }
 
 function resetField() {
-    document.getElementById("mailInput").value = "";
-    document.getElementById("passwordInput").value = "";
+    document.getElementById("userLogInput").value = "";
+    document.getElementById("passwordLogInput").value = "";
+}
+
+function handleKeyPress(e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    document.getElementById("submitBtn").click();
+  }
 }

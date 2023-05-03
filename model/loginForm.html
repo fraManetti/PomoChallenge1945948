@@ -16,7 +16,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>    
     <link rel="stylesheet" href="../style/loginStyle/signupStyle.css" >
-    <script  src="../script/loginScript/loginScript.js"></script>
+    
     <script>
         $(function(){
           $("#mynavbar").load("./oldnavbar.html");
@@ -53,7 +53,7 @@
 
                             <b>Password</b>  
                             <br>
-                        <input type="password" name="passwordLogInput" id="passwordLogInput" placeholder="Insert password" required="true">
+                        <input type="password" name="passwordLogInput" id="passwordLogInput" placeholder="Insert password" required="true" onkeypress="handleKeyPress(event)">
                         <img id="visiblePassword" src ="../style/img/eye-slash-solid.png" onclick="showPassword()">
                         </img>
                         <br>
