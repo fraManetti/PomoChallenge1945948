@@ -30,7 +30,7 @@
     } 
 
     /*settaggio input number (box di input numero pomodori)*/
-    input[type='number']{
+    input[class='x']{
         width:35px;
         cursor:default;
         margin-left: 7px;
