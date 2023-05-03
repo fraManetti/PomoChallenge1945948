@@ -1,0 +1,124 @@
+.navbar {
+    background: rgba(255, 255, 255, 0.7);
+    position: fixed;
+    }
+
+
+.container {
+    margin-top: 66px;
+    height: 95vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
+    text-align: center;
+    width: 100%;
+    background-color: rgb(245, 244, 244);
+    z-index: 1;
+    position: absolute;
+  }
+
+#signupPanel {
+    z-index: 2;
+    position: relative;
+    background-color: white;
+    width: 400px;
+    padding: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.712);
+
+    
+}
+
+#submitSignForm {
+    text-align: center;
+    width: 100%;
+    flex-direction: row;
+}
+
+.imgContainer {
+    text-align: center;
+    justify-content: center;
+    width: 400px;
+}
+
+.imgAvatar {
+    border-radius: 100%;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    cursor: default;
+    box-shadow: 3px 3px 7px  rgba(0, 0, 0, 0.712);
+  }
+
+.loginButton {
+    color: white;
+    padding: 10px 10px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    box-shadow: 3px 3px 7px  rgba(0, 0, 0, 0.712);
+  }
+
+#clearSignBtn {
+    background-color: rgb(233, 44, 44);
+}
+
+#submitSignBtn {
+    background-color: #04AA6D;
+    margin-right: 10px;
+}
+
+.loginButton:hover {
+    opacity: 0.7;
+}
+
+input[name="mailInput"] {
+    margin-bottom: 7px;
+    margin-top: 5px;
+}
+
+.icon-mail {
+    background-image: url('../img/eye-solid.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-left: 25px;
+}
+
+#mailSignInput {
+    background-image: url('../img/user-solid.png');
+    background-position: 220px center;
+    background-repeat: no-repeat;
+    background-size: 15px 16px;
+    padding-left: 20px;
+    opacity: 0.8;
+}
+
+#passwordSignInput{
+    margin-left: 42px;
+    background-image: url('../img/lock-solid.png');
+    background-position: 220px center;
+    background-repeat: no-repeat;
+    background-size: 15px 16px;
+    padding-left: 20px;
+    opacity: 0.8;
+}
+
+
+input[type=text], input[type=password] {
+    width: 250px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+
+#visibleSignPassword {
+    margin-left: 12px;
+    width: 27px;
+    height: 22px;
+    cursor: pointer;
+}
+
+#rememberCheckbox {
+    
+}

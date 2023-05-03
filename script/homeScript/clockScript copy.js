@@ -1,8 +1,12 @@
-  //Variabili per le task:
+// versione con index
+//Variabili per le task:
   var taskOn = false;
   var taskList = [];
   var countCurrPom =0;
   var clock;
+  var countS;
+  var countB;
+  var countL;
 function resetClock() {
   clock.stop();
   pos = "Pomodoro";
@@ -14,10 +18,10 @@ function resetClock() {
 $(document).ready(function(){
 
   var countTimes = 0; 
-  var countS = 25;
+  countS = 25;
   $("#session").html(countS);
-  var countB = 5;
-  var countL = 15;
+  countB = 5;
+  countL = 15;
   $("#break").html(countB);
   $("#longBreak").html(countL);
   var pos = "Pomodoro";
@@ -73,6 +77,7 @@ $(document).ready(function(){
 
   
   $("#start").on("click", function(){
+    updateTaskTag();
     if(clock.running){
       clock.stop();
       countLama = clock.getTime();
@@ -89,10 +94,15 @@ $(document).ready(function(){
           pos = posLama;
           $("#stats").html(pos);
         }
-        count = countS;    
-        clock.start();    
-        $(this).text("PAUSE");
-      
+        if(!(taskOn && taskList.length == 0)){
+          count = countS;    
+          clock.start();    
+          $(this).text("PAUSE");
+        }
+        else{
+          alert("Non hai ancora inserito task!");
+          //clock.stop();
+        }
     }
   });
   
@@ -182,6 +192,7 @@ $(document).ready(function(){
     });
   
     $("#skip").on("click", function(){
+      updateTaskTag();
       if (pos == "Session"){
         if(taskOn)checkCurrentTask();
 
@@ -205,6 +216,7 @@ $(document).ready(function(){
       }
   });
   $("#clear").on("click", function(){
+    updateTaskTag();
     clock.stop();
     pos = "Pomodoro";
     $("#stats").html(pos);
@@ -214,6 +226,9 @@ $(document).ready(function(){
     $("#session").html("25");
     $("#longBreak").html("15");
     $("#break").html("5");
+    countB=5;
+    countL=15;
+    countS=25;
   });
 //da sistemare con il fatto che ora è nascosto!
   // $("#customCheckBoxx").on("click",function(){

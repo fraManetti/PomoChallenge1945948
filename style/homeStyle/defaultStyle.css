@@ -1,0 +1,76 @@
+
+.navbar {
+    background: rgba(255, 255, 255, 0.7);
+    position: fixed;
+    }
+
+
+.container {
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+    height: 100vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
+  
+  }
+
+
+  
+.center-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+  }
+
+  .center-box > * {
+    margin: 0 20px;
+  }
+
+  .box {
+    border-color: #bd0101;
+    }
+
+  .popup{
+    
+    width: 200px;
+	  height: 400px;
+	  background: #fefefe;
+
+	  padding: 10px 20px;
+	  position: relative;
+	  color: #333;
+  }
+
+  .overlay{
+    position: absolute; /* schermo intero*/
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1000px;
+    background: rgba(0,0,0,0.7); /* colore sfondo e opcità */
+    text-align: center;
+    display: none; /*cambiaremo in display: none*/
+    
+    z-index: 3;
+  }
+
+  #infoPop {
+    margin: 250px auto;
+  }
+
+  .close {
+    cursor: pointer;
+  }
+
+  #infoClose{
+	position: absolute;
+	top: -20px;
+	right: -20px;
+	color: #fff;
+}
+
+#hiddenCustom {
+    display: none;
+    padding-bottom: 2%;
+    
+    }

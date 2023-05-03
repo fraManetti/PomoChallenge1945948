@@ -1,9 +1,11 @@
+
+
 $(document).ready(function(){
     var countTimes = 0; 
-    var countS = 25;
+    countS = 25;
     $("#session").html(countS);
-    var countB = 5;
-    var countL = 15;
+    countB = 5;
+    countL = 15;
     $("#break").html(countB);
     $("#longBreak").html(countL);
     var pos = "Pomodoro";

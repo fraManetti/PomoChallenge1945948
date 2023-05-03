@@ -25,6 +25,7 @@ body {
    margin: 2em auto 2em;
    display: flex;
    justify-content: center;
+   z-index: -1;
  }
 
   .col-md-6 {

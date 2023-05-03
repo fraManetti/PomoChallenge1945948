@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="description" content="App metodo concentrazione pomodoro">
+    <title>Profile</title>
+    <link rel="stylesheet" href="../style/loginStyle/loginStyle.css" >
+    <script  src="../script/loginScript/loginScript.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div id="loginPanel">
+            <FORM method="post" id="submitForm" action="../server/logIn.php"> 
+                <div class="imgContainer">
+                    <INPUT type="IMAGE" class="imgAvatar" SRC="../style/img/pomo.png">
+                    </input>
+                </div>
+
+                <div class="infoPanel">
+                
+                    <fieldset name="infoField">
+                        <legend>  Submit information </legend>
+                            <b>Username</b>
+                            <br>
+                        <input type="text" name="userLogInput" id="userLogInput" placeholder=" Insert Username" required="true">
+                        <br>
+
+                            <b>Password</b>  
+                            <br>
+                        <input type="password" name="passwordLogInput" id="passwordLogInput" placeholder="Insert password" required="true">
+                        <img id="visiblePassword" src ="../style/img/eye-slash-solid.png" onclick="showPassword()">
+                        </img>
+                        <br>
+                        
+                        <input type="submit" id="submitBtn" class="loginButton" value="Log in">
+                        <button id="clearBtn" class="loginButton" onclick="resetField()">
+                            Clear 
+                        </button>
+                        
+                        <br>
+                        <label>
+                            <input type="checkbox" name="remember" id="rememberCheckbox"> 
+                            Remember me
+                        </label>
+                        <p>
+                            Don't have an account yet?
+                            <a href="./signupForm.html">
+                            Sign up
+                            </a>
+                        </p>
+                    </fieldset>
+                </div>
+            </FORM>
+        </div>
+    </div>
+</body>
+</html>
