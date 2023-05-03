@@ -92,7 +92,7 @@ input[name="mailInput"] {
     opacity: 0.8;
 }
 
-#passwordInput{
+#passwordLogInput{
     margin-left: 42px;
     background-image: url('../img/lock-solid.png');
     background-position: 220px center;
