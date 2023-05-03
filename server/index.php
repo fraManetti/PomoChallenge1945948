@@ -18,6 +18,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
     <script  src="../script/homeScript/clockScript.js"></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
+    <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
 
@@ -35,9 +36,12 @@
             user=postgres password=pomodoro") or die ('Connection error-impossibile connettersi al server' . pg_last_error());
         
 session_start(); 
+$arr =["cioa","ddd","sss","fff","ffg"];
     $query = "select keyhash,title,pomodori,note,donepomodori from task where task.username=$1";
     $res = pg_query_params ($db_conn,$query,array($_SESSION["username"]));
     while ($tuple=pg_fetch_array($res,null,PGSQL_ASSOC)){
+            
+            //echo  '<script> fillTask('. $tuple.');</script>';
             echo $tuple["title"];
             echo $tuple["pomodori"];
             echo $tuple["note"];
@@ -45,6 +49,7 @@ session_start();
         echo '<br>';
     }
 ?>
+
     <div id="mynavbar"></div>
     <div class="container">
       <div class="box">box1</div>
@@ -192,5 +197,10 @@ session_start();
 echo $_SESSION["username"];
 
     ?>
+    <script>
+    <?php 
+        echo fillTask($arr);
+    ?>
+</script>
 </body>
 </html>
