@@ -30,7 +30,7 @@
     <div class="container">
         <h1>REGISTRAZIONE: </h1>
         <div id="signupPanel">
-            <FORM method="post" id="submitSignForm" action="../server/signUp.php"> 
+            <FORM method="post" id="submitSignForm" action="../server/signUp.php" onsubmit="handleSubmit(event)"> 
                 <div class="imgContainer">
                     <INPUT type="IMAGE" class="imgAvatar" SRC="../style/img/pomo.png">
                     </input>
@@ -57,7 +57,7 @@
                         <input type="password" name="confirmPasswordSignInput" id="confirmPasswordSignInput" placeholder="Insert password" required="true" onkeypress="handleKeyPress(event)">
                         <br>
 
-                        <input type="submit" id="submitSignBtn" class="loginButton" onclick="handleSubmit(event)">
+                        <input type="submit" id="submitSignBtn" class="loginButton">
                         <button id="clearSignBtn" class="loginButton" onclick="resetField()">
                             Clear 
                         </button>
