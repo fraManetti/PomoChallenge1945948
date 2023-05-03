@@ -11,7 +11,7 @@ function resetClock() {
   clock.stop();
   pos = "Pomodoro";
   $("#stats").html(pos);
-  clock.setTime(0);
+  clock.setTime(countS*60);
   $('#start').text('START');
   countTimes=0;
   titleTimer(clock)
@@ -39,8 +39,6 @@ $(document).ready(function(){
     updateTaskTag(true,false);
     console.log(countCurrPom);
     if (taskList[0].pomodori == countCurrPom){
-      $('#endDing')[0].play();
-
     alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
       countCurrPom=0;
       index--;
@@ -57,8 +55,6 @@ $(document).ready(function(){
       countCurrPom++;
       updateTaskTag(true,false);
       if (taskList[0].pomodori == countCurrPom){
-        $('#endDing')[0].play();
-
       alert("Task Finita!");
         countCurrPom=0;
         index--;
@@ -71,7 +67,7 @@ $(document).ready(function(){
     return false;
   
 }
-     clock = $(".timer").FlipClock(0, {
+     clock = $(".timer").FlipClock(countS*60, {
       countdown: true,
       clockFace: 'MinuteCounter',
       autoStart: false,
@@ -227,7 +223,7 @@ $(document).ready(function(){
     clock.stop();
     pos = "Pomodoro";
     $("#stats").html(pos);
-    clock.setTime(0);
+    clock.setTime(countS *60);
     $('#start').text('START');
     countTimes=0;
     $("#session").html("25");

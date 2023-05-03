@@ -70,7 +70,7 @@ function deleteTask(e) {
         tasks[i].children[1].textContent=JSON.stringify(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1))-1)+")"; 
       }
   }
-  if(taskList.length==0){
+  if(taskList.length==0 && taskOn){
     resetClock();
     document.getElementById("customCheckbox").checked=false;
     alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
