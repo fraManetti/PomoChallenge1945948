@@ -1,7 +1,7 @@
   //Variabili per le task:
   var taskOn = false;
   var taskList = [];
-  var countCurrPom =0;
+  //var countCurrPom =0;
   var clock;
   var countS;
   var countB;
@@ -35,12 +35,11 @@ $(document).ready(function(){
   function checkCurrentTask() {
 
   if(taskList.length==1){
-    countCurrPom++;
+    taskList[0].donepomodori+=1;
     updateTaskTag(true,false);
-    console.log(countCurrPom);
-    if (taskList[0].pomodori == countCurrPom){
-    alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
-      countCurrPom=0;
+    if (taskList[0].pomodori ==  taskList[0].donepomodori){
+      alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
+      taskList[0].donepomodori=0;
       index--;
       removeTaskItem();
       updateTaskTag(false,false);
@@ -52,16 +51,16 @@ $(document).ready(function(){
       countTimes=tmp;
       return true;
 }}    if(taskList.length>0 && taskList.length!=1){
-      countCurrPom++;
-      updateTaskTag(true,false);
-      if (taskList[0].pomodori == countCurrPom){
-      alert("Task Finita!");
-        countCurrPom=0;
-        index--;
-        removeTaskItem();
-        updateTaskTag(false,false);
-        updateTaskButtons();
-        return true;
+        taskList[0].donepomodori+=1;
+        updateTaskTag(true,false);
+        if (taskList[0].pomodori ==taskList[0].donepomodori){
+          alert("Task Finita!");
+          taskList[0].donepomodori=0;
+          index--;
+          removeTaskItem();
+          updateTaskTag(false,false);
+          updateTaskButtons();
+          return true;
   }}  else 
     updateTaskTag(false,false);
     return false;
@@ -117,16 +116,13 @@ $(document).ready(function(){
       posLama = $("#stats").html();
       $(this).text("START");
     } else {
-        if (count != countS || clock.getTime()==0){
+        if (count != countS){
           clock.setTime(countS*60);
           countTimes++;
           pos="Session";
           $("#stats").html(pos)
          // console.log(countTimes);
-        } else {
-          pos = posLama;
-          $("#stats").html(pos);
-        }
+        } 
         if(!(taskOn && taskList.length == 0)){
           count = countS;    
           clock.start();    
