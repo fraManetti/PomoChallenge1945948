@@ -6,7 +6,7 @@
 
 .container {
     margin-top: 66px;
-    height: 95vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
+    height:fit-content; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
     text-align: center;
     width: 100%;
     background-color: rgb(245, 244, 244);
@@ -22,6 +22,7 @@
     padding: 5px;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 60px;
     margin-top: 60px;
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.712);
 
@@ -62,10 +63,17 @@
     background-color: rgb(233, 44, 44);
 }
 
-#submitSignBtn {
+#submitSignBtn{
     background-color: #04AA6D;
     margin-right: 10px;
 }
+
+input[type="submit"]:disabled {
+    background: #414040;
+    cursor: pointer;
+  }
+
+
 
 .loginButton:hover {
     opacity: 0.7;
@@ -83,7 +91,7 @@ input[name="mailInput"] {
   padding-left: 25px;
 }
 
-#mailSignInput {
+#userSignInput {
     background-image: url('../img/user-solid.png');
     background-position: 220px center;
     background-repeat: no-repeat;
@@ -102,6 +110,15 @@ input[name="mailInput"] {
     opacity: 0.8;
 }
 
+#confirmPasswordSignInput{
+    background-image: url('../img/lock-solid.png');
+    background-position: 220px center;
+    background-repeat: no-repeat;
+    background-size: 15px 16px;
+    padding-left: 20px;
+    opacity: 0.8;
+}
+
 
 input[type=text], input[type=password] {
     width: 250px;
@@ -110,6 +127,7 @@ input[type=text], input[type=password] {
     display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
+    cursor: text;
   }
 
 #visibleSignPassword {
@@ -117,6 +135,7 @@ input[type=text], input[type=password] {
     width: 27px;
     height: 22px;
     cursor: pointer;
+    
 }
 
 #rememberCheckbox {

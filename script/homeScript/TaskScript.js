@@ -316,10 +316,10 @@ function addTask(){
       document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
           <div  class="task" data-value="${key}">
             
-              <button style='font-size:24px' class="delete" onClick="deleteTask(event);">
-                <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
+              <!-- <button style='font-size:24px' class="delete"  id ="deleteBtn" >  -->
+                <img class = "taskImg" id ="deleteImg" src = "../style/img/trash-can-solid.png"   onClick="deleteTask(event);">
                 </img>
-              </button>   
+              <!-- </button>   -->
               <span class="indexTasks">${index})</span>
               <input type="text" readOnly id="taskname"  value="${document.getElementById("taskFieldInput").value}" onkeypress="handleKeyPress(event, 'options')" maxlength="25">
 

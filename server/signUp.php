@@ -21,6 +21,7 @@
                 echo "<h1> cambia user</h1>";
             }
             else{
+
                // $psw = password_hash( $_POST['passwordSignInput'],PASSWORD_BCRYPT,$options=['max_length'=>14]);
                 $psw =  $_POST['passwordSignInput'];
                 $psw= preg_replace('/\s/','',$psw);
