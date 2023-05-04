@@ -31,24 +31,12 @@
 
 </head>
 <body>
-<?php 
-            $db_conn = pg_connect("host=localhost port=5432 dbname=pomochallenge 
+<?php $db_conn = pg_connect("host=localhost port=5432 dbname=pomochallenge 
             user=postgres password=pomodoro") or die ('Connection error-impossibile connettersi al server' . pg_last_error());
         
 session_start(); 
-$arr =["cioa","ddd","sss","fff","ffg"];
-    $query = "select keyhash,title,pomodori,note,donepomodori from task where task.username=$1";
-    $res = pg_query_params ($db_conn,$query,array($_SESSION["username"]));
-    while ($tuple=pg_fetch_array($res,null,PGSQL_ASSOC)){
-            
-            //echo  '<script> fillTask('. $tuple.');</script>';
-            echo $tuple["title"];
-            echo $tuple["pomodori"];
-            echo $tuple["note"];
-            echo $tuple["donepomodori"];
-        echo '<br>';
-    }
-?>
+$query = "SELECT keyhash, title, pomodori, note, donepomodori FROM task WHERE task.username = $1";
+$res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
 
     <div id="mynavbar"></div>
     <div class="container">
@@ -193,14 +181,27 @@ $arr =["cioa","ddd","sss","fff","ffg"];
           </div>
         
         </div>
-      </div><?php 
-echo $_SESSION["username"];
+      </div>
 
-    ?>
-    <script>
-    <?php 
-        echo fillTask($arr);
-    ?>
-</script>
+<?php 
+            
+
+while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
+    // Converte la tupla in una stringa JSON
+    $tuple_json = json_encode($tuple);
+
+    // Passa la tupla alla funzione JavaScript fillTask
+    echo '<script>fillTaskList(' . $tuple_json . ')</script>';
+
+    // Esempio di output della tupla
+    echo $tuple["title"];
+    echo $tuple["pomodori"];
+    echo $tuple["note"];
+    echo $tuple["donepomodori"];
+    echo '<br>';
+}
+echo '<script> fillTaskBox(); </script>'
+?>
+});
 </body>
 </html>
