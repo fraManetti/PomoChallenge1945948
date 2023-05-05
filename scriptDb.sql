@@ -10,7 +10,9 @@ create table task (
 	pomodori int not null,
 	note varchar(115),
 	donepomodori int not null,
-	primary key (username,keyhash)
+	primary key (username,keyhash),
+	FOREIGN KEY (username) REFERENCES utente(username)
+
 );
 
 create table endedtask (
@@ -20,10 +22,14 @@ create table endedtask (
 	pomodori int not null,
 	note varchar(115),
 	data varchar(10) not null,
-	primary key (username,keyhash)
+	primary key (username,keyhash),
+	FOREIGN KEY (username) REFERENCES utente(username)
+
 );
 
 -----------------------
 select * from utente;
 select * from task
 select * from endedtask
+
+DELETE FROM task where true
