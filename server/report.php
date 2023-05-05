@@ -13,8 +13,6 @@
     <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/reportStyle/reportStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/tasksStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
@@ -48,16 +46,19 @@
     
     <div class="navbar" id="mynavbar"></div>
     <div class="container">
-        <div id = "selectDatePanel">
-        </div>
         <div id = "reportPanel">
+            <div id = "selectDatePanel">
+                <button id ="dailyButton" onclick="loadDaily()">
+                    Attività giornaliere
+                </button>
+            </div>
+            <br>
+            <div id = "tasksPanel">
+            </div>
         </div>
-
-
     </div>
     
 <?php 
-print_r($res);
     while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
 
      $tuple_json = json_encode($tuple);
