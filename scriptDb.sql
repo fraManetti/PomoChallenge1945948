@@ -23,6 +23,6 @@ create table endedtask (
 );
 
 -----------------------
-select * from utente
+select * from utente;
 select * from task
 select * from endedtask
