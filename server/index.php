@@ -203,6 +203,6 @@ while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
 }
 echo '<script> fillTaskBox(); </script>'
 ?>
-});
+
 </body>
 </html>
