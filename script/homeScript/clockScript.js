@@ -6,7 +6,14 @@
   var countS;
   var countB;
   var countL;
-  var countTimes = 0; 
+  var countTimes = 0;
+  var countIncS = 0;
+  var countDecS = 0;
+  var countIncB = 0;
+  var countDecB = 0;
+  var countIncL = 0;
+  var countDecL = 0;
+  var pos = "Pomodoro";
 function resetClock() {
   clock.stop();
   pos = "Pomodoro";
@@ -14,7 +21,7 @@ function resetClock() {
   clock.setTime(countS*60);
   $('#start').text('START');
   countTimes=0;
-  titleTimer(clock)
+  document.title = "PomoChallenge";
 }
 $(document).ready(function(){
 
@@ -25,7 +32,7 @@ $(document).ready(function(){
   countL = 15;
   $("#break").html(countB);
   $("#longBreak").html(countL);
-  var pos = "Pomodoro";
+  //var pos = "Pomodoro";
   var countLama;
   var posLama;
   var count;
@@ -115,9 +122,11 @@ $(document).ready(function(){
       countLama = clock.getTime();
       posLama = $("#stats").html();
       $(this).text("START");
+      document.title = "PomoChallenge";
     } else {
-        if (count != countS){
-          clock.setTime(countS*60);
+        if (count != countS || clock.getTime()==0){
+          if(clock.getTime()< countS*60 || clock.getTime()>countS*60 && pos=="Session") clock.setTime(clock.getTime().time);
+          else clock.setTime(countS*60);
           countTimes++;
           pos="Session";
           $("#stats").html(pos)
@@ -140,8 +149,16 @@ $(document).ready(function(){
       if ($("#session").html() > 0){
         countS = parseInt($("#session").html());
         countS+=1;
+        console.log(countS);
         $("#session").html(countS);
-        //clock.setTime(countS*60);
+        //console.log(clock.getTime().time);
+        if(pos == "Session"){
+          console.log("ci sei!");
+          if(countIncS!=0) clock.setTime((clock.getTime().time)+61);
+          else clock.setTime((clock.getTime().time)+60);
+          countIncS++;
+        }
+        if(pos == "Pomodoro") clock.setTime(countS*60);
       }
     });
     
@@ -150,7 +167,12 @@ $(document).ready(function(){
         countS = parseInt($("#session").html());
         countS-=1;
         $("#session").html(countS);
-        //clock.setTime(countS*60);
+        if(pos== "Session"){
+          if(countDecS!=0) clock.setTime((clock.getTime().time)-59);
+          else clock.setTime((clock.getTime().time)-60);
+          countDecS++;
+        }
+        if(pos == "Pomodoro") clock.setTime(countS*60);
       }
     });
     //BREAK
@@ -159,6 +181,11 @@ $(document).ready(function(){
         countB = parseInt($("#break").html());
         countB+=1;
         $("#break").html(countB);
+        if(pos == "Short Break"){
+          if(countIncB!=0) clock.setTime((clock.getTime().time)+61);
+          else clock.setTime((clock.getTime().time)+60);
+          countIncB++;
+        }
       }    
     });
     $("#breakDec").on("click", function(){
@@ -166,6 +193,11 @@ $(document).ready(function(){
         countB = parseInt($("#break").html());
         countB-=1;
         $("#break").html(countB);
+        if(pos == "Short Break"){
+          if(countDecB!=0) clock.setTime((clock.getTime().time)-59);
+          else clock.setTime((clock.getTime().time)-60);
+          countDecB++;
+        }
       }
     });
      // LONG BREAK
@@ -174,6 +206,11 @@ $(document).ready(function(){
         countL = parseInt($("#longBreak").html());
         countL+=1;
         $("#longBreak").html(countL);
+        if(pos == "Long Break"){
+          if(countIncL!=0) clock.setTime((clock.getTime().time)+61);
+          else clock.setTime((clock.getTime().time)+60);
+          countIncL++;
+        }
       }    
     });
     $("#longDec").on("click", function(){
@@ -181,6 +218,11 @@ $(document).ready(function(){
         countL = parseInt($("#longBreak").html());
         countL-=1;
         $("#longBreak").html(countL);
+        if(pos == "Long Break"){
+          if(countDecL!=0) clock.setTime((clock.getTime().time)-59);
+          else clock.setTime((clock.getTime().time)-60);
+          countDecL++;
+        }
       }
     });
   
@@ -215,20 +257,25 @@ $(document).ready(function(){
       }
   });
   $("#clear").on("click", function(){
+    console.log(clock.getTime().time);
+    countB=5;
+    countL=15;
+    countS=25;
+    console.log(countS);
     updateTaskTag(false,false);
     clock.stop();
     pos = "Pomodoro";
     $("#stats").html(pos);
-    clock.setTime(countS *60);
+    clock.setTime(countS*60);
     $('#start').text('START');
+    document.title="PomoChallenge";
     countTimes=0;
     $("#session").html("25");
     $("#longBreak").html("15");
     $("#break").html("5");
-    countB=5;
-    countL=15;
-    countS=25;
-    titleTimer(clock)
+    
+    //titleTimer(clock)
+    
   });
 
 })

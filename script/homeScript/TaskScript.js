@@ -457,4 +457,15 @@ function deleteEndedTask(){
   updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
 }
 
+/*se ci dovessero servire per le vignette a comparsa*/
+function mostraVignetta(){
+  let vignetta = document.querySelector(".vignetta");
+  vignetta.style.display = "block";
+}
+
+function nascondiVignetta() {
+  let vignetta = document.querySelector(".vignetta");
+  vignetta.style.display = "none";
+}
+
 
