@@ -1,24 +1,12 @@
 MIN_LEN = 8;
-MAX_ULEN = 40;
+MAX_LEN = 40;
 MAX_PLEN = 32;
 
-var specialC = [
-  "`" , "!" , "?" , "$" , "?" , "%" , "^" ,  "&" , "*" , "(" , ")" , "_" , "-" , "+" , "=" , "{" , "[" ,
-  "}" , "]" , ":" , ";" , "@" , "'" , "~" , "#" , "|" , "\\" , "<" , "," , ">" , "." , "?" ,  "/"];
+const uppercaseRegex = new RegExp('(?=.*[A-Z]).+');
+const lowercaseRegex = new RegExp('(?=.*[a-z]).+');
+const numRegex = new RegExp('.*[0-9]+.*'); 
+const specialRegex = new RegExp('(?=.*[@#$%^&+=]).+');
 
-var numbers = [
-  0,1,2,3,4,5,6,7,8,9,0
-];
-
-var lowercase = [
-  "a" , "b" , "c" , "d" , "e" , "f" ,  "g" , "h" , "i" , "j" , "k" , "l" , "m" , "n" ,
-   "o" , "p" , "q" , "r" , "s" , "t" , "u" , "v" , "w" , "x" , "y" , "z"
-];
-
-var uppercase = [
-  "A" , "B" , "C" , "D" , "E" , "F" , "G" ,  "H" , "I" , "J" , "K" , "L" , "M" , "N" ,
-   "O" , "P" , "Q" , "R" , "S" , "T" , "U" , "V" , "W" , "X" , "Y" , "Z"
-];
 
 function showPassword() {
     var x = document.getElementById("passwordSignInput");
@@ -51,23 +39,25 @@ function handleSubmit(e) {
   var conf = document.getElementById("confirmPasswordSignInput").value;
   var username = document.getElementById("userSignInput").value;
 
-  if(pass == ""  || conf == "" || username == "") {
+  /* if(pass == ""  || conf == "" || username == "") {
     alert("Inserire dati nei campi");
     e.preventDefault;
-  }
-  if(checkPass() && checkUsername()) {
+  } */
+   if(checkPass() && checkUsername()) {
     console.log("connessione");
   }
   else {
     e.preventDefault();
-  }
+  } 
+
+  
 }
 
 
 function checkPass() {
   var pass = document.getElementById("passwordSignInput");
   var conf = document.getElementById("confirmPasswordSignInput");
-  if(pass.value != conf.value) {
+   if(pass.value != conf.value) {
     alert("Le password non coincidono");
     return false
   }
@@ -79,23 +69,25 @@ function checkPass() {
     alert("La password deve essere massimo di " + MAX_LEN + " caratteri");
     return false;
   }
-  else if(!numIncludes(pass.value)) {
-    alert("La password deve includere almeno un numero");
-    return false
-  }
-  else if(!specialChar(pass.value)) {
-    alert("La password deve contenetre almeno un carattere speciale");
-    return false;
-  }
-  else if(!lowerChar(pass.value)) {
+  else if(!lowercaseRegex.test(pass.value)) {
     alert("La password deve contenetre almeno una lettera minuscola");
     return false;
   }
-  else if(!upperChar(pass.value)) {
+  else if(!uppercaseRegex.test(pass.value)) {
     alert("La password deve contenetre almeno una lettera maiuscola");
     return false;
   }
-  else return true;
+  else if(!numRegex.test(pass.value)) {
+    alert("La password deve includere almeno un numero");
+    return false;
+  }
+  else if(!specialRegex.test(pass.value)) {
+    alert("La password deve contenetre almeno un carattere speciale");
+    return false;
+  }
+  else {
+    return true;
+  }
 }
 
 function checkUsername() {
@@ -104,50 +96,14 @@ function checkUsername() {
     alert("L'username deve contenere almeno " + MIN_LEN + " caratteri");
     return false  
   }
-  else if(user.value.length > MAX_ULEN) {
-    alert("L'username deve contenere almeno " + MIN_LEN + " caratteri");
+  else if(user.value.length > MAX_LEN) {
+    alert("L'username deve contenere al massimo " + MAX_LEN + " caratteri");
     return false 
   }
-  else if(specialChar(user.value)) {
+  else if(specialRegex.test(user.value)) {
     alert("L'username non può contenere caratteri speciali");
     return false;
   }
   else return true;
-}
-
-function numIncludes(value) {
-  for (let i = 0; i < numbers.length; i++) {
-    const element = numbers[i];
-    if(value.includes(element))
-      return true;
-  }
-  return false;
-}
-
-function specialChar(value) {
-  for (let i = 0; i < specialC.length; i++) {
-    const element = specialC[i];
-    if(value.includes(element))
-      return true;
-  }
-  return false;
-}
-
-function lowerChar(value) {
-  for (let i = 0; i < lowercase.length; i++) {
-    const element = lowercase[i];
-    if(value.includes(element))
-      return true;
-  }
-  return false;
-}
-
-function upperChar(value) {
-  for (let i = 0; i < uppercase.length; i++) {
-    const element = uppercase[i];
-    if(value.includes(element))
-      return true;
-  }
-  return false;
 }
 
