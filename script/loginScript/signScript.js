@@ -1,4 +1,5 @@
-MIN_LEN = 8;
+MIN_PLEN = 8;
+MIN_ULEN = 3;
 MAX_LEN = 40;
 MAX_PLEN = 32;
 
@@ -61,8 +62,8 @@ function checkPass() {
     alert("Le password non coincidono");
     return false
   }
-  else if(pass.value.length < MIN_LEN) {
-    alert("La password deve contenere almeno " + MIN_LEN + " caratteri");
+  else if(pass.value.length < MIN_PLEN) {
+    alert("La password deve contenere almeno " + MIN_PLEN + " caratteri");
     return false;
   }
   else if(pass.value.length > MAX_PLEN) {
@@ -92,8 +93,8 @@ function checkPass() {
 
 function checkUsername() {
   var user = document.getElementById("userSignInput");
-  if(user.value.length < MIN_LEN) {
-    alert("L'username deve contenere almeno " + MIN_LEN + " caratteri");
+  if(user.value.length < MIN_ULEN) {
+    alert("L'username deve contenere almeno " + MIN_ULEN + " caratteri");
     return false  
   }
   else if(user.value.length > MAX_LEN) {
