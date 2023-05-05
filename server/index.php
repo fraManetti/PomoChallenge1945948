@@ -18,6 +18,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
     <script  src="../script/homeScript/clockScript.js"></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
+    <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
 
@@ -30,21 +31,13 @@
 
 </head>
 <body>
-<?php 
-            $db_conn = pg_connect("host=localhost port=5432 dbname=pomochallenge 
+<?php $db_conn = pg_connect("host=localhost port=5432 dbname=pomochallenge 
             user=postgres password=pomodoro") or die ('Connection error-impossibile connettersi al server' . pg_last_error());
         
 session_start(); 
-    $query = "select keyhash,title,pomodori,note,donepomodori from task where task.username=$1";
-    $res = pg_query_params ($db_conn,$query,array($_SESSION["username"]));
-    while ($tuple=pg_fetch_array($res,null,PGSQL_ASSOC)){
-            echo $tuple["title"];
-            echo $tuple["pomodori"];
-            echo $tuple["note"];
-            echo $tuple["donepomodori"];
-        echo '<br>';
-    }
-?>
+$query = "SELECT keyhash, title, pomodori, note, donepomodori FROM task WHERE task.username = $1";
+$res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
+
     <div id="mynavbar"></div>
     <div class="container">
       <div class="box">box1</div>
@@ -188,9 +181,27 @@ session_start();
           </div>
         
         </div>
-      </div><?php 
-echo $_SESSION["username"];
+      </div>
 
-    ?>
+<?php 
+            
+
+while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
+    // Converte la tupla in una stringa JSON
+    $tuple_json = json_encode($tuple);
+
+    // Passa la tupla alla funzione JavaScript fillTask
+    echo '<script>fillTaskList(' . $tuple_json . ')</script>';
+
+    // Esempio di output della tupla
+    echo $tuple["title"];
+    echo $tuple["pomodori"];
+    echo $tuple["note"];
+    echo $tuple["donepomodori"];
+    echo '<br>';
+}
+echo '<script> fillTaskBox(); </script>'
+?>
+});
 </body>
 </html>
