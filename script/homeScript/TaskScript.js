@@ -11,6 +11,7 @@ var planning = false;
 var checkedCustom = false;
 var anyTaskOpen=false;
 var delEnded=false;
+
 //#################################################################
 //##########             FUNZIONI AUSILIARIE:        ##############
 //#################################################################
@@ -59,6 +60,9 @@ function deleteTask(e) {
   var deletedIndex;
   for (var i=0; i<taskList.length;i++){
     if (taskList[i].key == key){
+      var task =taskList[i];
+      task.index=i;
+      updateServer(task,"DEL");
       taskList.splice(i,1);
       deletedIndex=i;
       index--;
@@ -131,14 +135,21 @@ function updateTaskBox (taskItems,  cond){
 
 //Aggiorno la lista delle task con le modifiche :
 function updateTaskMap(newTitle, newPomos,newNote) {
+  var task=[];
+  task.key=currentKey;
+  task.title = newTitle;
+  task.pomodori=newPomos;
+  task.note= newNote;
   taskList.forEach(function(tuple) {
     if (tuple.key == currentKey){
         tuple.title = newTitle;
         tuple.pomodori = newPomos;
         tuple.note = newNote;
+        task.donepomodori = tuple.donepomodori;
       }
     }
   )
+  updateServer(task,"UP");
 }
 
 //Aggiorno orario stimato per la fine:
@@ -312,7 +323,8 @@ function addTask(){
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask); 
     updateTaskButtons();
-
+    newTask.index=index;
+    updateServer(newTask,"ADD");
       document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
           <div  class="task" data-value="${key}">
             
@@ -469,3 +481,18 @@ function nascondiVignetta() {
 }
 
 
+function updateServer(newTask,type) {
+  $.ajax({
+    url: "../server/updateTaskServer.php",
+    type: "POST",
+    data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index},
+    success: function(result) {
+        // Aggiornamento eseguito con successo
+        console.log(result);
+    },
+    error: function(xhr, status, error) {
+        // Errore nell'aggiornamento
+        console.error(error);
+    }
+});
+}

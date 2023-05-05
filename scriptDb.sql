@@ -10,6 +10,7 @@ create table task (
 	pomodori int not null,
 	note varchar(115),
 	donepomodori int not null,
+	ind int not null,
 	primary key (username,keyhash),
 	FOREIGN KEY (username) REFERENCES utente(username)
 
@@ -33,3 +34,4 @@ select * from task
 select * from endedtask
 
 DELETE FROM task where true
+INSERT INTO task values ('luca',12345,'tds',3,'prova1',1)

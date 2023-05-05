@@ -149,11 +149,11 @@ $(document).ready(function(){
       if ($("#session").html() > 0){
         countS = parseInt($("#session").html());
         countS+=1;
-        console.log(countS);
+        //console.log(countS);
         $("#session").html(countS);
         //console.log(clock.getTime().time);
         if(pos == "Session"){
-          console.log("ci sei!");
+          //console.log("ci sei!");
           if(countIncS!=0) clock.setTime((clock.getTime().time)+61);
           else clock.setTime((clock.getTime().time)+60);
           countIncS++;

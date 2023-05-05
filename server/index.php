@@ -1,3 +1,7 @@
+<?php
+  include( 'db_conn.php');  
+  session_start(); 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,11 +35,8 @@
 
 </head>
 <body>
-<?php $db_conn = pg_connect("host=localhost port=5432 dbname=pomochallenge 
-            user=postgres password=pomodoro") or die ('Connection error-impossibile connettersi al server' . pg_last_error());
-        
-session_start(); 
-$query = "SELECT keyhash, title, pomodori, note, donepomodori FROM task WHERE task.username = $1";
+<?php         
+$query = "SELECT keyhash, title, pomodori, note, donepomodori FROM task WHERE task.username = $1 ORDER BY ind";
 $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
 
     <div id="mynavbar"></div>
