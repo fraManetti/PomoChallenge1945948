@@ -31,7 +31,7 @@
                 $res = pg_query_params($db_conn, $query, array($user,$psw));
                 if ($res){
                      echo '<script> alert ("reg riuscita")</script>';
-                    header ("Location: ./logIn.php");}
+                    header ("Location: ../model/loginForm.html");}
                 else
                     echo "<h1>reg fallita</h1>";
             }
