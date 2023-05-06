@@ -349,7 +349,7 @@ function addTask(){
               <!-- </button>   -->
               <span class="indexTasks">${index})</span>
               <input type="text" readOnly id="taskname"  value="${document.getElementById("taskFieldInput").value}" onkeypress="handleKeyPress(event, 'options')" maxlength="25">
-
+              
 
               <input type="number" value="" class="x" readonly  min="1">
               

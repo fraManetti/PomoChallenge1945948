@@ -22,7 +22,7 @@ create table endedtask (
 	title varchar(25) not null,
 	pomodori int not null,
 	note varchar(115),
-	data varchar(10) not null,
+	dat varchar(10) not null,
 	primary key (username,keyhash),
 	FOREIGN KEY (username) REFERENCES utente(username)
 
