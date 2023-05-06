@@ -91,6 +91,13 @@ function deleteTask(e) {
 //Funzione per eliminare la task da lista e marcarca come completata
 function removeTaskItem() {
   var key = taskList[0].key;
+  var task = taskList[0];
+  task.index=1;
+  var dat = new Date();
+  var day = dat.getDay()<10?dat.getDay():"0"+JSON.stringify(dat.getDay());
+  task.dat=day+"-"+dat.getMonth()+"-"+dat.getFullYear() ;
+  console.log(task.dat)
+  updateServer(task,"FYN");
   taskList.shift();
   var tasks= document.getElementsByClassName("task");
   for (var i=0; i<tasks.length;i++){
@@ -186,11 +193,11 @@ function updateTaskTag(isRunning,isEnded){
   if (isRunning){  
     var nPomo=taskList[0].pomodori;
     if(!isEnded)
-      textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
+      textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+ JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
     else
-      textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
+      textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+ JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
     var time=0;
-    //console.log(textToAppend);
+    console.log(taskList[0].donepomodori);
   for ( i = pomoCount-taskList[0].donepomodori; i>0;i--){
     if(i%4 ==0)
       time+=countL;
@@ -455,6 +462,7 @@ function addTask(){
   }
 function deleteAllTask() {
   index=1;
+  updateServer(taskList[0],"ALL_DEL");
   taskList=[];
   $('.task').remove();
   updateTaskButtons();
@@ -485,7 +493,7 @@ function updateServer(newTask,type) {
   $.ajax({
     url: "../server/updateTaskServer.php",
     type: "POST",
-    data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index},
+    data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat},
     success: function(result) {
         // Aggiornamento eseguito con successo
         console.log(result);

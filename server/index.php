@@ -195,11 +195,7 @@ while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
     echo '<script>fillTaskList(' . $tuple_json . ')</script>';
 
     // Esempio di output della tupla
-    echo $tuple["title"];
-    echo $tuple["pomodori"];
-    echo $tuple["note"];
-    echo $tuple["donepomodori"];
-    echo '<br>';
+
 }
 echo '<script> fillTaskBox(); </script>'
 ?>

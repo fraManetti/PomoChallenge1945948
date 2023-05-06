@@ -13,7 +13,6 @@
       $donepomodori = $_POST["donepomodori"];
       $ind = $_POST["ind"];
       $type = $_POST['type'];
-    echo $type;
       // Esegui l'aggiornamento della riga del database
       //$sql = "insert into task values ($1, $2,$3,$4,$5)";
       //$sql = "UPDATE task SET title='$title', pomodori='$pomodori', note='$note',  WHERE keyhash=$key AND username='{$_SESSION['username']}'";
@@ -26,10 +25,21 @@
                 $query = "update  task set title='{$title}', pomodori={$pomodori}, note='{$note}', donepomodori={$donepomodori}  where keyhash='{$key}' and username='{$username}'";
             break;
         case 'DEL':
-            $query = "delete from task where keyhash='{$key}' and username='$username'"; 
+            $query = "delete from task where keyhash='{$key}' and username='{$username}'"; 
             $res = pg_query($db_conn,$query);
-            $query = "update task set ind-1 where ind>{$ind}";
+            $query = "update task set ind=ind-1 where ind>{$ind} and username='{$username}'";
             break;
+        case 'ALL_DEL':
+          $query="delete from task where username='{$username}'";
+          break;
+        case 'FYN':
+          $dat  =$_POST['dat'];
+          $query = "delete from task where keyhash='{$key}' and username='{$username}'"; 
+          $res = pg_query($db_conn,$query);
+          $query = "update task set ind=ind-1 where ind>{$ind} and username='{$username}'";
+          $res = pg_query($db_conn,$query);
+          $query = "insert into endedtask values ('{$username}','{$key}','{$title}',{$pomodori},'{$note}','{$dat}')";
+          break;
         default:
             break;
       } 
