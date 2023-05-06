@@ -94,8 +94,16 @@ function removeTaskItem() {
   var task = taskList[0];
   task.index=1;
   var dat = new Date();
-  var day = dat.getDay()<10?dat.getDay():"0"+JSON.stringify(dat.getDay());
-  task.dat=day+"-"+dat.getMonth()+"-"+dat.getFullYear() ;
+  
+  var day = JSON.parse(dat.getDay());
+  var month = JSON.parse(dat.getMonth());
+  var year = JSON.parse(dat.getFullYear());
+  if (day<10)
+    day = "0"+day;
+  if (month<10)
+    month = "0"+month;
+  
+  task.dat=day+"-"+month+"-"+year;
   console.log(task.dat)
   updateServer(task,"FYN");
   taskList.shift();
