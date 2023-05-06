@@ -1,7 +1,5 @@
 
 function downloadEnded(tuple) {
-    console.log(tuple.title); // Output: Mario
-    
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task">
         
@@ -42,18 +40,27 @@ function endedOption(e) {
 }
 
 
-function loadDaily() {
+function load(s) {
+    var url;
+    if(s == 'daily') url = "dailyLoad.php";
+    else if(s == 'weekly') url = "weeklyLoad.php";
+    else if(s == 'all') url = "allLoad.php";
+    document.getElementById("tasksPanel").innerHTML = '';
     var httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
     httpRequest.onreadystatechange = function() {
-        if (httpRequest.readyState === XMLHttpRequest.DONE) {
-            if (httpRequest.status === 200) {
-                var newData = JSON.parse(httpRequest.responseText);
-                downloadEnded(newData);
-            } else {
-                console.error('Errore durante la richiesta dei dati');
-            }
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        var response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          console.log(response.error);
+        } else {
+            console.log(response);
+            response.forEach(function(tuple) {
+            downloadEnded(tuple);
+          });
         }
+      }
     };
-    httpRequest.open('GET', 'dailyLoad.php');
     httpRequest.send();
-}
+  }

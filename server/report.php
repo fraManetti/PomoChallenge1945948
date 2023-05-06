@@ -37,7 +37,9 @@
             
     session_start(); 
     $cookie = $_SESSION["username"]; 
-    $query = "select keyhash, title, pomodori, note, dat from endedtask where endedtask.username = '{$cookie}'";
+    $data_corrente = date('d-m-Y');
+    //$data_corrente = '27-08-2004';
+    $query = "select keyhash, title, pomodori, note, dat from endedtask where endedtask.username = '{$cookie}' and endedtask.dat = '{$data_corrente}'";
     $res = pg_query($db_conn, $query);
     if (pg_num_rows($res) == 0) {
         echo '<h1>Nessun risultato trovato</h1>';}
@@ -48,8 +50,14 @@
     <div class="container">
         <div id = "reportPanel">
             <div id = "selectDatePanel">
-                <button id ="dailyButton" onclick="loadDaily()">
+                <button id ="dailyButton" onclick="load('daily')">
                     Attività giornaliere
+                </button>
+                <button id ="weeklyButton" onclick="load('weekly')">
+                    Attività settimanali
+                </button>
+                <button id ="allButton" onclick="load('all')">
+                    Tutte le attività
                 </button>
             </div>
             <br>
@@ -59,8 +67,8 @@
     </div>
     
 <?php 
+    
     while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
-
      $tuple_json = json_encode($tuple);
     echo '<script> 
     downloadEnded(' . $tuple_json . ')
