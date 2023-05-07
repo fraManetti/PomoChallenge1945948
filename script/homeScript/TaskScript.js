@@ -74,7 +74,6 @@ function deleteTask(e) {
     resetClock();
     document.getElementById("customCheckbox").checked=false;
     alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
-      countCurrPom=0;
       }
   updateTaskTag(false,false);
   updateTaskButtons();
@@ -176,12 +175,12 @@ function updateTaskTag(isRunning,isEnded){
   if (isRunning){  
     var nPomo=taskList[0].pomodori;
     if(!isEnded)
-      textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
+      textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
     else
-      textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
+      textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
     var time=0;
     //console.log(textToAppend);
-  for ( i = pomoCount-countCurrPom; i>0;i--){
+  for ( i = pomoCount-taskList[0].donepomodori; i>0;i--){
     if(i%4 ==0)
       time+=countL;
     else
@@ -308,7 +307,7 @@ function addTask(){
     var title=$('#taskFieldInput').val();
     var key =hashCode(title+JSON.stringify(number)+JSON.stringify(Math.random(1000000000)));
     var note = document.getElementById("taskNote").value;
-    var newTask = { key:key, title: title, pomodori: number,note: note };
+    var newTask = { key:key, title: title, pomodori: number,note: note,donepomodori: 0 };
 
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask); 
@@ -322,7 +321,7 @@ function addTask(){
                 </img>
               </button>   
               <span class="indexTasks">${index})</span>
-              <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}" onkeypress="handleKeyPress(event, 'options')">
+              <input type="text" readOnly id="taskname"  value="${document.getElementById("taskFieldInput").value}" onkeypress="handleKeyPress(event, 'options')" maxlength="25">
 
 
               <input type="number" value="" class="x" readonly  min="1">
@@ -332,7 +331,7 @@ function addTask(){
                   </img>
               </button>
               <div class="hiddenOption" display = none>
-                <textarea name="taskNote" id="hiddenNote" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
+                <textarea name="taskNote" id="hiddenNote" cols="40" rows="3" placeholder="updateNote" maxlength="115">${document.getElementById("taskNote").value}</textarea>
               </div>
           </div>
       `)

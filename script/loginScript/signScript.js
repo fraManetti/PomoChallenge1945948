@@ -13,3 +13,10 @@ function resetField() {
     document.getElementById("userSignInput").value = "";
     document.getElementById("passwordSignInput").value = "";
 }
+
+function handleKeyPress(e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    document.getElementById("submitSignBtn").click();
+  }
+}

@@ -18,19 +18,38 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
     <script  src="../script/homeScript/clockScript.js"></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
+    <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
 
     <script>
         $(function(){
-          $("#mynavbar").load("./oldnavbar.html");
+          $("#mynavbar").load("../model/newNavbar.html");
         });
 
     </script>
 
 </head>
 <body>
-    
+<?php 
+            $db_conn = pg_connect("host=localhost port=5432 dbname=pomochallenge 
+            user=postgres password=pomodoro") or die ('Connection error-impossibile connettersi al server' . pg_last_error());
+        
+session_start(); 
+$arr =["cioa","ddd","sss","fff","ffg"];
+    $query = "select keyhash,title,pomodori,note,donepomodori from task where task.username=$1";
+    $res = pg_query_params ($db_conn,$query,array($_SESSION["username"]));
+    while ($tuple=pg_fetch_array($res,null,PGSQL_ASSOC)){
+            
+            //echo  '<script> fillTask('. $tuple.');</script>';
+            echo $tuple["title"];
+            echo $tuple["pomodori"];
+            echo $tuple["note"];
+            echo $tuple["donepomodori"];
+        echo '<br>';
+    }
+?>
+
     <div id="mynavbar"></div>
     <div class="container">
       <div class="box">box1</div>
@@ -40,9 +59,8 @@
               <div id="switchRow"> 
                       <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
                       </img>
-                      <!--prima c'era onclick="InfoPopUp"-->
-                      <img id = "infoImg" src  = "../style/img/info-solid.png" onmouseover="mostraVignetta()" onmouseout="nascondiVignetta()">
-                      <div class="vignetta">Un Pomodoro è un timer <br> che corrisponde ad una <br> sessione di lavoro. <br> Al termine di ogni Pomodoro <br> ci sarà una Short Break. <br>Ogni quattro pomodori <br> ci sarà invece una Long Break.</div>
+                  
+                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
                       </img>
                       <div class="overlay" id="infoOverlay">
                         <div class = "popup" id="infoPop">
@@ -70,7 +88,7 @@
                         <button class="btn btn-default" id="sessDec">-</button>        
                       </div>
                       <div class="col-md-2">
-                        <input class="params" type="number" id="session" value = "25" onblur="writeSession()"></input>
+                        <div id="session"></div>
                       </div>
                       <div class="col-md-4">
                         <button class="btn btn-default" id="sessInc">+</button>
@@ -84,7 +102,7 @@
                         <button class="btn btn-default" id="breakDec">-</button>
                       </div>
                       <div class="col-md-2">
-                        <input class="params" type="number" id="break" value = "5" onblur="writeShortBreak()"></input>
+                        <div id="break"></div>
                       </div>
                       <div class="col-md-4">
                         <button class="btn btn-default" id="breakInc">+</button>        
@@ -98,7 +116,7 @@
                         <button class="btn btn-default" id="longDec">-</button>        
                       </div>
                       <div class="col-md-2">
-                        <input class="params" type="number" id="longBreak" value = "15" onblur="writeLongBreak()" ></input>
+                        <div id="longBreak"></div>
                       </div>
                       <div class="col-md-4">
                         <button class="btn btn-default" id="longInc">+</button>
@@ -175,10 +193,14 @@
           </div>
         
         </div>
-      </div>
-      <div class="box">
-        box3
-      </div>
-    </div>
+      </div><?php 
+echo $_SESSION["username"];
+
+    ?>
+    <script>
+    <?php 
+        echo fillTask($arr);
+    ?>
+</script>
 </body>
 </html>
