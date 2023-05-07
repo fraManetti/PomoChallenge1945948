@@ -4,7 +4,6 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>PomoChallenge</title>
-    <link rel="icon" type="image/x-icon" href="..//style/img/tomato.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
@@ -24,7 +23,7 @@
 
     <script>
         $(function(){
-          $("#mynavbar").load("./oldNavbar.html");
+          $("#mynavbar").load("./oldnavbar.html");
         });
 
     </script>
@@ -140,14 +139,25 @@
                     </label>
                   </p>
                 </div>
-                  <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')" maxlength="25">
+                  <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')">
+<!--
+                  <script>
+                    var input = document.getElementById("taskFieldInput");
+                    input.addEventListener("keypress", function(event) {
+                      if (event.key === "Enter") {
+                        event.preventDefault();
+                        document.getElementById("push").click();
+                      }
+                    });
+                    </script>
+-->
                   <button id="push" onclick="addTask();">Add</button>
                   <br>
                   Quanti Pomodori?<br>
                   <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
                   Note: <br>
         
-                  <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')" maxlength="115" ></textarea>
+                  <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')"></textarea>
               </div>
 
               <div id="taskTag">
