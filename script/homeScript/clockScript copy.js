@@ -1,4 +1,5 @@
-  //Variabili per le task:
+// versione con index
+//Variabili per le task:
   var taskOn = false;
   var taskList = [];
   var countCurrPom =0;
@@ -6,99 +7,62 @@
   var countS;
   var countB;
   var countL;
-  var countTimes = 0;
-  var countIncS = 0;
-  var countDecS = 0;
-  var countIncB = 0;
-  var countDecB = 0;
-  var countIncL = 0;
-  var countDecL = 0;
-  var pos = "Pomodoro";
 function resetClock() {
   clock.stop();
   pos = "Pomodoro";
   $("#stats").html(pos);
-  clock.setTime(countS*60);
+  clock.setTime(0);
   $('#start').text('START');
   countTimes=0;
-  document.title = "PomoChallenge";
 }
 $(document).ready(function(){
 
-  countTimes = 0; 
+  var countTimes = 0; 
   countS = 25;
   $("#session").html(countS);
   countB = 5;
   countL = 15;
   $("#break").html(countB);
   $("#longBreak").html(countL);
-  //var pos = "Pomodoro";
+  var pos = "Pomodoro";
   var countLama;
   var posLama;
   var count;
     $("#stats").html(pos);
-
-
   function checkCurrentTask() {
-
-  if(taskList.length==1){
+    var pomTarget;
     countCurrPom++;
-    updateTaskTag(true,false);
-    console.log(countCurrPom);
-    if (taskList[0].pomodori == countCurrPom){
-    alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
-      countCurrPom=0;
-      index--;
-      removeTaskItem();
-      updateTaskTag(false,false);
-      updateTaskButtons();
-      var tmp=countTimes;
-      //resetClock();
-      document.getElementById("customCheckbox").checked=false;
-      taskOn = false;
-      countTimes=tmp;
-      return true;
-}}    if(taskList.length>0 && taskList.length!=1){
-      countCurrPom++;
-      updateTaskTag(true,false);
-      if (taskList[0].pomodori == countCurrPom){
+    taskList.forEach(function(triple){
+      if (triple.index==1)
+        pomTarget=triple.pomodori;
+    })
+    if (pomTarget == countCurrPom){
       alert("Task Finita!");
-        countCurrPom=0;
-        index--;
-        removeTaskItem();
-        updateTaskTag(false,false);
-        updateTaskButtons();
-        return true;
-  }}  else 
-    updateTaskTag(false,false);
-    return false;
-  
-}
-     clock = $(".timer").FlipClock(countS*60, {
+      countCurrPom=0;
+      taskList.forEach(function(triple){
+          triple.index--;
+      })
+    }
+  }
+     clock = $(".timer").FlipClock(0, {
       countdown: true,
       clockFace: 'MinuteCounter',
       autoStart: false,
       callbacks: {
         interval: function(){
-          var isEnded;
-          if (clock.getTime() == 0 ){
-            $('#endDing')[0].play();
+          if (clock.getTime() == 0 )
               if (pos == "Session"){
-                if(taskOn)isEnded=checkCurrentTask();
+                if(taskOn)checkCurrentTask();
                 if(countTimes%4!=0){
                 clock.setTime(countB*60);
                 clock.start();
                 pos = "Short Break";
                 $("#stats").html(pos);
-                if(taskOn && taskList.length>0)updateTaskTag(true,isEnded);
-                else updateTaskTag(false,false);
               } else{
                 clock.setTime(countL*60);
                 clock.start();
                 pos = "Long Break";
                 $("#stats").html(pos);
-                if(taskOn && taskList.length>0)updateTaskTag(true,isEnded);
-      else updateTaskTag(false,false);
               } 
             } 
             else if (pos == "Short Break" || pos=="Long Break"){
@@ -106,28 +70,22 @@ $(document).ready(function(){
               clock.start();
               pos = "Session";
               $("#stats").html(pos);
-              if(taskOn && taskList.length>0)updateTaskTag(true,false);
-              else updateTaskTag(false,false);
             }
-            
-          }     titleTimer(clock)   
-        }}
+          }        
+        }
       })
 
   
   $("#start").on("click", function(){
-    if(taskOn && taskList.length>0)updateTaskTag(true,false);
-    else updateTaskTag(false,false);
+    updateTaskTag();
     if(clock.running){
       clock.stop();
       countLama = clock.getTime();
       posLama = $("#stats").html();
       $(this).text("START");
-      document.title = "PomoChallenge";
     } else {
         if (count != countS || clock.getTime()==0){
-          if(clock.getTime()< countS*60 || clock.getTime()>countS*60 && pos=="Session") clock.setTime(clock.getTime().time);
-          else clock.setTime(countS*60);
+          clock.setTime(countS*60);
           countTimes++;
           pos="Session";
           $("#stats").html(pos)
@@ -148,21 +106,49 @@ $(document).ready(function(){
     }
   });
   
+  // implementa le funzioni stop e skip in modo simile
+  
+  function goTasks() {
+    // // scorri tutte le task
+    // for (var i = 0; i < taskList.length; i++) {
+    //   var task = taskList[i];
+    //   console.log(task);
+    //   // esegui il numero di pomodori previsti per la task corrente
+    //   for (var j = 1; j <= task.pomodori; j++) {
+    //     // esegui un pomodoro
+    //     console.log(task.pomodori,j);
+    //     clock.setTime(countS*60);
+    //     clock.start();
+    //     pos="Session";
+    //     $("#stats").html(pos)    
+    //     console.log("ciao");
+
+    //     // attendi che il timer raggiunga lo zero
+    //     while (clock.getTime() > 0) {}
+    //     // esegui una pausa breve o lunga a seconda del numero di pomodori completati
+    //     if (j % 4 == 0) {
+    //       clock.setTime(countL*60);
+    //       clock.start();
+    //       pos = "Long Break";
+    //       $("#stats").html(pos);
+    //     } else {
+    //       clock.setTime(countB*60);
+    //       clock.start();
+    //       pos = "Short Break";
+    //       $("#stats").html(pos);
+    //     }
+    //     // attendi che il timer raggiunga lo zero
+    //     while (clock.getTime() > 0) {}
+    //   }
+    // }
+  }
      //SESSION
      $("#sessInc").on("click", function(){
       if ($("#session").html() > 0){
         countS = parseInt($("#session").html());
         countS+=1;
-        console.log(countS);
         $("#session").html(countS);
-        //console.log(clock.getTime().time);
-        if(pos == "Session"){
-          console.log("ci sei!");
-          if(countIncS!=0) clock.setTime((clock.getTime().time)+61);
-          else clock.setTime((clock.getTime().time)+60);
-          countIncS++;
-        }
-        if(pos == "Pomodoro") clock.setTime(countS*60);
+        //clock.setTime(countS*60);
       }
     });
     
@@ -171,12 +157,7 @@ $(document).ready(function(){
         countS = parseInt($("#session").html());
         countS-=1;
         $("#session").html(countS);
-        if(pos== "Session"){
-          if(countDecS!=0) clock.setTime((clock.getTime().time)-59);
-          else clock.setTime((clock.getTime().time)-60);
-          countDecS++;
-        }
-        if(pos == "Pomodoro") clock.setTime(countS*60);
+        //clock.setTime(countS*60);
       }
     });
     //BREAK
@@ -185,11 +166,6 @@ $(document).ready(function(){
         countB = parseInt($("#break").html());
         countB+=1;
         $("#break").html(countB);
-        if(pos == "Short Break"){
-          if(countIncB!=0) clock.setTime((clock.getTime().time)+61);
-          else clock.setTime((clock.getTime().time)+60);
-          countIncB++;
-        }
       }    
     });
     $("#breakDec").on("click", function(){
@@ -197,11 +173,6 @@ $(document).ready(function(){
         countB = parseInt($("#break").html());
         countB-=1;
         $("#break").html(countB);
-        if(pos == "Short Break"){
-          if(countDecB!=0) clock.setTime((clock.getTime().time)-59);
-          else clock.setTime((clock.getTime().time)-60);
-          countDecB++;
-        }
       }
     });
      // LONG BREAK
@@ -210,11 +181,6 @@ $(document).ready(function(){
         countL = parseInt($("#longBreak").html());
         countL+=1;
         $("#longBreak").html(countL);
-        if(pos == "Long Break"){
-          if(countIncL!=0) clock.setTime((clock.getTime().time)+61);
-          else clock.setTime((clock.getTime().time)+60);
-          countIncL++;
-        }
       }    
     });
     $("#longDec").on("click", function(){
@@ -222,33 +188,24 @@ $(document).ready(function(){
         countL = parseInt($("#longBreak").html());
         countL-=1;
         $("#longBreak").html(countL);
-        if(pos == "Long Break"){
-          if(countDecL!=0) clock.setTime((clock.getTime().time)-59);
-          else clock.setTime((clock.getTime().time)-60);
-          countDecL++;
-        }
       }
     });
   
     $("#skip").on("click", function(){
-      var isEnded;
+      updateTaskTag();
       if (pos == "Session"){
-        if(taskOn)isEnded=checkCurrentTask();
+        if(taskOn)checkCurrentTask();
+
         if(countTimes%4!=0){
         clock.setTime(countB*60);
         clock.start();
         pos = "Short Break";
-        $("#stats").html(pos);      
-      if(taskOn && taskList.length>0)updateTaskTag(true,isEnded);
-      else updateTaskTag(false,false);
-    }
+        $("#stats").html(pos);}
         else{
           clock.setTime(countL*60);
           clock.start();
           pos = "Long Break";
-          $("#stats").html(pos);   
-          if(taskOn && taskList.length>0)updateTaskTag(true,isEnded);
-          else updateTaskTag(false,false);       
+          $("#stats").html(pos);          
         }
       } else if (pos == "Short Break" || pos=="Long Break"){
         countTimes++;
@@ -256,30 +213,47 @@ $(document).ready(function(){
         clock.start();
         pos = "Session";
         $("#stats").html(pos);
-        if(taskOn && taskList.length>0)updateTaskTag(true,false);
-        else updateTaskTag(false,false);
       }
   });
   $("#clear").on("click", function(){
-    console.log(clock.getTime().time);
-    countB=5;
-    countL=15;
-    countS=25;
-    console.log(countS);
-    updateTaskTag(false,false);
+    updateTaskTag();
     clock.stop();
     pos = "Pomodoro";
     $("#stats").html(pos);
-    clock.setTime(countS*60);
+    clock.setTime(0);
     $('#start').text('START');
-    document.title="PomoChallenge";
     countTimes=0;
     $("#session").html("25");
     $("#longBreak").html("15");
     $("#break").html("5");
-    
-    //titleTimer(clock)
-    
+    countB=5;
+    countL=15;
+    countS=25;
   });
+//da sistemare con il fatto che ora è nascosto!
+  // $("#customCheckBoxx").on("click",function(){
+  //   console.log("check");
+  //   clock.stop();
+  //   pos = "Pomodoro";
+  //   $("#stats").html(pos);
+  //   clock.setTime(0);
+  //   $('#start').text('START');
+  //   countTimes=0;
+  // });
 
+
+  $("#selectTaskArea").on("click","#push", function() {
+    // // ottieni il titolo della task dall'input dell'utente
+    // var title = $("#taskname").val();
+
+    // // ottieni il numero di pomodori previsti per la task dall'input dell'utente
+    // // var pomodori = $(".x").val();
+    // // // crea una nuova task con i valori inseriti dall'utente
+    // // var newTask = { title: title, pomodori: pomodori };
+    // // // aggiungi la nuova task all'elenco delle task
+    // // taskList.push(newTask);
+    // // console.log(pomodori);
+
+
+  });
 })
