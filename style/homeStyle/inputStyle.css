@@ -27,6 +27,10 @@
     input[type='text']{
         width:293px;
         
+    }
+
+    input[type='number']{
+        width:45px;
     } 
 
     /*settaggio input number (box di input numero pomodori)*/
