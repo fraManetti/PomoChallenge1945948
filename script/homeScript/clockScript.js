@@ -43,6 +43,8 @@ $(document).ready(function(){
 
   if(taskList.length==1){
     taskList[0].donepomodori+=1;
+    console.log("ora: ",clock.getTime()/60);
+    taskList[0].tim += countS -(clock.getTime()/60);
     var task =taskList[0];
     task.index=1;
     updateServer(task,"UP");
@@ -62,6 +64,7 @@ $(document).ready(function(){
       return true;
 }}    if(taskList.length>0 && taskList.length!=1){
         taskList[0].donepomodori+=1;
+        taskList[0].tim += countS;
         var task =taskList[0];
         task.index=1;
         updateServer(task,"UP");
