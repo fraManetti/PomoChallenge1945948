@@ -112,15 +112,8 @@ body {
     z-index: 1;
   }
 
-  input[type=number].params::-webkit-inner-spin-button,
-  input[type=number].params::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-  }
+
   
-  input[type=number].params {
-      appearance: textfield;
-  }
 
 
 

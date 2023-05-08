@@ -40,7 +40,7 @@
 $query = "SELECT keyhash, title, pomodori, note, donepomodori FROM task WHERE task.username = $1 ORDER BY ind";
 $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
 
-    <div id="mynavbar"></div>
+<div id="mynavbar"></div>
     <div class="container">
       <div class="box">box1</div>
         <div class="center-box">
@@ -49,8 +49,9 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
               <div id="switchRow"> 
                       <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
                       </img>
-                  
-                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
+                      <!--prima c'era onclick="InfoPopUp"-->
+                      <img id = "infoImg" src  = "../style/img/info-solid.png" onmouseover="mostraVignetta()" onmouseout="nascondiVignetta()">
+                      <div class="vignetta">Un Pomodoro è un timer <br> che corrisponde ad una <br> sessione di lavoro. <br> Al termine di ogni Pomodoro <br> ci sarà una Short Break. <br>Ogni quattro pomodori <br> ci sarà invece una Long Break.</div>
                       </img>
                       <div class="overlay" id="infoOverlay">
                         <div class = "popup" id="infoPop">
@@ -78,7 +79,7 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
                         <button class="btn btn-default" id="sessDec">-</button>        
                       </div>
                       <div class="col-md-2">
-                        <div id="session"></div>
+                        <input type="number" class="params" id="session" value = "25" onblur="writeSession()"></input>
                       </div>
                       <div class="col-md-4">
                         <button class="btn btn-default" id="sessInc">+</button>
@@ -92,7 +93,7 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
                         <button class="btn btn-default" id="breakDec">-</button>
                       </div>
                       <div class="col-md-2">
-                        <div id="break"></div>
+                        <input type="number" class="params" id="break" value = "5" onblur="writeShortBreak()"></input>
                       </div>
                       <div class="col-md-4">
                         <button class="btn btn-default" id="breakInc">+</button>        
@@ -106,7 +107,7 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
                         <button class="btn btn-default" id="longDec">-</button>        
                       </div>
                       <div class="col-md-2">
-                        <div id="longBreak"></div>
+                        <input type="number" class="params" id="longBreak" value = "15" onblur="writeLongBreak()" ></input>
                       </div>
                       <div class="col-md-4">
                         <button class="btn btn-default" id="longInc">+</button>
@@ -184,6 +185,10 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
         
         </div>
       </div>
+      <div class="box">
+        box3
+      </div>
+    </div>
 
 <?php 
             
