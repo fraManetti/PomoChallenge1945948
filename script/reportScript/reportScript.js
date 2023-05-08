@@ -10,10 +10,11 @@ function downloadEnded(tuple) {
 
         <input type="number"  id="endedPomos" value= "${tuple.pomodori}" readonly  min="1">
        
-        <img id = "endedOptionImg" src  = "../style/img/sliders-solid.png" onclick = "endedOption(event)">
-        </img>
-  
-     
+        <button id="optionbuton" onclick = "endedOption(event)">
+            <img id = "endedOptionImg" src  = "../style/img/ellipsis-vertical-solid.png" >
+            </img>
+        </button>
+        
         <div id="hiddenOption">
           <textarea name="taskNote" readonly class="hiddenNote" cols="40" rows="3" placeholder="updateNote" maxlength="115">${tuple.note}</textarea>
         </div>    
@@ -21,6 +22,12 @@ function downloadEnded(tuple) {
     
     </div>
 `)
+if (!document.querySelector('#currentPeriod').innerHTML.trim())
+    document.querySelector('#currentPeriod').insertAdjacentHTML('beforeend', `
+        <h3>
+            ${tuple.dat}
+        </h3>
+    `)
 }
 
 function deleteEndedTask(e) {
@@ -46,6 +53,7 @@ function load(s) {
     else if(s == 'weekly') url = "weeklyLoad.php";
     else if(s == 'all') url = "allLoad.php";
     document.getElementById("tasksPanel").innerHTML = '';
+    document.getElementById("currentPeriod").innerHTML = '';
     var httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');

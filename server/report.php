@@ -41,8 +41,7 @@
     //$data_corrente = '27-08-2004';
     $query = "select keyhash, title, pomodori, note, dat from endedtask where endedtask.username = '{$cookie}' and endedtask.dat = '{$data_corrente}'";
     $res = pg_query($db_conn, $query);
-    if (pg_num_rows($res) == 0) {
-        echo '<h1>Nessun risultato trovato</h1>';}
+   
     
  ;?>
     
@@ -60,7 +59,8 @@
                     Tutte le attività
                 </button>
             </div>
-            <br>
+            <div id = "currentPeriod">
+            </div>
             <div id = "tasksPanel">
             </div>
         </div>
@@ -71,7 +71,10 @@
     while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
      $tuple_json = json_encode($tuple);
     echo '<script> 
-    downloadEnded(' . $tuple_json . ')
+    downloadEnded(' . $tuple_json . ');
+    var dat = new Date("Jul 12 2011");
+    dat.setDate(dat.getDate() + 30);
+    console.log(dat);
     </script>';
     }
 
