@@ -29,17 +29,7 @@ create table endedtask (
 	FOREIGN KEY (username) REFERENCES utente(username)
 
 );
-create table endedtask (
-    username varchar(40) not null, 
-    keyhash varchar(32) not null,
-    title varchar(25) not null,
-    pomodori int not null,
-    note varchar(115),
-    dat varchar(10) not null,
-    primary key (username,keyhash),
-    FOREIGN KEY (username) REFERENCES utente(username)
 
-);
 -----------------------
 select * from utente;
 select * from task

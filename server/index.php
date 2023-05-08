@@ -37,7 +37,7 @@
 </head>
 <body>
 <?php         
-$query = "SELECT keyhash, title, pomodori, note, donepomodori FROM task WHERE task.username = $1 ORDER BY ind";
+$query = "SELECT keyhash, title, pomodori, note, donepomodori,tim FROM task WHERE task.username = $1 ORDER BY ind";
 $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
 
 <div id="mynavbar"></div>
