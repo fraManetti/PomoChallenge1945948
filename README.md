@@ -2,6 +2,6 @@
 
 Utente (_username,_ paswd)
 
-Task(_usename,key(hash),_ title,pomodori,note,donepomodori,ind)
+Task(_usename,key(hash),_ title,pomodori,note,donepomodori,ind,tim)
 
-EndedTask (_username,key(hash),_ title,pomodori,note,dat)
+EndedTask (_username,key(hash),_ title,pomodori,note,dat,tim)
