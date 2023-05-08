@@ -94,10 +94,10 @@ function removeTaskItem() {
   var task = taskList[0];
   task.index=1;
   var dat = new Date();
-  
-  var day = JSON.parse(dat.getDay());
-  var month = JSON.parse(dat.getMonth());
+  var day = JSON.parse(dat.getDate());
+  var month = JSON.parse(dat.getMonth()+1);
   var year = JSON.parse(dat.getFullYear());
+  console.log(day,month,year)
   if (day<10)
     day = "0"+day;
   if (month<10)
@@ -498,7 +498,6 @@ function nascondiVignetta() {
 
 
 function updateServer(newTask,type) {
-  console.log(newTask.tim);
   $.ajax({
     url: "../server/updateTaskServer.php",
     type: "POST",
