@@ -1,5 +1,9 @@
 
 function downloadEnded(tuple) {
+  var totalTime = 0;
+  for(var i=0; i<tuple.length;i++){
+    totalTime+=tuple.tim;
+  }
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task">
         
@@ -8,7 +12,7 @@ function downloadEnded(tuple) {
         <input type="text" readonly id="endedTaskname" value="${tuple.title}" maxlength="25">
        
 
-        <input type="number"  id="endedPomos" value= "${tuple.pomodori}" readonly  min="1">
+        <input type="number"  id="endedPomos" value= "${totalTime}" readonly  min="1">
        
         <img id = "endedOptionImg" src  = "../style/img/sliders-solid.png" onclick = "endedOption(event)">
         </img>

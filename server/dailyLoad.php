@@ -8,7 +8,7 @@
     $data_corrente = date('d-m-Y');
 
     //$data_corrente = '27-08-2004';
-    $query = "select keyhash, title, pomodori, note, dat from endedtask where endedtask.username = '{$cookie}' and endedtask.dat = '{$data_corrente}'";
+    $query = "select keyhash, title, pomodori, note, dat,tim from endedtask where endedtask.username = '{$cookie}' and endedtask.dat = '{$data_corrente}'";
     $res = pg_query($db_conn, $query);
     
         $result_array = array();
