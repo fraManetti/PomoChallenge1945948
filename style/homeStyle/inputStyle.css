@@ -27,7 +27,18 @@
     input[type='text']{
         width:293px;
         
-    } 
+    }
+
+    input[type='number'].params {
+        width: 45px;
+        appearance: textfield;
+    }
+
+    input[type=number].params::-webkit-inner-spin-button,
+    input[type=number].params::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 
     /*settaggio input number (box di input numero pomodori)*/
     input[class='x']{
