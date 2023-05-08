@@ -1,11 +1,12 @@
 <?php 
-    $connessione="host=localhost port=5432 dbname=pomochallenge 
-    user=postgres password=pomodoro";
-    $db_conn = pg_connect($connessione) or die ('Connection error-impossibile connettersi al server' . pg_last_error());
-            
-    session_start(); 
+  include( 'db_conn.php');  
+  session_start();
+  if (!isset($_SESSION["username"])) {
+      header("HTTP/1.1 401 Unauthorized");
+      exit();
+    }
     $cookie = $_SESSION["username"]; 
-    $query = "select keyhash, title, pomodori, note, dat from endedtask where endedtask.username = '{$cookie}'";
+    $query = "select keyhash, title, pomodori, note, dat,tim from endedtask where endedtask.username = '{$cookie}'";
     $res = pg_query($db_conn, $query);
     
         $result_array = array();

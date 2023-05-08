@@ -1,18 +1,22 @@
 
+function upTotalTime(totalTime) {
+  console.log(totalTime);
+  document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
+    <p1> ${totalTime}</p1>
+  `);
+}
 function downloadEnded(tuple) {
   var totalTime = 0;
-  for(var i=0; i<tuple.length;i++){
-    totalTime+=tuple.tim;
-  }
+  console.log(tuple);
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
-    <div  class="task">
+    <div  class="task" data-value="${tuple.keyhash}">
         
         <img class = "taskImg" id ="endedDeleteImg" src = "../style/img/trash-can-solid.png"   onClick="deleteEndedTask(event);">
         </img>
         <input type="text" readonly id="endedTaskname" value="${tuple.title}" maxlength="25">
        
 
-        <input type="number"  id="endedPomos" value= "${totalTime}" readonly  min="1">
+        <input type="number"  id="endedPomos" value= "${tuple.tim}" readonly  min="1">
        
         <img id = "endedOptionImg" src  = "../style/img/sliders-solid.png" onclick = "endedOption(event)">
         </img>
@@ -24,11 +28,29 @@ function downloadEnded(tuple) {
        
     
     </div>
-`)
+`);
 }
 
 function deleteEndedTask(e) {
-    
+  var url ="deleteTask.php";
+  var button = e.currentTarget;
+  console.log(button)
+  var task = button.parentNode;
+ task.remove();
+  var keyhash = task.getAttribute("data-value");
+  $.ajax({
+    url: "../server/deleteTask.php",
+    type: "POST",
+    data: {keyhash: keyhash},
+    success: function(result) {
+        // Aggiornamento eseguito con successo
+        console.log(result);
+    },
+    error: function(xhr, status, error) {
+        // Errore nell'aggiornamento
+        console.error(error);
+    }
+});
 }
 
 function endedOption(e) {
@@ -46,6 +68,7 @@ function endedOption(e) {
 
 function load(s) {
     var url;
+    var totalTime = 0 ;
     if(s == 'daily') url = "dailyLoad.php";
     else if(s == 'weekly') url = "weeklyLoad.php";
     else if(s == 'all') url = "allLoad.php";
@@ -60,8 +83,10 @@ function load(s) {
           console.log(response.error);
         } else {
             response.forEach(function(tuple) {
-            downloadEnded(tuple);
+              downloadEnded(tuple);
+              totalTime+= tuple.time;
           });
+          upTotalTime(totalTime);
         }
       }
     };

@@ -1,5 +1,4 @@
 function fillTaskList(tuple) {
-    console.log(tuple.tim);
     var newTask = { key:tuple.keyhash, title: tuple.title, pomodori: parseInt(tuple.pomodori),note: tuple.note,donepomodori: parseInt(tuple.donepomodori),tim:(tuple.tim) };
     taskList.push(newTask); 
 }

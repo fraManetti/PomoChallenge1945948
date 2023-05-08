@@ -39,7 +39,7 @@
     $cookie = $_SESSION["username"]; 
     $data_corrente = date('d-m-Y');
     //$data_corrente = '27-08-2004';
-    $query = "select keyhash, title, pomodori, note, dat from endedtask where endedtask.username = '{$cookie}' and endedtask.dat = '{$data_corrente}'";
+    $query = "select keyhash, title, pomodori, note, dat,tim from endedtask where endedtask.username = '{$cookie}' and endedtask.dat = '{$data_corrente}'";
     $res = pg_query($db_conn, $query);
     if (pg_num_rows($res) == 0) {
         echo '<h1>Nessun risultato trovato</h1>';}
@@ -60,6 +60,7 @@
                     Tutte le attività
                 </button>
             </div>
+            <div id ="currentPeriod"> </div>
             <br>
             <div id = "tasksPanel">
             </div>
