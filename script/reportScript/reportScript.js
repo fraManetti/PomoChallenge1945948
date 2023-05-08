@@ -55,7 +55,6 @@ function load(s) {
         if ('error' in response) {
           console.log(response.error);
         } else {
-            console.log(response);
             response.forEach(function(tuple) {
             downloadEnded(tuple);
           });
