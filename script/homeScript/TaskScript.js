@@ -1,7 +1,6 @@
 //#################################################################
 //##########             VARIABILI:                  ##############
 //#################################################################
-var index=1;
 var oldTitle="";
 var oldPomos = 0;
 var oldNote="";
@@ -11,6 +10,7 @@ var planning = false;
 var checkedCustom = false;
 var anyTaskOpen=false;
 var delEnded=false;
+var index=1;
 
 //#################################################################
 //##########             FUNZIONI AUSILIARIE:        ##############
@@ -205,7 +205,7 @@ function updateTaskTag(isRunning,isEnded){
     else
       textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+ JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
     var time=0;
-    console.log(taskList[0].donepomodori);
+    //console.log(taskList[0].donepomodori);
   for ( i = pomoCount-taskList[0].donepomodori; i>0;i--){
     if(i%4 ==0)
       time+=countL;
@@ -333,7 +333,7 @@ function addTask(){
     var title=$('#taskFieldInput').val();
     var key =hashCode(title+JSON.stringify(number)+JSON.stringify(Math.random(1000000000)));
     var note = document.getElementById("taskNote").value;
-    var newTask = { key:key, title: title, pomodori: number,note: note,donepomodori: 0 };
+    var newTask = { key:key, title: title, pomodori: number,note: note,donepomodori: 0,tim:0 };
 
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask); 
@@ -498,10 +498,11 @@ function nascondiVignetta() {
 
 
 function updateServer(newTask,type) {
+  console.log(newTask.tim);
   $.ajax({
     url: "../server/updateTaskServer.php",
     type: "POST",
-    data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat},
+    data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat,tim:1},
     success: function(result) {
         // Aggiornamento eseguito con successo
         console.log(result);
