@@ -59,6 +59,9 @@
                 <button id ="allButton" onclick="load('all')">
                     Tutte le attività
                 </button>
+                <button id = "increaseTimePeriod" onclick="increase()">
+                    +
+                </button>
             </div>
             <br>
             <div id = "tasksPanel">

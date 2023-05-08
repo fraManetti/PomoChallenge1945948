@@ -1,3 +1,11 @@
+var currentString = "asd";
+var currentDate = new Date();
+
+function parseDate(str) {
+  var parts = str.split("-");
+  return new Date(parts[2], parts[1] - 1, parts[0]);
+  
+}
 
 function downloadEnded(tuple) {
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
@@ -21,6 +29,8 @@ function downloadEnded(tuple) {
     
     </div>
 `)
+  console.log(tuple.dat);
+  currentDate = parseDate(tuple.dat);
 }
 
 function deleteEndedTask(e) {
@@ -63,3 +73,37 @@ function load(s) {
     };
     httpRequest.send();
   }
+
+function increaseDay() {
+  currentDate.setDate(currentDate.getDate() + 1);
+  var day = JSON.parse(currentDate.getDate());
+  var month = JSON.parse(currentDate.getMonth()+1);
+  var year = JSON.parse(currentDate.getFullYear());
+  if (day<10)
+    day = "0"+day;
+  if (month<10)
+    month = "0"+month;
+  
+  currentString = day+"-"+month+"-"+year;
+}
+
+function increase(newTask,type) {
+  increaseDay();
+  document.getElementById("tasksPanel").innerHTML = '';
+  $.ajax({
+    url: "../server/dailyLoadIncrease.php",
+    type: "POST",
+    data: {currentString: currentString},
+    success: function(result) {
+        // Aggiornamento eseguito con successo
+        console.log(JSON.parse(result));
+        for(var i = 0; i<result.length; i++) {
+          downloadEnded(JSON.parse(result)[i]);
+        }
+    },
+    error: function(xhr, status, error) {
+        // Errore nell'aggiornamento
+        console.error(error);
+    }
+});
+}
