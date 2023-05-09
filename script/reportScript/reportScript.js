@@ -147,3 +147,33 @@ function decrease(newTask,type) {
     }
 });
 }
+
+function increaseweek(newTask,type) {
+  increaseDay();
+  increaseDay();
+  increaseDay();
+  increaseDay();
+  increaseDay();
+  increaseDay();
+  increaseDay();
+  document.getElementById("tasksPanel").innerHTML = '';
+  $.ajax({
+    url: "../server/increaseWeek.php",
+    type: "POST",
+    data: {currentString: currentString},
+    success: function(result) {
+        // Aggiornamento eseguito con successo
+        var endedTasks = JSON.parse(result);
+
+        if(endedTasks.length != 0) {
+          for(var i = 0; i<endedTasks.length; i++) {
+            downloadEnded(endedTasks[i]);
+          }
+        }
+    },
+    error: function(xhr, status, error) {
+        // Errore nell'aggiornamento
+        console.error(error);
+    }
+});
+}
