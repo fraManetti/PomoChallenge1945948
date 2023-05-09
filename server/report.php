@@ -68,6 +68,10 @@
                 <button id = "increaseWeek" onclick="increaseweek()">
                     increaseweek
                 </button>
+
+                <button id = "decreaseWeek" onclick="decreaseweek()">
+                    decweek
+                </button>
             </div>
             <br>
             <div id = "tasksPanel">
@@ -80,6 +84,7 @@
     while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
      $tuple_json = json_encode($tuple);
     echo '<script> 
+    currentPeriodType = "day";
     downloadEnded(' . $tuple_json . ')
     </script>';
     }

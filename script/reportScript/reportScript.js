@@ -1,5 +1,6 @@
-var currentString = "asd";
+var currentString = "";
 var currentDate = new Date();
+var currentPeriodType = "";
 
 function parseDate(str) {
   var parts = str.split("-");
@@ -32,9 +33,6 @@ function downloadEnded(tuple) {
   currentDate = parseDate(tuple.dat);
 }
 
-function deleteEndedTask(e) {
-    
-}
 
 function endedOption(e) {
     var button = e.currentTarget;
@@ -51,9 +49,19 @@ function endedOption(e) {
 
 function load(s) {
     var url;
-    if(s == 'daily') url = "dailyLoad.php";
-    else if(s == 'weekly') url = "weeklyLoad.php";
-    else if(s == 'all') url = "allLoad.php";
+    if(s == 'daily') {
+      url = "dailyLoad.php";
+      currentPeriodType = "day";
+    }
+    else if(s == 'weekly') {
+      url = "weeklyLoad.php";
+      currentPeriodType = "week";
+    }
+    else if(s == 'all') {
+      url = "allLoad.php";
+      currentPeriodType = "none";
+    }
+    console.log(currentPeriodType);
     document.getElementById("tasksPanel").innerHTML = '';
     var httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
@@ -73,8 +81,13 @@ function load(s) {
     httpRequest.send();
   }
 
-function increaseDay() {
-  currentDate.setDate(currentDate.getDate() + 1);
+function increaseDay(s) {
+  if(s == "+") {
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+  else if (s == "-") {
+    currentDate.setDate(currentDate.getDate() - 1);
+  }
   var day = JSON.parse(currentDate.getDate());
   var month = JSON.parse(currentDate.getMonth()+1);
   var year = JSON.parse(currentDate.getFullYear());
@@ -86,8 +99,13 @@ function increaseDay() {
   currentString = day+"-"+month+"-"+year;
 }
 
-function decreaseDay() {
-  currentDate.setDate(currentDate.getDate() - 1);
+function increaseWeek(s) {
+  if(s == "+") {
+    currentDate.setDate(currentDate.getDate() + 7);
+  }
+  else if (s == "-") {
+    currentDate.setDate(currentDate.getDate() - 7);
+  }
   var day = JSON.parse(currentDate.getDate());
   var month = JSON.parse(currentDate.getMonth()+1);
   var year = JSON.parse(currentDate.getFullYear());
@@ -100,12 +118,35 @@ function decreaseDay() {
 }
 
 
-function increase(newTask,type) {
-  increaseDay();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function increase() {
   document.getElementById("tasksPanel").innerHTML = '';
+  var typeReq = "POST";
+  if(currentPeriodType == "day") {
+    increaseDay("+");
+    var php = "../server/dailyLoadIncrease.php";
+  }
+  else if(currentPeriodType == "week") {
+    increaseWeek("+");
+    var php = "../server/increaseWeek.php";
+  }
   $.ajax({
-    url: "../server/dailyLoadIncrease.php",
-    type: "POST",
+    url: php,
+    type: typeReq,
     data: {currentString: currentString},
     success: function(result) {
         // Aggiornamento eseguito con successo
@@ -124,42 +165,20 @@ function increase(newTask,type) {
 });
 }
 
-function decrease(newTask,type) {
-  decreaseDay();
+function decrease() {
   document.getElementById("tasksPanel").innerHTML = '';
+  var typeReq = "POST";
+  if(currentPeriodType == "day") {
+    increaseDay("-");
+    var php = "../server/dailyLoadIncrease.php";
+  }
+  else if(currentPeriodType == "week") {
+    increaseWeek("-");
+    var php = "../server/increaseWeek.php";
+  }
   $.ajax({
-    url: "../server/dailyLoadIncrease.php",
-    type: "POST",
-    data: {currentString: currentString},
-    success: function(result) {
-        // Aggiornamento eseguito con successo
-        var endedTasks = JSON.parse(result);
-
-        if(endedTasks.length != 0) {
-          for(var i = 0; i<endedTasks.length; i++) {
-            downloadEnded(endedTasks[i]);
-          }
-        }
-    },
-    error: function(xhr, status, error) {
-        // Errore nell'aggiornamento
-        console.error(error);
-    }
-});
-}
-
-function increaseweek(newTask,type) {
-  increaseDay();
-  increaseDay();
-  increaseDay();
-  increaseDay();
-  increaseDay();
-  increaseDay();
-  increaseDay();
-  document.getElementById("tasksPanel").innerHTML = '';
-  $.ajax({
-    url: "../server/increaseWeek.php",
-    type: "POST",
+    url: php,
+    type: typeReq,
     data: {currentString: currentString},
     success: function(result) {
         // Aggiornamento eseguito con successo
