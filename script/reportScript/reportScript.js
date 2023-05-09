@@ -29,7 +29,6 @@ function downloadEnded(tuple) {
     
     </div>
 `)
-  console.log(tuple.dat);
   currentDate = parseDate(tuple.dat);
 }
 
@@ -87,6 +86,20 @@ function increaseDay() {
   currentString = day+"-"+month+"-"+year;
 }
 
+function decreaseDay() {
+  currentDate.setDate(currentDate.getDate() - 1);
+  var day = JSON.parse(currentDate.getDate());
+  var month = JSON.parse(currentDate.getMonth()+1);
+  var year = JSON.parse(currentDate.getFullYear());
+  if (day<10)
+    day = "0"+day;
+  if (month<10)
+    month = "0"+month;
+  
+  currentString = day+"-"+month+"-"+year;
+}
+
+
 function increase(newTask,type) {
   increaseDay();
   document.getElementById("tasksPanel").innerHTML = '';
@@ -96,9 +109,36 @@ function increase(newTask,type) {
     data: {currentString: currentString},
     success: function(result) {
         // Aggiornamento eseguito con successo
-        console.log(JSON.parse(result));
-        for(var i = 0; i<result.length; i++) {
-          downloadEnded(JSON.parse(result)[i]);
+        var endedTasks = JSON.parse(result);
+
+        if(endedTasks.length != 0) {
+          for(var i = 0; i<endedTasks.length; i++) {
+            downloadEnded(endedTasks[i]);
+          }
+        }
+    },
+    error: function(xhr, status, error) {
+        // Errore nell'aggiornamento
+        console.error(error);
+    }
+});
+}
+
+function decrease(newTask,type) {
+  decreaseDay();
+  document.getElementById("tasksPanel").innerHTML = '';
+  $.ajax({
+    url: "../server/dailyLoadIncrease.php",
+    type: "POST",
+    data: {currentString: currentString},
+    success: function(result) {
+        // Aggiornamento eseguito con successo
+        var endedTasks = JSON.parse(result);
+
+        if(endedTasks.length != 0) {
+          for(var i = 0; i<endedTasks.length; i++) {
+            downloadEnded(endedTasks[i]);
+          }
         }
     },
     error: function(xhr, status, error) {

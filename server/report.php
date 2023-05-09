@@ -62,6 +62,9 @@
                 <button id = "increaseTimePeriod" onclick="increase()">
                     +
                 </button>
+                <button id = "decreaseTimePeriod" onclick="decrease()">
+                    -
+                </button>
             </div>
             <br>
             <div id = "tasksPanel">
