@@ -2,6 +2,82 @@ var currentString = "";
 var currentDate = new Date();
 var currentPeriodType = "";
 
+$(document).ready(charts)
+
+function charts() {
+  const ctx = document.getElementById('myChart');
+  
+  Promise.all([
+    monthQuery('01'),
+    monthQuery('02'),
+    monthQuery('03'),
+    monthQuery('04'),
+    monthQuery('05'),
+    monthQuery('06'),
+    monthQuery('07'),
+    monthQuery('08'),
+    monthQuery('09'),
+    monthQuery('10'),
+    monthQuery('11'),
+    monthQuery('12')
+  ]).then((data) => {
+    new Chart(ctx, {
+      
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [{
+          label: '# ore in ',
+          data: data,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  });
+}
+
+function monthQuery(s) {
+  return new Promise((resolve, reject) => {
+    var sum = 0;
+    var period = s;
+    var php = "../server/getMonthTime.php";
+    var typeReq = "POST";
+    $.ajax({
+      url: php,
+      type: typeReq,
+      data: {period: period},
+      success: function(result) {
+          // Aggiornamento eseguito con successo
+          console.log(result);
+          var endedTasks = JSON.parse(result);
+          console.log(result);
+          if(endedTasks.length != 0) {
+            for(var i = 0; i<endedTasks.length; i++) {
+              sum += endedTasks[i].tim;
+              //sumTime(endedTasks[i]);
+            }
+          }
+          resolve(sum);
+      },
+      error: function(xhr, status, error) {
+          // Errore nell'aggiornamento
+          console.error(error);
+          reject(error);
+      }
+    });
+  });
+}
+
+
+
+
 function parseDate(str) {
   var parts = str.split("-");
   return new Date(parts[2], parts[1] - 1, parts[0]);

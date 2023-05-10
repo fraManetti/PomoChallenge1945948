@@ -17,6 +17,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
     <script  src="../script/homeScript/clockScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
     <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script  src="../script/reportScript/reportScript.js"></script>
@@ -73,6 +74,10 @@
             <br>
             <div id = "tasksPanel">
             </div>
+            
+        </div>
+        <div id = chartPanel>
+            <canvas id="myChart"></canvas>
         </div>
     </div>
     
