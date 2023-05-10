@@ -59,6 +59,13 @@
                 <button id ="allButton" onclick="load('all')">
                     Tutte le attività
                 </button>
+                <button id = "increaseTimePeriod" onclick="increase()">
+                    +
+                </button>
+                <button id = "decreaseTimePeriod" onclick="decrease()">
+                    -
+                </button>
+sas
             </div>
             <div id ="currentPeriod"> </div>
             <br>
@@ -72,6 +79,7 @@
     while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
      $tuple_json = json_encode($tuple);
     echo '<script> 
+    currentPeriodType = "day";
     downloadEnded(' . $tuple_json . ')
     </script>';
     }
