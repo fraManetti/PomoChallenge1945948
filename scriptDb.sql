@@ -30,6 +30,20 @@ create table endedtask (
 
 );
 
+create table richieste (
+	richiedente varchar(40) not null,
+	accettante varchar(40) not null,
+	primary key (richiedente,accettante),
+	FOREIGN KEY (richiedente) REFERENCES  utente(username),
+	FOREIGN KEY (accettante) REFERENCES  utente(username)
+);
+create table amici (
+	utentea varchar(40) not null,
+	utenteb varchar(40) not null,
+	primary key (utentea,utenteb),
+	FOREIGN KEY (utentea) REFERENCES  utente(username),
+	FOREIGN KEY (utenteb) REFERENCES  utente(username)
+	);
 -----------------------
 select * from utente;
 select * from task
@@ -37,3 +51,18 @@ select * from endedtask
 
 DELETE FROM task where true
 INSERT INTO task values ('luca',12345,'tds',3,'prova1',1)
+insert into utente values ('max','Password.1=');
+insert into utente values ('max1','Password.1=');
+insert into utente values ('max2','Password.1=');
+insert into utente values ('max3','Password.1=');
+insert into utente values ('max4','Password.1=');
+insert into utente values ('max5','Password.1=');
+insert into utente values ('max6','Password.1=');
+
+insert into amici values ('luca','marco')
+insert into amici values('luca','max');
+insert into amici values('luca','max1');
+insert into amici values('max','max3');
+insert into amici values('max','max4');
+insert into amici values('max','max5');
+insert into amici values('max','max6');
