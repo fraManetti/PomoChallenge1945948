@@ -56,6 +56,9 @@
                 <button id ="weeklyButton" onclick="load('weekly')">
                     Attività settimanali
                 </button>
+                <button id ="monthlyButton" onclick="load('month')">
+                    Attività mensili
+                </button>
                 <button id ="allButton" onclick="load('all')">
                     Tutte le attività
                 </button>
@@ -65,7 +68,6 @@
                 <button id = "decreaseTimePeriod" onclick="decrease()">
                     -
                 </button>
-sas
             </div>
             <div id ="currentPeriod"> </div>
             <br>

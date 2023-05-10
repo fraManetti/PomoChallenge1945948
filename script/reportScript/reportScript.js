@@ -89,6 +89,10 @@ function load(s) {
       url = "weeklyLoad.php";
       currentPeriodType = "week";
     }
+    else if(s == 'month') {
+      url = "monthlyLoad.php";
+      currentPeriodType = "month";
+    }
     else if(s == 'all') {
       url = "allLoad.php";
       currentPeriodType = "none";
@@ -151,18 +155,24 @@ function increaseWeek(s) {
   currentString = day+"-"+month+"-"+year;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+function increaseMonth(s) {
+  currentDate.setDate(currentDate.getDate());
+  var day = JSON.parse(currentDate.getDate());
+  var year = JSON.parse(currentDate.getFullYear());
+  if(s == "+") {
+    var month = JSON.parse(currentDate.getMonth()+2);
+  }
+  else if (s == "-") {
+    var month = JSON.parse(currentDate.getMonth());
+  }
+  
+  if (day<10)
+    day = "0"+day;
+  if (month<10)
+    month = "0"+month;
+  
+  currentString = day+"-"+month+"-"+year;
+}
 
 
 
@@ -177,6 +187,10 @@ function increase() {
   else if(currentPeriodType == "week") {
     increaseWeek("+");
     var php = "../server/increaseWeek.php";
+  }
+  else if(currentPeriodType == "month") {
+    increaseMonth("+");
+    var php = "../server/increaseMonth.php";
   }
   $.ajax({
     url: php,
@@ -209,6 +223,10 @@ function decrease() {
   else if(currentPeriodType == "week") {
     increaseWeek("-");
     var php = "../server/increaseWeek.php";
+  }
+  else if(currentPeriodType == "month") {
+    increaseMonth("-");
+    var php = "../server/increaseMonth.php";
   }
   $.ajax({
     url: php,
