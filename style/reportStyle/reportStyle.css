@@ -11,9 +11,10 @@
   height: 40px;
 }
 
-#currentDate {
-  height: 60px;
+#currentPeriod {
+  height: 40px;
   background-color: white;
+  text-align: center;
 }
 
 #tasksPanel{
@@ -72,10 +73,18 @@
   margin: auto;
 }
 
-#endedOptionImg {
-  width: 20px;
-  height: 20px;
+#optionbuton{
+  width: 25px;
+  height: 25px;
+  background-color: transparent;
+  border-color: transparent;
   margin: auto;
+}
+
+#endedOptionImg {
+  width: 5px;
+  height: 20px;
+  margin-bottom: 5px;
 }
 
 #hiddenOption {
@@ -86,4 +95,9 @@
 .hiddenNote{
   margin-left: 42px;
   width: 300px;
+}
+
+#chartPanel {
+  margin-right: auto;
+  width: 500px;
 }

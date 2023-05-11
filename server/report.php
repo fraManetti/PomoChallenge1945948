@@ -17,6 +17,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
     <script  src="../script/homeScript/clockScript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
     <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script  src="../script/reportScript/reportScript.js"></script>
@@ -41,8 +42,7 @@
     //$data_corrente = '27-08-2004';
     $query = "select keyhash, title, pomodori, note, dat,tim from endedtask where endedtask.username = '{$cookie}' and endedtask.dat = '{$data_corrente}'";
     $res = pg_query($db_conn, $query);
-    if (pg_num_rows($res) == 0) {
-        echo '<h1>Nessun risultato trovato</h1>';}
+   
     
  ;?>
     
@@ -56,6 +56,9 @@
                 <button id ="weeklyButton" onclick="load('weekly')">
                     Attività settimanali
                 </button>
+                <button id ="monthlyButton" onclick="load('month')">
+                    Attività mensili
+                </button>
                 <button id ="allButton" onclick="load('all')">
                     Tutte le attività
                 </button>
@@ -65,12 +68,15 @@
                 <button id = "decreaseTimePeriod" onclick="decrease()">
                     -
                 </button>
-sas
             </div>
             <div id ="currentPeriod"> </div>
             <br>
             <div id = "tasksPanel">
             </div>
+            
+        </div>
+        <div id = chartPanel>
+            <canvas id="myChart"></canvas>
         </div>
     </div>
     
@@ -79,7 +85,6 @@ sas
     while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
      $tuple_json = json_encode($tuple);
     echo '<script> 
-    currentPeriodType = "day";
     downloadEnded(' . $tuple_json . ')
     </script>';
     }
