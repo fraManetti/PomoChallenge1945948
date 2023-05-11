@@ -1,3 +1,7 @@
+<?php
+  include( 'db_conn.php');  
+  session_start(); 
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,20 +23,24 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
     <script  src="../script/homeScript/clockScript.js"></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
+    <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
 
     <script>
         $(function(){
-          $("#mynavbar").load("./oldNavbar.html");
+          $("#mynavbar").load("../model/newNavbar.html");
         });
 
     </script>
 
 </head>
 <body>
-    
-    <div id="mynavbar"></div>
+<?php         
+$query = "SELECT keyhash, title, pomodori, note, donepomodori,tim FROM task WHERE task.username = $1 ORDER BY ind";
+$res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
+
+<div id="mynavbar"></div>
     <div class="container">
       <div class="box">box1</div>
         <div class="center-box">
@@ -181,5 +189,21 @@
         box3
       </div>
     </div>
+
+<?php 
+            
+
+while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
+    // Converte la tupla in una stringa JSON
+    $tuple_json = json_encode($tuple);
+
+    // Passa la tupla alla funzione JavaScript fillTask
+    echo '<script>fillTaskList(' . $tuple_json . ')</script>';
+
+
+}
+echo '<script> fillTaskBox(); </script>'
+?>
+
 </body>
 </html>

@@ -1,7 +1,6 @@
 # PomoChallenge
+Utente (username, paswd)
 
-Utente (_username,_ paswd)
+Task(usename,key(hash), title,pomodori,note,donepomodori,ind,tim)
 
-Task(_usename,key(hash),_ title,pomodori,note,donepomodori,ind,tim)
-
-EndedTask (_username,key(hash),_ title,pomodori,note,dat,tim)
+EndedTask (username,key(hash), title,pomodori,note,dat,tim)

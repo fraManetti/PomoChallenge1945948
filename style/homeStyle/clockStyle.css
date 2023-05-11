@@ -1,9 +1,4 @@
-body {
-  padding-top: 5%;
-   background: url("https://static.pexels.com/photos/6663/desk-white-black-header.jpg") no-repeat center center fixed;
-   background-size: cover;
 
- }
  
 
  p {
@@ -36,7 +31,7 @@ body {
   .col-md-4 {
     display: flex;
     justify-content: center;
-    width: 10%;
+    width: 35%;
     margin-bottom: 5%;
   }
   
@@ -99,6 +94,21 @@ body {
     justify-content: center;
     margin-bottom: 5px;
   }
+
+  /*se ci dovesse servire, è la classe per le vignette a comparsa per la spiegazione di un elemento su cui passo sopra con il mouse*/
+  .vignetta {
+    display: none;
+    position: absolute;
+    background-color: #ffffe1;
+    color: black;
+    border: 1px solid #000000;
+    padding: 5px;
+    font-size: 0.8em;
+    z-index: 1;
+  }
+
+
+  
 
 
 

@@ -1,7 +1,6 @@
 //#################################################################
 //##########             VARIABILI:                  ##############
 //#################################################################
-var index=1;
 var oldTitle="";
 var oldPomos = 0;
 var oldNote="";
@@ -11,6 +10,8 @@ var planning = false;
 var checkedCustom = false;
 var anyTaskOpen=false;
 var delEnded=false;
+var index=1;
+
 //#################################################################
 //##########             FUNZIONI AUSILIARIE:        ##############
 //#################################################################
@@ -59,6 +60,9 @@ function deleteTask(e) {
   var deletedIndex;
   for (var i=0; i<taskList.length;i++){
     if (taskList[i].key == key){
+      var task =taskList[i];
+      task.index=i;
+      updateServer(task,"DEL");
       taskList.splice(i,1);
       deletedIndex=i;
       index--;
@@ -74,7 +78,6 @@ function deleteTask(e) {
     resetClock();
     document.getElementById("customCheckbox").checked=false;
     alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
-      countCurrPom=0;
       }
   updateTaskTag(false,false);
   updateTaskButtons();
@@ -88,6 +91,21 @@ function deleteTask(e) {
 //Funzione per eliminare la task da lista e marcarca come completata
 function removeTaskItem() {
   var key = taskList[0].key;
+  var task = taskList[0];
+  task.index=1;
+  var dat = new Date();
+  var day = JSON.parse(dat.getDate());
+  var month = JSON.parse(dat.getMonth()+1);
+  var year = JSON.parse(dat.getFullYear());
+  console.log(day,month,year)
+  if (day<10)
+    day = "0"+day;
+  if (month<10)
+    month = "0"+month;
+  
+  task.dat=day+"-"+month+"-"+year;
+  console.log(task.dat)
+  updateServer(task,"FYN");
   taskList.shift();
   var tasks= document.getElementsByClassName("task");
   for (var i=0; i<tasks.length;i++){
@@ -132,14 +150,21 @@ function updateTaskBox (taskItems,  cond){
 
 //Aggiorno la lista delle task con le modifiche :
 function updateTaskMap(newTitle, newPomos,newNote) {
+  var task=[];
+  task.key=currentKey;
+  task.title = newTitle;
+  task.pomodori=newPomos;
+  task.note= newNote;
   taskList.forEach(function(tuple) {
     if (tuple.key == currentKey){
         tuple.title = newTitle;
         tuple.pomodori = newPomos;
         tuple.note = newNote;
+        task.donepomodori = tuple.donepomodori;
       }
     }
   )
+  updateServer(task,"UP");
 }
 
 //Aggiorno orario stimato per la fine:
@@ -176,12 +201,12 @@ function updateTaskTag(isRunning,isEnded){
   if (isRunning){  
     var nPomo=taskList[0].pomodori;
     if(!isEnded)
-      textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
+      textToAppend+="\n"+"Task Corrente: "+taskList[0].title+"   ("+ JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
     else
-      textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+JSON.stringify(countCurrPom)+"/"+nPomo+")";
+      textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+ JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
     var time=0;
-    //console.log(textToAppend);
-  for ( i = pomoCount-countCurrPom; i>0;i--){
+    //console.log(taskList[0].donepomodori);
+  for ( i = pomoCount-taskList[0].donepomodori; i>0;i--){
     if(i%4 ==0)
       time+=countL;
     else
@@ -308,22 +333,23 @@ function addTask(){
     var title=$('#taskFieldInput').val();
     var key =hashCode(title+JSON.stringify(number)+JSON.stringify(Math.random(1000000000)));
     var note = document.getElementById("taskNote").value;
-    var newTask = { key:key, title: title, pomodori: number,note: note };
+    var newTask = { key:key, title: title, pomodori: number,note: note,donepomodori: 0,tim:0 };
 
     // aggiungi la nuova task all'elenco delle task
     taskList.push(newTask); 
     updateTaskButtons();
-
+    newTask.index=index;
+    updateServer(newTask,"ADD");
       document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
           <div  class="task" data-value="${key}">
             
-              <button style='font-size:24px' class="delete" onClick="deleteTask(event);">
-                <img class = "taskImg" src  = "../style/img/trash-can-solid.png">
+              <!-- <button style='font-size:24px' class="delete"  id ="deleteBtn" >  -->
+                <img class = "taskImg" id ="deleteImg" src = "../style/img/trash-can-solid.png"   onClick="deleteTask(event);">
                 </img>
-              </button>   
+              <!-- </button>   -->
               <span class="indexTasks">${index})</span>
-              <input type="text" readOnly id="taskname" value="${document.getElementById("taskFieldInput").value}" onkeypress="handleKeyPress(event, 'options')">
-
+              <input type="text" readOnly id="taskname"  value="${document.getElementById("taskFieldInput").value}" onkeypress="handleKeyPress(event, 'options')" maxlength="25">
+              
 
               <input type="number" value="" class="x" readonly  min="1">
               
@@ -332,7 +358,7 @@ function addTask(){
                   </img>
               </button>
               <div class="hiddenOption" display = none>
-                <textarea name="taskNote" id="hiddenNote" cols="40" rows="3" placeholder="updateNote">${document.getElementById("taskNote").value}</textarea>
+                <textarea name="taskNote" id="hiddenNote" cols="40" rows="3" placeholder="updateNote" maxlength="115">${document.getElementById("taskNote").value}</textarea>
               </div>
           </div>
       `)
@@ -444,6 +470,7 @@ function addTask(){
   }
 function deleteAllTask() {
   index=1;
+  updateServer(taskList[0],"ALL_DEL");
   taskList=[];
   $('.task').remove();
   updateTaskButtons();
@@ -458,4 +485,30 @@ function deleteEndedTask(){
   updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
 }
 
+/*se ci dovessero servire per le vignette a comparsa*/
+function mostraVignetta(){
+  let vignetta = document.querySelector(".vignetta");
+  vignetta.style.display = "block";
+}
 
+function nascondiVignetta() {
+  let vignetta = document.querySelector(".vignetta");
+  vignetta.style.display = "none";
+}
+
+
+function updateServer(newTask,type) {
+  $.ajax({
+    url: "../server/updateTaskServer.php",
+    type: "POST",
+    data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat,tim:newTask.tim},
+    success: function(result) {
+        // Aggiornamento eseguito con successo
+        console.log(result);
+    },
+    error: function(xhr, status, error) {
+        // Errore nell'aggiornamento
+        console.error(error);
+    }
+});
+}

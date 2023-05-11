@@ -6,22 +6,23 @@
     <title>PomoChallenge</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css" >
+    <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
     <link rel="stylesheet" href="../style/homeStyle/clockStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
+    <link rel="stylesheet" href="../style/homeStyle/tasksStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!--<script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>-->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
+    <script  src="../script/homeScript/clockScript.js"></script>
+    <script  src="../script/homeScript/TaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
-    <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
-
+    
     <script>
         $(function(){
-          $("#newNavbar").load("./newNavbar.html");
+          $("#newNavbar").load("./oldNavbar.html");
         });
 
     </script>
@@ -31,6 +32,11 @@
         
 <div id="newNavbar"></div>
 
+<div>
+  <p>
+    ${taskList[0].title}
+  </p>
+</div>
 <!--<a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   Profilo
 </a>

@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>Profile</title>
-
+    <link rel="icon" type="image/x-icon" href="..//style/img/tomato.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
@@ -19,7 +19,7 @@
 
     <script>
         $(function(){
-          $("#mynavbar").load("./oldnavbar.html");
+          $("#mynavbar").load("./oldNavbar.html");
         });
 
     </script>
@@ -30,7 +30,7 @@
     <div class="container">
         <h1>REGISTRAZIONE: </h1>
         <div id="signupPanel">
-            <FORM method="post" id="submitSignForm" action="../server/signUp.php"> 
+            <FORM method="post" id="submitSignForm" action="../server/signUp.php" onsubmit="handleSubmit(event)"> 
                 <div class="imgContainer">
                     <INPUT type="IMAGE" class="imgAvatar" SRC="../style/img/pomo.png">
                     </input>
@@ -47,12 +47,17 @@
 
                             <b>Password</b>  
                             <br>
-                        <input type="password" name="passwordSignInput" id="passwordSignInput" placeholder="Insert password" required="true">
-                        <img id="visibleSignPassword" src ="../style/img/eye-slash-solid.png" onclick="showPassword()">
+                        <input type="password" name="passwordSignInput" id="passwordSignInput" placeholder="Insert password" required="true" >
+                        <img id="visibleSignPassword" src ="../style/img/eye-slash-solid.png" onclick="showPassword()" >
                         </img>
                         <br>
-                        
-                        <input type="submit" id="submitSignBtn" class="loginButton" >
+
+                        <b>Confirm password</b>  
+                            <br>
+                        <input type="password" name="confirmPasswordSignInput" id="confirmPasswordSignInput" placeholder="Insert password" required="true" onkeypress="handleKeyPress(event)">
+                        <br>
+
+                        <input type="submit" id="submitSignBtn" class="loginButton">
                         <button id="clearSignBtn" class="loginButton" onclick="resetField()">
                             Clear 
                         </button>
@@ -68,6 +73,7 @@
                             Log in
                             </a>
                         </p>
+
                     </fieldset>
                 </div>
             </FORM>
