@@ -1,12 +1,9 @@
 function fillTaskList(tuple) {
-    console.log(tuple.title);
-    var newTask = { key:tuple.keyhash, title: tuple.title, pomodori: tuple.pomodori,note: tuple.note,donepomodori: tuple.donepomodori };
+    var newTask = { key:tuple.keyhash, title: tuple.title, pomodori: parseInt(tuple.pomodori),note: tuple.note,donepomodori: parseInt(tuple.donepomodori),tim:(tuple.tim) };
     taskList.push(newTask); 
 }
 function fillTaskBox (){
     for (var i=0 ;i<taskList.length;i++){
-        index+=i;
-        console.log(taskList.length);
         document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
         <div  class="task" data-value="${taskList[i].key}">
           
@@ -29,5 +26,6 @@ function fillTaskBox (){
             </div>
         </div>
     `)
-    }
+    index++;}
+    updateTaskButtons();
 }

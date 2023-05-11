@@ -97,3 +97,8 @@
   margin-left: 42px;
   width: 300px;
 }
+
+#chartPanel {
+  margin-right: auto;
+  width: 500px;
+}

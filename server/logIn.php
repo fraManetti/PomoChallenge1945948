@@ -1,6 +1,6 @@
 <?php 
-        $db_conn = pg_connect("host=localhost port=5432 dbname=pomochallenge 
-        user=postgres password=pomodoro") or die ('Connection error-impossibile connettersi al server' . pg_last_error());
+  include( 'db_conn.php');  
+
     // if($_SERVER["REQUEST_METHOD"] !="POST"){
     //     header("Location: ../model/index.html");
     // }

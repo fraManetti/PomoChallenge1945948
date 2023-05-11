@@ -5,7 +5,7 @@
             
     session_start(); 
     $cookie = $_SESSION["username"]; 
-    $query = "select keyhash, title, pomodori, note, dat,tim from endedtask where endedtask.username = '{$cookie}' and date_trunc('week', to_date(dat, 'DD-MM-YYYY')) = date_trunc('week', current_date)::date;";
+    $query = "select keyhash, title, pomodori, note, dat,tim from endedtask where endedtask.username = '{$cookie}' and date_trunc('month', to_date(dat, 'DD-MM-YYYY')) = date_trunc('month', current_date)::date;";
     $res = pg_query($db_conn, $query);
     
         $result_array = array();
