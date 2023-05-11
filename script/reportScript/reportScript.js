@@ -60,7 +60,7 @@ function monthQuery(s) {
           console.log(result);
           if(endedTasks.length != 0) {
             for(var i = 0; i<endedTasks.length; i++) {
-              sum += endedTasks[i].tim;
+              sum += parseInt(endedTasks[i].tim);
               //sumTime(endedTasks[i]);
             }
           }
