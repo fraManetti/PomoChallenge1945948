@@ -1,7 +1,7 @@
 var currentString = "";
 var currentDate = new Date();
 var currentPeriodType = "";
-
+var totalTime=0;
 let myChart = null;
 function monthCharts(i) {
   const ctx = document.getElementById('myChart');
@@ -153,11 +153,10 @@ function parseDate(str) {
 function upTotalTime(totalTime) {
   console.log(totalTime);
   document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
-    <p1> ${totalTime}</p1>
+    <p1> Tempo Totale: ${totalTime}</p1>
   `);
 }
 function downloadEnded(tuple) {
-  var totalTime = 0;
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task" data-value="${tuple.keyhash}">
         
@@ -180,6 +179,7 @@ function downloadEnded(tuple) {
     
     </div>
 `)
+totalTime+= JSON.parse(tuple.tim);
 if (!document.querySelector('#currentPeriod').innerHTML.trim())
     document.querySelector('#currentPeriod').insertAdjacentHTML('beforeend', `
         <h3>
@@ -226,7 +226,7 @@ function endedOption(e) {
 function load(s) {
     if(myChart!= null) myChart.destroy();
     var url;
-    var totalTime = 0 ;
+    totalTime = 0 ;
     if(s == 'daily') url = "dailyLoad.php";
     else if(s == 'weekly') url = "weeklyLoad.php";
     else if(s == 'all') url = "allLoad.php";
@@ -264,7 +264,6 @@ function load(s) {
         } else {
             response.forEach(function(tuple) {
               downloadEnded(tuple);
-              totalTime+= tuple.time;
           });
           upTotalTime(totalTime);
         }

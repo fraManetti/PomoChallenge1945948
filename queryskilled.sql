@@ -11,3 +11,4 @@ FROM (
 ) AS pippo
 ORDER BY random()
 LIMIT 3;
+...

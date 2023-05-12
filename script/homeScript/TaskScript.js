@@ -97,7 +97,9 @@ function removeTaskItem() {
   var day = JSON.parse(dat.getDate());
   var month = JSON.parse(dat.getMonth()+1);
   var year = JSON.parse(dat.getFullYear());
-  console.log(day,month,year)
+  var hour = JSON.parse(dat.getHours());
+
+  console.log("data",day,month,year,hour);
   if (day<10)
     day = "0"+day;
   if (month<10)

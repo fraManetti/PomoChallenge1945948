@@ -86,10 +86,12 @@
      $tuple_json = json_encode($tuple);
     echo '<script> 
     currentPeriodType = "day";
-    downloadEnded(' . $tuple_json . ')
+    downloadEnded(' . $tuple_json . ');
     </script>';
     }
-
+    echo '<script>
+       upTotalTime(totalTime);
+    </script>';
 ?>
 </body>
 </html>
