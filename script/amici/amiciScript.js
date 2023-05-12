@@ -3,7 +3,7 @@ function acceptIncomingReq(e) {
     var amico = button.parentNode.getAttribute("data-value");
     button.parentNode.remove();
     $.ajax({
-        url: "../scripts/updateAmici.php",
+        url: "updateAmici.php",
         type: "POST",
         data: {amico: amico,type: "acceptReq"},
         success: function(result) {
@@ -82,7 +82,8 @@ function downloadAmici(amico) {
     document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
         <div class="amico" data-value=${amico}>
             ${amico}
-            <button class = "delAmico" onClick = delAmico(event);></button>
+            <button class="visitaProfiloButton">Profilo</button>
+            <button class = "delAmico" id = "delete-friend-button" onClick = delAmico(event);> Rimuovi </button>
         </div>
     `)
 }
@@ -104,14 +105,14 @@ function addFriend(e) {
     document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
         <div class="request" data-value = ${friendToAdd}>
             ${friendToAdd}
-            <button class ="delReq" onClick="delOutgoingReq(event);"> delete</button>
+            <button class ="delReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)}
 function sendRequest() {
     var friendToAdd = document.getElementById("search").value;
     document.getElementById("search").value="";
         $.ajax({
-        url: "../scripts/updateAmici.php",
+        url: "updateAmici.php",
         type: "POST",
         data: {amico: friendToAdd,type: "reqAmico"},
         success: function(result) {
@@ -126,7 +127,7 @@ function sendRequest() {
     document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
         <div class="request" data-value = ${friendToAdd}>
             ${friendToAdd}
-            <button class ="delReq" onClick="delOutgoingReq(event);"> delete</button>
+            <button class ="delReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)
 }
@@ -134,8 +135,8 @@ function downloadIncomingRequest(amico) {
     document.querySelector("#incoming").insertAdjacentHTML('beforeend', `
         <div class="incomingReq" data-value=${amico}>
             ${amico}
-            <button class = "acceptIncomingReq" onClick = acceptIncomingReq(event);>accept</button>
-            <button class = "delIncomingReq" onClick = delIncomingReq(event);>delete</button>
+            <button class = "acceptIncomingReq" onClick = acceptIncomingReq(event);>&#10004;</button>
+            <button class = "delIncomingReq" onClick = delIncomingReq(event);>x</button>
         </div>
     `)
 }
@@ -143,7 +144,7 @@ function downloadSuggAmici(tuple) {
     document.querySelector("#suggBox").insertAdjacentHTML('beforeend', `
         <div class ="suggAmico" data-value =${tuple.utentea}>    
     <span data-value=${tuple.utentea} >${tuple.utentea}</span>
-    <button class ="visitaProfiloButton" >profilo</button>
+    <button class ="visitaProfiloButton" >Profilo</button>
     <button class="sendRequestButton" onClick="addFriend(event);">+</button>
     </div>
 `)
