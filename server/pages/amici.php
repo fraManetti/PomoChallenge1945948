@@ -52,6 +52,7 @@
                 </div>
         </div>
         <div id="boxdx" > 
+            <div id = "topBox">
             <div id ="searchBox" class="row">
 <div class="sample ten">
   <input type="text" name="search" placeholder="search" id="search">
@@ -60,6 +61,8 @@
   </button>
   <button type="reset" class="btn btn-reset fa fa-times"></button>
 </div>      </div>
+<div id ="suggBox" class = "box"> <h2>Suggeriti</h2> </div>
+</div>
 <div id ="amiciRequest" class="row">
     <div id="incoming" class="box">
     <h2>Richieste Entranti</h2>
@@ -97,4 +100,41 @@ $username = $_SESSION['username'];
         downloadIncomingRequest(' . $tuple_json . ') </script>';
     }
 ?>
+<?php 
+    $query = "select * from richieste where richiedente = '${username}'";
+    $res = pg_query ($db_conn,$query);
+    while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
+        $tuple_json = json_encode($tuple['accettante']);
+        echo '<script>
+        downloadOutgoingRequest(' . $tuple_json . ') </script>';
+    }
+?>
+<?php 
+    $query ="
+    WITH mieiAmici AS (
+        SELECT utentea AS amico FROM amici WHERE utenteb = 'luca'
+        UNION
+        SELECT utenteb AS amico FROM amici WHERE utentea = 'luca'
+      )
+      SELECT *
+      FROM (
+        SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != 'luca'
+        UNION
+        SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != 'luca'
+      ) AS pippo
+      ORDER BY random()
+      LIMIT 3;
+    ";
+$res = pg_query($db_conn,$query);
+if (!$res) {
+    header("HTTP/1.1 500 Internal Server Error");
+    //echo '<script> alert ("inserisci amico valido");</script>';
+    exit();
+  }
+  while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
+    $tuple_json = json_encode($tuple);
+    echo '<script>
+    downloadSuggAmici(' . $tuple_json . ') </script>';
+}
+  ?>
 </html>

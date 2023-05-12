@@ -67,4 +67,8 @@
     #outgoing {
       background-color: lightgreen;
     }
+
+    #suggBox {
+      background-color: rgb(228, 112, 112);
+    }
     
