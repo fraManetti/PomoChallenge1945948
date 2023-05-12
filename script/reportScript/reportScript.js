@@ -3,8 +3,11 @@ var currentD = new Date();
 var currentPeriodType = "";
 
 
-let myChart = null;
+var myChart = null;
 function monthCharts(i) {
+  if (myChart) {
+    myChart.destroy();
+  }
   const ctx = document.getElementById('myChart');
   monthQuery().then((data) => {
     const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -15,7 +18,7 @@ function monthCharts(i) {
       data: {
         labels: monthLabels,
         datasets: [{
-          label: `# minutes in ${currentMonth}`,
+          label: `# minutes in a month`,
           data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1],data[7][1],data[8][1],
                 data[9][1],data[10][1],data[11][1]],
           borderWidth: 0.8,
@@ -38,32 +41,24 @@ function monthCharts(i) {
 }
 
 function weekCharts() {
+  if (myChart) {
+    myChart.destroy();
+  }
   const ctx = document.getElementById('myChart');
-  
-  Promise.all([
-    weekQuery(0),
-    weekQuery(1),
-    weekQuery(2),
-    weekQuery(3),
-    weekQuery(4),
-    weekQuery(5),
-    weekQuery(6),
-
-  ]).then((data) => {
+  weekQuery().then((data) => {
+    const monthLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     myChart = new Chart(ctx, {
-      
       type: 'bar',
       data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: monthLabels,
         datasets: [{
-          label: '# minutes in a week',
-          data: data,
+          label: `# minutes in a month`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
           borderWidth: 0.8,
-          barThickness: 25,
         }]
       },
       options: {
-        animation: false,
+      
         normalized: true,
         scales: {
           y: {
@@ -72,9 +67,9 @@ function weekCharts() {
         }
       }
     });
-    
+  }).catch((error) => {
+    console.error(error);
   });
-
 }
 
 function monthQuery() {
@@ -97,34 +92,23 @@ function monthQuery() {
   });
 }
 
-function weekQuery(s) {
+function weekQuery() {
   return new Promise((resolve, reject) => {
-    var sum = 0;
-    var period = s;
-    var php = "../server/getWeekTime.php";
-    var typeReq = "POST";
-    $.ajax({
-      url: php,
-      type: typeReq,
-      data: {period: period},
-      success: function(result) {
-        console.log(result);
-          // Aggiornamento eseguito con successo
-          var endedTasks = JSON.parse(result);
-          if(endedTasks.length != 0) {
-            for(var i = 0; i<endedTasks.length; i++) {
-              sum += parseInt(endedTasks[i].tim);
-              //sumTime(endedTasks[i]);
-            }
-          }
-          resolve(sum);
-      },
-      error: function(xhr, status, error) {
-          // Errore nell'aggiornamento
-          console.error(error);
-          reject(error);
+    const url = "getWeekTime.php";
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
       }
-    });
+    }
+    httpRequest.send();
   });
 }
 
@@ -334,8 +318,11 @@ function increase() {
   else if(currentPeriodType == "month") {
     increaseMonth("+");
     var php = "../server/increaseMonth.php";
-    console.log(currentD);
-    console.log(currentString);
+    if(myChart != null) {
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = 'red';
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()-1] = 'grey';
+      myChart.update();
+    }
   }
   $.ajax({
     url: php,
@@ -371,6 +358,11 @@ function decrease() {
   else if(currentPeriodType == "month") {
     increaseMonth("-");
     var php = "../server/increaseMonth.php";
+    if(myChart != null) {
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = 'red';
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()+1] = 'grey';
+      myChart.update();
+    }
   }
   $.ajax({
     url: php,
