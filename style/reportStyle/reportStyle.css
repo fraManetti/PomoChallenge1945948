@@ -34,7 +34,18 @@
   margin-left: auto;
   margin-right: auto;
   background-color: white;
+  position: absolute;
   
+}
+
+#chartPanel {
+  border-style: solid;
+  height: 700px;
+  width: fit-content;
+  margin-left: 600px;
+  margin-right: auto;
+  background-color: white;
+  position: absolute;
 }
 
 .task {

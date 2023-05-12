@@ -56,7 +56,7 @@
                 <button id ="weeklyButton" onclick="load('weekly')">
                     Attività settimanali
                 </button>
-                <button id ="monthlyButton" onclick="load('month')">
+                <button id ="monthlyButton" onclick="load('monthly')">
                     Attività mensili
                 </button>
                 <button id ="allButton" onclick="load('all')">
@@ -85,6 +85,7 @@
     while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
      $tuple_json = json_encode($tuple);
     echo '<script> 
+    currentPeriodType = "day";
     downloadEnded(' . $tuple_json . ')
     </script>';
     }

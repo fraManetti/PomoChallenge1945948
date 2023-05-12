@@ -2,9 +2,8 @@ var currentString = "";
 var currentDate = new Date();
 var currentPeriodType = "";
 
-$(document).ready(charts)
-
-function charts() {
+let myChart = null;
+function monthCharts(i) {
   const ctx = document.getElementById('myChart');
   
   Promise.all([
@@ -21,15 +20,16 @@ function charts() {
     monthQuery('11'),
     monthQuery('12')
   ]).then((data) => {
-    new Chart(ctx, {
+    myChart = new Chart(ctx, {
       
       type: 'bar',
       data: {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
-          label: '# ore in ',
+          label: '# minutes in a month',
           data: data,
-          borderWidth: 1
+          borderWidth: 0.8,
+          backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === i-1 ? 'red' : 'grey')
         }]
       },
       options: {
@@ -40,7 +40,47 @@ function charts() {
         }
       }
     });
+    
   });
+
+}
+
+function weekCharts() {
+  const ctx = document.getElementById('myChart');
+  
+  Promise.all([
+    weekQuery(0),
+    weekQuery(1),
+    weekQuery(2),
+    weekQuery(3),
+    weekQuery(4),
+    weekQuery(5),
+    weekQuery(6),
+
+  ]).then((data) => {
+    myChart = new Chart(ctx, {
+      
+      type: 'bar',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: '# minutes in a week',
+          data: data,
+          borderWidth: 0.8,
+          barThickness: 25,
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+    
+  });
+
 }
 
 function monthQuery(s) {
@@ -55,9 +95,38 @@ function monthQuery(s) {
       data: {period: period},
       success: function(result) {
           // Aggiornamento eseguito con successo
-          console.log(result);
           var endedTasks = JSON.parse(result);
-          console.log(result);
+          if(endedTasks.length != 0) {
+            for(var i = 0; i<endedTasks.length; i++) {
+              sum += parseInt(endedTasks[i].tim);
+              //sumTime(endedTasks[i]);
+            }
+          }
+          resolve(sum);
+      },
+      error: function(xhr, status, error) {
+          // Errore nell'aggiornamento
+          console.error(error);
+          reject(error);
+      }
+    });
+  });
+}
+
+function weekQuery(s) {
+  return new Promise((resolve, reject) => {
+    var sum = 0;
+    var period = s;
+    var php = "../server/getWeekTime.php";
+    var typeReq = "POST";
+    $.ajax({
+      url: php,
+      type: typeReq,
+      data: {period: period},
+      success: function(result) {
+        console.log(result);
+          // Aggiornamento eseguito con successo
+          var endedTasks = JSON.parse(result);
           if(endedTasks.length != 0) {
             for(var i = 0; i<endedTasks.length; i++) {
               sum += parseInt(endedTasks[i].tim);
@@ -76,8 +145,6 @@ function monthQuery(s) {
 }
 
 
-
-
 function parseDate(str) {
   var parts = str.split("-");
   return new Date(parts[2], parts[1] - 1, parts[0]);
@@ -91,7 +158,6 @@ function upTotalTime(totalTime) {
 }
 function downloadEnded(tuple) {
   var totalTime = 0;
-  console.log(tuple);
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task" data-value="${tuple.keyhash}">
         
@@ -126,7 +192,6 @@ if (!document.querySelector('#currentPeriod').innerHTML.trim())
 function deleteEndedTask(e) {
   var url ="deleteTask.php";
   var button = e.currentTarget;
-  console.log(button)
   var task = button.parentNode;
  task.remove();
   var keyhash = task.getAttribute("data-value");
@@ -136,7 +201,7 @@ function deleteEndedTask(e) {
     data: {keyhash: keyhash},
     success: function(result) {
         // Aggiornamento eseguito con successo
-        console.log(result);
+        
     },
     error: function(xhr, status, error) {
         // Errore nell'aggiornamento
@@ -159,6 +224,7 @@ function endedOption(e) {
 
 
 function load(s) {
+    if(myChart!= null) myChart.destroy();
     var url;
     var totalTime = 0 ;
     if(s == 'daily') url = "dailyLoad.php";
@@ -171,18 +237,22 @@ function load(s) {
     else if(s == 'weekly') {
       url = "weeklyLoad.php";
       currentPeriodType = "week";
+      weekCharts();
     }
-    else if(s == 'month') {
+    else if(s == 'monthly') {
       url = "monthlyLoad.php";
       currentPeriodType = "month";
+      currentMonth = new Date().getMonth()+1;
+      console.log(parseInt(currentMonth));
+      monthCharts(parseInt(currentMonth));
     }
     else if(s == 'all') {
       url = "allLoad.php";
       currentPeriodType = "none";
     }
-    console.log(currentPeriodType);
     document.getElementById("tasksPanel").innerHTML = '';
     document.getElementById("currentPeriod").innerHTML = '';
+    //document.getElementById("myChart").innerHTML = '';
     var httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -240,7 +310,7 @@ function increaseWeek(s) {
 }
 
 function increaseMonth(s) {
-  currentDate.setDate(currentDate.getDate());
+  console.log(currentDate);
   var day = JSON.parse(currentDate.getDate());
   var year = JSON.parse(currentDate.getFullYear());
   if(s == "+") {
@@ -275,6 +345,7 @@ function increase() {
   else if(currentPeriodType == "month") {
     increaseMonth("+");
     var php = "../server/increaseMonth.php";
+    console.log(currentString);
   }
   $.ajax({
     url: php,
@@ -283,7 +354,6 @@ function increase() {
     success: function(result) {
         // Aggiornamento eseguito con successo
         var endedTasks = JSON.parse(result);
-
         if(endedTasks.length != 0) {
           for(var i = 0; i<endedTasks.length; i++) {
             downloadEnded(endedTasks[i]);
