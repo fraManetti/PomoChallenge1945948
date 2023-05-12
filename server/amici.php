@@ -1,5 +1,5 @@
 <?php
-  include( '../db_conn.php');  
+  include( 'db_conn.php');  
   session_start(); 
 ?>
 <!DOCTYPE html>
@@ -22,18 +22,18 @@
 
     <link rel="stylesheet" href="../../bootstrap/dist/css/bootstrap.css" >
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
-    <link rel="stylesheet" href="../../style/homeStyle/style.css">
-    <link rel="stylesheet" href="../../style/amiciStyle/amiciStyle.css">
-    <link rel="stylesheet" href="../../style/homeStyle/inputStyle.css">
+    <link rel="stylesheet" href="../style/homeStyle/style.css">
+    <link rel="stylesheet" href="../style/amiciStyle/amiciStyle.css">
+    <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-    <script src="../../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
-    <script src="../../script/amici/amiciScript.js"></script>
+    <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
+    <script src="../script/amici/amiciScript.js"></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
 
     <script>
         $(function(){
-          $("#mynavbar").load("../../model/newNavbar.html");
+          $("#mynavbar").load("../model/newNavbar.html");
         });
 
     </script>
