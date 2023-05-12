@@ -35,12 +35,13 @@
           break;
         case 'FYN':
           $dat  =$_POST['dat'];
+          $ora = $_POST['ora'];
           $query = "delete from task where keyhash='{$key}' and username='{$username}'"; 
           $res = pg_query($db_conn,$query);
           $query = "update task set ind=ind-1 where ind>{$ind} and username='{$username}'";
           $res = pg_query($db_conn,$query);
           echo $dat;
-          $query = "insert into endedtask values ('{$username}','{$key}','{$title}',{$pomodori},'{$note}','{$dat}',{$tim})";
+          $query = "insert into endedtask values ('{$username}','{$key}','{$title}',{$pomodori},'{$note}','{$dat}',{$tim},{$ora})";
           break;
         default:
             break;

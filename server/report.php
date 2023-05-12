@@ -84,9 +84,11 @@
     </script>';
     }
     echo '<script>
+        hourCharts();
        upTotalTime(totalTime);
     </script>';
 ?>
 </body>
 </html>
 
+a

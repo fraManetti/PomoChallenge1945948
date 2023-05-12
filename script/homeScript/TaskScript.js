@@ -104,8 +104,10 @@ function removeTaskItem() {
     day = "0"+day;
   if (month<10)
     month = "0"+month;
-  
+  if(hour<10)
+    hours = "0"+hour;
   task.dat=day+"-"+month+"-"+year;
+  task.ora = hour;
   console.log(task.dat)
   updateServer(task,"FYN");
   taskList.shift();
@@ -503,7 +505,7 @@ function updateServer(newTask,type) {
   $.ajax({
     url: "../server/updateTaskServer.php",
     type: "POST",
-    data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat,tim:newTask.tim},
+    data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat,tim:newTask.tim,ora:newTask.ora},
     success: function(result) {
         // Aggiornamento eseguito con successo
         console.log(result);

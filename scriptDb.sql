@@ -25,6 +25,7 @@ create table endedtask (
 	note varchar(115),
 	dat varchar(10) not null,
     tim int not null,
+	ora varchar(8) not null,
 	primary key (username,keyhash),
 	FOREIGN KEY (username) REFERENCES utente(username)
 
@@ -66,3 +67,20 @@ insert into amici values('max','max3');
 insert into amici values('max','max4');
 insert into amici values('max','max5');
 insert into amici values('max','max6');
+
+---------------
+
+INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
+	VALUES ('luca', '012345678', '10-05-2023', 1, '', '12-05-2023', 3, '03:00:00' );
+INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
+	VALUES ('luca', '0123456781', '10-05-2023', 1, '', '12-04-2023', 3, '13:00:00' );
+INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
+	VALUES ('luca', '0123456782', '10-05-2023', 1, '', '12-06-2023', 3, '23:00:00' );
+INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
+	VALUES ('luca', '0123456783', '10-05-2023', 1, '', '10-05-2023', 3, '00:00:00' );
+INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
+	VALUES ('luca', '0123456784', '10-05-2023', 1, '', '11-05-2023', 3, '08:00:00' );
+INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
+	VALUES ('luca', '012345678', '10-05-2023', 1, '', '12-05-2023', 5, '03:00:00' );
+INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
+	VALUES ('luca', '012345678', '10-05-2023', 1, '', '12-05-2023', 3, '13:00:00' );
