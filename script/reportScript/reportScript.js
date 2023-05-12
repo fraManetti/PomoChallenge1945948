@@ -1,6 +1,7 @@
 var currentString = "";
-var currentDate = new Date();
+var currentD = new Date();
 var currentPeriodType = "";
+
 
 let myChart = null;
 function monthCharts(i) {
@@ -9,8 +10,6 @@ function monthCharts(i) {
     const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const currentMonthIndex = i - 1;
     const currentMonth = monthLabels[currentMonthIndex];
-    const totalTim = data[0][1];
-    console.log(currentMonth);
     myChart = new Chart(ctx, {
       type: 'bar',
       data: {
@@ -37,57 +36,6 @@ function monthCharts(i) {
     console.error(error);
   });
 }
-
-
-
-
-
-
-
-
- 
-
-
-/* function monthCharts(i) {
-  const ctx = document.getElementById('myChart');
-
-  myChart = new Chart(ctx, {
-      
-    type: 'bar',
-    data: {
-      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      datasets: [{
-        label: '# minutes in a month',
-        data: [monthQuery('01'),
-        monthQuery('02'),
-        monthQuery('03'),
-        monthQuery('04'),
-        monthQuery('05'),
-        monthQuery('06'),
-        monthQuery('07'),
-        monthQuery('08'),
-        monthQuery('09'),
-        monthQuery('10'),
-        monthQuery('11'),
-        monthQuery('12')],
-        borderWidth: 0.8,
-        backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === i-1 ? 'red' : 'grey')
-      }]
-    },
-    options: {
-      animation: false,
-      normalized: true,
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-});
-
-} */
-
-
 
 function weekCharts() {
   const ctx = document.getElementById('myChart');
@@ -141,7 +89,6 @@ function monthQuery() {
         if ('error' in response) {
           reject(response.error);
         } else {
-          console.log(response);
           resolve(response);
         }
       }
@@ -149,8 +96,6 @@ function monthQuery() {
     httpRequest.send();
   });
 }
-
-    
 
 function weekQuery(s) {
   return new Promise((resolve, reject) => {
@@ -183,12 +128,12 @@ function weekQuery(s) {
   });
 }
 
-
 function parseDate(str) {
   var parts = str.split("-");
   return new Date(parts[2], parts[1] - 1, parts[0]);
   
 }
+
 function upTotalTime(totalTime) {
   document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
     <p1> ${totalTime}</p1>
@@ -224,7 +169,7 @@ if (!document.querySelector('#currentPeriod').innerHTML.trim())
             ${tuple.dat}
         </h3>
     `)
-  currentDate = parseDate(tuple.dat);
+  //currentD = parseDate(tuple.dat);
 }
 
 function deleteEndedTask(e) {
@@ -264,6 +209,7 @@ function endedOption(e) {
 
 
 function load(s) {
+  currentD = new Date();
     if(myChart!= null) myChart.destroy();
     var url;
     var totalTime = 0 ;
@@ -282,7 +228,7 @@ function load(s) {
     else if(s == 'monthly') {
       url = "monthlyLoad.php";
       currentPeriodType = "month";
-      currentMonth = new Date().getMonth()+1;
+      currentMonth = currentD.getMonth()+1;
       monthCharts(currentMonth);
       
     }
@@ -317,14 +263,14 @@ function load(s) {
 
 function increaseDay(s) {
   if(s == "+") {
-    currentDate.setDate(currentDate.getDate() + 1);
+    currentD.setDate(currentD.getDate() + 1);
   }
   else if (s == "-") {
-    currentDate.setDate(currentDate.getDate() - 1);
+    currentD.setDate(currentD.getDate() - 1);
   }
-  var day = JSON.parse(currentDate.getDate());
-  var month = JSON.parse(currentDate.getMonth()+1);
-  var year = JSON.parse(currentDate.getFullYear());
+  var day = JSON.parse(currentD.getDate());
+  var month = JSON.parse(currentD.getMonth()+1);
+  var year = JSON.parse(currentD.getFullYear());
   if (day<10)
     day = "0"+day;
   if (month<10)
@@ -335,14 +281,14 @@ function increaseDay(s) {
 
 function increaseWeek(s) {
   if(s == "+") {
-    currentDate.setDate(currentDate.getDate() + 7);
+    currentD.setDate(currentD.getDate() + 7);
   }
   else if (s == "-") {
-    currentDate.setDate(currentDate.getDate() - 7);
+    currentD.setDate(currentD.getDate() - 7);
   }
-  var day = JSON.parse(currentDate.getDate());
-  var month = JSON.parse(currentDate.getMonth()+1);
-  var year = JSON.parse(currentDate.getFullYear());
+  var day = JSON.parse(currentD.getDate());
+  var month = JSON.parse(currentD.getMonth()+1);
+  var year = JSON.parse(currentD.getFullYear());
   if (day<10)
     day = "0"+day;
   if (month<10)
@@ -352,16 +298,16 @@ function increaseWeek(s) {
 }
 
 function increaseMonth(s) {
-  console.log(currentDate);
-  var day = JSON.parse(currentDate.getDate());
-  var year = JSON.parse(currentDate.getFullYear());
+  
   if(s == "+") {
-    var month = JSON.parse(currentDate.getMonth()+2);
+    currentD.setMonth(currentD.getMonth() + 1);
   }
   else if (s == "-") {
-    var month = JSON.parse(currentDate.getMonth());
+    currentD.setMonth(currentD.getMonth() - 1);
   }
-  
+  var day = JSON.parse(currentD.getDate());
+  var month = JSON.parse(currentD.getMonth()+1);
+  var year = JSON.parse(currentD.getFullYear());
   if (day<10)
     day = "0"+day;
   if (month<10)
@@ -374,6 +320,7 @@ function increaseMonth(s) {
 
 
 function increase() {
+  //console.log(currentString);
   document.getElementById("tasksPanel").innerHTML = '';
   var typeReq = "POST";
   if(currentPeriodType == "day") {
@@ -387,6 +334,7 @@ function increase() {
   else if(currentPeriodType == "month") {
     increaseMonth("+");
     var php = "../server/increaseMonth.php";
+    console.log(currentD);
     console.log(currentString);
   }
   $.ajax({
