@@ -5,34 +5,27 @@ var currentPeriodType = "";
 let myChart = null;
 function monthCharts(i) {
   const ctx = document.getElementById('myChart');
-  
-  Promise.all([
-    monthQuery('01'),
-    monthQuery('02'),
-    monthQuery('03'),
-    monthQuery('04'),
-    monthQuery('05'),
-    monthQuery('06'),
-    monthQuery('07'),
-    monthQuery('08'),
-    monthQuery('09'),
-    monthQuery('10'),
-    monthQuery('11'),
-    monthQuery('12')
-  ]).then((data) => {
+  monthQuery().then((data) => {
+    const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const currentMonthIndex = i - 1;
+    const currentMonth = monthLabels[currentMonthIndex];
+    const totalTim = data[0][1];
+    console.log(currentMonth);
     myChart = new Chart(ctx, {
-      
       type: 'bar',
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: monthLabels,
         datasets: [{
-          label: '# minutes in a month',
-          data: data,
+          label: `# minutes in ${currentMonth}`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1],data[7][1],data[8][1],
+                data[9][1],data[10][1],data[11][1]],
           borderWidth: 0.8,
-          backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === i-1 ? 'red' : 'grey')
+          backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? 'red' : 'grey')
         }]
       },
       options: {
+      
+        normalized: true,
         scales: {
           y: {
             beginAtZero: true
@@ -40,10 +33,61 @@ function monthCharts(i) {
         }
       }
     });
-    
+  }).catch((error) => {
+    console.error(error);
   });
-
 }
+
+
+
+
+
+
+
+
+ 
+
+
+/* function monthCharts(i) {
+  const ctx = document.getElementById('myChart');
+
+  myChart = new Chart(ctx, {
+      
+    type: 'bar',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      datasets: [{
+        label: '# minutes in a month',
+        data: [monthQuery('01'),
+        monthQuery('02'),
+        monthQuery('03'),
+        monthQuery('04'),
+        monthQuery('05'),
+        monthQuery('06'),
+        monthQuery('07'),
+        monthQuery('08'),
+        monthQuery('09'),
+        monthQuery('10'),
+        monthQuery('11'),
+        monthQuery('12')],
+        borderWidth: 0.8,
+        backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === i-1 ? 'red' : 'grey')
+      }]
+    },
+    options: {
+      animation: false,
+      normalized: true,
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+});
+
+} */
+
+
 
 function weekCharts() {
   const ctx = document.getElementById('myChart');
@@ -71,6 +115,8 @@ function weekCharts() {
         }]
       },
       options: {
+        animation: false,
+        normalized: true,
         scales: {
           y: {
             beginAtZero: true
@@ -83,35 +129,28 @@ function weekCharts() {
 
 }
 
-function monthQuery(s) {
+function monthQuery() {
   return new Promise((resolve, reject) => {
-    var sum = 0;
-    var period = s;
-    var php = "../server/getMonthTime.php";
-    var typeReq = "POST";
-    $.ajax({
-      url: php,
-      type: typeReq,
-      data: {period: period},
-      success: function(result) {
-          // Aggiornamento eseguito con successo
-          var endedTasks = JSON.parse(result);
-          if(endedTasks.length != 0) {
-            for(var i = 0; i<endedTasks.length; i++) {
-              sum += parseInt(endedTasks[i].tim);
-              //sumTime(endedTasks[i]);
-            }
-          }
-          resolve(sum);
-      },
-      error: function(xhr, status, error) {
-          // Errore nell'aggiornamento
-          console.error(error);
-          reject(error);
+    const url = "getMonthTime.php";
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          console.log(response);
+          resolve(response);
+        }
       }
-    });
+    }
+    httpRequest.send();
   });
 }
+
+    
 
 function weekQuery(s) {
   return new Promise((resolve, reject) => {
@@ -151,7 +190,6 @@ function parseDate(str) {
   
 }
 function upTotalTime(totalTime) {
-  console.log(totalTime);
   document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
     <p1> ${totalTime}</p1>
   `);
@@ -201,7 +239,9 @@ function deleteEndedTask(e) {
     data: {keyhash: keyhash},
     success: function(result) {
         // Aggiornamento eseguito con successo
-        
+        if(myChart!= null) myChart.destroy();
+        currentMonth = new Date().getMonth()+1;
+        monthCharts(currentMonth);
     },
     error: function(xhr, status, error) {
         // Errore nell'aggiornamento
@@ -243,8 +283,8 @@ function load(s) {
       url = "monthlyLoad.php";
       currentPeriodType = "month";
       currentMonth = new Date().getMonth()+1;
-      console.log(parseInt(currentMonth));
-      monthCharts(parseInt(currentMonth));
+      monthCharts(currentMonth);
+      
     }
     else if(s == 'all') {
       url = "allLoad.php";
@@ -267,10 +307,12 @@ function load(s) {
               totalTime+= tuple.time;
           });
           upTotalTime(totalTime);
+          
         }
       }
     };
     httpRequest.send();
+    
   }
 
 function increaseDay(s) {
