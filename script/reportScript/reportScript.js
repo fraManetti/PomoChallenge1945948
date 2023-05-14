@@ -75,6 +75,39 @@ function weekCharts() {
   });
 }
 
+function weekCharts2(s) {
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
+  weekQuery2(s).then((data) => {
+    const weekLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: weekLabels,
+        datasets: [{
+          label: `# minutes in a week`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
+          borderWidth: 0.8,
+          //backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? 'red' : 'grey')
+        }]
+      },
+      options: {
+      
+        normalized: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
 function monthQuery() {
   return new Promise((resolve, reject) => {
     const url = "getMonthTime.php";
@@ -112,6 +145,27 @@ function weekQuery() {
       }
     }
     httpRequest.send();
+  });
+}
+
+function weekQuery2(s) {
+  return new Promise((resolve, reject) => {
+    const url = "increaseWeekTime.php";
+    const formData = new FormData();
+    formData.append("parametro1", s);
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("POST", url);
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send(formData);
   });
 }
 
@@ -180,7 +234,7 @@ function deleteEndedTask(e) {
           weekCharts();
         }
         else if(currentPeriodType == "day") {
-          
+
         }
         
     },
@@ -326,6 +380,7 @@ function increase() {
   else if(currentPeriodType == "week") {
     increaseWeek("+");
     var php = "../server/increaseWeek.php";
+    weekCharts2(currentString);
   }
   else if(currentPeriodType == "month") {
     increaseMonth("+");
@@ -366,6 +421,7 @@ function decrease() {
   else if(currentPeriodType == "week") {
     increaseWeek("-");
     var php = "../server/increaseWeek.php";
+    weekCharts2(currentString);
   }
   else if(currentPeriodType == "month") {
     increaseMonth("-");
