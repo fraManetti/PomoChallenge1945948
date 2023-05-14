@@ -70,7 +70,7 @@
             
         </div>
         <div id = chartPanel>
-            <canvas id="myChart"></canvas>
+            <canvas id="myChartCanvas"></canvas>
         </div>
     </div>
     

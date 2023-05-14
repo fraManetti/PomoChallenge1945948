@@ -4,11 +4,13 @@ var currentPeriodType = "";
 
 
 var myChart = null;
+
+
 function monthCharts(i) {
   if (myChart) {
     myChart.destroy();
   }
-  const ctx = document.getElementById('myChart');
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
   monthQuery().then((data) => {
     const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const currentMonthIndex = i - 1;
@@ -44,17 +46,18 @@ function weekCharts() {
   if (myChart) {
     myChart.destroy();
   }
-  const ctx = document.getElementById('myChart');
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
   weekQuery().then((data) => {
-    const monthLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    const weekLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: monthLabels,
+        labels: weekLabels,
         datasets: [{
-          label: `# minutes in a month`,
+          label: `# minutes in a week`,
           data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
           borderWidth: 0.8,
+          //backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? 'red' : 'grey')
         }]
       },
       options: {
@@ -169,8 +172,17 @@ function deleteEndedTask(e) {
     success: function(result) {
         // Aggiornamento eseguito con successo
         if(myChart!= null) myChart.destroy();
-        currentMonth = new Date().getMonth()+1;
-        monthCharts(currentMonth);
+        if(currentPeriodType == "month") {
+          currentMonth = new Date().getMonth()+1;
+          monthCharts(currentMonth);
+        }
+        else if(currentPeriodType == "week") {
+          weekCharts();
+        }
+        else if(currentPeriodType == "day") {
+          
+        }
+        
     },
     error: function(xhr, status, error) {
         // Errore nell'aggiornamento

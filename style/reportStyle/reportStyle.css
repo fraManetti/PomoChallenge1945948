@@ -46,6 +46,7 @@
   margin-right: auto;
   background-color: white;
   position: absolute;
+  width: 500px;
 }
 
 .task {
@@ -108,7 +109,4 @@
   width: 300px;
 }
 
-#chartPanel {
-  margin-right: auto;
-  width: 500px;
-}
+
