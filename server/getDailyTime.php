@@ -16,7 +16,7 @@
           FROM hours
           LEFT JOIN endedtask
             ON  hours.hour = (endedtask.ora)::time
-            AND endedtask.username = '{$username}' AND to_date(endedtask.dat, 'DD-MM-YYYY') = '${dat}'
+            AND endedtask.username = '{$username}' AND to_date(endedtask.dat, 'DD-MM-YYYY') = '{$dat}'
           GROUP BY hours.hour
           ORDER BY hour
       

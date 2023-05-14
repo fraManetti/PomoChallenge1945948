@@ -59,6 +59,8 @@ insert into utente values ('max3','Password.1=');
 insert into utente values ('max4','Password.1=');
 insert into utente values ('max5','Password.1=');
 insert into utente values ('max6','Password.1=');
+insert into utente values ('marco','Password.1=');
+
 
 insert into amici values ('luca','marco')
 insert into amici values('luca','max');
@@ -71,7 +73,7 @@ insert into amici values('max','max6');
 ---------------
 
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
-	VALUES ('luca', '012345678', '10-05-2023', 1, '', '12-05-2023', 3, '03:00:00' );
+	VALUES ('luca', '0123456778', '10-05-2023', 1, '', '12-05-2023', 3, '03:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
 	VALUES ('luca', '0123456781', '10-05-2023', 1, '', '12-04-2023', 3, '13:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
@@ -81,6 +83,6 @@ INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
 	VALUES ('luca', '0123456784', '10-05-2023', 1, '', '11-05-2023', 3, '08:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
-	VALUES ('luca', '012345678', '10-05-2023', 1, '', '12-05-2023', 5, '03:00:00' );
+	VALUES ('luca', '01234567852', '10-05-2023', 1, '', '12-05-2023', 5, '03:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
-	VALUES ('luca', '012345678', '10-05-2023', 1, '', '12-05-2023', 3, '13:00:00' );
+	VALUES ('luca', '012345678554', '10-05-2023', 1, '', '12-05-2023', 3, '13:00:00' );

@@ -107,8 +107,9 @@ function removeTaskItem() {
   if(hour<10)
     hours = "0"+hour;
   task.dat=day+"-"+month+"-"+year;
+  hour+= ":00:00";
   task.ora = hour;
-  console.log(task.dat)
+  console.log(typeof hour,hour);
   updateServer(task,"FYN");
   taskList.shift();
   var tasks= document.getElementsByClassName("task");
@@ -132,7 +133,7 @@ function titleTimer(clock) {
   var minutes = Math.floor(timeInSeconds / 60);
   var seconds = timeInSeconds % 60;
   var timeString = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-  document.title = timeString + " - PC";
+  document.title = timeString + " - "+pos;
 }
 
 
@@ -164,10 +165,14 @@ function updateTaskMap(newTitle, newPomos,newNote) {
         tuple.title = newTitle;
         tuple.pomodori = newPomos;
         tuple.note = newNote;
-        task.donepomodori = tuple.donepomodori;
+        task.donepomodori = tuple.donepomodori;  
+        task.index = tuple.index;
+        task.tim = countS-(clock.getTime()/60);
+
       }
     }
   )
+  console.log(task)
   updateServer(task,"UP");
 }
 
@@ -216,7 +221,9 @@ function updateTaskTag(isRunning,isEnded){
     else
       time+=countB;
     time+=countS;
-  } timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
+  } 
+  time-=(countS-(clock.getTime()/60));
+  timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
 
   document.getElementById("timeEstimated").innerText=timeToAppend;
   } else 
@@ -297,6 +304,7 @@ function showOption(e) {
     oldTitle= taskItems[2].value;
     oldPomos= taskItems[3].value;
     oldNote = hiddenBox.children[0].value;
+    //oldIndex = JSON.parse(taskItems[2].getAttribute("data-value");
     currentKey=taskBox.getAttribute("data-value");
   }
 }
@@ -351,7 +359,7 @@ function addTask(){
                 <img class = "taskImg" id ="deleteImg" src = "../style/img/trash-can-solid.png"   onClick="deleteTask(event);">
                 </img>
               <!-- </button>   -->
-              <span class="indexTasks">${index})</span>
+              <span class="indexTasks" data-value="${index}">${index})</span>
               <input type="text" readOnly id="taskname"  value="${document.getElementById("taskFieldInput").value}" onkeypress="handleKeyPress(event, 'options')" maxlength="25">
               
 
@@ -502,8 +510,9 @@ function nascondiVignetta() {
 
 
 function updateServer(newTask,type) {
+  console.log(newTask.tim);
   $.ajax({
-    url: "../server/updateTaskServer.php",
+    url: "updateTaskServer.php",
     type: "POST",
     data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat,tim:newTask.tim,ora:newTask.ora},
     success: function(result) {
