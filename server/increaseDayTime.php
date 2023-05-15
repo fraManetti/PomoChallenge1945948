@@ -3,6 +3,7 @@
   session_start(); 
 ?>
 <?php 
+    $parametro1 = $_POST['parametro1'];
     $username = $_SESSION["username"]; 
     $dat = date('d-m-Y');
     $query = "    
@@ -16,7 +17,7 @@
           FROM hours
           LEFT JOIN endedtask
             ON  hours.hour = (endedtask.ora)::time
-            AND endedtask.username = '{$username}' AND to_date(endedtask.dat, 'DD-MM-YYYY') = '{$dat}'
+            AND endedtask.username = '{$username}' AND to_date(endedtask.dat, 'DD-MM-YYYY') = '{$parametro1}'
           GROUP BY hours.hour
           ORDER BY hour
       

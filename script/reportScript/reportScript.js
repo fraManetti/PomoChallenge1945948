@@ -39,6 +39,7 @@ function hourCharts() {
     console.error(error);
   });
 }
+
 function dailyQuery() {
   return new Promise((resolve, reject) => {
     const url = "getDailyTime.php";
@@ -59,6 +60,65 @@ function dailyQuery() {
     httpRequest.send();
   });
 }
+
+function hourCharts2(s) {
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas');
+  dailyQuery2(s).then((data) => {
+    const hoursLabels = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
+    '12','13','14','15','16','17','18','19','20','21','22','23' ];
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: hoursLabels,
+        datasets: [{
+          label: `# minutes in a day`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1],data[7][1],data[8][1],
+                data[9][1],data[10][1],data[11][1],data[12][1],data[13][1],data[14][1],data[15][1],data[16][1],data[17][1],
+                data[18][1],data[19][1],data[20][1],data[21][1],data[22][1],data[23][1]],
+          borderWidth: 0.8,
+          //backgroundColor: Array.from({ length: 24 }).fill(undefined).map((color, index) => index === currentHourIndex ? 'red' : 'grey')
+        }]
+      },
+      options: {
+        showLine: true,
+        borderWidth: '2px',
+        normalized: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+function dailyQuery2(s) {
+  return new Promise((resolve, reject) => {
+    const url = "increaseDayTime.php";
+    const formData = new FormData();
+    formData.append("parametro1", s);
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("POST", url);
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send(formData);
+  });
+}
+
 function monthCharts(i) {
   if (myChart) {
     myChart.destroy();
@@ -433,6 +493,7 @@ function increase() {
   if(currentPeriodType == "day") {
     increaseDay("+");
     var php = "../server/dailyLoadIncrease.php";
+    hourCharts2(currentString);
   }
   else if(currentPeriodType == "week") {
     increaseWeek("+");
@@ -475,6 +536,7 @@ function decrease() {
   if(currentPeriodType == "day") {
     increaseDay("-");
     var php = "../server/dailyLoadIncrease.php";
+    hourCharts2(currentString);
   }
   else if(currentPeriodType == "week") {
     increaseWeek("-");
