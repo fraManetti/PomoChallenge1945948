@@ -1,11 +1,6 @@
 var currentString = "";
 var currentD = new Date();
 var currentPeriodType = "";
-
-
-var myChart = null;
-
-
 var totalTime=0;
 let myChart = null;
 function hourCharts() {
@@ -184,6 +179,14 @@ function weekQuery() {
   });
 }
 
+<<<<<<< HEAD
+function dailyQuery() {
+  return new Promise((resolve, reject) => {
+    const url = "getDailyTime.php";
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+=======
 function weekQuery2(s) {
   return new Promise((resolve, reject) => {
     const url = "increaseWeekTime.php";
@@ -191,38 +194,26 @@ function weekQuery2(s) {
     formData.append("parametro1", s);
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("POST", url);
+>>>>>>> 40d9685fee4e35524318af599bba125e865dc016
     httpRequest.onreadystatechange = function() {
       if (httpRequest.readyState === 4 && httpRequest.status === 200) {
         const response = JSON.parse(httpRequest.responseText);
         if ('error' in response) {
           reject(response.error);
         } else {
-          resolve(response);
-        }
-      }
-    }
-    httpRequest.send(formData);
-  });
-}
-
-function dailyQuery() {
-  return new Promise((resolve, reject) => {
-    const url = "getDailyTime.php";
-    const httpRequest = new XMLHttpRequest();
-    httpRequest.open("GET", url, true);
-    httpRequest.setRequestHeader('Content-Type', 'application/json');
-    httpRequest.onreadystatechange = function() {
-      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-        const response = JSON.parse(httpRequest.responseText);
-        if ('error' in response) {
-          reject(response.error);
-        } else {
+<<<<<<< HEAD
           console.log(response);
+=======
+>>>>>>> 40d9685fee4e35524318af599bba125e865dc016
           resolve(response);
         }
       }
     }
+<<<<<<< HEAD
     httpRequest.send();
+=======
+    httpRequest.send(formData);
+>>>>>>> 40d9685fee4e35524318af599bba125e865dc016
   });
 }
 
