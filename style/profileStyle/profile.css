@@ -1,23 +1,136 @@
 .navbar {
     background: rgba(255, 255, 255, 0.7);
     position: fixed;
-    }
-
-
-.container {
-    margin-top: 66px;
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
-    height: 100vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
+  }
   
+  .boxDati {
+    width: 620px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 80px; 
+    text-align: center;
+    background: white;
+    border-radius: 20px;
+  }
+  
+  .title {
+    font-weight: bold;
+    font-size: 35px;
+    text-align: left;
+    padding: 20px 40px 15px 40px;
+    border-bottom: solid gray thin;
+    color: #333333;
+    
+  }
+  
+  .content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  
+  .immagine-profilo {
+    padding-top: 25px;
+      width: 50%;
+      text-align: center;
+  }
+  
+  
+  .immagine-profilo img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .immagine-profilo label {
+    display: inline-block;
+    font-size: 24px;
+    cursor: pointer;
+    margin-top: 2px;
+  }
+  
+  .dati-account {
+      font-size: 19px;
+      width: 50%;
+      padding-top: 25px;
+  }
+  
+  .editPencil {
+      font-size: 18px;
+      background-color: transparent;
+      border: transparent
+  }
+  
+  .editPasswordBtn{
+    font-size: 15px;
+    border:none;
+    border-radius: 10px;
+    padding: 4px 60px;
+    cursor: pointer;
   }
 
-#levelPanel {
-    border-width:1px;
-    border-style:solid;
-    border-color: black;
-    height: 250px;
-    width: 250px;
-    margin-right: 50px;
-    margin-top: 200px;
+  .editUsername{
+    font-size: 12px;
+    border:none;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 0px 8px;
+    cursor: pointer;
+    color: rgb(108, 105, 105)
+  }
+  
+  .profileField{
+    text-align: left;
+    border-bottom: solid gray thin;
+    margin-bottom: 5%;
 }
+
+.profileFieldNames{
+    color: rgb(108, 105, 105);
+}
+
+input[type="text"] {
+    width: 140px;
+    border-color: transparent;
+  }
+
+  .popupPass {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid black;
+    border-radius: 10px; 
+    padding: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #closePopup {
+    position: fixed;
+    top: 5%;
+    left: 97%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+  }
+
+  .resetImageBtn{
+    font-size: 12px;
+    border-width: 1px;
+    border-radius: 10px;
+    background-color: transparent;
+    padding: 0px 8px;
+    cursor: pointer;
+    color: rgb(108, 105, 105)
+  }
+
+  .imageButton{
+    text-align: left;
+    padding-top: 2%;
+    padding-left: 18%;
+  }

@@ -4,7 +4,8 @@
 
 html,
 body {
-  font-size: 12px;
+  background: url("https://static.pexels.com/photos/6663/desk-white-black-header.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
 h1 {
@@ -85,7 +86,7 @@ button.btn-search, button.btn-reset {
   border-radius: 50%;
   height: 26px;
   left: 222px;
-  top: 2px;
+  top: 1px;
   transition-delay: .3s;
   width: 26px;
 }

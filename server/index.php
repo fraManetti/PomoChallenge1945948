@@ -86,6 +86,7 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
                       </div>
                     </div>
                   </div>
+
                   <div class="col-md-6">
                     <div class="row"><p>Short Break<p></div>
                     <div class="row counter">
