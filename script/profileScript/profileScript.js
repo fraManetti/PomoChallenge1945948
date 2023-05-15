@@ -62,3 +62,30 @@ function handleOutClick(event) {
     });
   }
 
+  function updateImage(event) {
+    file = event.target.files[0];
+    imageUrl = URL.createObjectURL(file);
+    imageElements = document.querySelectorAll('img');
+    imageElements.forEach(function(imageElement) {
+    imageElement.src = imageUrl;
+    });
+    localStorage.setItem('profileImage', imageUrl);
+   }
+   
+   window.addEventListener('load', function() {
+    savedImageUrl = localStorage.getItem('profileImage');
+    if (savedImageUrl) {
+    imageElements = document.querySelectorAll('img');
+    imageElements.forEach(function(imageElement) {
+    imageElement.src = savedImageUrl;
+    });
+    }
+   });
+   
+   function resetImage() {
+    localStorage.removeItem('profileImage');
+    imageElements = document.querySelectorAll('img');
+    imageElements.forEach(function(imageElement) {
+    imageElement.src = 'https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg';
+    });
+   }

@@ -35,34 +35,8 @@
 
     </script>
 
-    <script>
-function updateImage(event) {
-  file = event.target.files[0];
-  imageUrl = URL.createObjectURL(file);
-  imageElement = document.querySelector('img');
-  imageElement.src = imageUrl;
-  localStorage.setItem('profileImage', imageUrl);
-}
-
-window.addEventListener('load', function() {
-  savedImageUrl = localStorage.getItem('profileImage');
-  if (savedImageUrl) {
-    imageElement = document.querySelector('img');
-    imageElement.src = savedImageUrl;
-  }
-});
-
-function resetImage() {
-  localStorage.removeItem('profileImage');
-  imageElement = document.querySelector('img');
-  imageElement.src = 'https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg';
-}
-    </script>
-
 </head>
 <body>
-    
-
 <div class="navbar" id="mynavbar"></div>
 <div class="boxDati">
   <div class="title">Informazioni personali</div>
