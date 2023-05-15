@@ -4,14 +4,13 @@
 ?>
 <?php 
     //$myvarValue = $_POST['period'];
-    $currentDate = date('Y-m-d');
-    $futureDate = date('Y-m-d', strtotime('+6 days'));
+    $parametro1 = $_POST['parametro1'];
     $cookie = $_SESSION["username"]; 
     $query = "
         WITH days AS (
         SELECT generate_series(
-          date_trunc('week', current_date)::date,
-          date_trunc('week', current_date)::date + interval '6 days',
+          date_trunc('week', to_date('{$parametro1}', 'DD-MM-YYYY'))::date,
+          date_trunc('week', to_date('{$parametro1}', 'DD-MM-YYYY'))::date + interval '6 days',
           '1 day'
         ) AS day
       )
@@ -25,15 +24,15 @@
       GROUP BY days.day
       ORDER BY day
     ";
-
+            
     $res = pg_query($db_conn, $query);
-    
-        $result_array = array();
+    //echo $parametro1;
+          $result_array = array();
         while ($tuple = pg_fetch_array($res, null, PGSQL_NUM)) {
             
             array_push($result_array, $tuple);
         } 
-        echo json_encode($result_array);
+        echo json_encode($result_array);   
     
     
 ?>

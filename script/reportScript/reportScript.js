@@ -1,6 +1,11 @@
 var currentString = "";
-var currentDate = new Date();
+var currentD = new Date();
 var currentPeriodType = "";
+
+
+var myChart = null;
+
+
 var totalTime=0;
 let myChart = null;
 function hourCharts() {
@@ -38,19 +43,20 @@ function hourCharts() {
 }
 
 function monthCharts(i) {
-  const ctx = document.getElementById('myChart');
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
   monthQuery().then((data) => {
     const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     const currentMonthIndex = i - 1;
     const currentMonth = monthLabels[currentMonthIndex];
-    const totalTim = data[0][1];
-    console.log(currentMonth);
     myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: monthLabels,
         datasets: [{
-          label: `# minutes in ${currentMonth}`,
+          label: `# minutes in a month`,
           data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1],data[7][1],data[8][1],
                 data[9][1],data[10][1],data[11][1]],
           borderWidth: 0.8,
@@ -72,35 +78,26 @@ function monthCharts(i) {
   });
 }
 
-
-
 function weekCharts() {
-  const ctx = document.getElementById('myChart');
-  
-  Promise.all([
-    weekQuery(0),
-    weekQuery(1),
-    weekQuery(2),
-    weekQuery(3),
-    weekQuery(4),
-    weekQuery(5),
-    weekQuery(6),
-
-  ]).then((data) => {
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
+  weekQuery().then((data) => {
+    const weekLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     myChart = new Chart(ctx, {
-      
       type: 'bar',
       data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: weekLabels,
         datasets: [{
-          label: '# minutes in a week',
-          data: data,
+          label: `# minutes in a week`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
           borderWidth: 0.8,
-          barThickness: 25,
+          //backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? 'red' : 'grey')
         }]
       },
       options: {
-        animation: false,
+      
         normalized: true,
         scales: {
           y: {
@@ -109,9 +106,42 @@ function weekCharts() {
         }
       }
     });
-    
+  }).catch((error) => {
+    console.error(error);
   });
+}
 
+function weekCharts2(s) {
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
+  weekQuery2(s).then((data) => {
+    const weekLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: weekLabels,
+        datasets: [{
+          label: `# minutes in a week`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
+          borderWidth: 0.8,
+          //backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? 'red' : 'grey')
+        }]
+      },
+      options: {
+      
+        normalized: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
 }
 
 function monthQuery() {
@@ -126,7 +156,6 @@ function monthQuery() {
         if ('error' in response) {
           reject(response.error);
         } else {
-          console.log(response);
           resolve(response);
         }
       }
@@ -135,36 +164,44 @@ function monthQuery() {
   });
 }
 
-    
-
-function weekQuery(s) {
+function weekQuery() {
   return new Promise((resolve, reject) => {
-    var sum = 0;
-    var period = s;
-    var php = "../server/getWeekTime.php";
-    var typeReq = "POST";
-    $.ajax({
-      url: php,
-      type: typeReq,
-      data: {period: period},
-      success: function(result) {
-        console.log(result);
-          // Aggiornamento eseguito con successo
-          var endedTasks = JSON.parse(result);
-          if(endedTasks.length != 0) {
-            for(var i = 0; i<endedTasks.length; i++) {
-              sum += parseInt(endedTasks[i].tim);
-              //sumTime(endedTasks[i]);
-            }
-          }
-          resolve(sum);
-      },
-      error: function(xhr, status, error) {
-          // Errore nell'aggiornamento
-          console.error(error);
-          reject(error);
+    const url = "getWeekTime.php";
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
       }
-    });
+    }
+    httpRequest.send();
+  });
+}
+
+function weekQuery2(s) {
+  return new Promise((resolve, reject) => {
+    const url = "increaseWeekTime.php";
+    const formData = new FormData();
+    formData.append("parametro1", s);
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("POST", url);
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send(formData);
   });
 }
 
@@ -194,6 +231,7 @@ function parseDate(str) {
   return new Date(parts[2], parts[1] - 1, parts[0]);
   
 }
+
 function upTotalTime(totalTime) {
   document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
     <p1> Tempo Totale: ${totalTime}</p1>
@@ -229,7 +267,7 @@ if (!document.querySelector('#currentPeriod').innerHTML.trim())
             ${tuple.dat}
         </h3>
     `)
-  currentDate = parseDate(tuple.dat);
+  //currentD = parseDate(tuple.dat);
 }
 
 function deleteEndedTask(e) {
@@ -245,8 +283,17 @@ function deleteEndedTask(e) {
     success: function(result) {
         // Aggiornamento eseguito con successo
         if(myChart!= null) myChart.destroy();
-        currentMonth = new Date().getMonth()+1;
-        monthCharts(currentMonth);
+        if(currentPeriodType == "month") {
+          currentMonth = new Date().getMonth()+1;
+          monthCharts(currentMonth);
+        }
+        else if(currentPeriodType == "week") {
+          weekCharts();
+        }
+        else if(currentPeriodType == "day") {
+
+        }
+        
     },
     error: function(xhr, status, error) {
         // Errore nell'aggiornamento
@@ -269,6 +316,7 @@ function endedOption(e) {
 
 
 function load(s) {
+  currentD = new Date();
     if(myChart!= null) myChart.destroy();
     var url;
     totalTime = 0 ;
@@ -289,7 +337,7 @@ function load(s) {
     else if(s == 'monthly') {
       url = "monthlyLoad.php";
       currentPeriodType = "month";
-      currentMonth = new Date().getMonth()+1;
+      currentMonth = currentD.getMonth()+1;
       monthCharts(currentMonth);
       
     }
@@ -323,14 +371,14 @@ function load(s) {
 
 function increaseDay(s) {
   if(s == "+") {
-    currentDate.setDate(currentDate.getDate() + 1);
+    currentD.setDate(currentD.getDate() + 1);
   }
   else if (s == "-") {
-    currentDate.setDate(currentDate.getDate() - 1);
+    currentD.setDate(currentD.getDate() - 1);
   }
-  var day = JSON.parse(currentDate.getDate());
-  var month = JSON.parse(currentDate.getMonth()+1);
-  var year = JSON.parse(currentDate.getFullYear());
+  var day = JSON.parse(currentD.getDate());
+  var month = JSON.parse(currentD.getMonth()+1);
+  var year = JSON.parse(currentD.getFullYear());
   if (day<10)
     day = "0"+day;
   if (month<10)
@@ -341,14 +389,14 @@ function increaseDay(s) {
 
 function increaseWeek(s) {
   if(s == "+") {
-    currentDate.setDate(currentDate.getDate() + 7);
+    currentD.setDate(currentD.getDate() + 7);
   }
   else if (s == "-") {
-    currentDate.setDate(currentDate.getDate() - 7);
+    currentD.setDate(currentD.getDate() - 7);
   }
-  var day = JSON.parse(currentDate.getDate());
-  var month = JSON.parse(currentDate.getMonth()+1);
-  var year = JSON.parse(currentDate.getFullYear());
+  var day = JSON.parse(currentD.getDate());
+  var month = JSON.parse(currentD.getMonth()+1);
+  var year = JSON.parse(currentD.getFullYear());
   if (day<10)
     day = "0"+day;
   if (month<10)
@@ -358,16 +406,16 @@ function increaseWeek(s) {
 }
 
 function increaseMonth(s) {
-  console.log(currentDate);
-  var day = JSON.parse(currentDate.getDate());
-  var year = JSON.parse(currentDate.getFullYear());
+  
   if(s == "+") {
-    var month = JSON.parse(currentDate.getMonth()+2);
+    currentD.setMonth(currentD.getMonth() + 1);
   }
   else if (s == "-") {
-    var month = JSON.parse(currentDate.getMonth());
+    currentD.setMonth(currentD.getMonth() - 1);
   }
-  
+  var day = JSON.parse(currentD.getDate());
+  var month = JSON.parse(currentD.getMonth()+1);
+  var year = JSON.parse(currentD.getFullYear());
   if (day<10)
     day = "0"+day;
   if (month<10)
@@ -380,6 +428,7 @@ function increaseMonth(s) {
 
 
 function increase() {
+  //console.log(currentString);
   document.getElementById("tasksPanel").innerHTML = '';
   var typeReq = "POST";
   if(currentPeriodType == "day") {
@@ -389,11 +438,16 @@ function increase() {
   else if(currentPeriodType == "week") {
     increaseWeek("+");
     var php = "../server/increaseWeek.php";
+    weekCharts2(currentString);
   }
   else if(currentPeriodType == "month") {
     increaseMonth("+");
     var php = "../server/increaseMonth.php";
-    console.log(currentString);
+    if(myChart != null) {
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = 'red';
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()-1] = 'grey';
+      myChart.update();
+    }
   }
   $.ajax({
     url: php,
@@ -425,10 +479,16 @@ function decrease() {
   else if(currentPeriodType == "week") {
     increaseWeek("-");
     var php = "../server/increaseWeek.php";
+    weekCharts2(currentString);
   }
   else if(currentPeriodType == "month") {
     increaseMonth("-");
     var php = "../server/increaseMonth.php";
+    if(myChart != null) {
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = 'red';
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()+1] = 'grey';
+      myChart.update();
+    }
   }
   $.ajax({
     url: php,
