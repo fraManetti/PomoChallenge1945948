@@ -84,3 +84,9 @@
     width:35px;
     cursor:default;
   }
+  .top-immagine img{
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    object-fit: cover;
+  }
