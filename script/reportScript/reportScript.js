@@ -2,6 +2,8 @@ var currentString = "";
 var currentD = new Date();
 var currentPeriodType = "";
 var totalTime=0;
+
+
 var myChart = null;
 
 function hourCharts() {
@@ -37,10 +39,6 @@ function hourCharts() {
     console.error(error);
   });
 }
-
-   
-
-
 function dailyQuery() {
   return new Promise((resolve, reject) => {
     const url = "getDailyTime.php";
@@ -61,19 +59,6 @@ function dailyQuery() {
     httpRequest.send();
   });
 }
-
-function parseDate(str) {
-  var parts = str.split("-");
-  return new Date(parts[2], parts[1] - 1, parts[0]);
-  
-}
-function upTotalTime(totalTime) {
-  document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
-    <p1> Tempo Totale: ${totalTime}</p1>
-  `);
-}
-
-
 function monthCharts(i) {
   if (myChart) {
     myChart.destroy();
@@ -237,7 +222,19 @@ function weekQuery2(s) {
   });
 }
 
+function parseDate(str) {
+  var parts = str.split("-");
+  return new Date(parts[2], parts[1] - 1, parts[0]);
+  
+}
+
+function upTotalTime(totalTime) {
+  document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
+    <p1> Tempo Totale: ${totalTime}</p1>
+  `);
+}
 function downloadEnded(tuple) {
+  //var totalTime = 0;
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task" data-value="${tuple.keyhash}">
         
@@ -261,13 +258,14 @@ function downloadEnded(tuple) {
     </div>
 `)
 totalTime+= JSON.parse(tuple.tim);
+
 if (!document.querySelector('#currentPeriod').innerHTML.trim())
     document.querySelector('#currentPeriod').insertAdjacentHTML('beforeend', `
         <h3>
             ${tuple.dat}
         </h3>
     `)
-  currentD = parseDate(tuple.dat);
+  //currentD = parseDate(tuple.dat);
 }
 
 function deleteEndedTask(e) {
@@ -319,7 +317,7 @@ function load(s) {
   currentD = new Date();
     if(myChart!= null) myChart.destroy();
     var url;
-    var totalTime = 0 ;
+     totalTime = 0 ;
     if(s == 'daily') url = "dailyLoad.php";
     else if(s == 'weekly') url = "weeklyLoad.php";
     else if(s == 'all') url = "allLoad.php";
@@ -359,6 +357,7 @@ function load(s) {
         } else {
             response.forEach(function(tuple) {
               downloadEnded(tuple);
+              totalTime+= tuple.time;
           });
           upTotalTime(totalTime);
           
@@ -456,7 +455,7 @@ function increase() {
     success: function(result) {
         // Aggiornamento eseguito con successo
         var endedTasks = JSON.parse(result);
-        console.log(endedTasks[i]);
+        console.log(endedTasks);
         if(endedTasks.length != 0) {
           for(var i = 0; i<endedTasks.length; i++) {
             downloadEnded(endedTasks[i]);
@@ -469,6 +468,7 @@ function increase() {
     }
 });
 }
+
 function decrease() {
   document.getElementById("tasksPanel").innerHTML = '';
   var typeReq = "POST";
@@ -499,6 +499,7 @@ function decrease() {
         var endedTasks = JSON.parse(result);
 
         if(endedTasks.length != 0) {
+          console.log(endedTasks);
           for(var i = 0; i<endedTasks.length; i++) {
             downloadEnded(endedTasks[i]);
           }
