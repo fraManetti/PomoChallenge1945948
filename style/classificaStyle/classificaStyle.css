@@ -1,0 +1,13 @@
+#classificaPanel {
+    border-style: solid;
+    height: 600px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-radius: 6px;
+   }
+
+ #classificaBox {
+    width: 500px;
+  }
