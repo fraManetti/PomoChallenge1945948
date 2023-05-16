@@ -31,14 +31,17 @@
         $(function(){
           $("#mynavbar").load("../model/newNavbar.html");
         });
-
+        isLogged=true;
     </script>
 
 </head>
 <body>
 <?php         
 $query = "SELECT keyhash, title, pomodori, note, donepomodori,tim FROM task WHERE task.username = $1 ORDER BY ind";
-$res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
+$res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); 
+
+
+?>
 
 <div id="mynavbar"></div>
     <div class="container">
@@ -193,7 +196,21 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
 
 <?php 
             
+if (isset($_COOKIE['taskList'])) {
 
+  echo '<script>mergeCookie()</script>';
+    $taskListString = $_COOKIE['taskList'];
+  $taskList = json_decode($taskListString, true);
+  $len = count($taskList);
+  $username =$_SESSION["username"];
+  $query2 = "update  task set ind= ind +{$len} where username='{$username}'";
+  $res2 = pg_query($db_conn,$query2);
+  for($i=0;$i<$len;$i++){
+    $query2 = "insert into task values ('{$username}','{$taskList[$i]['key']}','{$taskList[$i]['title']}',{$taskList[$i]['pomodori']},'{$taskList[$i]['note']}',{$taskList[$i]['donepomodori']},{$taskList[$i]['index']},{$taskList[$i]['tim']})";
+    $res2 = pg_query($db_conn,$query2);
+  }
+
+}
 while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
     // Converte la tupla in una stringa JSON
     $tuple_json = json_encode($tuple);
@@ -203,6 +220,8 @@ while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
 
 
 }
+
+
 echo '<script> fillTaskBox(); </script>'
 ?>
 

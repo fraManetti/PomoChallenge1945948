@@ -30,3 +30,15 @@ function fillTaskBox (){
     index++;}
     updateTaskButtons();
 }
+function mergeCookie() {
+    let cookieValue = document.cookie
+  .split('; ')
+  .find(row => row.startsWith('taskList='))
+  .split('=')[1];
+  console.log(typeof cookieValue);
+    JSON.parse(cookieValue).forEach(function(tuple) {
+        var newTask = { key:tuple.key, title: tuple.title, pomodori: parseInt(tuple.pomodori),note: tuple.note,donepomodori: parseInt(tuple.donepomodori),tim:(tuple.tim) };
+        taskList.push(newTask); 
+    });
+  }
+

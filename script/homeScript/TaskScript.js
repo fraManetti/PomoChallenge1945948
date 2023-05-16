@@ -11,7 +11,7 @@ var checkedCustom = false;
 var anyTaskOpen=false;
 var delEnded=false;
 var index=1;
-
+var isLogged=false;
 //#################################################################
 //##########             FUNZIONI AUSILIARIE:        ##############
 //#################################################################
@@ -510,7 +510,9 @@ function nascondiVignetta() {
 
 
 function updateServer(newTask,type) {
-  console.log(newTask.tim);
+  let taskListString = JSON.stringify(taskList);
+  document.cookie = "taskList=" + taskListString + "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';
+  if(isLogged){
   $.ajax({
     url: "updateTaskServer.php",
     type: "POST",
@@ -523,5 +525,6 @@ function updateServer(newTask,type) {
         // Errore nell'aggiornamento
         console.error(error);
     }
-});
+});}
+else return;
 }
