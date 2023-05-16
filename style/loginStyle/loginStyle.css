@@ -4,15 +4,16 @@
     }
 
 
-.container {
+/*container {
     margin-top: 66px;
     height: 95vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
-    text-align: center;
+/*    text-align: center;
     width: 100%;
     background-color: rgb(245, 244, 244);
     z-index: 1;
     position: absolute;
-  }
+  }*/
+
 
 #loginPanel {
     z-index: 2;
@@ -23,7 +24,8 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 60px;
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.712);
+    border-radius: 10px;
+    /*box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.712);*/
 
     
 }
@@ -46,7 +48,10 @@
     border-color: black;
     border-style: solid;
     cursor: default;
-    box-shadow: 3px 3px 7px  rgba(0, 0, 0, 0.712);
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+
   }
 
 .loginButton {
@@ -56,19 +61,23 @@
     border: none;
     cursor: pointer;
     box-shadow: 3px 3px 7px  rgba(0, 0, 0, 0.712);
+    border-radius: 10px;
   }
 
 #clearBtn {
     background-color: rgb(233, 44, 44);
+    border-radius:10px ;
 }
 
 #submitBtn {
     background-color: #04AA6D;
     margin-right: 10px;
+    border-radius: 10px;
 }
 
 .loginButton:hover {
     opacity: 0.7;
+    border-radius: 10px;
 }
 
 input[name="mailInput"] {
