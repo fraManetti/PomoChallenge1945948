@@ -22,13 +22,13 @@
           ORDER BY hour
       
 ";
-      $res = pg_query($db_conn, $query);
-      //echo $query;
+    $res = pg_query($db_conn, $query);
+    
         $result_array = array();
         while ($tuple = pg_fetch_array($res, null, PGSQL_NUM)) {
             
             array_push($result_array, $tuple);
         } 
-        echo json_encode($result_array); 
+        echo json_encode($result_array);
     
 ?>
