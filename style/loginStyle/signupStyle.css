@@ -4,15 +4,15 @@
     }
 
 
-.container {
+/*.container {
     margin-top: 66px;
     height:fit-content; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
-    text-align: center;
+/*    text-align: center;
     width: 100%;
     background-color: rgb(245, 244, 244);
     z-index: 1;
     position: absolute;
-  }
+  }*/
 
 #signupPanel {
     z-index: 2;
@@ -22,9 +22,9 @@
     padding: 5px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 60px;
-    margin-top: 60px;
-    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.712);
+    margin-top: 20px;
+    /*box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.712);*/
+    border-radius: 10px;
 
     
 }
@@ -47,7 +47,9 @@
     border-color: black;
     border-style: solid;
     cursor: default;
-    box-shadow: 3px 3px 7px  rgba(0, 0, 0, 0.712);
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
   }
 
 .loginButton {
@@ -57,15 +59,21 @@
     border: none;
     cursor: pointer;
     box-shadow: 3px 3px 7px  rgba(0, 0, 0, 0.712);
+    border-radius: 10px;
+
   }
 
 #clearSignBtn {
     background-color: rgb(233, 44, 44);
+    border-radius: 10px;
+
 }
 
 #submitSignBtn{
     background-color: #04AA6D;
     margin-right: 10px;
+    border-radius: 10px;
+
 }
 
 input[type="submit"]:disabled {
@@ -77,6 +85,8 @@ input[type="submit"]:disabled {
 
 .loginButton:hover {
     opacity: 0.7;
+    border-radius: 10px;
+
 }
 
 input[name="mailInput"] {
