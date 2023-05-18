@@ -1,10 +1,6 @@
 <?php 
   include( 'db_conn.php');  
 ?>
-<!DOCTYPE html>
-<html>
-    <head></head>
-    <body>
 <?php 
         if($db_conn){
             $user = $_POST['userLogInput'];
@@ -12,7 +8,7 @@
             $query = "select * from utente where username=$1";
             $res = pg_query_params($db_conn,$query,array($user));
             if (!($tuple = pg_fetch_array($res,null,PGSQL_ASSOC))){
-                echo "<h1>  user non registrato</h1>";           
+                header("location: ../model/loginForm.html?login=failed1");
 
             }
             else{
@@ -21,18 +17,18 @@
                 $psw= preg_replace('/\s/','',$psw);
                 $query ="select* from utente where username=$1 and paswd=$2";
                 $res = pg_query_params($db_conn, $query, array($user,$psw));
-                if (!($tuple=pg_fetch_array($res,null,PGSQL_ASSOC)))
-                    echo '<h1>login non riuscita</h1> ';
+                if (!($tuple=pg_fetch_array($res,null,PGSQL_ASSOC))){
+                    header("location: ../model/loginForm.html?login=failed2");
+                }
                 else{
                     session_start();
                     if(!isset($_SESSION["username"]))
                        $_SESSION["username"]=$user;
-                       //echo $_SESSION["username"];
+                       $remember = $_POST['remember'];
+                       if(isset ($remember))
+                        setcookie("loggedUser",$user,time()+3600,"/");
                        header ("Location: ./index.php");
 
             }
         }}
         ?>
-
-</body>
-</html>

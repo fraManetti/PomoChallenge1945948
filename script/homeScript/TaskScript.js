@@ -451,6 +451,10 @@ function addTask(){
       taskList[i1] = taskList[i2];
       taskList[i2] = temp;
 
+      tmp = taskList[i1].index;
+      taskList[i1].index=taskList[i2].index;
+      taskList[i2].index=tmp;
+
       var tasks = document.querySelectorAll('.task:not(.endedTasks)');
       tasks[i1].setAttribute("data-value",taskList[i1].key);
       tasks[i1].children[2].value = taskList[i1].title;
@@ -462,6 +466,12 @@ function addTask(){
       tasks[i2].children[3].value = taskList[i2].pomodori;
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
       updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
+      var task = taskList[i1];
+      task.ora = "00:00:00";
+      updateServer(task,"UP");
+      var task = taskList[i2];
+      task.ora = "00:00:00";
+      updateServer(task,"UP");
     }
     else{
       alert("Inserisci degli indici validi");
@@ -472,10 +482,14 @@ function addTask(){
     taskList.reverse();
     var tasks = document.querySelectorAll('.task:not(.endedTasks)');
     for (var i=0; i<tasks.length;i++){
-        tasks[i].setAttribute("data-value",taskList[i].key);
-        tasks[i].children[2].value=taskList[i].title;
-        tasks[i].children[3].value=taskList[i].pomodori;
-        tasks[i].children[4].nextElementSibling.children[0].value=taskList[i].note;
+      taskList[i].index= i+1;
+      var task = taskList[i];
+      tasks[i].setAttribute("data-value",task.key);
+        tasks[i].children[2].value=task.title;
+        tasks[i].children[3].value=task.pomodori;
+        tasks[i].children[4].nextElementSibling.children[0].value=task.note;
+        task.ora="00:00:00";
+        updateServer(task,"UP");
   }
   updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
 
@@ -510,8 +524,7 @@ function nascondiVignetta() {
 
 
 function updateServer(newTask,type) {
-  let taskListString = JSON.stringify(taskList);
-  document.cookie = "taskList=" + taskListString + "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';
+
   if(isLogged){
   $.ajax({
     url: "updateTaskServer.php",
@@ -526,5 +539,11 @@ function updateServer(newTask,type) {
         console.error(error);
     }
 });}
-else return;
-}
+else{let taskListString = JSON.stringify(taskList);
+document.cookie = "taskList=" + taskListString + "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';
+var data =new Date();
+var timestamp=data.getTime();
+console.log(timestamp);
+document.cookie= "cookie_timestamp="+timestamp+ "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';
+
+}}

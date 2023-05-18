@@ -43,6 +43,29 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"]));
 
 ?>
 
+<?php 
+            
+if (isset($_COOKIE['taskList'])){
+  if( !isset($_COOKIE["server_timestamp"]) ||(isset($_COOKIE["server_timestamp"]) and $_COOKIE["server_timestamp"]<$_COOKIE["cookie_timestamp"] ) ) {
+
+  echo '<script>mergeCookie()</script>';
+    $taskListString = $_COOKIE['taskList'];
+  $taskList = json_decode($taskListString, true);
+  $len = count($taskList);
+  $username =$_SESSION["username"];
+  $query2 = "update  task set ind= ind +{$len} where username='{$username}'";
+  $res2 = pg_query($db_conn,$query2);
+  for($i=0;$i<$len;$i++){
+    $query2 = "insert into task values ('{$username}','{$taskList[$i]['key']}','{$taskList[$i]['title']}',{$taskList[$i]['pomodori']},'{$taskList[$i]['note']}',{$taskList[$i]['donepomodori']},{$taskList[$i]['index']},{$taskList[$i]['tim']})";
+    $res2 = pg_query($db_conn,$query2);
+  }
+$timestamp = time()*1000;
+setcookie("server_timestamp",$timestamp,time()+3600,"/");
+}
+
+}
+?>
+
 <div id="mynavbar"></div>
     <div class="container">
       <div class="box">box1</div>
@@ -194,23 +217,8 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"]));
       </div>
     </div>
 
-<?php 
-            
-if (isset($_COOKIE['taskList'])) {
 
-  echo '<script>mergeCookie()</script>';
-    $taskListString = $_COOKIE['taskList'];
-  $taskList = json_decode($taskListString, true);
-  $len = count($taskList);
-  $username =$_SESSION["username"];
-  $query2 = "update  task set ind= ind +{$len} where username='{$username}'";
-  $res2 = pg_query($db_conn,$query2);
-  for($i=0;$i<$len;$i++){
-    $query2 = "insert into task values ('{$username}','{$taskList[$i]['key']}','{$taskList[$i]['title']}',{$taskList[$i]['pomodori']},'{$taskList[$i]['note']}',{$taskList[$i]['donepomodori']},{$taskList[$i]['index']},{$taskList[$i]['tim']})";
-    $res2 = pg_query($db_conn,$query2);
-  }
-
-}
+<?php
 while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
     // Converte la tupla in una stringa JSON
     $tuple_json = json_encode($tuple);

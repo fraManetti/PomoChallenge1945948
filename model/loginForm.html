@@ -24,6 +24,7 @@
         });
 
     </script>
+
 </head>
 
 <body>
@@ -73,5 +74,23 @@
             </FORM>
         </div>
    <!-- </div>-->
-</body>
+
+</body>   
+
 </html>
+<script>
+    window.onload = function() {
+    if (new URLSearchParams(window.location.search).get('login') === 'failed1') {
+alert('Login non riuscita, user non registrato.Riprova');
+const newUrl = new URL(window.location.href);
+newUrl.searchParams.delete('login');
+window.history.replaceState({}, '', newUrl);
+}
+if (new URLSearchParams(window.location.search).get('login') === 'failed2') {
+alert('Login non riuscita, user o psw errati.Riprova');
+const newUrl = new URL(window.location.href);
+newUrl.searchParams.delete('login');
+window.history.replaceState({}, '', newUrl);
+}
+}
+</script>

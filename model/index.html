@@ -20,8 +20,12 @@
     <script  src="../script/homeScript/clockScript.js"></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
+    <script src="../script/homeScript/serverTaskScript.js"></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
-
+<script>
+  if (document.cookie.indexOf("loggedUser" + '=') !== -1)
+  window.location.replace("../server/index.php");
+</script>
     <script>
         $(function(){
           $("#mynavbar").load("./oldNavbar.html");
@@ -34,7 +38,7 @@
     
     <div id="mynavbar"></div>
     <div class="container">
-      <div class="box">box1</div>
+      <div class="box"></div>
         <div class="center-box">
           <div class="box">
             <div class="pomodoro">
@@ -178,8 +182,14 @@
         </div>
       </div>
       <div class="box">
-        box3
+        
       </div>
     </div>
+    <script>
+      if(document.cookie.indexOf("taskList" + '=') !== -1){
+        mergeCookie();
+        fillTaskBox();
+      }
+    </script>
 </body>
 </html>

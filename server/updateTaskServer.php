@@ -14,6 +14,7 @@
       $ind = $_POST["ind"];
       $type = $_POST['type'];
       $tim =$_POST['tim'];
+      $ind = $_POST['ind'];
       // Esegui l'aggiornamento della riga del database
       //$sql = "insert into task values ($1, $2,$3,$4,$5)";
       //$sql = "UPDATE task SET title='$title', pomodori='$pomodori', note='$note',  WHERE keyhash=$key AND username='{$_SESSION['username']}'";
@@ -23,7 +24,7 @@
             $query = "insert into task values ('{$username}','{$key}','{$title}',{$pomodori},'{$note}',{$donepomodori}, {$ind},{$tim})";
             break;
         case 'UP':
-                $query = "update  task set title='{$title}', pomodori={$pomodori}, note='{$note}', donepomodori={$donepomodori}, tim={$tim}  where keyhash='{$key}' and username='{$username}'";
+                $query = "update  task set title='{$title}', pomodori={$pomodori}, note='{$note}', donepomodori={$donepomodori},ind={$ind}, tim={$tim}  where keyhash='{$key}' and username='{$username}'";
             break;
         case 'DEL':
             $query = "delete from task where keyhash='{$key}' and username='{$username}'"; 
