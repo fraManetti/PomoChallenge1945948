@@ -38,6 +38,11 @@
   
 }
 
+#innerPanel {
+  display: grid;
+  grid-template-columns: 5% 90% 5%;
+}
+
 #chartPanel {
   border-style: solid;
   height: 700px;

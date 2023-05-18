@@ -4,23 +4,21 @@
 ?>
 <?php 
     $username = $_SESSION["username"]; 
-    $dat = date('d-m-Y');
     $query = "    
     WITH hours AS (
         SELECT (n || ':00:00')::time AS hour
         FROM generate_series(0, 23) AS n
     )
-          SELECT
-            date_trunc('hour', hours.hour) AS hour,
-            CASE WHEN SUM(endedtask.tim) IS NULL THEN 0 ELSE SUM(endedtask.tim) END AS total_tim
-          FROM hours
-          LEFT JOIN endedtask
-            ON  hours.hour = (endedtask.ora)::time
-            AND endedtask.username = '{$username}' AND to_date(endedtask.dat, 'DD-MM-YYYY') = '{$dat}'
-          GROUP BY hours.hour
-          ORDER BY hour
+	select hour,
+	CASE WHEN sum(tim)::numeric/(EXTRACT(DOY FROM CURRENT_DATE))::numeric IS NULL THEN 0
+	ELSE sum(tim)::numeric/(EXTRACT(DOY FROM CURRENT_DATE))::numeric END as tempo
+	from endedtask right join hours on (endedtask.ora::time = hours.hour and username = '{$username}')
+	
+	group by hour
+	order by hour
       
 ";
+
       $res = pg_query($db_conn, $query);
       //echo $query;
         $result_array = array();
