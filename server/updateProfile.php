@@ -4,18 +4,31 @@ session_start();
 ?>
 
 <?php 
-$username = $_POST['oldUsername'];
+
 $type = $_POST['type'];
-$newUsername = $_POST['newUsername'];
-
-
 
 switch ($type) {
     case 'updateUsername': 
+        $username = $_POST['oldUsername'];
+        $newUsername = $_POST['newUsername'];
         $query = "update utente set username='${newUsername}' where username='${username}'";
+        $_SESSION["username"] = $newUsername;
         break;
-    case 'updatePassword':
+    case 'confirmNewPassword':
+        $username = $_SESSION["username"];
+        $oldPass = $_POST["oldPass"];
+        $query= "select * from utente where paswd='${oldPass}' and username='${username}'";
+        $res = pg_query($db_conn,$query);
+
+        $tuple = pg_fetch_array($res,null,PGSQL_ASSOC);
+        if(!$tuple) {
+            echo "Password corrente inserita non corretta";
+            break;} 
+        $newPass = $_POST["newPass"];
+        $query = "update utente set paswd='${newPass}' where paswd='${oldPass}' and username='${username}' ";
+        echo "Password correttamente aggiornata";
         break;
+
     default:
         # code...
         break;
@@ -23,8 +36,9 @@ switch ($type) {
 
 $res = pg_query($db_conn,$query);
 
+
 if (!$res) {
-    //header("HTTP/1.1 500 Internal Server Error");
+    header("HTTP/1.1 500 Internal Server Error");
     exit();
 }
 ?>

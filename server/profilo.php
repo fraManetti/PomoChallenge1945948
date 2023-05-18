@@ -56,7 +56,7 @@
       <button class="editUsername" onclick = "updateUsername()">Edit</button></p>
       <p class = "profileField"> ⏱️ <label class="profileFieldNames"> Totale delle ore: </label> <span id="ore-studio">0</span></p>
       <p class = "profileField"> 👫 <label class="profileFieldNames">Amici totali: </label> <span id="amici-totali">0</span></p>
-      <button class="editPasswordBtn" onclick="updatePassword()">Modifica password</button>
+      <button class="editPasswordBtn" onclick="openPopUpPassword()">Modifica password</button>
       
 
       <div id="popupContainer"></div>
@@ -65,3 +65,26 @@
 </div>
     
 </body>
+<?php 
+//--------------------------------------------------------------------------------------------------------------->
+        $username = $_SESSION['username'];
+        $query = "select amici.utente, sum(amici.contaAmici) as totale
+        from (
+            select utentea as utente, count(*) as contaAmici
+            from amici
+            where utentea='${username}'
+            group by utente
+            union
+            select utenteb as utente, count(*) as contaAmici
+            from amici
+            where utenteb='${username}'
+            group by utente) as amici
+            group by amici.utente";
+        $res = pg_query ($db_conn,$query);
+        $tuple = pg_fetch_array($res, null, PGSQL_ASSOC);
+        $tuple_json = json_encode($tuple['totale']);
+          echo '<script>
+          contaAmici(' . $tuple_json . ') </script>';
+        
+?>
+</html>
