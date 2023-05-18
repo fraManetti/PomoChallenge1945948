@@ -45,27 +45,35 @@
         <div id = "reportPanel">
             <div id = "selectDatePanel">
                 <button id ="dailyButton" onclick="load('daily')">
-                    Attività giornaliere
+                    Daily
                 </button>
                 <button id ="weeklyButton" onclick="load('weekly')">
-                    Attività settimanali
+                    Weekly
                 </button>
                 <button id ="monthlyButton" onclick="load('monthly')">
-                    Attività mensili
+                    Monthly
                 </button>
                 <button id ="allButton" onclick="load('all')">
-                    Tutte le attività
+                    All
                 </button>
-                <button id = "increaseTimePeriod" onclick="increase()">
-                    +
-                </button>
-                <button id = "decreaseTimePeriod" onclick="decrease()">
-                    -
-                </button>
+                <div id ="currentPeriod"> 
+                    <?php echo $data_corrente; ?> <br>
+                </div>
+                <br>
             </div>
-            <div id ="currentPeriod"> </div>
-            <br>
-            <div id = "tasksPanel">
+            <div id = "innerPanel">
+                <div id = "decrBtn">
+                    <button id = "decreaseTimePeriod" onclick="decrease()">
+                        -
+                    </button>
+                </div>
+                <div id = "tasksPanel">
+                </div>
+                <div id = incrBtn>
+                    <button id = "increaseTimePeriod" onclick="increase()">
+                        +
+                    </button>
+                </div>
             </div>
             
         </div>
@@ -91,4 +99,3 @@
 </body>
 </html>
 
-a
