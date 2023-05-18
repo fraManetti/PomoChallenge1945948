@@ -5,6 +5,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="../HackTimer/HackTimer.js" ></script>
+<script src="../HackTimer/HackTimerWorker.js" ></script>
+
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>PomoChallenge</title>
@@ -26,7 +29,6 @@
     <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
-
     <script>
         $(function(){
           $("#mynavbar").load("../model/newNavbar.html");

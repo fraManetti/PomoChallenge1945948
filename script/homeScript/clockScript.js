@@ -1,4 +1,4 @@
- //Variabili per le task:
+//Variabili per le task:
  var taskOn = false;
  var taskList = [];
  //var countCurrPom =0;
