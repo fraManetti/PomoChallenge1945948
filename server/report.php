@@ -43,42 +43,48 @@
     <div class="navbar" id="mynavbar"></div>
     <div class="container">
         <div id = "reportPanel">
-            <div id = "selectDatePanel">
-                <button id ="dailyButton" onclick="load('daily')">
-                    Daily
-                </button>
-                <button id ="weeklyButton" onclick="load('weekly')">
-                    Weekly
-                </button>
-                <button id ="monthlyButton" onclick="load('monthly')">
-                    Monthly
-                </button>
-                <button id ="allButton" onclick="load('all')">
-                    All
-                </button>
+            
+                <div id = "selectDatePanel">
+                    <button class = "tabClass active" id ="dailyButton" onclick="load('daily', event)">
+                        Daily
+                    </button>
+                    <button class = "tabClass" id ="weeklyButton" onclick="load('weekly', event)">
+                        Weekly
+                    </button>
+                    <button class = "tabClass" id ="monthlyButton" onclick="load('monthly', event)">
+                        Monthly
+                    </button>
+                    <button class = "tabClass" id ="allButton" onclick="load('all', event)">
+                        All
+                    </button>
+                </div>
                 <div id ="currentPeriod"> 
                     <?php echo $data_corrente; ?> <br>
                 </div>
-                <br>
-            </div>
-            <div id = "innerPanel">
-                <div id = "decrBtn">
-                    <button id = "decreaseTimePeriod" onclick="decrease()">
-                        -
-                    </button>
+                <div id ="totalTime"> 
+                
                 </div>
-                <div id = "tasksPanel">
+                <div id = "innerPanel">
+                    <div class = "incrDecrBtnPanel">
+                        <button class = "timePeriodBtn" id = "decreaseTimePeriod" onclick="decrease()" onmousedown="startInterval('-')" onmouseup="stopInterval()">
+                            -
+                        </button>
+                    </div>
+                    <div id = "tasksPanel">
+                    </div>
+                    <div class = incrDecrBtnPanel>
+                        <button class = "timePeriodBtn" id = "increaseTimePeriod" onclick="increase()" onmousedown="startInterval('+')" onmouseup="stopInterval()">
+                            +
+                        </button>
+                    </div>
                 </div>
-                <div id = incrBtn>
-                    <button id = "increaseTimePeriod" onclick="increase()">
-                        +
-                    </button>
-                </div>
-            </div>
-            
+
         </div>
         <div id = chartPanel>
-            <canvas id="myChartCanvas"></canvas>
+            
+            <div id = canvasPanel>
+                <canvas id="myChartCanvas"></canvas>
+            </div>
         </div>
     </div>
     

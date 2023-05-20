@@ -2,12 +2,13 @@ var currentD = new Date();
 var currentString = dateToString(currentD);
 var currentPeriodType = "day";
 var totalTime=0;
+var canCharge = true;
 
 var mon; 
 var sun;
 weekInterval(currentD);
 var mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", 
-                        "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
+            "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
 
 var myChart = null;
 
@@ -26,6 +27,9 @@ function hourCharts() {
                 data[9][1],data[10][1],data[11][1],data[12][1],data[13][1],data[14][1],data[15][1],data[16][1],data[17][1],
                 data[18][1],data[19][1],data[20][1],data[21][1],data[22][1],data[23][1]],
           borderWidth: 0.8,
+          backgroundColor  : "#e7645d",
+          borderColor: "#e7645d",
+          borderWidth: 2,
         }]
       },
       options: {
@@ -83,6 +87,9 @@ function hourCharts2(s) {
                 data[9][1],data[10][1],data[11][1],data[12][1],data[13][1],data[14][1],data[15][1],data[16][1],data[17][1],
                 data[18][1],data[19][1],data[20][1],data[21][1],data[22][1],data[23][1]],
           borderWidth: 0.8,
+          backgroundColor  : "#e7645d",
+          borderColor: "#e7645d",
+          borderWidth: 2,
           //backgroundColor: Array.from({ length: 24 }).fill(undefined).map((color, index) => index === currentHourIndex ? 'red' : 'grey')
         }]
       },
@@ -142,8 +149,8 @@ function monthCharts(i) {
           data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1],data[7][1],data[8][1],
                 data[9][1],data[10][1],data[11][1]],
           borderWidth: 0.8,
-          backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? 'red' : 'grey'),
-          //backgroundColor: data[0][1].map((color, index) => index === currentMonthIndex ? 'red' : 'grey'),
+          backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? "#e85e56" : "#494949"),
+          hoverBackgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? "#fc9690" : "#6e6d6d"),
         }]
       },
       options: {
@@ -181,7 +188,8 @@ function weekCharts() {
           label: `# minutes in a week`,
           data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
           borderWidth: 0.8,
-          //backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? 'red' : 'grey')
+          backgroundColor: "#e7645d",
+          hoverBackgroundColor: "#fc9690",
         }]
       },
       options: {
@@ -215,7 +223,8 @@ function weekCharts2(s) {
           label: `# minutes in a week`,
           data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
           borderWidth: 0.8,
-          //backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? 'red' : 'grey')
+          backgroundColor: "#e7645d",
+          hoverBackgroundColor: "#fc9690",
         }]
       },
       options: {
@@ -248,8 +257,9 @@ function avgDailyCharts() {
           data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1],data[7][1],data[8][1],
                 data[9][1],data[10][1],data[11][1],data[12][1],data[13][1],data[14][1],data[15][1],data[16][1],data[17][1],
                 data[18][1],data[19][1],data[20][1],data[21][1],data[22][1],data[23][1]],
-          borderWidth: 0.8,
-          //backgroundColor: Array.from({ length: 24 }).fill(undefined).map((color, index) => index === currentHourIndex ? 'red' : 'grey')
+          backgroundColor  : "#e7645d",
+          borderColor: "#e7645d",
+          borderWidth: 2,
         }]
       },
       options: {
@@ -361,7 +371,7 @@ function parseDate(str) {
 }
 
 function upTotalTime(totalTime) {
-  document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
+  document.querySelector("#totalTime").insertAdjacentHTML('beforeend', `
     <p1> Tempo Totale: ${totalTime}</p1>
   `);
 }
@@ -392,13 +402,55 @@ function downloadEnded(tuple) {
 totalTime+= JSON.parse(tuple.tim);
 }
 
-function checkMonthsBorder(s) {
-  if(s == "-") {
-    cMonth = currentD.getMonth();
-    if(cMonth == 0) {}
+function checkMonthsBorder() {
+  cMonth = currentD.getMonth();
+  if(cMonth == 0)     document.getElementById("decreaseTimePeriod").disabled = true;
+  else if(cMonth == 11)    document.getElementById("increaseTimePeriod").disabled = true;
+  else {
+    document.getElementById("decreaseTimePeriod").disabled = false;
+    document.getElementById("increaseTimePeriod").disabled = false;
+
   }
 }
 
+function checkWeekBorder() {
+  var monD = parseDate(mon);
+  var sunD = parseDate(sun);
+  if(monD.getMonth == 0 && monD.getDate == 1) {
+    document.getElementById("decreaseTimePeriod").disabled = true;
+  }
+  else if(sunD.getMonth() == 0 && sunD.getDate() < 7) {
+    monD.setDate(1);
+    monD.setMonth(0);
+    document.getElementById("decreaseTimePeriod").disabled = true;
+  }
+  else if(sunD.getMonth() == 11 && sunD.getDate() == 31) {
+    document.getElementById("increaseTimePeriod").disabled = true;
+  }
+  else if(monD.getMonth() == 11 && monD.getDate() > 31-7) {
+    sunD.setDate(31);
+    sunD.setMonth(11);
+    document.getElementById("increaseTimePeriod").disabled = true;
+  }
+  else {
+    document.getElementById("decreaseTimePeriod").disabled = false;
+    document.getElementById("increaseTimePeriod").disabled = false;
+  }
+  mon = dateToString(monD);
+  sun = dateToString(sunD);
+}
+
+function checkDayBorder() {
+  date = currentString;
+  var parts = date.split("-");
+  if(parts[0] == "01" && parts[1] == "01")     document.getElementById("decreaseTimePeriod").disabled = true;
+  else if(parts[0] == "31" && parts[1] == "12")    document.getElementById("increaseTimePeriod").disabled = true;
+  else {
+    document.getElementById("decreaseTimePeriod").disabled = false;
+    document.getElementById("increaseTimePeriod").disabled = false;
+
+  }
+} 
 
 function dateToString(d) {
   var day = JSON.parse(d.getDate());
@@ -418,10 +470,9 @@ function weekInterval(d) {
   var currentDayOfWeek = today.getDay();
   var daysToMonday = currentDayOfWeek === 0 ? 6 : currentDayOfWeek - 1;
   var monD = new Date(today.getFullYear(), today.getMonth(), today.getDate() - daysToMonday);
-
   var daysToSunday = currentDayOfWeek === 0 ? 0 : 7 - currentDayOfWeek;
   var sunD = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysToSunday);
-
+  
   mon = dateToString(monD);
   sun = dateToString(sunD);
 }
@@ -470,9 +521,15 @@ function endedOption(e) {
     }
 }
 
+function load(s, e) {
+  var currentActiveButton = document.querySelector('.tabClass.active');
+  if (currentActiveButton) {
+    currentActiveButton.classList.remove('active');
+  }
+  e.currentTarget.classList.add('active');
 
-function load(s) {
   document.querySelector("#currentPeriod").innerHTML= "";
+  document.querySelector("#totalTime").innerHTML= "";
   currentD = new Date();
   if(myChart!= null) myChart.destroy();
   var url;
@@ -497,6 +554,7 @@ function load(s) {
     document.getElementById("increaseTimePeriod").disabled = false;
     document.getElementById("decreaseTimePeriod").disabled = false;
     weekInterval(currentD);
+    checkWeekBorder();
   }
   else if(s == 'monthly') {
     url = "monthlyLoad.php";
@@ -506,11 +564,13 @@ function load(s) {
     monthCharts(currentMonth);
     document.getElementById("increaseTimePeriod").disabled = false;
     document.getElementById("decreaseTimePeriod").disabled = false;
+    checkMonthsBorder();
     
   }
   else if(s == 'all') {
     url = "allLoad.php";
     currentPeriodType = "none";
+    document.querySelector("#currentPeriod").innerText= "Total tasks";
     document.getElementById("increaseTimePeriod").disabled = true;
     document.getElementById("decreaseTimePeriod").disabled = true;
     avgDailyCharts();
@@ -598,13 +658,15 @@ function increase() {
   var typeReq = "POST";
   if(currentPeriodType == "day") {
     increaseDay("+");
+    checkDayBorder();
     document.querySelector("#currentPeriod").innerText= currentString;
     var php = "../server/dailyLoadIncrease.php";
-    hourCharts2(currentString);
+    if(canCharge) hourCharts2(currentString);
   }
   else if(currentPeriodType == "week") {
     increaseWeek("+");
     weekInterval(currentD);
+    checkWeekBorder();
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
     var php = "../server/increaseWeek.php";
     weekInterval(currentD);
@@ -615,9 +677,12 @@ function increase() {
     increaseMonth("+");
     document.querySelector("#currentPeriod").innerText= mesi[currentD.getMonth()];
     var php = "../server/increaseMonth.php";
+    checkMonthsBorder();
     if(myChart != null) {
-      myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = 'red';
-      myChart.data.datasets[0].backgroundColor[currentD.getMonth()-1] = 'grey';
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = "#e85e56";
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()-1] = "#494949";
+      myChart.data.datasets[0].hoverBackgroundColor[currentD.getMonth()] = "#fc9690";
+      myChart.data.datasets[0].hoverBackgroundColor[currentD.getMonth()-1] = "#6e6d6d";
       myChart.update();
     }
   }
@@ -651,11 +716,13 @@ function decrease() {
     increaseDay("-");
     document.querySelector("#currentPeriod").innerText= currentString;
     var php = "../server/dailyLoadIncrease.php";
-    hourCharts2(currentString);
+    if(canCharge) hourCharts2(currentString);
+    checkDayBorder();
   }
   else if(currentPeriodType == "week") {
     increaseWeek("-");
     weekInterval(currentD);
+    checkWeekBorder();
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
     var php = "../server/increaseWeek.php";
     weekCharts2(currentString);
@@ -664,9 +731,12 @@ function decrease() {
     increaseMonth("-");
     document.querySelector("#currentPeriod").innerText= mesi[currentD.getMonth()];
     var php = "../server/increaseMonth.php";
+    checkMonthsBorder();
     if(myChart != null) {
-      myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = 'red';
-      myChart.data.datasets[0].backgroundColor[currentD.getMonth()+1] = 'grey';
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = "#e85e56";
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()+1] = "#494949";
+      myChart.data.datasets[0].hoverBackgroundColor[currentD.getMonth()] = "#fc9690";
+      myChart.data.datasets[0].hoverBackgroundColor[currentD.getMonth()+1] = "#6e6d6d";
       myChart.update();
     }
   }
@@ -692,4 +762,16 @@ function decrease() {
         console.error(error);
     }
 });
+}
+
+function startInterval(s) {
+  if(s == "-") intervalId = setInterval(decrease, 100); 
+  else if(s == "+") intervalId = setInterval(increase, 100); 
+  if(myChart) myChart.destroy();
+  canCharge = false;
+}
+
+function stopInterval() {
+  clearInterval(intervalId); 
+  canCharge = true;
 }
