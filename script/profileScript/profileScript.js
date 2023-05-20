@@ -192,5 +192,8 @@ function handleOutClick(event) {
 
    function contaAmici(contaAmici) {
     document.getElementById("amici-totali").innerHTML = contaAmici;
-
+}
+function contaOre(contaOre) {
+  document.getElementById("ore-studio").innerHTML = contaOre;
+  
 }

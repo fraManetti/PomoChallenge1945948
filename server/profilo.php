@@ -85,6 +85,13 @@
         $tuple_json = json_encode($tuple['totale']);
           echo '<script>
           contaAmici(' . $tuple_json . ') </script>';
-        
-?>
+          $query="select sum(tim) as totale
+          from endedtask
+          where username='${username}'";
+          $res = pg_query ($db_conn,$query);
+          $tuple = pg_fetch_array($res, null, PGSQL_ASSOC);
+          $tuple_json = json_encode($tuple['totale']);
+          echo '<script>
+          contaOre(' . $tuple_json . ') </script>';
+  ?>
 </html>
