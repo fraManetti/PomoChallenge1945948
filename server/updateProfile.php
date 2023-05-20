@@ -23,6 +23,7 @@ switch ($type) {
 
         $query = "update utente set username='${newUsername}' where username='${username}'";
         $_SESSION["username"] = $newUsername;
+        echo "Username Correttamente Aggiornato";
         break;
     case 'confirmNewPassword':
         $username = $_SESSION["username"];
