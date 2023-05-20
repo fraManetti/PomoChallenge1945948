@@ -1,50 +1,3 @@
-create table utente (
-    username varchar(40) not null, 
-    paswd varchar(32) not null,
-    primary key (username)
-);
-create table task (
-    username varchar(40) not null, 
-    keyhash varchar(32) not null,
-	title varchar(25) not null,
-	pomodori int not null,
-	note varchar(115),
-	donepomodori int not null,
-	ind int not null,
-    tim int not null,
-	primary key (username,keyhash),
-	FOREIGN KEY (username) REFERENCES utente(username)
-
-);
-
-create table endedtask (
-    username varchar(40) not null, 
-    keyhash varchar(32) not null,
-	title varchar(25) not null,
-	pomodori int not null,
-	note varchar(115),
-	dat varchar(10) not null,
-    tim int not null,
-	ora varchar(8) not null,
-	primary key (username,keyhash),
-	FOREIGN KEY (username) REFERENCES utente(username)
-
-);
-
-create table richieste (
-	richiedente varchar(40) not null,
-	accettante varchar(40) not null,
-	primary key (richiedente,accettante),
-	FOREIGN KEY (richiedente) REFERENCES  utente(username),
-	FOREIGN KEY (accettante) REFERENCES  utente(username)
-);
-create table amici (
-	utentea varchar(40) not null,
-	utenteb varchar(40) not null,
-	primary key (utentea,utenteb),
-	FOREIGN KEY (utentea) REFERENCES  utente(username),
-	FOREIGN KEY (utenteb) REFERENCES  utente(username)
-	);
 -----------------------
 select * from utente;
 select * from task
@@ -60,9 +13,10 @@ insert into utente values ('max4','Password.1=');
 insert into utente values ('max5','Password.1=');
 insert into utente values ('max6','Password.1=');
 insert into utente values ('marco','Password.1=');
+insert into utente values ('luca','Password.1=');
 
 
-insert into amici values ('luca','marco')
+insert into amici values ('luca','marco');
 insert into amici values('luca','max');
 insert into amici values('luca','max1');
 insert into amici values('max','max3');
@@ -86,3 +40,52 @@ INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
 	VALUES ('luca', '01234567852', '10-05-2023', 1, '', '12-05-2023', 5, '03:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
 	VALUES ('luca', '012345678554', '10-05-2023', 1, '', '12-05-2023', 3, '13:00:00' );
+
+
+CREATE TABLE utente (
+    username VARCHAR(40) NOT NULL,
+    paswd VARCHAR(32) NOT NULL,
+    PRIMARY KEY (username)
+);
+
+CREATE TABLE task (
+    username VARCHAR(40) NOT NULL,
+    keyhash VARCHAR(32) NOT NULL,
+    title VARCHAR(25) NOT NULL,
+    pomodori INT NOT NULL,
+    note VARCHAR(115),
+    donepomodori INT NOT NULL,
+    ind INT NOT NULL,
+    tim INT NOT NULL,
+    PRIMARY KEY (username,keyhash),
+    FOREIGN KEY (username) REFERENCES utente(username) ON UPDATE CASCADE
+);
+
+CREATE TABLE endedtask (
+    username VARCHAR(40) NOT NULL,
+    keyhash VARCHAR(32) NOT NULL,
+    title VARCHAR(25) NOT NULL,
+    pomodori INT NOT NULL,
+    note VARCHAR(115),
+    dat VARCHAR(10) NOT NULL,
+    tim INT NOT NULL,
+    ora VARCHAR(8) NOT NULL,
+    PRIMARY KEY (username,keyhash),
+    FOREIGN KEY (username) REFERENCES utente(username) ON UPDATE CASCADE
+);
+
+CREATE TABLE richieste (
+    richiedente VARCHAR(40) NOT NULL,
+    accettante VARCHAR(40) NOT NULL,
+    PRIMARY KEY (richiedente,accettante),
+    FOREIGN KEY (richiedente) REFERENCES utente(username) ON UPDATE CASCADE,
+    FOREIGN KEY (accettante) REFERENCES utente(username) ON UPDATE CASCADE
+);
+
+CREATE TABLE amici (
+    utentea VARCHAR(40) NOT NULL,
+    utenteb VARCHAR(40) NOT NULL,
+    PRIMARY KEY (utentea,utenteb),
+    FOREIGN KEY (utentea) REFERENCES utente(username) ON UPDATE CASCADE,
+    FOREIGN KEY (utenteb) REFERENCES utente(username) ON UPDATE CASCADE
+);

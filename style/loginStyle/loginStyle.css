@@ -131,3 +131,5 @@ input[type=text], input[type=password] {
 #rememberCheckbox {
     
 }
+
+input[type=password]::-ms-reveal { display: none; }
