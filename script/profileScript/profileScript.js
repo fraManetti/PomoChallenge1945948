@@ -79,7 +79,7 @@ function checkNewUsername(newUsername) {
                       data: {type: "updateUsername", oldUsername: originalValue, newUsername: usernameField.value},
                       success: function(result) {
                           alert(result);
-                          if(result) usernameField.value = originalValue;
+                          if(JSON.stringify(result)!='Username Correttamente Aggiornato'  ) usernameField.value = originalValue;
                           usernameField.disabled = true;
                           editButton.innerHTML = 'Edit';
                       },
