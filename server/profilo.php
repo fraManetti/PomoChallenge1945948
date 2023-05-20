@@ -68,18 +68,23 @@
 <?php 
 //--------------------------------------------------------------------------------------------------------------->
         $username = $_SESSION['username'];
-        $query = "select amici.utente, sum(amici.contaAmici) as totale
+        $query = "select amiciC.utente, sum(amiciC.contaAmici) as totale
         from (
-            select utentea as utente, count(*) as contaAmici
-            from amici
-            where utentea='${username}'
-            group by utente
-            union
-            select utenteb as utente, count(*) as contaAmici
-            from amici
-            where utenteb='${username}'
-            group by utente) as amici
-            group by amici.utente";
+        select utentea as utente, count(*) as contaAmici
+        from amici
+        where utentea='{$username}'
+        group by utente
+        union
+        select utenteb as utente, count(*) as contaAmici
+        from amici
+        where utenteb='{$username}'
+        group by utente
+        union
+        select username, 0
+        from utente 
+        where username not in (select utentea from amici) and username not in (select utenteb from amici) and username = '{$username}'
+        ) as amiciC
+        group by amiciC.utente";
         $res = pg_query ($db_conn,$query);
         $tuple = pg_fetch_array($res, null, PGSQL_ASSOC);
         $tuple_json = json_encode($tuple['totale']);

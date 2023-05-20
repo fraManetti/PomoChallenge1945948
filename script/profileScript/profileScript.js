@@ -78,7 +78,8 @@ function checkNewUsername(newUsername) {
                       type: "POST",
                       data: {type: "updateUsername", oldUsername: originalValue, newUsername: usernameField.value},
                       success: function(result) {
-                          console.log(result);
+                          alert(result);
+                          if(result) usernameField.value = originalValue;
                           usernameField.disabled = true;
                           editButton.innerHTML = 'Edit';
                       },
@@ -115,11 +116,11 @@ function handleOutClick(event) {
       <div class="popupPass">
           <div id="closePopup">&times;</div>
           <label> Password corrente: 
-          <input type="password" id="oldPass" required></label><br>
+          <input type="password" class="changePass" id="oldPass" required></label><br>
           <label> Nuova password:
-          <input type="password" id="newPass" required></label><br>
+          <input type="password" class="changePass" id="newPass" required></label><br>
 
-          <button id = "confirmChangePassword" onclick="confirmNewPassword()" >Conferma</button>
+          <button class="editPasswordBtn" id = "confirmChangePassword" onclick="confirmNewPassword()" >Conferma</button>
       </div>
     `;
     
