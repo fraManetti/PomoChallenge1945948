@@ -45,8 +45,10 @@ function handleKeyPress(event, string) {
 
 //Serve per sapere se sono in modalità task o meno:
 function modalitaTask() {
-  if(!taskOn)
+  if(!taskOn){
     taskOn=true;
+    updateTaskTag(false,false);
+  }
   else 
     taskOn=false;
 }
@@ -62,10 +64,11 @@ function deleteTask(e) {
     if (taskList[i].key == key){
       var task =taskList[i];
       task.index=i;
-      updateServer(task,"DEL");
       taskList.splice(i,1);
       deletedIndex=i;
-      index--;
+      index--;      
+      updateServer(task,"DEL");
+
     }}
   var tasks = document.querySelectorAll('.task:not(.endedTasks)');
   for(var i=0; i<tasks.length;i++){
@@ -205,6 +208,7 @@ function updateTaskTag(isRunning,isEnded){
   var pomoCount =0; //conta il numero di pomodori nelle task aggiunte
   taskList.forEach(function(tuple){
     pomoCount+=JSON.parse(tuple.pomodori);
+    pomoCount-=JSON.parse(tuple.donepomodori);
   });
   var textToAppend  = "Pomodori Complessivi: "+JSON.parse(pomoCount); 
   if (isRunning){  
@@ -215,13 +219,15 @@ function updateTaskTag(isRunning,isEnded){
       textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+ JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
     var time=0;
     //console.log(taskList[0].donepomodori);
-  for ( i = pomoCount-taskList[0].donepomodori; i>0;i--){
+  for ( i = pomoCount; i>0;i--){
+    time = parseInt(time);
     if(i%4 ==0)
-      time+=countL;
+      time+=parseInt(countL);
     else
-      time+=countB;
-    time+=countS;
+      time+=parseInt(countB);
+    time+=parseInt(countS);
   } 
+  console.log("time: ",time,countB,countS,countL);
   time-=(countS-(clock.getTime()/60));
   timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
 
@@ -547,3 +553,11 @@ console.log(timestamp);
 document.cookie= "cookie_timestamp="+timestamp+ "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';
 
 }}
+function setButtonState() {
+  var checkBox = document.getElementById("customCheckbox");
+  if (taskOn == true){
+    checkBox.checked = true;
+  } else {
+    checkBox.checked = false;
+  }
+}

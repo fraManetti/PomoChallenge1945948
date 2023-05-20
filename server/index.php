@@ -37,7 +37,7 @@
     </script>
 
 </head>
-<body>
+<body onload="setButtonState()">
 <?php         
 $query = "SELECT keyhash, title, pomodori, note, donepomodori,tim FROM task WHERE task.username = $1 ORDER BY ind";
 $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); 

@@ -26,7 +26,7 @@
                        $_SESSION["username"]=$user;
                        $remember = $_POST['remember'];
                        if(isset ($remember))
-                        setcookie("loggedUser",$user,time()+3600,"/");
+                        setcookie("loggedUser",$user,time() + 30*24*60*6,"/");
                        header ("Location: ./index.php");
 
             }

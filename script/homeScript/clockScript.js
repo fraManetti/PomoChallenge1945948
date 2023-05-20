@@ -132,7 +132,6 @@ $(document).ready(function(){
     console.log(typeof  taskList[0].tim,taskList[0].tim);
     var task =taskList[0];
     task.index=1;
-    updateServer(task,"UP");
     updateTaskTag(true,false);
     if (taskList[0].pomodori ==  taskList[0].donepomodori){
             alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
@@ -140,11 +139,12 @@ $(document).ready(function(){
       taskList[0].donepomodori=0;
       index--;
       removeTaskItem();
+      updateServer(task,"UP");
       updateTaskTag(false,false);
       updateTaskButtons();
       var tmp=countTimes;
-      document.getElementById("customCheckbox").checked=false;
       taskOn = false;
+      setButtonState();  
       countTimes=tmp;
       return true;
 }}    if(taskList.length>0 && taskList.length!=1){
