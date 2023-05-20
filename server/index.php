@@ -5,10 +5,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="../HackTimer/HackTimer.js" ></script>
+<script src="../HackTimer/HackTimerWorker.js" ></script>
+
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>PomoChallenge</title>
-    <link rel="icon" type="image/x-icon" href="..//style/img/tomato.png">
+    <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
@@ -26,19 +29,44 @@
     <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
-
     <script>
         $(function(){
           $("#mynavbar").load("../model/newNavbar.html");
         });
-
+        isLogged=true;
     </script>
 
 </head>
-<body>
+<body onload="setButtonState()">
 <?php         
 $query = "SELECT keyhash, title, pomodori, note, donepomodori,tim FROM task WHERE task.username = $1 ORDER BY ind";
-$res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
+$res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); 
+
+
+?>
+
+<?php 
+            
+if (isset($_COOKIE['taskList'])){
+  if( !isset($_COOKIE["server_timestamp"]) ||(isset($_COOKIE["server_timestamp"]) and $_COOKIE["server_timestamp"]<$_COOKIE["cookie_timestamp"] ) ) {
+
+  echo '<script>mergeCookie()</script>';
+    $taskListString = $_COOKIE['taskList'];
+  $taskList = json_decode($taskListString, true);
+  $len = count($taskList);
+  $username =$_SESSION["username"];
+  $query2 = "update  task set ind= ind +{$len} where username='{$username}'";
+  $res2 = pg_query($db_conn,$query2);
+  for($i=0;$i<$len;$i++){
+    $query2 = "insert into task values ('{$username}','{$taskList[$i]['key']}','{$taskList[$i]['title']}',{$taskList[$i]['pomodori']},'{$taskList[$i]['note']}',{$taskList[$i]['donepomodori']},{$taskList[$i]['index']},{$taskList[$i]['tim']})";
+    $res2 = pg_query($db_conn,$query2);
+  }
+$timestamp = time()*1000;
+setcookie("server_timestamp",$timestamp,time()+3600,"/");
+}
+
+}
+?>
 
 <div id="mynavbar"></div>
     <div class="container">
@@ -86,6 +114,7 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
                       </div>
                     </div>
                   </div>
+
                   <div class="col-md-6">
                     <div class="row"><p>Short Break<p></div>
                     <div class="row counter">
@@ -190,9 +219,8 @@ $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); ?>
       </div>
     </div>
 
-<?php 
-            
 
+<?php
 while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
     // Converte la tupla in una stringa JSON
     $tuple_json = json_encode($tuple);
@@ -202,6 +230,8 @@ while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
 
 
 }
+
+
 echo '<script> fillTaskBox(); </script>'
 ?>
 

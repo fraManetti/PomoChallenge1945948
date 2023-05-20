@@ -11,7 +11,7 @@ var checkedCustom = false;
 var anyTaskOpen=false;
 var delEnded=false;
 var index=1;
-
+var isLogged=false;
 //#################################################################
 //##########             FUNZIONI AUSILIARIE:        ##############
 //#################################################################
@@ -45,8 +45,10 @@ function handleKeyPress(event, string) {
 
 //Serve per sapere se sono in modalità task o meno:
 function modalitaTask() {
-  if(!taskOn)
+  if(!taskOn){
     taskOn=true;
+    updateTaskTag(false,false);
+  }
   else 
     taskOn=false;
 }
@@ -62,10 +64,11 @@ function deleteTask(e) {
     if (taskList[i].key == key){
       var task =taskList[i];
       task.index=i;
-      updateServer(task,"DEL");
       taskList.splice(i,1);
       deletedIndex=i;
-      index--;
+      index--;      
+      updateServer(task,"DEL");
+
     }}
   var tasks = document.querySelectorAll('.task:not(.endedTasks)');
   for(var i=0; i<tasks.length;i++){
@@ -97,14 +100,19 @@ function removeTaskItem() {
   var day = JSON.parse(dat.getDate());
   var month = JSON.parse(dat.getMonth()+1);
   var year = JSON.parse(dat.getFullYear());
-  console.log(day,month,year)
+  var hour = JSON.parse(dat.getHours());
+
+  console.log("data",day,month,year,hour);
   if (day<10)
     day = "0"+day;
   if (month<10)
     month = "0"+month;
-  
+  if(hour<10)
+    hours = "0"+hour;
   task.dat=day+"-"+month+"-"+year;
-  console.log(task.dat)
+  hour+= ":00:00";
+  task.ora = hour;
+  console.log(typeof hour,hour);
   updateServer(task,"FYN");
   taskList.shift();
   var tasks= document.getElementsByClassName("task");
@@ -128,7 +136,7 @@ function titleTimer(clock) {
   var minutes = Math.floor(timeInSeconds / 60);
   var seconds = timeInSeconds % 60;
   var timeString = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-  document.title = timeString + " - PC";
+  document.title = timeString + " - "+pos;
 }
 
 
@@ -160,10 +168,14 @@ function updateTaskMap(newTitle, newPomos,newNote) {
         tuple.title = newTitle;
         tuple.pomodori = newPomos;
         tuple.note = newNote;
-        task.donepomodori = tuple.donepomodori;
+        task.donepomodori = tuple.donepomodori;  
+        task.index = tuple.index;
+        task.tim = countS-(clock.getTime()/60);
+
       }
     }
   )
+  console.log(task)
   updateServer(task,"UP");
 }
 
@@ -196,6 +208,7 @@ function updateTaskTag(isRunning,isEnded){
   var pomoCount =0; //conta il numero di pomodori nelle task aggiunte
   taskList.forEach(function(tuple){
     pomoCount+=JSON.parse(tuple.pomodori);
+    pomoCount-=JSON.parse(tuple.donepomodori);
   });
   var textToAppend  = "Pomodori Complessivi: "+JSON.parse(pomoCount); 
   if (isRunning){  
@@ -206,13 +219,17 @@ function updateTaskTag(isRunning,isEnded){
       textToAppend+="\n"+"Task Successiva: "+taskList[0].title+"   ("+ JSON.stringify(taskList[0].donepomodori)+"/"+nPomo+")";
     var time=0;
     //console.log(taskList[0].donepomodori);
-  for ( i = pomoCount-taskList[0].donepomodori; i>0;i--){
+  for ( i = pomoCount; i>0;i--){
+    time = parseInt(time);
     if(i%4 ==0)
-      time+=countL;
+      time+=parseInt(countL);
     else
-      time+=countB;
-    time+=countS;
-  } timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
+      time+=parseInt(countB);
+    time+=parseInt(countS);
+  } 
+  console.log("time: ",time,countB,countS,countL);
+  time-=(countS-(clock.getTime()/60));
+  timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
 
   document.getElementById("timeEstimated").innerText=timeToAppend;
   } else 
@@ -293,6 +310,7 @@ function showOption(e) {
     oldTitle= taskItems[2].value;
     oldPomos= taskItems[3].value;
     oldNote = hiddenBox.children[0].value;
+    //oldIndex = JSON.parse(taskItems[2].getAttribute("data-value");
     currentKey=taskBox.getAttribute("data-value");
   }
 }
@@ -347,7 +365,7 @@ function addTask(){
                 <img class = "taskImg" id ="deleteImg" src = "../style/img/trash-can-solid.png"   onClick="deleteTask(event);">
                 </img>
               <!-- </button>   -->
-              <span class="indexTasks">${index})</span>
+              <span class="indexTasks" data-value="${index}">${index})</span>
               <input type="text" readOnly id="taskname"  value="${document.getElementById("taskFieldInput").value}" onkeypress="handleKeyPress(event, 'options')" maxlength="25">
               
 
@@ -439,6 +457,10 @@ function addTask(){
       taskList[i1] = taskList[i2];
       taskList[i2] = temp;
 
+      tmp = taskList[i1].index;
+      taskList[i1].index=taskList[i2].index;
+      taskList[i2].index=tmp;
+
       var tasks = document.querySelectorAll('.task:not(.endedTasks)');
       tasks[i1].setAttribute("data-value",taskList[i1].key);
       tasks[i1].children[2].value = taskList[i1].title;
@@ -450,6 +472,12 @@ function addTask(){
       tasks[i2].children[3].value = taskList[i2].pomodori;
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
       updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
+      var task = taskList[i1];
+      task.ora = "00:00:00";
+      updateServer(task,"UP");
+      var task = taskList[i2];
+      task.ora = "00:00:00";
+      updateServer(task,"UP");
     }
     else{
       alert("Inserisci degli indici validi");
@@ -460,10 +488,14 @@ function addTask(){
     taskList.reverse();
     var tasks = document.querySelectorAll('.task:not(.endedTasks)');
     for (var i=0; i<tasks.length;i++){
-        tasks[i].setAttribute("data-value",taskList[i].key);
-        tasks[i].children[2].value=taskList[i].title;
-        tasks[i].children[3].value=taskList[i].pomodori;
-        tasks[i].children[4].nextElementSibling.children[0].value=taskList[i].note;
+      taskList[i].index= i+1;
+      var task = taskList[i];
+      tasks[i].setAttribute("data-value",task.key);
+        tasks[i].children[2].value=task.title;
+        tasks[i].children[3].value=task.pomodori;
+        tasks[i].children[4].nextElementSibling.children[0].value=task.note;
+        task.ora="00:00:00";
+        updateServer(task,"UP");
   }
   updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
 
@@ -498,10 +530,12 @@ function nascondiVignetta() {
 
 
 function updateServer(newTask,type) {
+
+  if(isLogged){
   $.ajax({
-    url: "../server/updateTaskServer.php",
+    url: "updateTaskServer.php",
     type: "POST",
-    data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat,tim:newTask.tim},
+    data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat,tim:newTask.tim,ora:newTask.ora},
     success: function(result) {
         // Aggiornamento eseguito con successo
         console.log(result);
@@ -510,5 +544,20 @@ function updateServer(newTask,type) {
         // Errore nell'aggiornamento
         console.error(error);
     }
-});
+});}
+else{let taskListString = JSON.stringify(taskList);
+document.cookie = "taskList=" + taskListString + "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';
+var data =new Date();
+var timestamp=data.getTime();
+console.log(timestamp);
+document.cookie= "cookie_timestamp="+timestamp+ "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';
+
+}}
+function setButtonState() {
+  var checkBox = document.getElementById("customCheckbox");
+  if (taskOn == true){
+    checkBox.checked = true;
+  } else {
+    checkBox.checked = false;
+  }
 }

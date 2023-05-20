@@ -5,7 +5,6 @@
     }
     body {
       padding-top: 5%;
-       background: url("https://static.pexels.com/photos/6663/desk-white-black-header.jpg") no-repeat center center fixed;
        background-size: cover;
     
      }
@@ -20,32 +19,25 @@
 
   #amiciPanel {
     border-style: solid;
-    height: 700px;
+    height: 600px;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    background-color: white;
-    
-  }
-#titleAmici {
-  background-color: rgb(186, 182, 182);  
-  text-align: center;
+    background-color: #EBE8E4;
+    border-radius: 6px;
+   }
 
-
-}
  #amiciBox {
     width: 500px;
   }
-  .amico {
-    text-align: center;
-  }
+
   #boxdx{
     height: 700px;
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
     display: grid;
-    grid-template-rows: 50% 50%;
+    grid-template-rows: 35% 65%;
     }
     #searchBox{
       width: 500px;
@@ -55,16 +47,197 @@
       width: 500px;
     }
 
-    .box {
-      width: 100%;
-      padding: 10px;
+    #suggBox {
+      border-style: solid;
+      border-color: black;
+      height: 150px;
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: white;
+      border-radius: 6px;
     }
     
+    .amico {
+      display: flex;
+      justify-content: center;
+      border-bottom: 2px solid black;
+
+    }
+
+    .amico > * {
+      margin: 4px;
+    }
+
+    #delete-friend-button {
+      font-size: 12px;
+      color: white;
+      background-color: rgb(230, 88, 88);
+      border: none;
+      border-radius: 10px;
+      padding: 2px 4px;
+      margin-left: 5%;
+      cursor: pointer;
+    }
+
+    .lista-amici-title{
+      margin-bottom: 0;
+      border-bottom: 3px solid black;
+      background-color: rgb(236, 111, 111);
+      text-align: center;
+
+
+    }
+    
+    .suggeriti-title{
+      text-align: center;
+      margin-bottom: 0;
+      border-bottom: 3px solid black;
+      background-color: rgb(236, 111, 111);
+    }
+
+    .suggAmico {
+      display: flex;
+      justify-content: center;
+      border-bottom: 2px solid black;
+
+    }
+
+    .suggAmico > * {
+      margin: 4px;
+    }
+
+    .visitaProfiloButton{
+      font-size: 12px;
+      color: black;
+      background-color: rgb(229, 224, 224);
+      border: none;
+      border-radius: 10px;
+      padding: 2px 4px;
+      margin-left: 5%;
+      cursor: pointer;
+    }
+
+    .sendRequestButton{
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      background-color: rgb(236, 111, 111);
+      border: none;
+      border-radius: 50%;
+      padding: 2px 2px;
+      padding-bottom: 6.5px;
+      margin-left: 5%;
+      cursor: pointer;
+    }
+
     #incoming {
-      background-color: lightblue;
+      border-style: solid;
+      border-color: black;
+      height: 150px;
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: white;
+      border-radius: 6px;
     }
-    
+
     #outgoing {
-      background-color: lightgreen;
+      border-style: solid;
+      border-color: black;
+      height: 150px;
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: white;
+      border-radius: 6px;
     }
-    
+
+    #incoming-title{
+      text-align: center;
+      margin-bottom: 0;
+      border-bottom: 3px solid black;
+      background-color: greenyellow
+    }
+
+    #outgoing-title{
+      text-align: center;
+      margin-bottom: 0;
+      border-bottom: 3px solid black;
+      background-color: lightblue
+    }
+
+    .request {
+      display: flex;
+      justify-content: center;
+      border-bottom: 2px solid black;
+
+    }
+
+    .request > * {
+      margin: 4px;
+    }
+
+    .delReq{
+      font-size: 12px;
+      color: white;
+      background-color: rgb(230, 88, 88);
+      border: none;
+      border-radius: 10px;
+      padding: 2px 4px;
+      margin-left: 5%;
+      cursor: pointer;
+    }
+
+    .incomingReq {
+      display: flex;
+      justify-content: center;
+      border-bottom: 2px solid black;
+
+    }
+
+    .incomingReq > * {
+      margin: 4px;
+    }
+
+    .delIncomingReq{
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      font-weight:500;
+      color: white;
+      background-color: rgb(236, 111, 111);
+      border: none;
+      border-radius: 50%;
+      padding: 2px 2px;
+      padding-bottom: 6.5px;
+      margin-left: 5%;
+      cursor: pointer;
+    }
+
+    .acceptIncomingReq{
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10px;
+      font-weight:500;
+      color: transparent;
+      text-shadow: 0 0 0 white;
+      background-color: green;
+      border: none;
+      border-radius: 50%;
+      padding: 2px 2px;
+      padding-bottom: 2px;
+      margin-left: 5%;
+      cursor: pointer;
+    }

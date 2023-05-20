@@ -1,97 +1,382 @@
-var currentString = "";
-var currentDate = new Date();
-var currentPeriodType = "";
+var currentD = new Date();
+var currentString = dateToString(currentD);
+var currentPeriodType = "day";
+var totalTime=0;
+var canCharge = true;
 
-$(document).ready(charts)
+var mon; 
+var sun;
+weekInterval(currentD);
+var mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", 
+            "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
 
-function charts() {
-  const ctx = document.getElementById('myChart');
-  
-  Promise.all([
-    monthQuery('01'),
-    monthQuery('02'),
-    monthQuery('03'),
-    monthQuery('04'),
-    monthQuery('05'),
-    monthQuery('06'),
-    monthQuery('07'),
-    monthQuery('08'),
-    monthQuery('09'),
-    monthQuery('10'),
-    monthQuery('11'),
-    monthQuery('12')
-  ]).then((data) => {
-    new Chart(ctx, {
-      
-      type: 'bar',
+var myChart = null;
+
+function hourCharts() {
+  const ctx = document.getElementById('myChartCanvas');
+  dailyQuery().then((data) => {
+    const hoursLabels = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
+    '12','13','14','15','16','17','18','19','20','21','22','23' ];
+    myChart = new Chart(ctx, {
+      type: 'line',
       data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: hoursLabels,
         datasets: [{
-          label: '# ore in ',
-          data: data,
-          borderWidth: 1
+          label: `# minutes in a day`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1],data[7][1],data[8][1],
+                data[9][1],data[10][1],data[11][1],data[12][1],data[13][1],data[14][1],data[15][1],data[16][1],data[17][1],
+                data[18][1],data[19][1],data[20][1],data[21][1],data[22][1],data[23][1]],
+          borderWidth: 0.8,
+          backgroundColor  : "#e7645d",
+          borderColor: "#e7645d",
+          borderWidth: 2,
         }]
       },
       options: {
+        showLine: true,
+        borderWidth: '2px',
+        normalized: true,
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            grace: '5%'
           }
         }
       }
     });
+  }).catch((error) => {
+    console.error(error);
   });
 }
 
-function monthQuery(s) {
+function dailyQuery() {
   return new Promise((resolve, reject) => {
-    var sum = 0;
-    var period = s;
-    var php = "../server/getMonthTime.php";
-    var typeReq = "POST";
-    $.ajax({
-      url: php,
-      type: typeReq,
-      data: {period: period},
-      success: function(result) {
-          // Aggiornamento eseguito con successo
-          console.log(result);
-          var endedTasks = JSON.parse(result);
-          console.log(result);
-          if(endedTasks.length != 0) {
-            for(var i = 0; i<endedTasks.length; i++) {
-              sum += parseInt(endedTasks[i].tim);
-              //sumTime(endedTasks[i]);
-            }
-          }
-          resolve(sum);
+    const url = "getDailyTime.php";
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send();
+  });
+}
+
+function hourCharts2(s) {
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas');
+  dailyQuery2(s).then((data) => {
+    const hoursLabels = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
+    '12','13','14','15','16','17','18','19','20','21','22','23' ];
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: hoursLabels,
+        datasets: [{
+          label: `# minutes in a day`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1],data[7][1],data[8][1],
+                data[9][1],data[10][1],data[11][1],data[12][1],data[13][1],data[14][1],data[15][1],data[16][1],data[17][1],
+                data[18][1],data[19][1],data[20][1],data[21][1],data[22][1],data[23][1]],
+          borderWidth: 0.8,
+          backgroundColor  : "#e7645d",
+          borderColor: "#e7645d",
+          borderWidth: 2,
+          //backgroundColor: Array.from({ length: 24 }).fill(undefined).map((color, index) => index === currentHourIndex ? 'red' : 'grey')
+        }]
       },
-      error: function(xhr, status, error) {
-          // Errore nell'aggiornamento
-          console.error(error);
-          reject(error);
+      options: {
+        showLine: true,
+        borderWidth: '2px',
+        normalized: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grace: '5%'
+          }
+        }
       }
     });
+  }).catch((error) => {
+    console.error(error);
   });
 }
 
+function dailyQuery2(s) {
+  return new Promise((resolve, reject) => {
+    const url = "increaseDayTime.php";
+    const formData = new FormData();
+    formData.append("parametro1", s);
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("POST", url);
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send(formData);
+  });
+}
 
+function monthCharts(i) {
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
+  monthQuery().then((data) => {
+    const monthLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const currentMonthIndex = i - 1;
+    const currentMonth = monthLabels[currentMonthIndex];
+    myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: monthLabels,
+        datasets: [{
+          label: `# minutes in a month`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1],data[7][1],data[8][1],
+                data[9][1],data[10][1],data[11][1]],
+          borderWidth: 0.8,
+          backgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? "#e85e56" : "#494949"),
+          hoverBackgroundColor: Array.from({ length: 12 }).fill(undefined).map((color, index) => index === currentMonthIndex ? "#fc9690" : "#6e6d6d"),
+        }]
+      },
+      options: {
+        plugins:{
+          legend: {
+           display: false
+          }
+         },
+        normalized: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grace: '5%'
+          }
+        }
+      }
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
+}
 
+function weekCharts() {
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
+  weekQuery().then((data) => {
+    const weekLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: weekLabels,
+        datasets: [{
+          label: `# minutes in a week`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
+          borderWidth: 0.8,
+          backgroundColor: "#e7645d",
+          hoverBackgroundColor: "#fc9690",
+        }]
+      },
+      options: {
+      
+        normalized: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grace: '5%'
+          }
+        }
+      }
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+function weekCharts2(s) {
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
+  weekQuery2(s).then((data) => {
+    const weekLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: weekLabels,
+        datasets: [{
+          label: `# minutes in a week`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
+          borderWidth: 0.8,
+          backgroundColor: "#e7645d",
+          hoverBackgroundColor: "#fc9690",
+        }]
+      },
+      options: {
+      
+        normalized: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grace: '5%'
+          }
+        }
+      }
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+function avgDailyCharts() {
+  const ctx = document.getElementById('myChartCanvas');
+  avgDailyQuery().then((data) => {
+    const hoursLabels = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
+    '12','13','14','15','16','17','18','19','20','21','22','23' ];
+    myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: hoursLabels,
+        datasets: [{
+          label: `# minutes in a day`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1],data[7][1],data[8][1],
+                data[9][1],data[10][1],data[11][1],data[12][1],data[13][1],data[14][1],data[15][1],data[16][1],data[17][1],
+                data[18][1],data[19][1],data[20][1],data[21][1],data[22][1],data[23][1]],
+          backgroundColor  : "#e7645d",
+          borderColor: "#e7645d",
+          borderWidth: 2,
+        }]
+      },
+      options: {
+        showLine: true,
+        borderWidth: '2px',
+        normalized: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grace: '5%'
+          }
+        }
+      }
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+function monthQuery() {
+  return new Promise((resolve, reject) => {
+    const url = "getMonthTime.php";
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send();
+  });
+}
+
+function weekQuery() {
+  return new Promise((resolve, reject) => {
+    const url = "getWeekTime.php";
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send();
+  });
+}
+
+function weekQuery2(s) {
+  return new Promise((resolve, reject) => {
+    const url = "increaseWeekTime.php";
+    const formData = new FormData();
+    formData.append("parametro1", s);
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("POST", url);
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send(formData);
+  });
+}
+
+function avgCharts(){
+  avgDailyCharts()
+}
+
+function avgDailyQuery() {
+  return new Promise((resolve, reject) => {
+    const url = "avgday.php";
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send();
+  });
+}
 
 function parseDate(str) {
   var parts = str.split("-");
   return new Date(parts[2], parts[1] - 1, parts[0]);
   
 }
+
 function upTotalTime(totalTime) {
-  console.log(totalTime);
-  document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
-    <p1> ${totalTime}</p1>
+  document.querySelector("#totalTime").insertAdjacentHTML('beforeend', `
+    <p1> Tempo Totale: ${totalTime}</p1>
   `);
 }
 function downloadEnded(tuple) {
-  var totalTime = 0;
-  console.log(tuple);
+  //var totalTime = 0;
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task" data-value="${tuple.keyhash}">
         
@@ -114,19 +399,87 @@ function downloadEnded(tuple) {
     
     </div>
 `)
-if (!document.querySelector('#currentPeriod').innerHTML.trim())
-    document.querySelector('#currentPeriod').insertAdjacentHTML('beforeend', `
-        <h3>
-            ${tuple.dat}
-        </h3>
-    `)
-  currentDate = parseDate(tuple.dat);
+totalTime+= JSON.parse(tuple.tim);
+}
+
+function checkMonthsBorder() {
+  cMonth = currentD.getMonth();
+  if(cMonth == 0)     document.getElementById("decreaseTimePeriod").disabled = true;
+  else if(cMonth == 11)    document.getElementById("increaseTimePeriod").disabled = true;
+  else {
+    document.getElementById("decreaseTimePeriod").disabled = false;
+    document.getElementById("increaseTimePeriod").disabled = false;
+
+  }
+}
+
+function checkWeekBorder() {
+  var monD = parseDate(mon);
+  var sunD = parseDate(sun);
+  if(monD.getMonth == 0 && monD.getDate == 1) {
+    document.getElementById("decreaseTimePeriod").disabled = true;
+  }
+  else if(sunD.getMonth() == 0 && sunD.getDate() < 7) {
+    monD.setDate(1);
+    monD.setMonth(0);
+    document.getElementById("decreaseTimePeriod").disabled = true;
+  }
+  else if(sunD.getMonth() == 11 && sunD.getDate() == 31) {
+    document.getElementById("increaseTimePeriod").disabled = true;
+  }
+  else if(monD.getMonth() == 11 && monD.getDate() > 31-7) {
+    sunD.setDate(31);
+    sunD.setMonth(11);
+    document.getElementById("increaseTimePeriod").disabled = true;
+  }
+  else {
+    document.getElementById("decreaseTimePeriod").disabled = false;
+    document.getElementById("increaseTimePeriod").disabled = false;
+  }
+  mon = dateToString(monD);
+  sun = dateToString(sunD);
+}
+
+function checkDayBorder() {
+  date = currentString;
+  var parts = date.split("-");
+  if(parts[0] == "01" && parts[1] == "01")     document.getElementById("decreaseTimePeriod").disabled = true;
+  else if(parts[0] == "31" && parts[1] == "12")    document.getElementById("increaseTimePeriod").disabled = true;
+  else {
+    document.getElementById("decreaseTimePeriod").disabled = false;
+    document.getElementById("increaseTimePeriod").disabled = false;
+
+  }
+} 
+
+function dateToString(d) {
+  var day = JSON.parse(d.getDate());
+  var month = JSON.parse(d.getMonth()+1);
+  var year = JSON.parse(d.getFullYear());
+  if (day<10)
+    day = "0"+day;
+  if (month<10)
+    month = "0"+month;
+    s =  day+"-"+month+"-"+year;
+    return s;
+}
+
+
+function weekInterval(d) {
+  var today = d;
+  var currentDayOfWeek = today.getDay();
+  var daysToMonday = currentDayOfWeek === 0 ? 6 : currentDayOfWeek - 1;
+  var monD = new Date(today.getFullYear(), today.getMonth(), today.getDate() - daysToMonday);
+  var daysToSunday = currentDayOfWeek === 0 ? 0 : 7 - currentDayOfWeek;
+  var sunD = new Date(today.getFullYear(), today.getMonth(), today.getDate() + daysToSunday);
+  
+  mon = dateToString(monD);
+  sun = dateToString(sunD);
 }
 
 function deleteEndedTask(e) {
   var url ="deleteTask.php";
   var button = e.currentTarget;
-  console.log(button)
   var task = button.parentNode;
  task.remove();
   var keyhash = task.getAttribute("data-value");
@@ -136,7 +489,18 @@ function deleteEndedTask(e) {
     data: {keyhash: keyhash},
     success: function(result) {
         // Aggiornamento eseguito con successo
-        console.log(result);
+        if(myChart!= null) myChart.destroy();
+        if(currentPeriodType == "month") {
+          currentMonth = new Date().getMonth()+1;
+          monthCharts(currentMonth);
+        }
+        else if(currentPeriodType == "week") {
+          weekCharts();
+        }
+        else if(currentPeriodType == "day") {
+
+        }
+        
     },
     error: function(xhr, status, error) {
         // Errore nell'aggiornamento
@@ -157,62 +521,93 @@ function endedOption(e) {
     }
 }
 
-
-function load(s) {
-    var url;
-    var totalTime = 0 ;
-    if(s == 'daily') url = "dailyLoad.php";
-    else if(s == 'weekly') url = "weeklyLoad.php";
-    else if(s == 'all') url = "allLoad.php";
-    if(s == 'daily') {
-      url = "dailyLoad.php";
-      currentPeriodType = "day";
-    }
-    else if(s == 'weekly') {
-      url = "weeklyLoad.php";
-      currentPeriodType = "week";
-    }
-    else if(s == 'month') {
-      url = "monthlyLoad.php";
-      currentPeriodType = "month";
-    }
-    else if(s == 'all') {
-      url = "allLoad.php";
-      currentPeriodType = "none";
-    }
-    console.log(currentPeriodType);
-    document.getElementById("tasksPanel").innerHTML = '';
-    document.getElementById("currentPeriod").innerHTML = '';
-    var httpRequest = new XMLHttpRequest();
-    httpRequest.open("GET", url, true);
-    httpRequest.setRequestHeader('Content-Type', 'application/json');
-    httpRequest.onreadystatechange = function() {
-      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-        var response = JSON.parse(httpRequest.responseText);
-        if ('error' in response) {
-          console.log(response.error);
-        } else {
-            response.forEach(function(tuple) {
-              downloadEnded(tuple);
-              totalTime+= tuple.time;
-          });
-          upTotalTime(totalTime);
-        }
-      }
-    };
-    httpRequest.send();
+function load(s, e) {
+  var currentActiveButton = document.querySelector('.tabClass.active');
+  if (currentActiveButton) {
+    currentActiveButton.classList.remove('active');
   }
+  e.currentTarget.classList.add('active');
+
+  document.querySelector("#currentPeriod").innerHTML= "";
+  document.querySelector("#totalTime").innerHTML= "";
+  currentD = new Date();
+  if(myChart!= null) myChart.destroy();
+  var url;
+    totalTime = 0 ;
+  if(s == 'daily') {
+  /*  document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
+    <p1> ${currentString} <br></p1>
+  `);*/
+    document.querySelector("#currentPeriod").innerText= currentString;
+    url = "dailyLoad.php";
+    currentPeriodType = "day";
+    currentHour = new Date().getHours();
+    hourCharts(currentHour);
+    document.getElementById("increaseTimePeriod").disabled = false;
+    document.getElementById("decreaseTimePeriod").disabled = false;
+  }
+  else if(s == 'weekly') {
+    document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
+    url = "weeklyLoad.php";
+    currentPeriodType = "week";
+    weekCharts();
+    document.getElementById("increaseTimePeriod").disabled = false;
+    document.getElementById("decreaseTimePeriod").disabled = false;
+    weekInterval(currentD);
+    checkWeekBorder();
+  }
+  else if(s == 'monthly') {
+    url = "monthlyLoad.php";
+    currentPeriodType = "month";
+    currentMonth = currentD.getMonth()+1;
+    document.querySelector("#currentPeriod").innerText= mesi[currentMonth-1];
+    monthCharts(currentMonth);
+    document.getElementById("increaseTimePeriod").disabled = false;
+    document.getElementById("decreaseTimePeriod").disabled = false;
+    checkMonthsBorder();
+    
+  }
+  else if(s == 'all') {
+    url = "allLoad.php";
+    currentPeriodType = "none";
+    document.querySelector("#currentPeriod").innerText= "Total tasks";
+    document.getElementById("increaseTimePeriod").disabled = true;
+    document.getElementById("decreaseTimePeriod").disabled = true;
+    avgDailyCharts();
+  }
+  document.getElementById("tasksPanel").innerHTML = '';
+  var httpRequest = new XMLHttpRequest();
+  httpRequest.open("GET", url, true);
+  httpRequest.setRequestHeader('Content-Type', 'application/json');
+  httpRequest.onreadystatechange = function() {
+    if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+      var response = JSON.parse(httpRequest.responseText);
+      if ('error' in response) {
+        console.log(response.error);
+      } else {
+          response.forEach(function(tuple) {
+            downloadEnded(tuple);
+            totalTime+= tuple.time;
+        });
+        upTotalTime(totalTime);
+        
+      }
+    }
+  };
+  httpRequest.send();
+    
+}
 
 function increaseDay(s) {
   if(s == "+") {
-    currentDate.setDate(currentDate.getDate() + 1);
+    currentD.setDate(currentD.getDate() + 1);
   }
   else if (s == "-") {
-    currentDate.setDate(currentDate.getDate() - 1);
+    currentD.setDate(currentD.getDate() - 1);
   }
-  var day = JSON.parse(currentDate.getDate());
-  var month = JSON.parse(currentDate.getMonth()+1);
-  var year = JSON.parse(currentDate.getFullYear());
+  var day = JSON.parse(currentD.getDate());
+  var month = JSON.parse(currentD.getMonth()+1);
+  var year = JSON.parse(currentD.getFullYear());
   if (day<10)
     day = "0"+day;
   if (month<10)
@@ -223,14 +618,14 @@ function increaseDay(s) {
 
 function increaseWeek(s) {
   if(s == "+") {
-    currentDate.setDate(currentDate.getDate() + 7);
+    currentD.setDate(currentD.getDate() + 7);
   }
   else if (s == "-") {
-    currentDate.setDate(currentDate.getDate() - 7);
+    currentD.setDate(currentD.getDate() - 7);
   }
-  var day = JSON.parse(currentDate.getDate());
-  var month = JSON.parse(currentDate.getMonth()+1);
-  var year = JSON.parse(currentDate.getFullYear());
+  var day = JSON.parse(currentD.getDate());
+  var month = JSON.parse(currentD.getMonth()+1);
+  var year = JSON.parse(currentD.getFullYear());
   if (day<10)
     day = "0"+day;
   if (month<10)
@@ -240,16 +635,16 @@ function increaseWeek(s) {
 }
 
 function increaseMonth(s) {
-  currentDate.setDate(currentDate.getDate());
-  var day = JSON.parse(currentDate.getDate());
-  var year = JSON.parse(currentDate.getFullYear());
+  
   if(s == "+") {
-    var month = JSON.parse(currentDate.getMonth()+2);
+    currentD.setMonth(currentD.getMonth() + 1);
   }
   else if (s == "-") {
-    var month = JSON.parse(currentDate.getMonth());
+    currentD.setMonth(currentD.getMonth() - 1);
   }
-  
+  var day = JSON.parse(currentD.getDate());
+  var month = JSON.parse(currentD.getMonth()+1);
+  var year = JSON.parse(currentD.getFullYear());
   if (day<10)
     day = "0"+day;
   if (month<10)
@@ -258,23 +653,41 @@ function increaseMonth(s) {
   currentString = day+"-"+month+"-"+year;
 }
 
-
-
-
 function increase() {
   document.getElementById("tasksPanel").innerHTML = '';
   var typeReq = "POST";
   if(currentPeriodType == "day") {
     increaseDay("+");
+    checkDayBorder();
+    document.querySelector("#currentPeriod").innerText= currentString;
     var php = "../server/dailyLoadIncrease.php";
+    if(canCharge) hourCharts2(currentString);
   }
   else if(currentPeriodType == "week") {
     increaseWeek("+");
+    weekInterval(currentD);
+    checkWeekBorder();
+    document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
     var php = "../server/increaseWeek.php";
+    weekInterval(currentD);
+    weekCharts2(currentString);
+
   }
   else if(currentPeriodType == "month") {
     increaseMonth("+");
+    document.querySelector("#currentPeriod").innerText= mesi[currentD.getMonth()];
     var php = "../server/increaseMonth.php";
+    checkMonthsBorder();
+    if(myChart != null) {
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = "#e85e56";
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()-1] = "#494949";
+      myChart.data.datasets[0].hoverBackgroundColor[currentD.getMonth()] = "#fc9690";
+      myChart.data.datasets[0].hoverBackgroundColor[currentD.getMonth()-1] = "#6e6d6d";
+      myChart.update();
+    }
+  }
+  else {
+    console.log("errore period type");
   }
   $.ajax({
     url: php,
@@ -283,7 +696,6 @@ function increase() {
     success: function(result) {
         // Aggiornamento eseguito con successo
         var endedTasks = JSON.parse(result);
-
         if(endedTasks.length != 0) {
           for(var i = 0; i<endedTasks.length; i++) {
             downloadEnded(endedTasks[i]);
@@ -302,15 +714,34 @@ function decrease() {
   var typeReq = "POST";
   if(currentPeriodType == "day") {
     increaseDay("-");
+    document.querySelector("#currentPeriod").innerText= currentString;
     var php = "../server/dailyLoadIncrease.php";
+    if(canCharge) hourCharts2(currentString);
+    checkDayBorder();
   }
   else if(currentPeriodType == "week") {
     increaseWeek("-");
+    weekInterval(currentD);
+    checkWeekBorder();
+    document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
     var php = "../server/increaseWeek.php";
+    weekCharts2(currentString);
   }
   else if(currentPeriodType == "month") {
     increaseMonth("-");
+    document.querySelector("#currentPeriod").innerText= mesi[currentD.getMonth()];
     var php = "../server/increaseMonth.php";
+    checkMonthsBorder();
+    if(myChart != null) {
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = "#e85e56";
+      myChart.data.datasets[0].backgroundColor[currentD.getMonth()+1] = "#494949";
+      myChart.data.datasets[0].hoverBackgroundColor[currentD.getMonth()] = "#fc9690";
+      myChart.data.datasets[0].hoverBackgroundColor[currentD.getMonth()+1] = "#6e6d6d";
+      myChart.update();
+    }
+  }
+  else {
+    console.log("errore period type")
   }
   $.ajax({
     url: php,
@@ -331,4 +762,16 @@ function decrease() {
         console.error(error);
     }
 });
+}
+
+function startInterval(s) {
+  if(s == "-") intervalId = setInterval(decrease, 100); 
+  else if(s == "+") intervalId = setInterval(increase, 100); 
+  if(myChart) myChart.destroy();
+  canCharge = false;
+}
+
+function stopInterval() {
+  clearInterval(intervalId); 
+  canCharge = true;
 }

@@ -1,5 +1,5 @@
 <?php
-  include( '../db_conn.php');  
+  include( 'db_conn.php');  
   session_start(); 
 ?>
 <?php             
@@ -13,8 +13,11 @@
         case 'reqAmico':
             $query="insert into richieste values ('${username}','${amico}')";
             break;
-        case 'delReq':
+        case 'delOutgoingReq':
             $query="delete from richieste where richiedente ='${username}' and accettante= '${amico}'";
+            break;
+        case 'delIncomingReq':
+            $query="delete from richieste where richiedente ='${amico}' and accettante= '${username}'";
             break;
         case 'acceptReq':
             $query="insert into amici values('${username}', '${amico}')";
