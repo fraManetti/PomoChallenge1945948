@@ -432,6 +432,7 @@ function upTotalTime(totalTime) {
   document.getElementById("totalTime").innerHTML="Tempo Totale : "+total;
 }
 
+
 function downloadEnded(tuple) {
   //var totalTime = 0;
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
@@ -461,8 +462,14 @@ function downloadEnded(tuple) {
 
 function checkMonthsBorder() {
   cMonth = currentD.getMonth();
-  if(cMonth == 0)     document.getElementById("decreaseTimePeriod").disabled = true;
-  else if(cMonth == 11)    document.getElementById("increaseTimePeriod").disabled = true;
+  if(cMonth == 0) { 
+    document.getElementById("decreaseTimePeriod").disabled = true;
+    stopInterval();
+  }
+  else if(cMonth == 11) {
+    document.getElementById("increaseTimePeriod").disabled = true;
+    stopInterval();
+  }
   else {
     document.getElementById("decreaseTimePeriod").disabled = false;
     document.getElementById("increaseTimePeriod").disabled = false;
@@ -475,19 +482,23 @@ function checkWeekBorder() {
   var sunD = parseDate(sun);
   if(monD.getMonth == 0 && monD.getDate == 1) {
     document.getElementById("decreaseTimePeriod").disabled = true;
+    stopInterval();
   }
   else if(sunD.getMonth() == 0 && sunD.getDate() < 7) {
     monD.setDate(1);
     monD.setMonth(0);
     document.getElementById("decreaseTimePeriod").disabled = true;
+    stopInterval();
   }
   else if(sunD.getMonth() == 11 && sunD.getDate() == 31) {
     document.getElementById("increaseTimePeriod").disabled = true;
+    stopInterval();
   }
   else if(monD.getMonth() == 11 && monD.getDate() > 31-7) {
     sunD.setDate(31);
     sunD.setMonth(11);
     document.getElementById("increaseTimePeriod").disabled = true;
+    stopInterval();
   }
   else {
     document.getElementById("decreaseTimePeriod").disabled = false;
@@ -500,8 +511,14 @@ function checkWeekBorder() {
 function checkDayBorder() {
   date = currentString;
   var parts = date.split("-");
-  if(parts[0] == "01" && parts[1] == "01")     document.getElementById("decreaseTimePeriod").disabled = true;
-  else if(parts[0] == "31" && parts[1] == "12")    document.getElementById("increaseTimePeriod").disabled = true;
+  if(parts[0] == "01" && parts[1] == "01") {
+    document.getElementById("decreaseTimePeriod").disabled = true;
+    stopInterval();
+  }
+  else if(parts[0] == "31" && parts[1] == "12") {
+    document.getElementById("increaseTimePeriod").disabled = true;
+    stopInterval();
+  }
   else {
     document.getElementById("decreaseTimePeriod").disabled = false;
     document.getElementById("increaseTimePeriod").disabled = false;
@@ -771,7 +788,7 @@ function increase() {
     increaseMonth("+");
     document.querySelector("#currentPeriod").innerText= mesi[currentD.getMonth()];
     var php = "../server/increaseMonth.php";
-    checkMonthsBorder();
+    checkMonthsBorder(); 
     if(myChart != null) {
       myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = "#e85e56";
       myChart.data.datasets[0].backgroundColor[currentD.getMonth()-1] = "#494949";
@@ -783,27 +800,29 @@ function increase() {
   else {
     console.log("errore period type");
   }
-  $.ajax({
-    url: php,
-    type: typeReq,
-    data: {currentString: currentString},
-    success: function(result) {
-        // Aggiornamento eseguito con successo
-        var endedTasks = JSON.parse(result);
-        if(endedTasks.length != 0) {           
-           totalTime = 0;
+  if(canCharge) {
+    $.ajax({
+      url: php,
+      type: typeReq,
+      data: {currentString: currentString},
+      success: function(result) {
+          // Aggiornamento eseguito con successo
+          var endedTasks = JSON.parse(result);
+          if(endedTasks.length != 0) {           
+             totalTime = 0;
           for(var i = 0; i<endedTasks.length; i++) {
-            downloadEnded(endedTasks[i]);
-            totalTime+=JSON.parse(endedTasks[i].tim);
+              downloadEnded(endedTasks[i]);
+              totalTime+=JSON.parse(endedTasks[i].tim);
           }
-          upTotalTime(totalTime);          
+            upTotalTime(totalTime);          
         }
-    },
-    error: function(xhr, status, error) {
-        // Errore nell'aggiornamento
-        console.error(error);
-    }
-});
+      },
+      error: function(xhr, status, error) {
+          // Errore nell'aggiornamento
+          console.error(error);
+      }
+    });
+  }
 }
 
 function decrease() {
@@ -841,34 +860,36 @@ function decrease() {
   else {
     console.log("errore period type")
   }
-  $.ajax({
-    url: php,
-    type: typeReq,
-    data: {currentString: currentString},
-    success: function(result) {
-        // Aggiornamento eseguito con successo
-        var endedTasks = JSON.parse(result);
+  if(canCharge) {
+    $.ajax({
+      url: php,
+      type: typeReq,
+      data: {currentString: currentString},
+      success: function(result) {
+          // Aggiornamento eseguito con successo
+          var endedTasks = JSON.parse(result);
 
-        if(endedTasks.length != 0) {
+          if(endedTasks.length != 0) {
           totalTime = 0;
-          for(var i = 0; i<endedTasks.length; i++) {
-            downloadEnded(endedTasks[i]);
+            for(var i = 0; i<endedTasks.length; i++) {
+              downloadEnded(endedTasks[i]);
             totalTime+=JSON.parse(endedTasks[i].tim);
-          }
+            }
           upTotalTime(totalTime);
-        }
-    },
-    error: function(xhr, status, error) {
-        // Errore nell'aggiornamento
-        console.error(error);
-    }
-});
+          }
+      },
+      error: function(xhr, status, error) {
+          // Errore nell'aggiornamento
+          console.error(error);
+      }
+    });
+  }
 }
 
 function startInterval(s) {
   if(s == "-") intervalId = setInterval(decrease, 100); 
   else if(s == "+") intervalId = setInterval(increase, 100); 
-  if(myChart) myChart.destroy();
+  if(myChart && currentPeriodType != "month") myChart.destroy();
   canCharge = false;
 }
 
