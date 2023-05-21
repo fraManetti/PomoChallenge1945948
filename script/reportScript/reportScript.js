@@ -651,7 +651,8 @@ function load(s, e) {
     avgBtns.forEach(function(btn) {
         btn.style.display = "block";
     });
-
+    document.getElementById("avgWeek").classList.remove('active');
+    document.getElementById("avgDay").classList.add('active');
   }
   document.getElementById("tasksPanel").innerHTML = '';
   var httpRequest = new XMLHttpRequest();
