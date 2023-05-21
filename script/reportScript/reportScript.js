@@ -706,24 +706,26 @@ function increase() {
   else {
     console.log("errore period type");
   }
-  $.ajax({
-    url: php,
-    type: typeReq,
-    data: {currentString: currentString},
-    success: function(result) {
-        // Aggiornamento eseguito con successo
-        var endedTasks = JSON.parse(result);
-        if(endedTasks.length != 0) {
-          for(var i = 0; i<endedTasks.length; i++) {
-            downloadEnded(endedTasks[i]);
+  if(canCharge) {
+    $.ajax({
+      url: php,
+      type: typeReq,
+      data: {currentString: currentString},
+      success: function(result) {
+          // Aggiornamento eseguito con successo
+          var endedTasks = JSON.parse(result);
+          if(endedTasks.length != 0) {
+            for(var i = 0; i<endedTasks.length; i++) {
+              downloadEnded(endedTasks[i]);
+            }
           }
-        }
-    },
-    error: function(xhr, status, error) {
-        // Errore nell'aggiornamento
-        console.error(error);
-    }
-});
+      },
+      error: function(xhr, status, error) {
+          // Errore nell'aggiornamento
+          console.error(error);
+      }
+    });
+  }
 }
 
 function decrease() {
@@ -760,25 +762,27 @@ function decrease() {
   else {
     console.log("errore period type")
   }
-  $.ajax({
-    url: php,
-    type: typeReq,
-    data: {currentString: currentString},
-    success: function(result) {
-        // Aggiornamento eseguito con successo
-        var endedTasks = JSON.parse(result);
+  if(canCharge) {
+    $.ajax({
+      url: php,
+      type: typeReq,
+      data: {currentString: currentString},
+      success: function(result) {
+          // Aggiornamento eseguito con successo
+          var endedTasks = JSON.parse(result);
 
-        if(endedTasks.length != 0) {
-          for(var i = 0; i<endedTasks.length; i++) {
-            downloadEnded(endedTasks[i]);
+          if(endedTasks.length != 0) {
+            for(var i = 0; i<endedTasks.length; i++) {
+              downloadEnded(endedTasks[i]);
+            }
           }
-        }
-    },
-    error: function(xhr, status, error) {
-        // Errore nell'aggiornamento
-        console.error(error);
-    }
-});
+      },
+      error: function(xhr, status, error) {
+          // Errore nell'aggiornamento
+          console.error(error);
+      }
+    });
+  }
 }
 
 function startInterval(s) {
