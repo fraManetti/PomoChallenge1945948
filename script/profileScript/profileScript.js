@@ -77,9 +77,9 @@ function checkNewUsername(newUsername) {
                       url: "./updateProfile.php",
                       type: "POST",
                       data: {type: "updateUsername", oldUsername: originalValue, newUsername: usernameField.value},
-                      success: function(result) {
+                      success: function(result) {   
+                        if(result.trim()!="Username Correttamente Aggiornato") usernameField.value = originalValue;
                           alert(result);
-                          if(JSON.stringify(result)!='Username Correttamente Aggiornato'  ) usernameField.value = originalValue;
                           usernameField.disabled = true;
                           editButton.innerHTML = 'Edit';
                       },
@@ -88,9 +88,14 @@ function checkNewUsername(newUsername) {
                           /*qui ci metterò l'alert*/
                       }
                   });
-              }
+              } else {
+                usernameField.disabled = true;
+                usernameField.value = originalValue;
+                editButton.innerHTML = 'Edit';
+                            }
           } else {
               usernameField.disabled = true;
+              usernameField.value = originalValue;
               editButton.innerHTML = 'Edit';
           }
       }
@@ -151,7 +156,7 @@ function handleOutClick(event) {
             data: {type: "confirmNewPassword", oldPass: oldPassword, newPass: newPassword},
             success: function(result) {
                 alert(result);
-                if(result == "Password correttamente aggiornata") popupContainer.innerHTML = "";
+                if(result.trim() == "Password correttamente aggiornata") popupContainer.innerHTML = "";
                 
             },
             error: function(xhr, status, error) {
@@ -195,6 +200,7 @@ function handleOutClick(event) {
     document.getElementById("amici-totali").innerHTML = contaAmici;
 }
 function contaOre(contaOre) {
-  document.getElementById("ore-studio").innerHTML = contaOre;
+  var cnt = convertMinHour(contaOre);
+  document.getElementById("ore-studio").innerHTML = cnt;
   
 }
