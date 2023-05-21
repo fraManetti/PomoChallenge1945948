@@ -244,6 +244,9 @@ function weekCharts2(s) {
 }
 
 function avgDailyCharts() {
+  if (myChart) {
+    myChart.destroy();
+  }
   const ctx = document.getElementById('myChartCanvas');
   avgDailyQuery().then((data) => {
     const hoursLabels = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
@@ -265,6 +268,41 @@ function avgDailyCharts() {
       options: {
         showLine: true,
         borderWidth: '2px',
+        normalized: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grace: '5%'
+          }
+        }
+      }
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+function avgWeeklyCharts() {
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
+  avgWeekQuery().then((data) => {
+    const weekLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: weekLabels,
+        datasets: [{
+          label: `# minutes in a week`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
+          borderWidth: 0.8,
+          backgroundColor: "#e7645d",
+          hoverBackgroundColor: "#fc9690",
+        }]
+      },
+      options: {
+      
         normalized: true,
         scales: {
           y: {
@@ -347,6 +385,26 @@ function avgCharts(){
 function avgDailyQuery() {
   return new Promise((resolve, reject) => {
     const url = "avgday.php";
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send();
+  });
+}
+
+function avgWeekQuery() {
+  return new Promise((resolve, reject) => {
+    const url = "avgWeekTime.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -545,6 +603,11 @@ function load(s, e) {
     hourCharts(currentHour);
     document.getElementById("increaseTimePeriod").disabled = false;
     document.getElementById("decreaseTimePeriod").disabled = false;
+
+    var avgBtns = document.querySelectorAll(".avgBtnClass");
+    avgBtns.forEach(function(btn) {
+        btn.style.display = "none";
+    });
   }
   else if(s == 'weekly') {
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
@@ -555,6 +618,11 @@ function load(s, e) {
     document.getElementById("decreaseTimePeriod").disabled = false;
     weekInterval(currentD);
     checkWeekBorder();
+
+    var avgBtns = document.querySelectorAll(".avgBtnClass");
+    avgBtns.forEach(function(btn) {
+        btn.style.display = "none";
+    });
   }
   else if(s == 'monthly') {
     url = "monthlyLoad.php";
@@ -565,7 +633,11 @@ function load(s, e) {
     document.getElementById("increaseTimePeriod").disabled = false;
     document.getElementById("decreaseTimePeriod").disabled = false;
     checkMonthsBorder();
-    
+
+    var avgBtns = document.querySelectorAll(".avgBtnClass");
+    avgBtns.forEach(function(btn) {
+        btn.style.display = "none";
+    });
   }
   else if(s == 'all') {
     url = "allLoad.php";
@@ -574,6 +646,12 @@ function load(s, e) {
     document.getElementById("increaseTimePeriod").disabled = true;
     document.getElementById("decreaseTimePeriod").disabled = true;
     avgDailyCharts();
+
+    var avgBtns = document.querySelectorAll(".avgBtnClass");
+    avgBtns.forEach(function(btn) {
+        btn.style.display = "block";
+    });
+
   }
   document.getElementById("tasksPanel").innerHTML = '';
   var httpRequest = new XMLHttpRequest();
@@ -595,7 +673,21 @@ function load(s, e) {
     }
   };
   httpRequest.send();
-    
+}
+
+function chartLoad(s, e) {
+  var currentActiveButton = document.querySelector('.avgBtnClass.active');
+  if (currentActiveButton) {
+    currentActiveButton.classList.remove('active');
+  }
+  e.currentTarget.classList.add('active');
+
+  if(s == 'avgDay') {
+    avgDailyCharts();
+  }
+  else if(s == "avgWeek") {
+    avgWeeklyCharts();
+  }
 }
 
 function increaseDay(s) {

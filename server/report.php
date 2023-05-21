@@ -81,8 +81,15 @@
 
         </div>
         <div id = chartPanel>
-            
-            <div id = canvasPanel>
+            <div id = "avgChoicePanel">
+                <button class = "avgBtnClass active" id = "avgDay" onclick="chartLoad('avgDay', event)">
+                    Average day
+                </button>
+                <button class = "avgBtnClass" id = "avgWeek" onclick="chartLoad('avgWeek', event)">
+                    Average week
+                </button>
+            </div>
+            <div id = "canvasPanel">
                 <canvas id="myChartCanvas"></canvas>
             </div>
         </div>
