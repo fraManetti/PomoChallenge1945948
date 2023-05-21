@@ -431,6 +431,7 @@ function upTotalTime(totalTime) {
   var total = convertMinHour(totalTime);
   document.getElementById("totalTime").innerHTML="Tempo Totale : "+total;
 }
+
 function downloadEnded(tuple) {
   //var totalTime = 0;
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
@@ -449,7 +450,7 @@ function downloadEnded(tuple) {
         </button>
         
         <div id="hiddenOption">
-          <textarea name="taskNote" readonly class="hiddenNote" cols="40" rows="3" placeholder="updateNote" maxlength="115">${tuple.note}</textarea>
+          <textarea name="taskNote" readonly class="hiddenNote" cols="40" rows="3" maxlength="115">${tuple.note}</textarea>
         </div>    
        
     
@@ -763,7 +764,7 @@ function increase() {
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
     var php = "../server/increaseWeek.php";
     weekInterval(currentD);
-    weekCharts2(currentString);
+    if(canCharge) weekCharts2(currentString);
 
   }
   else if(currentPeriodType == "month") {
@@ -822,7 +823,7 @@ function decrease() {
     checkWeekBorder();
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
     var php = "../server/increaseWeek.php";
-    weekCharts2(currentString);
+    if(canCharge) weekCharts2(currentString);
   }
   else if(currentPeriodType == "month") {
     increaseMonth("-");
