@@ -102,7 +102,16 @@
   border-color: #494949;
 }
 
-
+#avgChoicePanel {
+  margin-left: 37px;
+  margin-right: 37px;
+  width: 460px;
+  height: 40px;
+  padding-top: 5px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background-color: #494949;
+}
 
 #canvasPanel {
   background-color: #f7f1eb;
@@ -214,6 +223,34 @@
 }
 */
 
+.avgBtnClass {
+  border-color: transparent;
+  background-color: transparent;
+  height: 30px;
+  width: 220px;
+  text-align: center;
+  justify-self: center;
+  color: #f7f1eb;
+  font-weight: 500;
+  border-radius: 7px;
+  overflow: hidden;
+  transform-style: flat;
+  cursor: pointer;
+  display: none;
+}
+
+.avgBtnClass.active {
+  background-color: #f4e9dc;
+  height: 30px;
+  width: 220px;
+  text-align: center;
+  justify-self: center;
+  color: #494949;
+  font-weight: 500;
+  border-radius: 7px;
+  overflow: hidden;
+
+}
 
   /*#################################################################
   //##########                  IMG:                   ##############
