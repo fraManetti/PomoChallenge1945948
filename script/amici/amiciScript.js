@@ -27,7 +27,7 @@ function delAmico(e) {
     var amico = button.parentNode.getAttribute("data-value");
     button.parentNode.remove();
     $.ajax({
-        url: "../scripts/updateAmici.php",
+        url: "updateAmici.php",
         type: "POST",
         data: {amico: amico,type: "delAmico"},
         success: function(result) {
@@ -46,7 +46,7 @@ function delOutgoingReq(e) {
     var req = button.parentNode.getAttribute("data-value");
     button.parentNode.remove();
     $.ajax({
-        url: "../scripts/updateAmici.php",
+        url: "updateAmici.php",
         type: "POST",
         data: {amico: req,type: "delOutgoingReq"},
         success: function(result) {
@@ -65,7 +65,7 @@ function delIncomingReq(e) {
     var req = button.parentNode.getAttribute("data-value");
     button.parentNode.remove();
     $.ajax({
-        url: "../scripts/updateAmici.php",
+        url: "updateAmici.php",
         type: "POST",
         data: {amico: req,type: "delIncomingReq"},
         success: function(result) {
@@ -90,7 +90,7 @@ function downloadAmici(amico) {
 function addFriend(e) {
     var friendToAdd = e.currentTarget.parentNode.children[0].getAttribute("data-value");
         $.ajax({
-        url: "../scripts/updateAmici.php",
+        url: "updateAmici.php",
         type: "POST",
         data: {amico: friendToAdd,type: "reqAmico"},
         success: function(result) {

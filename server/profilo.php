@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>PomoChallenge</title>
-    <link rel="icon" type="image/x-icon" href="..//style/img/tomato.png">
+    <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >

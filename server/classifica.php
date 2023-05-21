@@ -9,6 +9,7 @@
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>PomoChallenge</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
 
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
