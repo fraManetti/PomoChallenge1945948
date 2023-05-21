@@ -21,6 +21,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <script  src="../script/reportScript/reportScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
+    <script  src="../script/defaultScript.js"></script>
     <script>
         $(function(){
             $("#mynavbar").load("../model/newNavbar.html");

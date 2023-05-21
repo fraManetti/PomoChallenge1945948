@@ -3,7 +3,6 @@ var currentString = dateToString(currentD);
 var currentPeriodType = "day";
 var totalTime=0;
 var canCharge = true;
-
 var mon; 
 var sun;
 weekInterval(currentD);
@@ -429,9 +428,8 @@ function parseDate(str) {
 }
 
 function upTotalTime(totalTime) {
-  document.querySelector("#totalTime").insertAdjacentHTML('beforeend', `
-    <p1> Tempo Totale: ${totalTime}</p1>
-  `);
+  var total = convertMinHour(totalTime);
+  document.getElementById("totalTime").innerHTML="Tempo Totale : "+total;
 }
 function downloadEnded(tuple) {
   //var totalTime = 0;
@@ -457,7 +455,7 @@ function downloadEnded(tuple) {
     
     </div>
 `)
-totalTime+= JSON.parse(tuple.tim);
+//totalTime+= JSON.parse(tuple.tim);
 }
 
 function checkMonthsBorder() {
@@ -664,6 +662,7 @@ function load(s, e) {
       if ('error' in response) {
         console.log(response.error);
       } else {
+        totalTime=0;
           response.forEach(function(tuple) {
             downloadEnded(tuple);
             totalTime+= tuple.time;
@@ -748,6 +747,7 @@ function increaseMonth(s) {
 
 function increase() {
   document.getElementById("tasksPanel").innerHTML = '';
+  upTotalTime(0);
   var typeReq = "POST";
   if(currentPeriodType == "day") {
     increaseDay("+");
@@ -789,10 +789,13 @@ function increase() {
     success: function(result) {
         // Aggiornamento eseguito con successo
         var endedTasks = JSON.parse(result);
-        if(endedTasks.length != 0) {
+        if(endedTasks.length != 0) {           
+           totalTime = 0;
           for(var i = 0; i<endedTasks.length; i++) {
             downloadEnded(endedTasks[i]);
+            totalTime+=JSON.parse(endedTasks[i].tim);
           }
+          upTotalTime(totalTime);          
         }
     },
     error: function(xhr, status, error) {
@@ -804,6 +807,7 @@ function increase() {
 
 function decrease() {
   document.getElementById("tasksPanel").innerHTML = '';
+  upTotalTime(0);
   var typeReq = "POST";
   if(currentPeriodType == "day") {
     increaseDay("-");
@@ -845,9 +849,12 @@ function decrease() {
         var endedTasks = JSON.parse(result);
 
         if(endedTasks.length != 0) {
+          totalTime = 0;
           for(var i = 0; i<endedTasks.length; i++) {
             downloadEnded(endedTasks[i]);
+            totalTime+=JSON.parse(endedTasks[i].tim);
           }
+          upTotalTime(totalTime);
         }
     },
     error: function(xhr, status, error) {
