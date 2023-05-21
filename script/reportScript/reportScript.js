@@ -433,6 +433,7 @@ function upTotalTime(totalTime) {
     <p1> Tempo Totale: ${totalTime}</p1>
   `);
 }
+
 function downloadEnded(tuple) {
   //var totalTime = 0;
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
@@ -451,7 +452,7 @@ function downloadEnded(tuple) {
         </button>
         
         <div id="hiddenOption">
-          <textarea name="taskNote" readonly class="hiddenNote" cols="40" rows="3" placeholder="updateNote" maxlength="115">${tuple.note}</textarea>
+          <textarea name="taskNote" readonly class="hiddenNote" cols="40" rows="3" maxlength="115">${tuple.note}</textarea>
         </div>    
        
     
