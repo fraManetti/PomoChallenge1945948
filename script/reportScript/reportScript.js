@@ -683,7 +683,7 @@ function load(s, e) {
         totalTime=0;
           response.forEach(function(tuple) {
             downloadEnded(tuple);
-            totalTime+= tuple.time;
+            totalTime+= JSON.parse(tuple.tim);
         });
         upTotalTime(totalTime);
         
