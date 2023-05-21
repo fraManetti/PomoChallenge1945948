@@ -764,7 +764,7 @@ function increase() {
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
     var php = "../server/increaseWeek.php";
     weekInterval(currentD);
-    weekCharts2(currentString);
+    if(canCharge) weekCharts2(currentString);
 
   }
   else if(currentPeriodType == "month") {
@@ -819,7 +819,7 @@ function decrease() {
     checkWeekBorder();
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
     var php = "../server/increaseWeek.php";
-    weekCharts2(currentString);
+    if(canCharge) weekCharts2(currentString);
   }
   else if(currentPeriodType == "month") {
     increaseMonth("-");
