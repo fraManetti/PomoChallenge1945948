@@ -1,0 +1,69 @@
+@media only screen and (max-height: 760px) {
+  
+  #selectDatePanel {
+    width: 460px;
+  }
+
+  #reportPanel {
+    height: 530px;
+    width: 560px;
+    justify-self: end;
+    position: relative;
+    background-color: #494949;
+    border-radius: 5%;
+    overflow: hidden;
+    border-color: #494949;
+    z-index: -1;
+  }
+
+  #chartPanel {
+    z-index: -1;
+    border-style: solid;
+    height: 530px;
+    width: 560px;
+    position: relative;
+    background-color: #494949;
+    border-radius: 5%;
+    overflow: hidden;
+    border-color: #494949;
+    justify-self: start;
+  }
+
+  #canvasPanel {
+    margin-top: 12%;
+  }
+  
+
+  #innerPanel {
+    height: 415px;
+  }
+
+  #tasksPanel{
+    height: 415px;
+    max-height: 415px;
+  }
+}
+
+@media only screen and (max-width: 1130px) {
+  .cnt {
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr; /* Modifica questa riga */
+    z-index: -1;
+    margin: 0;
+    padding-top: 40px;
+  }
+  
+
+    #reportPanel {
+      grid-column: 1; /* Imposta il pannello sulla prima colonna */
+      justify-self: center;
+    }
+    
+    #chartPanel {
+      grid-column: 1; /* Imposta il pannello sulla prima colonna */
+      margin-top: 20px; /* Aggiungi uno spazio tra i pannelli */
+      justify-self: center;
+    }
+}

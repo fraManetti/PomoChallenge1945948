@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/reportStyle/reportStyle.css">
+    <link rel="stylesheet" href="../style/reportStyle/reportStyleDesktop.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
@@ -42,7 +43,7 @@
  ;?>
     
     <div class="navbar" id="mynavbar"></div>
-    <div class="container">
+    <div class="cnt">
         <div id = "reportPanel">
             
                 <div id = "selectDatePanel">
@@ -81,7 +82,7 @@
                 </div>
 
         </div>
-        <div id = chartPanel>
+        <div id = "chartPanel">
             <div id = "avgChoicePanel">
                 <button class = "avgBtnClass active" id = "avgDay" onclick="chartLoad('avgDay', event)">
                     Average day
