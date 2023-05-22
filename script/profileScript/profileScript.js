@@ -170,13 +170,25 @@ function handleOutClick(event) {
 
   function updateImage(event) {
     file = event.target.files[0];
-    imageUrl = URL.createObjectURL(file);
-    imageElements = document.querySelectorAll('img');
-    imageElements.forEach(function(imageElement) {
-    imageElement.src = imageUrl;
-    });
-    localStorage.setItem('profileImage', imageUrl);
-   }
+
+    var form_data = new FormData();
+    form_data.append("image",file);
+    $.ajax({
+      url: "../server/uploadImg.php",
+      type: "POST",
+      dataType: 'text',
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form_data,
+      success: function(result) {
+          console.log(result);          
+      },
+      error: function(xhr, status, error) {
+          console.error(error);
+          /*qui ci metterò l'alert*/
+      }
+  });   }
    
    window.addEventListener('load', function() {
     savedImageUrl = localStorage.getItem('profileImage');

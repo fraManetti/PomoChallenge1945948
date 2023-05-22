@@ -46,7 +46,7 @@
       <div class="image-container"> 
         <img src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg">
         <label for="file-input">✏️</label>
-        <input id="file-input" type="file" onchange="updateImage(event)" style="display:none"/>
+        <input id="file-input" name ="image" type="file" onchange="updateImage(event)" style="display:none"/>
       <div class="imageButton"> <button class="resetImageBtn" onclick="resetImage()">Rimuovi immagine profilo</button></div>
 
 
