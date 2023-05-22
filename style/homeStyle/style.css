@@ -325,6 +325,7 @@ vertical-align: auto;
   padding: .25rem 1.5rem;
   text-decoration: none;
   display: block;
+  text-align: left;
 }
 
 .dropdown-content a:hover {background-color: #f8f9fa;}

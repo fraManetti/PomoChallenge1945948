@@ -24,7 +24,7 @@
     margin-left: auto;
     margin-right: auto;
     background-color: #EBE8E4;
-    border-radius: 6px;
+    border-radius: 5%;
    }
 
  #amiciBox {
@@ -41,6 +41,10 @@
     }
     #searchBox{
       width: 500px;
+      /*margin-left: 100px;*/
+      text-align: left;
+      padding-right: 420px;
+      /*padding-left: 100px;*/
 
     }
     #amiciRequest{
@@ -54,14 +58,16 @@
       width: 500px;
       margin-left: auto;
       margin-right: auto;
-      background-color: white;
-      border-radius: 6px;
+      background-color: #EBE8E4;
+      border-radius: 15px;
     }
     
     .amico {
       display: flex;
       justify-content: center;
-      border-bottom: 2px solid black;
+      font-size: 18px;
+      font-weight: 500;
+      border-bottom: 1px solid #a29e9e;
 
     }
 
@@ -82,8 +88,8 @@
 
     .lista-amici-title{
       margin-bottom: 0;
-      border-bottom: 3px solid black;
-      background-color: rgb(236, 111, 111);
+      border-bottom: 2px solid #c6c4c1;
+      background-color: transparent;
       text-align: center;
 
 
@@ -91,15 +97,19 @@
     
     .suggeriti-title{
       text-align: center;
-      margin-bottom: 0;
-      border-bottom: 3px solid black;
-      background-color: rgb(236, 111, 111);
+      border-bottom: 2px solid #c6c4c1;
+      background-color: transparent;
+      font-size: 30px;
+      color: rgb(54, 51, 51);
+      font-weight: 500;
     }
 
     .suggAmico {
       display: flex;
       justify-content: center;
-      border-bottom: 2px solid black;
+      border-bottom: 1px solid #a29e9e;
+      font-size: 18px;
+      font-weight: 500;
 
     }
 
@@ -143,8 +153,8 @@
       width: 500px;
       margin-left: auto;
       margin-right: auto;
-      background-color: white;
-      border-radius: 6px;
+      background-color: #EBE8E4;
+      border-radius: 15px;
     }
 
     #outgoing {
@@ -154,28 +164,33 @@
       width: 500px;
       margin-left: auto;
       margin-right: auto;
-      background-color: white;
-      border-radius: 6px;
+      background-color: #EBE8E4;
+      border-radius: 15px;
     }
 
     #incoming-title{
       text-align: center;
       margin-bottom: 0;
-      border-bottom: 3px solid black;
-      background-color: greenyellow
+      border-bottom: 2px solid #c6c4c1;
+      background-color: transparent;
+      font-size: 28px;
+      color: rgb(54, 51, 51);
+      font-weight: 500;
     }
 
     #outgoing-title{
       text-align: center;
       margin-bottom: 0;
-      border-bottom: 3px solid black;
-      background-color: lightblue
+      border-bottom: 2px solid #c6c4c1;
+      background-color: transparent;
+      font-size: 28px;
+      color: rgb(54, 51, 51);
+      font-weight: 500;
     }
 
     .request {
       display: flex;
       justify-content: center;
-      border-bottom: 2px solid black;
 
     }
 
@@ -194,12 +209,34 @@
       cursor: pointer;
     }
 
+    .delOutgoingReq{
+      font-size: 12px;
+      color: white;
+      background-color: rgb(230, 88, 88);
+      border: none;
+      border-radius: 10px;
+      padding: 2px 4px;
+      margin-left: 5%;
+      cursor: pointer;
+      border-bottom: 1px solid #a29e9e;
+    }
+
     .incomingReq {
+      font-size: 18px;
+      font-weight: 500;
       display: flex;
       justify-content: center;
-      border-bottom: 2px solid black;
-
+      border-bottom: 1px solid #a29e9e;
     }
+
+    .outgoingReq {
+      font-size: 18px;
+      font-weight: 500;
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid #a29e9e;
+    }
+
 
     .incomingReq > * {
       margin: 4px;
