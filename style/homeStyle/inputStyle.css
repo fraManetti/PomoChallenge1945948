@@ -1,9 +1,10 @@
 /*----- container totale della parte task -----*/
 #taskBox{
 
-    background: white; 
-    border-radius: 5px;
+    background:  #eeeeee; 
+    border-radius: 15px;
     width: 500px;
+    margin-bottom: 30px;
     }
 
 
@@ -53,14 +54,14 @@
     float: right;
     font-weight: 500;
     font-size: 16px;
-    background-color: #0d75ec;
+    background-color: #e85e56;
     border: none;
     color: #ffffff;
     cursor: pointer;
     outline: none;
-    width: 20%;
-    height: 45px;
-    border-radius: 5px;
+    width: 22%;
+    height: 40px;
+    border-radius: 7px;
     font-family: 'Poppins',sans-serif;
     }
 
@@ -77,13 +78,36 @@
       }
     /*----- pannello nuove task -----*/
     #tasks{
-    border-radius: 10px;
+    border-radius: 15px;
     width: 470p;
     position: relative;
-    background-color: #ffffff;
-    padding: 5px 15px;
-    margin-top: 10px;
+    background-color:  #eeeeee;
+    padding: 15px 15px;
+    margin-top: 40px;
     
     overflow-y: auto;
     max-height: 300px;
     }
+
+    #automatic-delete{
+        margin-top: 13px;
+        margin-bottom: 13px;
+        font-weight: 500;
+        font-size: 17px;
+        color: #3a3939
+    }
+
+    .roundBtnHomeTop{
+        border-radius: 5px;
+    }
+
+    .roundBtnHomeBottom{
+        border-radius: 5px;
+    }
+    
+    .bottomTag{
+        margin-left: 12px;
+    }
+
+
+   

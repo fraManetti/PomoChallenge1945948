@@ -157,22 +157,24 @@
               </div>
 
               <div id="taskTag">
-                <button name = "swapTasksButton" class = roundBtn id="defaultOrderButton" disabled onclick="openSwapPopup()">
+                <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
                   Swap tasks </button>
-                  <button name = "reverseTasksButton" class = roundBtn id="defaultOrderButton" disabled onclick="reverseTask();">
+                  <button name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
                     Reverse tasks </button>                           
               </div>
-              <div id="taskTag">
-                <button name = "deleteAllTaskButton" class = roundBtn id="defaultOrderButton" disabled onclick="deleteAllTask();">
+              <div class="bottomTag" id="taskTag">
+                <button name = "deleteAllTaskButton" class = "roundBtnHomeBottom" id="ButtonLeft" disabled onclick="deleteAllTask();">
                   Delete all tasks </button>  
-                <button name = "deleteEndedTaskButton" class = roundBtn id="defaultOrderButton" disabled onclick="deleteEndedTask();">
+                <button name = "deleteEndedTaskButton" class = "roundBtnHomeBottom" id="ButtonRight" disabled onclick="deleteEndedTask();">
                   Delete ended tasks </button>  
-                <label>
-                  Automatic delete for ended tasks
-                </label>
-                  <input type="checkbox" id="automaticDel" onclick="(function () {
-                    delEnded=event.currentTarget.checked;
-                  })()"> 
+                  <div id = "automatic-delete">
+                    <label>
+                      Automatic delete for ended tasks
+                    </label>
+                    <input type="checkbox" id="automaticDel" onclick="(function () {
+                        delEnded=event.currentTarget.checked;
+                      })()"> 
+                    </div> 
               </div>
               <div id="tasks">
               </div>
