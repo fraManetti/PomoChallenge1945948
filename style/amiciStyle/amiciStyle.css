@@ -16,6 +16,7 @@
   
   }
 
+  
 
 
 
@@ -39,7 +40,7 @@
     margin-left: auto;
     margin-right: auto;
     display: grid;
-    grid-template-rows: 35% 65%;
+    grid-template-rows: 31% 67%;
     }
     #searchBox{
       width: 500px;
