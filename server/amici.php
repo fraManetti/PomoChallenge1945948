@@ -45,10 +45,11 @@
     <div class="container">
             <div id = "amiciPanel">
                 <div id="titleAmici">
-                    <h2 class="lista-amici-title"> Lista amici </h2>
+                    <h2 class="lista-amici-title"> I miei amici </h2>
+                   
                 </div>
-                <div id="amiciBox">
-                    <!-- qui verrà codice iniettato dalle query -->
+                <div class = "box" id="amiciBox">
+                    
                 </div>
         </div>
         <div id="boxdx" > 
@@ -64,14 +65,19 @@
 <div id ="suggBox" class = "box"> <div class="suggeriti-title">Suggeriti</div> </div>
 </div>
 <div id ="amiciRequest">
-    <div id="incoming" class="box">
-    <div id = "incoming-title">Richieste Entranti</div>
-    <!-- inserisci qui il contenuto delle richieste entranti -->
+    <div class="box" id="incoming">
+    <div id = "incoming-title">Richieste entranti</div>
+    <div class="box" id="incomingR"></div>
+    
   </div>
   <br>
-  <div id="outgoing" class="box">
-    <div id = "outgoing-title">Richieste Uscite</div>
-    <!-- inserisci qui il contenuto delle richieste uscenti -->
+  <div class="box" id="outgoing">
+    <div id = "outgoing-title">Richieste uscite</div>
+    <!--<div id="outgoingColumnTitles">
+    <span class="elemOutgoing">Username</span>
+    <span class="elemOutgoing">Status</span>
+    </div>-->
+    <div class="box" id="outgoingR"></div>
   </div>
             </div>
         </div>

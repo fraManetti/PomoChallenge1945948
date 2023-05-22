@@ -18,7 +18,8 @@ function acceptIncomingReq(e) {
     document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
     <div class="amico" data-value=${amico}>
         ${amico}
-        <button class = "delAmico" onClick = delAmico(event);></button>
+        <button class ="visitaProfiloButton">Profilo</button>
+        <button class = "delAmico" id="delete-friend-button" onClick = delAmico(event);>Rimuovi</button>
     </div>
 `)
 }
@@ -102,7 +103,7 @@ function addFriend(e) {
             console.error(error);
         }
     });
-    document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
+    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
         <div class="outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
             <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
@@ -124,7 +125,7 @@ function sendRequest() {
             console.error(error);
         }
     });
-    document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
+    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
         <div class="outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
             <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
@@ -132,7 +133,7 @@ function sendRequest() {
     `)
 }
 function downloadIncomingRequest(amico) {
-    document.querySelector("#incoming").insertAdjacentHTML('beforeend', `
+    document.querySelector("#incomingR").insertAdjacentHTML('beforeend', `
         <div class="incomingReq" data-value=${amico}>
             ${amico}
             <button class = "acceptIncomingReq" onClick = acceptIncomingReq(event);>&#10004;</button>
@@ -150,7 +151,7 @@ function downloadSuggAmici(tuple) {
 `)
 }
 function downloadOutgoingRequest(amico) {
-    document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
+    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
         <div class="outgoingReq" data-value=${amico}>
             ${amico}
             <button class = "delOutgoingReq" onClick = delOutgoingReq(event);>Annulla</button>
