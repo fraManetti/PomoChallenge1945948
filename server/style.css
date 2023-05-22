@@ -99,6 +99,9 @@ button.btn-search, button.btn-reset {
   z-index: -1;
 }
 
+
+
+
 @keyframes bounceRight {
   0% {
     transform: translateX(0px);

@@ -103,9 +103,9 @@ function addFriend(e) {
         }
     });
     document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
-        <div class="request" data-value = ${friendToAdd}>
+        <div class="outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
-            <button class ="delReq" onClick="delOutgoingReq(event);"> Annulla</button>
+            <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)}
 function sendRequest() {
@@ -125,9 +125,9 @@ function sendRequest() {
         }
     });
     document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
-        <div class="request" data-value = ${friendToAdd}>
+        <div class="outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
-            <button class ="delReq" onClick="delOutgoingReq(event);"> Annulla</button>
+            <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)
 }
@@ -153,6 +153,6 @@ function downloadOutgoingRequest(amico) {
     document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
         <div class="outgoingReq" data-value=${amico}>
             ${amico}
-            <button class = "delOutgoingReq" onClick = delOutgoingReq(event);>delete</button>
+            <button class = "delOutgoingReq" onClick = delOutgoingReq(event);>Annulla</button>
         </div>
     `)}
