@@ -437,7 +437,16 @@ function downloadEnded(tuple) {
   //var totalTime = 0;
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task" data-value="${tuple.keyhash}">
-        
+    <!--
+        <div class = "descPanel"> 
+          <div class = "descript" id = "name"> 
+            Task Name
+          </div>
+          <div class = "descript" id = "pomo"> 
+            Num pomo
+          </div>
+        </div>
+        -->
         <img class = "taskImg" id ="endedDeleteImg" src = "../style/img/trash-can-solid.png"   onClick="deleteEndedTask(event);">
         </img>
         <input type="text" readonly id="endedTaskname" value="${tuple.title}" maxlength="25">
