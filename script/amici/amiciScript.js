@@ -142,7 +142,8 @@ function downloadIncomingRequest(amico) {
     `)
 }
 function downloadSuggAmici(tuple) {
-    document.querySelector("#suggBox").insertAdjacentHTML('beforeend', `
+    
+    document.querySelector("#suggested").insertAdjacentHTML('beforeend', `
         <div class ="suggAmico" data-value =${tuple.utentea}>    
     <span data-value=${tuple.utentea} >${tuple.utentea}</span>
     <button class ="visitaProfiloButton" >Profilo</button>
