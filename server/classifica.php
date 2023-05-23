@@ -26,7 +26,8 @@
     <script  src="../script/homeScript/TaskScript.js"></script>
     <script  src="../script/classifica/classifica.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
-    
+    <script  src="../script/defaultScript.js"></script>
+
     <script>
         $(function(){
           $("#newNavbar").load("../model/newNavbar.html");

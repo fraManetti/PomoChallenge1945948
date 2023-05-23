@@ -227,7 +227,11 @@ function updateTaskTag(isRunning,isEnded){
       time+=parseInt(countB);
     time+=parseInt(countS);
   } 
-  console.log("time: ",time,countB,countS,countL);
+  if(pos =="Short Break")
+    time+=countB;
+  else if (pos =="Long Break")
+    time+=countL;
+  console.log("time: ",time,countB,countS,countL,clock.getTime()/60);
   time-=(countS-(clock.getTime()/60));
   timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
 
