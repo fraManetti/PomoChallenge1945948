@@ -48,13 +48,13 @@
             
                 <div id = "selectDatePanel">
                     <button class = "tabClass active" id ="dailyButton" onclick="load('daily', event)">
-                        Daily
+                        Day
                     </button>
                     <button class = "tabClass" id ="weeklyButton" onclick="load('weekly', event)">
-                        Weekly
+                        Week
                     </button>
                     <button class = "tabClass" id ="monthlyButton" onclick="load('monthly', event)">
-                        Monthly
+                        Month
                     </button>
                     <button class = "tabClass" id ="allButton" onclick="load('all', event)">
                         All

@@ -131,6 +131,7 @@
     overflow: hidden;
     border-color: #494949;
     justify-self: left;
+    margin-bottom: 20px;
   }
 
   #avgChoicePanel {
