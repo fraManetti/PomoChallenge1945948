@@ -73,15 +73,10 @@
     <div class="box" id="incoming">
     <div id = "incoming-title">Richieste entranti</div>
     <div class="box" id="incomingR"></div>
-    
   </div>
   <br>
   <div class="box" id="outgoing">
     <div id = "outgoing-title">Richieste uscite</div>
-    <!--<div id="outgoingColumnTitles">
-    <span class="elemOutgoing">Username</span>
-    <span class="elemOutgoing">Status</span>
-    </div>-->
     <div class="box" id="outgoingR"></div>
   </div>
             </div>

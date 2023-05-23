@@ -111,7 +111,8 @@ function addFriend(e) {
     `)}
 function sendRequest() {
     var friendToAdd = document.getElementById("search").value;
-    document.getElementById("search").value="";
+    if(friendToAdd!=''){
+    console.log(friendToAdd+"stringa");
         $.ajax({
         url: "updateAmici.php",
         type: "POST",
@@ -125,12 +126,15 @@ function sendRequest() {
             console.error(error);
         }
     });
+    
+    document.getElementById("search").value="";
     document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
         <div class="outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
             <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)
+    }
 }
 function downloadIncomingRequest(amico) {
     document.querySelector("#incomingR").insertAdjacentHTML('beforeend', `
