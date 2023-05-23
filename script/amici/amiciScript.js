@@ -18,7 +18,7 @@ function acceptIncomingReq(e) {
     document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
     <div class="amico" data-value=${amico}>
         ${amico}
-        <button class ="visitaProfiloButton">Profilo</button>
+        <button class ="visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
         <button class = "delAmico" id="delete-friend-button" onClick = delAmico(event);>Rimuovi</button>
     </div>
 `)
@@ -83,7 +83,7 @@ function downloadAmici(amico) {
     document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
         <div class="amico" data-value=${amico}>
             ${amico}
-            <button class="visitaProfiloButton">Profilo</button>
+            <button class="visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
             <button class = "delAmico" id = "delete-friend-button" onClick = delAmico(event);> Rimuovi </button>
         </div>
     `)
@@ -146,7 +146,7 @@ function downloadSuggAmici(tuple) {
     document.querySelector("#suggested").insertAdjacentHTML('beforeend', `
         <div class ="suggAmico" data-value =${tuple.utentea}>    
     <span data-value=${tuple.utentea} >${tuple.utentea}</span>
-    <button class ="visitaProfiloButton" >Profilo</button>
+    <button class ="visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
     <button class="sendRequestButton" onClick="addFriend(event);">+</button>
     </div>
 `)

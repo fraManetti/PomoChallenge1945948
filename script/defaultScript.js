@@ -3,37 +3,42 @@ function convertMinHour(minutes) {
     let remainingMinutes = minutes % 60;
     return `${hours} h : ${remainingMinutes} m`;
 }
-function openProfilePopUp() {
+function openProfilePopUp(e) {
+    var box = e.currentTarget.parentNode;
+    var name = box.getAttribute("data-value");
     const url = "../server/getProfile.php";
-    const httpRequest = new XMLHttpRequest();
-    httpRequest.open("GET", url, true);
-    httpRequest.setRequestHeader('Content-Type', 'application/json');
-    httpRequest.onreadystatechange = function() {
-      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
-        const response = JSON.parse(httpRequest.responseText);
-        if ('error' in response) {
-          reject(response.error);
-        } else {
-          console.log(response);
-          
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: { profile:name },
+        success: function(result) {
+            // Aggiornamento eseguito con successo
+            var path = JSON.parse(result)[0];
+            var tim = convertMinHour(JSON.parse(result)[1]);
+            document.body.insertAdjacentHTML('beforeend', `
+            <div class="overlay" id="profileOverlay">
+            <div class="popup">
+            <img class="profilePic" src=${path}></img>
+                    <p>
+                        Username: ${name}
+                    </p>
+                    <p>
+                        Ore studio : ${tim}
+                    </p>
+                    <span class = "close" id="infoClose" onclick="closePopUp()">
+                    X
+                  </span>
+                </div></div>
+                 `
+                );
+             document.getElementById("profileOverlay").style.display="block";   
+        },
+        error: function(xhr, status, error) {
+            // Errore nell'aggiornamento
+            console.error(error);
         }
-      }
-    }
-    httpRequest.send();
-//     <div class="overlay" id="profileOverlay">
-//     <div class = "popup" id="infoPop">
-//       <p>
-//         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
-//       </p>
-//       <span class = "close" id="infoClose" onclick="closeInfo()">
-//         X
-//       </span>
-//     </div>
-//   </div>
-    // var overlay = document.getElementById("infoOverlay");
-    // var computedStyle = window.getComputedStyle(overlay);
-    // overlay.style.display = "block";
+    });
 }  
-  function closeInfo() {
-    document.getElementById("infoOverlay").style.display="none";
+  function closePopUp() {
+    document.getElementById("profileOverlay").remove();
   }

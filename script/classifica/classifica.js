@@ -5,9 +5,9 @@ function downloadClassifica(tuple) {
         <div class="classifica-item" data-value=${user}>
             <span class="elemClassifica" id = "utenteClassifica">${user}</span>
             <span class="elemClassifica" id="oreClassifica">${points}</span>
-            <button class="visitaProfiloButton" onClick=openProfilePopUp();>Profilo</button>
+            <button class="visitaProfiloButton" onClick="openProfilePopUp(event);">Profilo</button>
         </div>
-    `)
+    `);
 }
 function downloadGlobalClass(){
     document.querySelector("#classificaBox").innerHTML="";
