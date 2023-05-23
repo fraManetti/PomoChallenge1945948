@@ -16,6 +16,9 @@
   
   }
 
+  
+
+
 
   #amiciPanel {
     border-style: solid;
@@ -37,7 +40,7 @@
     margin-left: auto;
     margin-right: auto;
     display: grid;
-    grid-template-rows: 35% 65%;
+    grid-template-rows: 31% 67%;
     }
     #searchBox{
       width: 500px;
@@ -63,11 +66,16 @@
     }
     
     .amico {
-      display: flex;
       justify-content: center;
       font-size: 18px;
       font-weight: 500;
       border-bottom: 1px solid #a29e9e;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      display: grid;
+      /*grid-template-columns: 380px 32px 32px;*/
+      grid-template-columns: 200px 100px 100px;
+      text-align: left;
 
     }
 
@@ -84,20 +92,22 @@
       padding: 2px 4px;
       margin-left: 5%;
       cursor: pointer;
+      width: 65px;
     }
 
     .lista-amici-title{
       margin-bottom: 0;
-      border-bottom: 2px solid #c6c4c1;
+    
       background-color: transparent;
       text-align: center;
+      padding-bottom: 20px;
 
 
     }
     
     .suggeriti-title{
       text-align: center;
-      border-bottom: 2px solid #c6c4c1;
+      
       background-color: transparent;
       font-size: 30px;
       color: rgb(54, 51, 51);
@@ -126,6 +136,7 @@
       padding: 2px 4px;
       margin-left: 5%;
       cursor: pointer;
+      width: 65px;
     }
 
     .sendRequestButton{
@@ -149,7 +160,7 @@
     #incoming {
       border-style: solid;
       border-color: black;
-      height: 150px;
+      height: 190px;
       width: 500px;
       margin-left: auto;
       margin-right: auto;
@@ -160,7 +171,7 @@
     #outgoing {
       border-style: solid;
       border-color: black;
-      height: 150px;
+      height: 190px;
       width: 500px;
       margin-left: auto;
       margin-right: auto;
@@ -168,10 +179,29 @@
       border-radius: 15px;
     }
 
+    #outgoingR {
+      display: grid;
+      overflow-y: scroll;
+      max-height: 106px;
+    }
+
+    #amiciBox{
+      display: grid;
+      overflow-y: scroll;
+      max-height: 500px;
+    }
+
+    #incomingR{
+      display: grid;
+      overflow-y: scroll;
+      max-height: 110px;
+    }
+
     #incoming-title{
+      padding-bottom: 10px;
       text-align: center;
       margin-bottom: 0;
-      border-bottom: 2px solid #c6c4c1;
+      /*border-bottom: 2px solid #c6c4c1;*/
       background-color: transparent;
       font-size: 28px;
       color: rgb(54, 51, 51);
@@ -179,9 +209,10 @@
     }
 
     #outgoing-title{
+      padding-bottom: 10px;
       text-align: center;
       margin-bottom: 0;
-      border-bottom: 2px solid #c6c4c1;
+      /*border-bottom: 2px solid #c6c4c1;*/
       background-color: transparent;
       font-size: 28px;
       color: rgb(54, 51, 51);
@@ -210,31 +241,45 @@
     }
 
     .delOutgoingReq{
+      width: 57px;
+      height: 23px;
       font-size: 12px;
       color: white;
       background-color: rgb(230, 88, 88);
       border: none;
+      width: 65px;
       border-radius: 10px;
-      padding: 2px 4px;
+      padding: 0px 4px;
       margin-left: 5%;
       cursor: pointer;
       border-bottom: 1px solid #a29e9e;
+      margin-top: 2px;
     }
 
     .incomingReq {
+      display: grid;
+      /*grid-template-columns: 380px 32px 32px;*/
+      grid-template-columns: 200px 50px 50px;
       font-size: 18px;
       font-weight: 500;
-      display: flex;
+      text-align: left;
       justify-content: center;
       border-bottom: 1px solid #a29e9e;
+      padding-top: 4px;
+      padding-bottom: 4px;
     }
 
     .outgoingReq {
+      display: grid;
+      /*grid-template-columns: 380px 32px 32px;*/
+      grid-template-columns: 200px 100px;
       font-size: 18px;
       font-weight: 500;
-      display: flex;
+      text-align: left;
       justify-content: center;
       border-bottom: 1px solid #a29e9e;
+      padding-top: 4px;
+      padding-bottom: 4px;
     }
 
 
@@ -251,10 +296,10 @@
       font-size: 16px;
       font-weight:500;
       color: white;
-      background-color: rgb(236, 111, 111);
+      background-color: rgb(230, 88, 88);
       border: none;
       border-radius: 50%;
-      padding: 2px 2px;
+      padding: 2px, 2px;
       padding-bottom: 6.5px;
       margin-left: 5%;
       cursor: pointer;
@@ -278,3 +323,22 @@
       margin-left: 5%;
       cursor: pointer;
     }
+
+    .box::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .box::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .box::-webkit-scrollbar-thumb {
+      background-color: rgb(165, 158, 158);
+      border-radius: 20px;
+      border: 3px solid transparent;
+    }
+    
+    .box::-webkit-scrollbar-button {
+      display: none;
+    }
+    
