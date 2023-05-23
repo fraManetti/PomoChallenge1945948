@@ -182,7 +182,11 @@ function handleOutClick(event) {
       processData: false,
       data: form_data,
       success: function(result) {
-          console.log(result);          
+          console.log(result);
+          document.getElementById("top-picture").src=result.trim();
+          document.getElementById("mypic").src=result.trim();      
+          document.cookie="profilepic="+result.trim()+ "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';;    
+
       },
       error: function(xhr, status, error) {
           console.error(error);
@@ -190,22 +194,30 @@ function handleOutClick(event) {
       }
   });   }
    
-   window.addEventListener('load', function() {
-    savedImageUrl = localStorage.getItem('profileImage');
-    if (savedImageUrl) {
-    imageElements = document.querySelectorAll('img');
-    imageElements.forEach(function(imageElement) {
-    imageElement.src = savedImageUrl;
-    });
-    }
-   });
-   
    function resetImage() {
-    localStorage.removeItem('profileImage');
-    imageElements = document.querySelectorAll('img');
-    imageElements.forEach(function(imageElement) {
-    imageElement.src = 'https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg';
-    });
+    if (document.cookie.indexOf("profilepic") >= 0) {
+      var path = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('profilepic='))
+      .split('=')[1];
+      var path_decoded=decodeURIComponent(path);
+    }
+    document.getElementById("mypic").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
+    document.getElementById("top-picture").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
+    $.ajax({
+      url: "../server/resetImage.php",
+      type: "POST",
+      data: {path: path_decoded},
+      success: function(result) {
+          console.log(result);
+          document.cookie="profilepic="+"; Thu, 01 Jan 1970 00:00:00 GMT;"+ 'path=/';    
+
+      },
+      error: function(xhr, status, error) {
+          console.error(error);
+          /*qui ci metterò l'alert*/
+      }
+  });
    }
 
    function contaAmici(contaAmici) {

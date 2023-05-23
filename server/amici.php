@@ -113,15 +113,15 @@ $username = $_SESSION['username'];
 <?php 
     $query ="
     WITH mieiAmici AS (
-        SELECT utentea AS amico FROM amici WHERE utenteb = 'luca'
+        SELECT utentea AS amico FROM amici WHERE utenteb = '${username}'
         UNION
-        SELECT utenteb AS amico FROM amici WHERE utentea = 'luca'
+        SELECT utenteb AS amico FROM amici WHERE utentea = '${username}'
       )
       SELECT *
       FROM (
-        SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != 'luca'
+        SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != '${username}'
         UNION
-        SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != 'luca'
+        SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != '${username}'
       ) AS pippo
       ORDER BY random()
       LIMIT 3;

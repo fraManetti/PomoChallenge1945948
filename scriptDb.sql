@@ -55,8 +55,8 @@ CREATE TABLE amici (
 CREATE TABLE imgutente(
     utente VARCHAR(40) NOT NULL,
     percorso VARCHAR (255) NOT NULL,
-    PRIMARY KEY (utente)
-    FOREIGN KEY (utente) REFERENCES utente(username) ON UPDATE CASCADE,
+    PRIMARY KEY (utente),
+    FOREIGN KEY (utente) REFERENCES utente(username) ON UPDATE CASCADE
 );
 insert into utente values ('max','Password.1=');
 insert into utente values ('max1','Password.1=');
