@@ -533,7 +533,7 @@ function nascondiVignetta() {
 
 
 function updateServer(newTask,type) {
-
+console.log(newTask,type);
   if(isLogged){
   $.ajax({
     url: "updateTaskServer.php",

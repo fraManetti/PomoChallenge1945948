@@ -98,17 +98,18 @@
     </div>
     
 <?php 
-    
+    $totalTime =0 ;
     while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
      $tuple_json = json_encode($tuple);
     echo '<script> 
     currentPeriodType = "day";
     downloadEnded(' . $tuple_json . ');
     </script>';
+    $totalTime+= $tuple['tim'];
     }
     echo '<script>
         hourCharts();
-       upTotalTime(totalTime);
+       upTotalTime(' .$totalTime . ');
     </script>';
 ?>
 </body>

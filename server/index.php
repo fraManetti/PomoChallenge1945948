@@ -70,7 +70,7 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
 
 <div id="mynavbar"></div>
     <div class="container">
-      <div class="box">box1</div>
+      <div class="box"></div>
         <div class="center-box">
           <div class="box">
             <div class="pomodoro">
@@ -218,7 +218,6 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
         </div>
       </div>
       <div class="box">
-        box3
       </div>
     </div>
 
