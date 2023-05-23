@@ -40,7 +40,7 @@
     margin-left: auto;
     margin-right: auto;
     display: grid;
-    grid-template-rows: 31% 67%;
+    grid-template-rows: 35% 70%;
     }
     #searchBox{
       width: 500px;
@@ -57,7 +57,7 @@
     #suggBox {
       border-style: solid;
       border-color: black;
-      height: 150px;
+      height: 185px;
       width: 500px;
       margin-left: auto;
       margin-right: auto;
@@ -107,7 +107,7 @@
     
     .suggeriti-title{
       text-align: center;
-      
+      padding-bottom: 10px;
       background-color: transparent;
       font-size: 30px;
       color: rgb(54, 51, 51);
@@ -115,11 +115,13 @@
     }
 
     .suggAmico {
-      display: flex;
+      display: grid;
+      grid-template-columns: 180px 80px 50px;
       justify-content: center;
       border-bottom: 1px solid #a29e9e;
       font-size: 18px;
       font-weight: 500;
+      text-align: left;
 
     }
 
@@ -148,7 +150,7 @@
       font-size: 20px;
       font-weight: bold;
       color: white;
-      background-color: rgb(236, 111, 111);
+      background-color: rgb(230, 88, 88);
       border: none;
       border-radius: 50%;
       padding: 2px 2px;
@@ -183,6 +185,11 @@
       display: grid;
       overflow-y: scroll;
       max-height: 106px;
+    }
+
+    #suggested{
+      display: grid;
+      
     }
 
     #amiciBox{
