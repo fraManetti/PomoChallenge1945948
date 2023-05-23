@@ -72,8 +72,8 @@
     <div class="box" id="incoming">
     <div id = "incoming-title">Richieste entranti</div>
     <div class="box" id="incomingR"></div>
-    
   </div>
+  <br>
   <div class="box" id="outgoing">
     <div id = "outgoing-title">Richieste uscite</div>
     <div class="box" id="outgoingR"></div>

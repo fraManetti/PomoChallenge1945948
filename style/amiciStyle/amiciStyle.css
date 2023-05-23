@@ -40,7 +40,7 @@
     margin-left: auto;
     margin-right: auto;
     display: grid;
-    grid-template-rows: 35% 70%;
+    grid-template-rows: 38% 62%;
     }
     #searchBox{
       width: 500px;
@@ -57,7 +57,7 @@
     #suggBox {
       border-style: solid;
       border-color: black;
-      height: 185px;
+      height: 190px;
       width: 500px;
       margin-left: auto;
       margin-right: auto;
@@ -162,7 +162,7 @@
     #incoming {
       border-style: solid;
       border-color: black;
-      height: 190px;
+      height: 150px;
       width: 500px;
       margin-left: auto;
       margin-right: auto;
@@ -173,7 +173,7 @@
     #outgoing {
       border-style: solid;
       border-color: black;
-      height: 190px;
+      height: 150px;
       width: 500px;
       margin-left: auto;
       margin-right: auto;
@@ -184,7 +184,7 @@
     #outgoingR {
       display: grid;
       overflow-y: scroll;
-      max-height: 106px;
+      max-height: 75px;
     }
 
     #suggested{
@@ -195,13 +195,13 @@
     #amiciBox{
       display: grid;
       overflow-y: scroll;
-      max-height: 500px;
+      max-height: 505px;
     }
 
     #incomingR{
       display: grid;
       overflow-y: scroll;
-      max-height: 110px;
+      max-height: 75px;
     }
 
     #incoming-title{
