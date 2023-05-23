@@ -321,9 +321,12 @@ function openTaskBar() {
   if(selectTaskArea.style.display === "block") {
     opened = false;
     selectTaskArea.style.display = "none"
+    document.getElementById("taskUse").innerHTML="Open task panel";
+
   }
   else {
     opened = true;
+    document.getElementById("taskUse").innerHTML="Close task panel";
     selectTaskArea.style.display = "block";
   }
 }

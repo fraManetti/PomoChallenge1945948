@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>PomoChallenge</title>
-    <link rel="icon" type="image/x-icon" href="../../style/img/tomato.png">
+    <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
 
@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/amiciStyle/amiciStyle.css">
+    
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src="../script/amici/amiciScript.js"></script>
@@ -44,33 +45,39 @@
     <div class="container">
             <div id = "amiciPanel">
                 <div id="titleAmici">
-                    <h2 class="lista-amici-title"> Lista amici </h2>
+                    <h2 class="lista-amici-title"> I miei amici </h2>
+                   
                 </div>
-                <div id="amiciBox">
-                    <!-- qui verrà codice iniettato dalle query -->
+                <div class = "box" id="amiciBox">
+                    
                 </div>
         </div>
         <div id="boxdx" > 
             <div id = "topBox">
             <div id ="searchBox" class="row">
 <div class="sample ten">
-  <input type="text" name="search" placeholder="search" id="search">
+  <input type="text" name="search" placeholder="Invia richiesta di amicizia" id="search">
   <button class="btn btn-search" onClick="sendRequest();">
-    <i class="fa fa-search"></i>
+    <i class="fa fa-arrow-right"></i>
   </button>
   <button type="reset" class="btn btn-reset fa fa-times"></button>
 </div>      </div>
-<div id ="suggBox" class = "box"> <h2 class="suggeriti-title">Suggeriti</h2> </div>
+<div id ="suggBox" class = "box"> <div class="suggeriti-title">Suggeriti</div> </div>
 </div>
 <div id ="amiciRequest">
-    <div id="incoming" class="box">
-    <h2 id = "incoming-title">Richieste Entranti</h2>
-    <!-- inserisci qui il contenuto delle richieste entranti -->
+    <div class="box" id="incoming">
+    <div id = "incoming-title">Richieste entranti</div>
+    <div class="box" id="incomingR"></div>
+    
   </div>
   <br>
-  <div id="outgoing" class="box">
-    <h2 id = "outgoing-title">Richieste Uscite</h2>
-    <!-- inserisci qui il contenuto delle richieste uscenti -->
+  <div class="box" id="outgoing">
+    <div id = "outgoing-title">Richieste uscite</div>
+    <!--<div id="outgoingColumnTitles">
+    <span class="elemOutgoing">Username</span>
+    <span class="elemOutgoing">Status</span>
+    </div>-->
+    <div class="box" id="outgoingR"></div>
   </div>
             </div>
         </div>
@@ -112,15 +119,15 @@ $username = $_SESSION['username'];
 <?php 
     $query ="
     WITH mieiAmici AS (
-        SELECT utentea AS amico FROM amici WHERE utenteb = 'luca'
+        SELECT utentea AS amico FROM amici WHERE utenteb = '${username}'
         UNION
-        SELECT utenteb AS amico FROM amici WHERE utentea = 'luca'
+        SELECT utenteb AS amico FROM amici WHERE utentea = '${username}'
       )
       SELECT *
       FROM (
-        SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != 'luca'
+        SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != '${username}'
         UNION
-        SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != 'luca'
+        SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != '${username}'
       ) AS pippo
       ORDER BY random()
       LIMIT 3;

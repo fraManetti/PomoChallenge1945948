@@ -24,8 +24,17 @@
                     session_start();
                     if(!isset($_SESSION["username"]))
                        $_SESSION["username"]=$user;
-                       $remember = $_POST['remember'];
-                       if(isset ($remember))
+                       $query = "select percorso from  imgutente where utente='${user}'";
+                       $res = pg_query($query);
+                       if($tuple=pg_fetch_array($res,null,PGSQL_ASSOC)){
+                        $path = $tuple['percorso'];
+                        if (file_exists($path)){
+                        setcookie("profilepic",$path,time() + 30*24*60*6,"/");
+                       }
+                       else 
+                       setcookie("profilepic","",time()-3600,"/");
+                    }
+                       if(isset ($_POST['remember']))
                         setcookie("loggedUser",$user,time() + 30*24*60*6,"/");
                        header ("Location: ./index.php");
 

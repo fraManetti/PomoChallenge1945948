@@ -9,7 +9,7 @@
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>PomoChallenge</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-
+    <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
     <link rel="stylesheet" href="../style/homeStyle/clockStyle.css">
@@ -38,9 +38,18 @@
 <div id="newNavbar"></div>
 <div class="container">
   <div id="classificaPanel">
-    <div id="classifica-title"> Classifica </div>
-    <div id="classificaBox"> </div>
-
+    <div id="classifica-title">Classifica</div>
+    <div id = "classificaButtons">
+    <button class= "tabClass" id="globaleClassButton">Globale</button>
+    <button class= "tabClass" id="amiciClassButtonDisabled" disabled>Amici</button>
+    </div>
+    <div id="classificaColumnTitles">
+    <span class="elemClassifica">Username</span>
+    <span class="elemClassifica">Ore totali</span>
+    <span class="elemClassifica">Profilo</span>
+    </div>
+    <div id="classificaBox"> 
+    </div>
 </div>
 </div>
 <?php 

@@ -18,7 +18,8 @@ function acceptIncomingReq(e) {
     document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
     <div class="amico" data-value=${amico}>
         ${amico}
-        <button class = "delAmico" onClick = delAmico(event);></button>
+        <button class ="visitaProfiloButton">Profilo</button>
+        <button class = "delAmico" id="delete-friend-button" onClick = delAmico(event);>Rimuovi</button>
     </div>
 `)
 }
@@ -27,7 +28,7 @@ function delAmico(e) {
     var amico = button.parentNode.getAttribute("data-value");
     button.parentNode.remove();
     $.ajax({
-        url: "../scripts/updateAmici.php",
+        url: "updateAmici.php",
         type: "POST",
         data: {amico: amico,type: "delAmico"},
         success: function(result) {
@@ -46,7 +47,7 @@ function delOutgoingReq(e) {
     var req = button.parentNode.getAttribute("data-value");
     button.parentNode.remove();
     $.ajax({
-        url: "../scripts/updateAmici.php",
+        url: "updateAmici.php",
         type: "POST",
         data: {amico: req,type: "delOutgoingReq"},
         success: function(result) {
@@ -65,7 +66,7 @@ function delIncomingReq(e) {
     var req = button.parentNode.getAttribute("data-value");
     button.parentNode.remove();
     $.ajax({
-        url: "../scripts/updateAmici.php",
+        url: "updateAmici.php",
         type: "POST",
         data: {amico: req,type: "delIncomingReq"},
         success: function(result) {
@@ -90,7 +91,7 @@ function downloadAmici(amico) {
 function addFriend(e) {
     var friendToAdd = e.currentTarget.parentNode.children[0].getAttribute("data-value");
         $.ajax({
-        url: "../scripts/updateAmici.php",
+        url: "updateAmici.php",
         type: "POST",
         data: {amico: friendToAdd,type: "reqAmico"},
         success: function(result) {
@@ -102,10 +103,10 @@ function addFriend(e) {
             console.error(error);
         }
     });
-    document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
-        <div class="request" data-value = ${friendToAdd}>
+    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
+        <div class="outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
-            <button class ="delReq" onClick="delOutgoingReq(event);"> Annulla</button>
+            <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)}
 function sendRequest() {
@@ -124,15 +125,15 @@ function sendRequest() {
             console.error(error);
         }
     });
-    document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
-        <div class="request" data-value = ${friendToAdd}>
+    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
+        <div class="outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
-            <button class ="delReq" onClick="delOutgoingReq(event);"> Annulla</button>
+            <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)
 }
 function downloadIncomingRequest(amico) {
-    document.querySelector("#incoming").insertAdjacentHTML('beforeend', `
+    document.querySelector("#incomingR").insertAdjacentHTML('beforeend', `
         <div class="incomingReq" data-value=${amico}>
             ${amico}
             <button class = "acceptIncomingReq" onClick = acceptIncomingReq(event);>&#10004;</button>
@@ -150,9 +151,9 @@ function downloadSuggAmici(tuple) {
 `)
 }
 function downloadOutgoingRequest(amico) {
-    document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
+    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
         <div class="outgoingReq" data-value=${amico}>
             ${amico}
-            <button class = "delOutgoingReq" onClick = delOutgoingReq(event);>delete</button>
+            <button class = "delOutgoingReq" onClick = delOutgoingReq(event);>Annulla</button>
         </div>
     `)}

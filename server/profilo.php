@@ -8,23 +8,21 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="App metodo concentrazione pomodoro">
     <title>PomoChallenge</title>
-    <link rel="icon" type="image/x-icon" href="..//style/img/tomato.png">
+    <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
     <link rel="stylesheet" href="../style/homeStyle/clockStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/tasksStyle.css">
     <link rel = "stylesheet" href = "../style/profileStyle/profile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
-    <script  src="../script/homeScript/clockScript.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
     <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script  src="../script/profileScript/profileScript.js"></script>
+    <script  src="../script/defaultScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
 
@@ -43,9 +41,9 @@
   <div class="content">
     <div class="immagine-profilo">
       <div class="image-container"> 
-        <img src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg">
+        <img id ="mypic" src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg">
         <label for="file-input">✏️</label>
-        <input id="file-input" type="file" onchange="updateImage(event)" style="display:none"/>
+        <input id="file-input" name ="image" type="file" onchange="updateImage(event)" style="display:none"/>
       <div class="imageButton"> <button class="resetImageBtn" onclick="resetImage()">Rimuovi immagine profilo</button></div>
 
 
@@ -100,3 +98,13 @@
           contaOre(' . $tuple_json . ') </script>';
   ?>
 </html>
+<script>
+if (document.cookie.indexOf("profilepic") >= 0) {
+      var path = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('profilepic='))
+      .split('=')[1];
+      var path_decoded=decodeURIComponent(path);
+      document.getElementById("mypic").src=path_decoded;
+    }
+</script>

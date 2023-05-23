@@ -1,279 +1,343 @@
-.container {
-    margin-top: 66px;
+
+  html, body {
+    min-height: 100%;
+  }
+ 
+  .cnt {
+    position: absolute;
+      width: 100%;
+      height: fit-content;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      z-index: -1;
+      margin: 0;
+      padding-top: 40px;
+      grid-column-gap: 40px;
+    }
+
+
+    /*#################################################################
+    //##########              PANNELLI:                  ##############
+    //#################################################################*/
+
+  #selectDatePanel {
+    justify-self: center;
+    width: 480px;
+    margin-left: 37px;
+    margin-right: 37px;
+    height: 40px;
+    padding-top: 5px;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    background-color: #494949;
+
+  }
+
+  #currentPeriod {
+    padding-bottom: 2px;
+    height: 30px;
+    text-align: center;
+    background-color: #494949;
+    color: #f7f1eb;
+    font-weight: 500;
+    font-size: 22px;
+    /*padding-top: 7px;*/
+  }
+
+  #totalTime {
+    padding-top: 2px;
+    height: 30px;
+    text-align: center;
+    background-color: #494949;
+    color: #f7f1eb;
+    font-weight: 500;
+    font-size: 14px;
+    /*padding-top: 7px;*/
+  }
+
+  #tasksPanel{
+    margin-left: auto;
+    margin-right: auto;
+    width: 470px;
+    height: 590px;
+    overflow-y: auto;
+    max-height: 590px;
+    background-color: #f7f1eb;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    z-index: 1;
+    border-radius: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #tasksPanel::-webkit-scrollbar {
+    width: 10px; /* Imposta lo spessore orizzontale */
+    margin-left: 5px
+  }
+
+  #tasksPanel::-webkit-scrollbar-thumb {
+    background-color: #e7645d; /* Colore del thumb */
+    border-radius: 5px; /* Arrotondamento del thumb */
+  }
+  
+  /* Per WebKit (Chrome, Safari, Opera) */
+  #tasksPanel::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Colore della track */
+    border-radius: 5px;
+  }
+
+  #reportPanel {
+    height: 700px;
+    width: 560px;
+    justify-self: end;
+    position: relative;
+    background-color: #494949;
+    border-radius: 5%;
+    overflow: hidden;
+    border-color: #494949;
+    z-index: -1;
+  }
+
+  #innerPanel {
+    background-color: #494949;
+    margin-left: auto;
+    margin-right: auto;
+    height: 610px;
+    width: 560px;
+    display: grid;
+    grid-template-columns: 7% 86% 7%;
+    justify-content: center;
+    text-align: center;
+    /*background-color: #f4e9dc;*/
+  }
+
+  .incrDecrBtnPanel {
+    background-color: #494949;
     width: 100%;
-    height: 100%;
-    background-color: transparent;
+    text-align: center;
+  }
+
+  #chartPanel {
+    z-index: -1;
+    border-style: solid;
+    height: 700px;
+    width: 560px;
+    position: relative;
+    background-color: #494949;
+    border-radius: 5%;
+    overflow: hidden;
+    border-color: #494949;
+    justify-self: left;
+  }
+
+  #avgChoicePanel {
+    margin-left: 37px;
+    margin-right: 37px;
+    width: 460px;
+    height: 40px;
+    padding-top: 5px;
     display: grid;
     grid-template-columns: 50% 50%;
+    background-color: #494949;
   }
 
-  /*#################################################################
-  //##########              PANNELLI:                  ##############
-  //#################################################################*/
-
-
-#selectDatePanel {
-  margin-left: 37px;
-  margin-right: 37px;
-  width: 460px;
-  height: 40px;
-  padding-top: 5px;
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
-  background-color: #494949;
-
-}
-
-#currentPeriod {
-  padding-bottom: 2px;
-  height: 30px;
-  text-align: center;
-  background-color: #494949;
-  color: #f7f1eb;
-  font-weight: 500;
-  font-size: 22px;
-  /*padding-top: 7px;*/
-}
-
-#totalTime {
-  padding-top: 2px;
-  height: 30px;
-  text-align: center;
-  background-color: #494949;
-  color: #f7f1eb;
-  font-weight: 500;
-  font-size: 14px;
-  /*padding-top: 7px;*/
-}
-
-#tasksPanel{
-  margin-left: auto;
-  margin-right: auto;
-  width: 460px;
-  height: 590px;
-  overflow-y: auto;
-  max-height: 600px;
-  background-color: #f7f1eb;
-  padding-left: 10px;
-  padding-right: 10px;
-  z-index: 1;
-  border-radius: 2%;
-}
-
-#reportPanel {
-  height: 700px;
-  width: 540px;
-  margin-left: auto;
-  margin-right: auto;
-  position: absolute;
-  background-color: #494949;
-  border-radius: 5%;
-  overflow: hidden;
-  border-color: #494949;
-}
-
-#innerPanel {
-  background-color: #494949;
-  margin-left: auto;
-  margin-right: auto;
-  height: 610px;
-  width: 540px;
-  display: grid;
-  grid-template-columns: 7% 86% 7%;
-  /*background-color: #f4e9dc;*/
-}
-
-.incrDecrBtnPanel {
-  background-color: #494949;
-  width: 100%;
-  text-align: center;
-}
-
-#chartPanel {
-  border-style: solid;
-  height: 700px;
-  margin-left: 600px;
-  width: 560px;
-  margin-right: auto;
-  position: absolute;
-  background-color: #494949;
-  border-radius: 5%;
-  overflow: hidden;
-  border-color: #494949;
-}
+  #canvasPanel {
+    background-color: #f7f1eb;
+    height: 340px;
+    width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 29%;
+    margin-bottom: 25%;
+    border-radius: 7px;
+    padding-top: 25px;
+  }
 
 
 
-#canvasPanel {
-  background-color: #f7f1eb;
-  height: 340px;
-  width: 540px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 29%;
-  margin-bottom: 25%;
-  border-radius: 7px;
-  padding-top: 25px;
-}
+    /*#################################################################
+    //##########               BUTTONS:                  ##############
+    //#################################################################*/
 
+  .tabClass {
+    border-color: transparent;
+    background-color: transparent;
+    height: 30px;
+    width: 105px;
+    text-align: center;
+    justify-self: center;
+    color: #f7f1eb;
+    font-weight: 500;
+    border-radius: 7px;
+    overflow: hidden;
+    transform-style: flat;
+    cursor: pointer;
+  }
 
+  .tabClass.active {
+    background-color: #f4e9dc;
+    height: 30px;
+    width: 105px;
+    text-align: center;
+    justify-self: center;
+    color: #494949;
+    font-weight: 500;
+    border-radius: 7px;
+    overflow: hidden;
 
-  /*#################################################################
-  //##########               BUTTONS:                  ##############
-  //#################################################################*/
+  }
 
-.tabClass {
-  border-color: transparent;
-  background-color: transparent;
-  height: 30px;
-  width: 105px;
-  text-align: center;
-  justify-self: center;
-  color: #f7f1eb;
-  font-weight: 500;
-  border-radius: 7px;
-  overflow: hidden;
-  transform-style: flat;
-  cursor: pointer;
-}
-
-.tabClass.active {
-  background-color: #f4e9dc;
-  height: 30px;
-  width: 105px;
-  text-align: center;
-  justify-self: center;
-  color: #494949;
-  font-weight: 500;
-  border-radius: 7px;
-  overflow: hidden;
-
-}
-
-#optionbuton{
-  width: 25px;
-  height: 25px;
-  background-color: transparent;
-  border-color: transparent;
-  margin: auto;
-}
-
-.timePeriodBtn {
-  margin-top: 230px;
-  height: 45px;
-  width: 27px;
-  margin-right: auto;
-  margin-left: auto;
-  border-color: transparent;
-  background-color: #f4e9dc;
-  border-radius: 5px;
-  color: #494949;
-  font-weight: 770;
-  font-size: 500;
-}
-
-.timePeriodBtn:disabled {
-  margin-top: 230px;
-  height: 45px;
-  width: 27px;
-  margin-right: auto;
-  margin-left: auto;
-  border-color: transparent;
-  background-color: transparent;
-  border-radius: 5px;
-  color: #494949;
-  font-weight: 770;
-  font-size: 500;
-}
-
-/*
-#increaseTimePeriod {
-  margin-top: 230px;
-  height: 45px;
-  width: 27px;
-  margin-right: 3px;
-  border-color: transparent;
-  background-color: #f4e9dc;
-  border-radius: 5px;
-  color: #494949;
-  font-weight: 770;
-  font-size: 500;
-}
-
-#decreaseTimePeriod {
-  margin-left: 1px;
-  margin-top: 230px;
-  height: 45px;
-  width: 27px;
-  border-color: transparent;
-  background-color: #f4e9dc;
-  border-radius: 5px;
-  color: #494949;
-  font-weight: 770;
-  font-size: 500;
-}
-*/
-
-
-  /*#################################################################
-  //##########                  IMG:                   ##############
-  //#################################################################*/
-
-  #endedDeleteImg {
-    width: 20px;
-    height: 20px;
+  #optionbuton{
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    border-color: transparent;
     margin: auto;
   }
-  
-  #endedOptionImg {
-    width: 5px;
-    height: 20px;
-    margin-bottom: 5px;
+
+  .timePeriodBtn {
+    margin-top: 230px;
+    height: 45px;
+    width: 27px;
+    margin-right: auto;
+    margin-left: auto;
+    border-color: transparent;
+    background-color: #f4e9dc;
+    border-radius: 5px;
+    color: #494949;
+    font-weight: 770;
+    font-size: 500;
+    display: block;
   }
 
-  
+  .timePeriodBtn:disabled {
+    margin-top: 230px;
+    height: 45px;
+    width: 27px;
+    margin-right: auto;
+    margin-left: auto;
+    display: none;
+    border-radius: 5px;
+    color: #494949;
+    font-weight: 770;
+    font-size: 500;
+  }
+
+  .avgBtnClass {
+    border-color: transparent;
+    background-color: transparent;
+    height: 30px;
+    width: 220px;
+    text-align: center;
+    justify-self: center;
+    color: #f7f1eb;
+    font-weight: 500;
+    border-radius: 7px;
+    overflow: hidden;
+    transform-style: flat;
+    cursor: pointer;
+    display: none;
+  }
+
+  .avgBtnClass.active {
+    background-color: #f4e9dc;
+    height: 30px;
+    width: 220px;
+    text-align: center;
+    justify-self: center;
+    color: #494949;
+    font-weight: 500;
+    border-radius: 7px;
+    overflow: hidden;
+
+  }
+
+    /*#################################################################
+    //##########                  IMG:                   ##############
+    //#################################################################*/
+
+    #endedDeleteImg {
+      width: 20px;
+      height: 20px;
+      margin: auto;
+    }
+    
+    #endedOptionImg {
+      width: 5px;
+      height: 20px;
+      margin-bottom: 5px;
+    }
+
+    
 
 
 
-  /*#################################################################
-  //##########              TASK ELEMENTS:             ##############
-  //#################################################################*/
+    /*#################################################################
+    //##########              TASK ELEMENTS:             ##############
+    //#################################################################*/
 
-.task {
-  border-radius: 7px;
-  justify-content: space-between;
-  border: 1px solid #e7645d;
-  cursor: pointer;
-  background-color: #e7645d;
-  width: 426px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  display: grid;
-  grid-template-columns: 10% 70% 10% 10%;
-}
+  .descPanel{
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .task {
+    justify-self: center;
+    border-radius: 7px;
+    justify-content: space-between;
+    border: 1px solid #e7645d;
+    cursor: default;
+    background-color: #e7645d;
+    width: 426px;
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: 10% 70% 10% 10%;
+  }
 
-#endedTaskname {
-  width: 300px;
-  height : 30px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
+  #endedTaskname {
+    width: 300px;
+    height : 30px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    background-color: #f7f1eb;
+    border-color: transparent;
+    color: #494949;
+    border-radius: 5px;
+    font-weight: 500;
+    cursor: context-menu;
+  }
 
-#endedPomos {
-  width: 40px;
-  height : 30px;
-  margin-left: 7px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
+  #endedPomos {
+    width: 40px;
+    height : 30px;
+    margin-left: 7px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    background-color: #f7f1eb;
+    border-radius: 5px;
+    border-color: transparent;
+    color: #494949;
+    font-weight: 550;
+    cursor: context-menu;
+  }
 
-#hiddenOption {
-  display: none;
-  margin: auto;
-}
+  #hiddenOption {
+    display: none;
+    margin: auto;
+  }
 
-.hiddenNote{
-  margin-left: 42px;
-  width: 300px;
-}
+  .hiddenNote{
+    margin-left: 42px;
+    width: 343px;
+    resize:none;
+    background-color: #f7f1eb;
+    border-color: transparent;
+    color: #494949;
+    font-weight: 500;
+    cursor: context-menu;
+    border-radius: 5px;
+  }
+
 

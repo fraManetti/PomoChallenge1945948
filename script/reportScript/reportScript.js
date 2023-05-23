@@ -3,7 +3,6 @@ var currentString = dateToString(currentD);
 var currentPeriodType = "day";
 var totalTime=0;
 var canCharge = true;
-
 var mon; 
 var sun;
 weekInterval(currentD);
@@ -244,6 +243,9 @@ function weekCharts2(s) {
 }
 
 function avgDailyCharts() {
+  if (myChart) {
+    myChart.destroy();
+  }
   const ctx = document.getElementById('myChartCanvas');
   avgDailyQuery().then((data) => {
     const hoursLabels = ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11',
@@ -265,6 +267,41 @@ function avgDailyCharts() {
       options: {
         showLine: true,
         borderWidth: '2px',
+        normalized: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            grace: '5%'
+          }
+        }
+      }
+    });
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+function avgWeeklyCharts() {
+  if (myChart) {
+    myChart.destroy();
+  }
+  const ctx = document.getElementById('myChartCanvas').getContext("2d");
+  avgWeekQuery().then((data) => {
+    const weekLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: weekLabels,
+        datasets: [{
+          label: `# minutes in a week`,
+          data: [data[0][1],data[1][1],data[2][1],data[3][1],data[4][1],data[5][1],data[6][1]],
+          borderWidth: 0.8,
+          backgroundColor: "#e7645d",
+          hoverBackgroundColor: "#fc9690",
+        }]
+      },
+      options: {
+      
         normalized: true,
         scales: {
           y: {
@@ -364,6 +401,26 @@ function avgDailyQuery() {
   });
 }
 
+function avgWeekQuery() {
+  return new Promise((resolve, reject) => {
+    const url = "avgWeekTime.php";
+    const httpRequest = new XMLHttpRequest();
+    httpRequest.open("GET", url, true);
+    httpRequest.setRequestHeader('Content-Type', 'application/json');
+    httpRequest.onreadystatechange = function() {
+      if (httpRequest.readyState === 4 && httpRequest.status === 200) {
+        const response = JSON.parse(httpRequest.responseText);
+        if ('error' in response) {
+          reject(response.error);
+        } else {
+          resolve(response);
+        }
+      }
+    }
+    httpRequest.send();
+  });
+}
+
 function parseDate(str) {
   var parts = str.split("-");
   return new Date(parts[2], parts[1] - 1, parts[0]);
@@ -371,15 +428,25 @@ function parseDate(str) {
 }
 
 function upTotalTime(totalTime) {
-  document.querySelector("#totalTime").insertAdjacentHTML('beforeend', `
-    <p1> Tempo Totale: ${totalTime}</p1>
-  `);
+  var total = convertMinHour(totalTime);
+  document.getElementById("totalTime").innerHTML="Tempo Totale : "+total;
 }
+
+
 function downloadEnded(tuple) {
   //var totalTime = 0;
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task" data-value="${tuple.keyhash}">
-        
+    <!--
+        <div class = "descPanel"> 
+          <div class = "descript" id = "name"> 
+            Task Name
+          </div>
+          <div class = "descript" id = "pomo"> 
+            Num pomo
+          </div>
+        </div>
+        -->
         <img class = "taskImg" id ="endedDeleteImg" src = "../style/img/trash-can-solid.png"   onClick="deleteEndedTask(event);">
         </img>
         <input type="text" readonly id="endedTaskname" value="${tuple.title}" maxlength="25">
@@ -393,19 +460,25 @@ function downloadEnded(tuple) {
         </button>
         
         <div id="hiddenOption">
-          <textarea name="taskNote" readonly class="hiddenNote" cols="40" rows="3" placeholder="updateNote" maxlength="115">${tuple.note}</textarea>
+          <textarea name="taskNote" readonly class="hiddenNote" cols="40" rows="3" maxlength="115">${tuple.note}</textarea>
         </div>    
        
     
     </div>
 `)
-totalTime+= JSON.parse(tuple.tim);
+//totalTime+= JSON.parse(tuple.tim);
 }
 
 function checkMonthsBorder() {
   cMonth = currentD.getMonth();
-  if(cMonth == 0)     document.getElementById("decreaseTimePeriod").disabled = true;
-  else if(cMonth == 11)    document.getElementById("increaseTimePeriod").disabled = true;
+  if(cMonth == 0) { 
+    document.getElementById("decreaseTimePeriod").disabled = true;
+    stopInterval();
+  }
+  else if(cMonth == 11) {
+    document.getElementById("increaseTimePeriod").disabled = true;
+    stopInterval();
+  }
   else {
     document.getElementById("decreaseTimePeriod").disabled = false;
     document.getElementById("increaseTimePeriod").disabled = false;
@@ -418,19 +491,23 @@ function checkWeekBorder() {
   var sunD = parseDate(sun);
   if(monD.getMonth == 0 && monD.getDate == 1) {
     document.getElementById("decreaseTimePeriod").disabled = true;
+    stopInterval();
   }
   else if(sunD.getMonth() == 0 && sunD.getDate() < 7) {
     monD.setDate(1);
     monD.setMonth(0);
     document.getElementById("decreaseTimePeriod").disabled = true;
+    stopInterval();
   }
   else if(sunD.getMonth() == 11 && sunD.getDate() == 31) {
     document.getElementById("increaseTimePeriod").disabled = true;
+    stopInterval();
   }
   else if(monD.getMonth() == 11 && monD.getDate() > 31-7) {
     sunD.setDate(31);
     sunD.setMonth(11);
     document.getElementById("increaseTimePeriod").disabled = true;
+    stopInterval();
   }
   else {
     document.getElementById("decreaseTimePeriod").disabled = false;
@@ -443,8 +520,14 @@ function checkWeekBorder() {
 function checkDayBorder() {
   date = currentString;
   var parts = date.split("-");
-  if(parts[0] == "01" && parts[1] == "01")     document.getElementById("decreaseTimePeriod").disabled = true;
-  else if(parts[0] == "31" && parts[1] == "12")    document.getElementById("increaseTimePeriod").disabled = true;
+  if(parts[0] == "01" && parts[1] == "01") {
+    document.getElementById("decreaseTimePeriod").disabled = true;
+    stopInterval();
+  }
+  else if(parts[0] == "31" && parts[1] == "12") {
+    document.getElementById("increaseTimePeriod").disabled = true;
+    stopInterval();
+  }
   else {
     document.getElementById("decreaseTimePeriod").disabled = false;
     document.getElementById("increaseTimePeriod").disabled = false;
@@ -545,6 +628,11 @@ function load(s, e) {
     hourCharts(currentHour);
     document.getElementById("increaseTimePeriod").disabled = false;
     document.getElementById("decreaseTimePeriod").disabled = false;
+
+    var avgBtns = document.querySelectorAll(".avgBtnClass");
+    avgBtns.forEach(function(btn) {
+        btn.style.display = "none";
+    });
   }
   else if(s == 'weekly') {
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
@@ -555,6 +643,11 @@ function load(s, e) {
     document.getElementById("decreaseTimePeriod").disabled = false;
     weekInterval(currentD);
     checkWeekBorder();
+
+    var avgBtns = document.querySelectorAll(".avgBtnClass");
+    avgBtns.forEach(function(btn) {
+        btn.style.display = "none";
+    });
   }
   else if(s == 'monthly') {
     url = "monthlyLoad.php";
@@ -565,7 +658,11 @@ function load(s, e) {
     document.getElementById("increaseTimePeriod").disabled = false;
     document.getElementById("decreaseTimePeriod").disabled = false;
     checkMonthsBorder();
-    
+
+    var avgBtns = document.querySelectorAll(".avgBtnClass");
+    avgBtns.forEach(function(btn) {
+        btn.style.display = "none";
+    });
   }
   else if(s == 'all') {
     url = "allLoad.php";
@@ -574,6 +671,13 @@ function load(s, e) {
     document.getElementById("increaseTimePeriod").disabled = true;
     document.getElementById("decreaseTimePeriod").disabled = true;
     avgDailyCharts();
+
+    var avgBtns = document.querySelectorAll(".avgBtnClass");
+    avgBtns.forEach(function(btn) {
+        btn.style.display = "block";
+    });
+    document.getElementById("avgWeek").classList.remove('active');
+    document.getElementById("avgDay").classList.add('active');
   }
   document.getElementById("tasksPanel").innerHTML = '';
   var httpRequest = new XMLHttpRequest();
@@ -585,9 +689,10 @@ function load(s, e) {
       if ('error' in response) {
         console.log(response.error);
       } else {
+        totalTime=0;
           response.forEach(function(tuple) {
             downloadEnded(tuple);
-            totalTime+= tuple.time;
+            totalTime+= JSON.parse(tuple.tim);
         });
         upTotalTime(totalTime);
         
@@ -595,7 +700,21 @@ function load(s, e) {
     }
   };
   httpRequest.send();
-    
+}
+
+function chartLoad(s, e) {
+  var currentActiveButton = document.querySelector('.avgBtnClass.active');
+  if (currentActiveButton) {
+    currentActiveButton.classList.remove('active');
+  }
+  e.currentTarget.classList.add('active');
+
+  if(s == 'avgDay') {
+    avgDailyCharts();
+  }
+  else if(s == "avgWeek") {
+    avgWeeklyCharts();
+  }
 }
 
 function increaseDay(s) {
@@ -655,6 +774,7 @@ function increaseMonth(s) {
 
 function increase() {
   document.getElementById("tasksPanel").innerHTML = '';
+  upTotalTime(0);
   var typeReq = "POST";
   if(currentPeriodType == "day") {
     increaseDay("+");
@@ -670,14 +790,14 @@ function increase() {
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
     var php = "../server/increaseWeek.php";
     weekInterval(currentD);
-    weekCharts2(currentString);
+    if(canCharge) weekCharts2(currentString);
 
   }
   else if(currentPeriodType == "month") {
     increaseMonth("+");
     document.querySelector("#currentPeriod").innerText= mesi[currentD.getMonth()];
     var php = "../server/increaseMonth.php";
-    checkMonthsBorder();
+    checkMonthsBorder(); 
     if(myChart != null) {
       myChart.data.datasets[0].backgroundColor[currentD.getMonth()] = "#e85e56";
       myChart.data.datasets[0].backgroundColor[currentD.getMonth()-1] = "#494949";
@@ -689,28 +809,34 @@ function increase() {
   else {
     console.log("errore period type");
   }
-  $.ajax({
-    url: php,
-    type: typeReq,
-    data: {currentString: currentString},
-    success: function(result) {
-        // Aggiornamento eseguito con successo
-        var endedTasks = JSON.parse(result);
-        if(endedTasks.length != 0) {
+  if(canCharge) {
+    $.ajax({
+      url: php,
+      type: typeReq,
+      data: {currentString: currentString},
+      success: function(result) {
+          // Aggiornamento eseguito con successo
+          var endedTasks = JSON.parse(result);
+          if(endedTasks.length != 0) {           
+             totalTime = 0;
           for(var i = 0; i<endedTasks.length; i++) {
-            downloadEnded(endedTasks[i]);
+              downloadEnded(endedTasks[i]);
+              totalTime+=JSON.parse(endedTasks[i].tim);
           }
+            upTotalTime(totalTime);          
         }
-    },
-    error: function(xhr, status, error) {
-        // Errore nell'aggiornamento
-        console.error(error);
-    }
-});
+      },
+      error: function(xhr, status, error) {
+          // Errore nell'aggiornamento
+          console.error(error);
+      }
+    });
+  }
 }
 
 function decrease() {
   document.getElementById("tasksPanel").innerHTML = '';
+  upTotalTime(0);
   var typeReq = "POST";
   if(currentPeriodType == "day") {
     increaseDay("-");
@@ -725,7 +851,7 @@ function decrease() {
     checkWeekBorder();
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
     var php = "../server/increaseWeek.php";
-    weekCharts2(currentString);
+    if(canCharge) weekCharts2(currentString);
   }
   else if(currentPeriodType == "month") {
     increaseMonth("-");
@@ -743,31 +869,36 @@ function decrease() {
   else {
     console.log("errore period type")
   }
-  $.ajax({
-    url: php,
-    type: typeReq,
-    data: {currentString: currentString},
-    success: function(result) {
-        // Aggiornamento eseguito con successo
-        var endedTasks = JSON.parse(result);
+  if(canCharge) {
+    $.ajax({
+      url: php,
+      type: typeReq,
+      data: {currentString: currentString},
+      success: function(result) {
+          // Aggiornamento eseguito con successo
+          var endedTasks = JSON.parse(result);
 
-        if(endedTasks.length != 0) {
-          for(var i = 0; i<endedTasks.length; i++) {
-            downloadEnded(endedTasks[i]);
+          if(endedTasks.length != 0) {
+          totalTime = 0;
+            for(var i = 0; i<endedTasks.length; i++) {
+              downloadEnded(endedTasks[i]);
+            totalTime+=JSON.parse(endedTasks[i].tim);
+            }
+          upTotalTime(totalTime);
           }
-        }
-    },
-    error: function(xhr, status, error) {
-        // Errore nell'aggiornamento
-        console.error(error);
-    }
-});
+      },
+      error: function(xhr, status, error) {
+          // Errore nell'aggiornamento
+          console.error(error);
+      }
+    });
+  }
 }
 
 function startInterval(s) {
   if(s == "-") intervalId = setInterval(decrease, 100); 
   else if(s == "+") intervalId = setInterval(increase, 100); 
-  if(myChart) myChart.destroy();
+  if(myChart && currentPeriodType != "month") myChart.destroy();
   canCharge = false;
 }
 
