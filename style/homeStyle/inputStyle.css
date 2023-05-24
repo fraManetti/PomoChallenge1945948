@@ -1,8 +1,9 @@
 /*----- container totale della parte task -----*/
 #taskBox{
 
-    background:  #eeeeee; 
-    border-radius: 15px;
+    background:  #494949; 
+    color: #f4e9dc;
+    border-radius: 22px;
     width: 500px;
     margin-bottom: 30px;
     }
@@ -27,6 +28,9 @@
     /*settaggio input text (box di input titolo task)*/
     input[type='text']{
         width:293px;
+        background-color: #f7f1eb;
+        border-color: transparent;
+        border-radius: 7px;
         
     }
 

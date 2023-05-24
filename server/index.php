@@ -177,11 +177,12 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
                     </label>
                   </p>
                 </div>
-                  <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')" maxlength="25">
-                  <button id="push" onclick="addTask();">Add</button>
-                  <br>
-                  Quanti Pomodori?<br>
+                  <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')" maxlength="35">
                   <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
+                  <br>
+                  <!-- Quanti Pomodori?<br> -->
+                  <button id="push" onclick="addTask();">Add</button>
+                  
                   Note: <br>
         
                   <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')" maxlength="115" ></textarea>
