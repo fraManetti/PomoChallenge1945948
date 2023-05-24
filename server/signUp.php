@@ -21,7 +21,7 @@ ini_set('display_errors', 1);
             $query = "select * from utente where username = $1 ";
             $res = pg_query_params($db_conn,$query,array($user));
             if ($tuple = pg_fetch_array($res,null,PGSQL_ASSOC)){
-                echo "<h1> cambia user</h1>";
+                header("location: ../model/signUpForm.html?signup=failed1");
             }
             else{
 
@@ -31,10 +31,10 @@ ini_set('display_errors', 1);
                 $query ="insert into utente values ($1,$2)";
                 $res = pg_query_params($db_conn, $query, array($user,$psw));
                 if ($res){
-                     echo '<script> alert ("reg riuscita")</script>';
-                    header ("Location: ../model/loginForm.html");}
+                    header("location: ../model/loginForm.html?signup=success");
+                }
                 else
-                    echo "<h1>reg fallita</h1>";
+                    header("location: ../model/signUpForm.html?signup=failed2");
             }
         }
         ?>

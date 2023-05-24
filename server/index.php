@@ -165,7 +165,7 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
             </button>
           </div>
           <div id = "selectTaskArea">
-              <p id="pomoCount">Pomodori Complessivi: 0</p>
+              <p id="pomoCount">Pomodori Rimanenti: 0</p>
               <p id="timeEstimated"> </p>
               <div id="newtask">
                 <div id = modalitaTaskRow>

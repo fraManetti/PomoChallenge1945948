@@ -228,3 +228,20 @@ function contaOre(contaOre) {
   document.getElementById("ore-studio").innerHTML = cnt;
   
 }
+function deleteAccount() {
+  $.ajax({
+    url: "../server/updateProfile.php",
+    type: "POST",
+    data: {type: "deleteAccount"},
+    success: function(result) {
+        // alert(result);
+        // if(result.trim() == "Cancellazione Riuscita!") popupContainer.innerHTML = "";
+        
+    },
+    error: function(xhr, status, error) {
+        console.error(error);
+        /*qui ci metterò l'alert*/
+    }
+});
+}
+

@@ -1,6 +1,6 @@
 function downloadClassifica(tuple) {
     var user =tuple.username;
-    var points = tuple.points;
+    var points = convertMinHour( tuple.points);
     document.querySelector("#classificaBox").insertAdjacentHTML('beforeend', `
         <div class="classifica-item" data-value=${user}>
             <span class="elemClassifica" id = "utenteClassifica">${user}</span>

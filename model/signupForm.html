@@ -80,3 +80,19 @@
    <!-- </div>-->
 </body>
 </html>
+<script>
+    window.onload = function() {
+    if (new URLSearchParams(window.location.search).get('signup') === 'failed1') {
+alert('Registrazione non riuscita, cambia username.');
+const newUrl = new URL(window.location.href);
+newUrl.searchParams.delete('signup');
+window.history.replaceState({}, '', newUrl);
+}
+if (new URLSearchParams(window.location.search).get('signup') === 'failed2') {
+alert('Registrazione non riuscita, riprova.');
+const newUrl = new URL(window.location.href);
+newUrl.searchParams.delete('signup');
+window.history.replaceState({}, '', newUrl);
+}
+}
+</script>

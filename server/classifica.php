@@ -47,7 +47,7 @@
     </div>
     <div id="classificaColumnTitles">
     <span class="elemClassifica">Username</span>
-    <span class="elemClassifica">Ore totali</span>
+    <span class="elemClassifica">Tempo totale</span>
     <span class="elemClassifica">Profilo</span>
     </div>
     <div id="classificaBox"> 

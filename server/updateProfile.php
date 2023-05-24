@@ -20,7 +20,6 @@ switch ($type) {
         if($tuple) {
             echo "Username già in uso";
             break;} 
-
         $query = "update utente set username='${newUsername}' where username='${username}'";
         $_SESSION["username"] = $newUsername;
         echo "Username Correttamente Aggiornato";
@@ -40,7 +39,13 @@ switch ($type) {
         $query = "update utente set paswd='${newPass}' where paswd='${oldPass}' and username='${username}' ";
         echo "Password correttamente aggiornata";
         break;
-
+    case 'deleteAccount':
+        $username=$_SESSION['username'];
+        $query = "delete from utente where username ='${username}'";
+        $res = pg_query($query);
+        if($res)
+            header("location: ../model/index.html?delete=success");
+        break;        
         default:
         # code...
         break;

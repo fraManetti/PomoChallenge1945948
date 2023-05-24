@@ -55,7 +55,8 @@
       <p class = "profileField"> ⏱️ <label class="profileFieldNames"> Totale delle ore: </label> <span id="ore-studio">0</span></p>
       <p class = "profileField"> 👫 <label class="profileFieldNames">Amici totali: </label> <span id="amici-totali">0</span></p>
       <button class="editPasswordBtn" onclick="openPopUpPassword()">Modifica password</button>
-      
+      <button class="deleteAccountBtn" onclick="deleteAccount()">Elimina Account</button>
+
 
       <div id="popupContainer"></div>
     </div>

@@ -92,5 +92,11 @@ const newUrl = new URL(window.location.href);
 newUrl.searchParams.delete('login');
 window.history.replaceState({}, '', newUrl);
 }
+if (new URLSearchParams(window.location.search).get('signup') === 'success') {
+alert('Registrazione correttamente riuscita.');
+const newUrl = new URL(window.location.href);
+newUrl.searchParams.delete('signup');
+window.history.replaceState({}, '', newUrl);
+}
 }
 </script>

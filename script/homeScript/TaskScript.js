@@ -210,7 +210,7 @@ function updateTaskTag(isRunning,isEnded){
     pomoCount+=JSON.parse(tuple.pomodori);
     pomoCount-=JSON.parse(tuple.donepomodori);
   });
-  var textToAppend  = "Pomodori Complessivi: "+JSON.parse(pomoCount); 
+  var textToAppend  = "Pomodori Rimanenti: "+JSON.parse(pomoCount); 
   if (isRunning){  
     var nPomo=taskList[0].pomodori;
     if(!isEnded)

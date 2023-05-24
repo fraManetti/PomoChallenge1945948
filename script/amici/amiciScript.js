@@ -88,6 +88,7 @@ function downloadAmici(amico) {
         </div>
     `)
 }
+//Funzione per aggiungere amico cliccando sul bottone aggiungi
 function addFriend(e) {
     var friendToAdd = e.currentTarget.parentNode.children[0].getAttribute("data-value");
         $.ajax({
@@ -96,6 +97,8 @@ function addFriend(e) {
         data: {amico: friendToAdd,type: "reqAmico"},
         success: function(result) {
             // Aggiornamento eseguito con successo
+            if(result.trim()!="")
+                alert(result.trim());
             console.log(result);
         },
         error: function(xhr, status, error) {
@@ -109,19 +112,29 @@ function addFriend(e) {
             <button class ="largeButton largeRedButton delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)}
+
+//Funzione per inviare richieste di amicizia dalla barra
 function sendRequest() {
     var friendToAdd = document.getElementById("search").value;
     if(friendToAdd!=''){
-    console.log(friendToAdd+"stringa");
         $.ajax({
         url: "updateAmici.php",
         type: "POST",
         data: {amico: friendToAdd,type: "reqAmico"},
         success: function(result) {
             // Aggiornamento eseguito con successo
-            console.log(result);
-            if(result){
-                console.log("andata!");
+            if(result.trim()!=""){
+                alert(result.trim());
+                document.getElementById("search").value="";
+            }
+            else{
+                    document.getElementById("search").value="";
+    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
+        <div class="utente outgoingReq" data-value = ${friendToAdd}>
+            ${friendToAdd}
+            <button class ="largeButton largeRedButton delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
+            </div>
+    `)
             }
         },
         error: function(xhr, status, error) {
@@ -130,13 +143,7 @@ function sendRequest() {
         }
     });
     
-    document.getElementById("search").value="";
-    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
-        <div class="utente outgoingReq" data-value = ${friendToAdd}>
-            ${friendToAdd}
-            <button class ="largeButton largeRedButton delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
-            </div>
-    `)
+
     }
 }
 function downloadIncomingRequest(amico) {

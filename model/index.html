@@ -134,7 +134,7 @@
             </button>
           </div>
           <div id = "selectTaskArea">
-              <p id="pomoCount">Pomodori Complessivi: 0</p>
+              <p id="pomoCount">Pomodori Rimanenti: 0</p>
               <p id="timeEstimated"> </p>
               <div id="newtask">
                 <div id = modalitaTaskRow>
@@ -197,3 +197,13 @@
     </script>
 </body>
 </html>
+<script>
+  window.onload = function() {
+  if (new URLSearchParams(window.location.search).get('delete') === 'success') {
+alert("Cancellazione Riuscita!");
+const newUrl = new URL(window.location.href);
+newUrl.searchParams.delete('delete');
+window.history.replaceState({}, '', newUrl);
+}
+}
+</script>
