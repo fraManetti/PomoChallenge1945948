@@ -63,7 +63,7 @@
 
 
   .taskShowed:has(#taskFieldInput) {
-    cursor: default;
+    cursor: pointer;
     
   }
     /*----- hover tasks -----*/
