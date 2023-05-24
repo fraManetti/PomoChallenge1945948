@@ -61,6 +61,14 @@
     border-color: transparent;
   }
 
+  /*settaggio input number (box di input numero pomodori)*/
+  input[class='x']{
+    width:35px;
+    cursor:default;
+    margin-left: 7px;
+} 
+
+
 
   .taskShowed:has(#taskFieldInput) {
     cursor: pointer;
