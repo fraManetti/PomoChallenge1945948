@@ -1,6 +1,4 @@
-* {
-  box-sizing: border-box;
-}
+
 
 html,
 
@@ -45,7 +43,6 @@ button.btn-search, button.btn-reset {
 .sample {
   float: left;
   height: 50px;
-  margin: 0 8%;
   position: relative;
   width: 34%;
 }

@@ -16,10 +16,10 @@ function acceptIncomingReq(e) {
         }
     });
     document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
-    <div class="amico" data-value=${amico}>
+    <div class="utente amico" data-value=${amico}>
         ${amico}
-        <button class ="visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
-        <button class = "delAmico" id="delete-friend-button" onClick = delAmico(event);>Rimuovi</button>
+        <button class ="largeButton largeWhiteButton visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
+        <button class = "largeButton largeRedButton delAmico" id="delete-friend-button" onClick = delAmico(event);>Rimuovi</button>
     </div>
 `)
 }
@@ -81,10 +81,10 @@ function delIncomingReq(e) {
 }
 function downloadAmici(amico) {
     document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
-        <div class="amico" data-value=${amico}>
+        <div class="utente amico" data-value=${amico}>
             ${amico}
-            <button class="visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
-            <button class = "delAmico" id = "delete-friend-button" onClick = delAmico(event);> Rimuovi </button>
+            <button class="largeButton largeWhiteButton visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
+            <button class = "largeButton largeRedButton delAmico" id = "delete-friend-button" onClick = delAmico(event);> Rimuovi </button>
         </div>
     `)
 }
@@ -104,9 +104,9 @@ function addFriend(e) {
         }
     });
     document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
-        <div class="outgoingReq" data-value = ${friendToAdd}>
+        <div class="utente outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
-            <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
+            <button class ="largeButton largeRedButton delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)}
 function sendRequest() {
@@ -120,6 +120,9 @@ function sendRequest() {
         success: function(result) {
             // Aggiornamento eseguito con successo
             console.log(result);
+            if(result){
+                console.log("andata!");
+            }
         },
         error: function(xhr, status, error) {
             // Errore nell'aggiornamento
@@ -129,36 +132,36 @@ function sendRequest() {
     
     document.getElementById("search").value="";
     document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
-        <div class="outgoingReq" data-value = ${friendToAdd}>
+        <div class="utente outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
-            <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
+            <button class ="largeButton largeRedButton delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)
     }
 }
 function downloadIncomingRequest(amico) {
     document.querySelector("#incomingR").insertAdjacentHTML('beforeend', `
-        <div class="incomingReq" data-value=${amico}>
+        <div class="utente incomingReq" data-value=${amico}>
             ${amico}
-            <button class = "acceptIncomingReq" onClick = acceptIncomingReq(event);>&#10004;</button>
-            <button class = "delIncomingReq" onClick = delIncomingReq(event);>x</button>
+            <button class = "roundRedButton acceptIncomingReq" onClick = acceptIncomingReq(event);>&#10004;</button>
+            <button class = "roundRedButton delIncomingReq" onClick = delIncomingReq(event);>x</button>
         </div>
     `)
 }
 function downloadSuggAmici(tuple) {
     
     document.querySelector("#suggested").insertAdjacentHTML('beforeend', `
-        <div class ="suggAmico" data-value =${tuple.utentea}>    
-    <span data-value=${tuple.utentea} >${tuple.utentea}</span>
-    <button class ="visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
-    <button class="sendRequestButton" onClick="addFriend(event);">+</button>
+    <div class ="utente suggAmico" data-value =${tuple.utentea}>    
+        ${tuple.utentea}
+    <button class ="largeButton largeWhiteButton visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
+    <button class="roundRedButton sendRequestButton" onClick="addFriend(event);">+</button>
     </div>
 `)
 }
 function downloadOutgoingRequest(amico) {
     document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
-        <div class="outgoingReq" data-value=${amico}>
+        <div class="utente outgoingReq" data-value=${amico}>
             ${amico}
-            <button class = "delOutgoingReq" onClick = delOutgoingReq(event);>Annulla</button>
+            <button class = "largeButton largeRedButton delOutgoingReq" onClick = delOutgoingReq(event);>Annulla</button>
         </div>
     `)}
