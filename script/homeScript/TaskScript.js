@@ -231,8 +231,10 @@ function updateTaskTag(isRunning,isEnded){
     time+=countB;
   else if (pos =="Long Break")
     time+=countL;
+  else if(pos=="Session")
+    time-=(countS-(clock.getTime()/60));
+
   console.log("time: ",time,countB,countS,countL,clock.getTime()/60);
-  time-=(countS-(clock.getTime()/60));
   timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
 
   document.getElementById("timeEstimated").innerText=timeToAppend;
