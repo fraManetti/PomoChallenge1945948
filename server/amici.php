@@ -42,45 +42,43 @@
 <body>
     
     <div id="mynavbar"></div>
-    <div class="container">
-            <div id = "amiciPanel">
-                <div id="titleAmici">
-                    <h2 class="lista-amici-title"> I miei amici </h2>
-                   
-                </div>
-                <div class = "box" id="amiciBox">
-                    
-                </div>
-        </div>
+      <div class="containerAmici">
+          <div id = "amiciPanel">
+              <div id="titleAmici">
+                  <div class="titlesAmici lista-amici-title"> I miei amici </div>
+              </div>
+              <div class = "box" id="amiciBox">
+              </div>
+          </div>
         <div id="boxdx" > 
-            <div id = "topBox">
-            <div id ="searchBox" class="row">
-<div class="sample ten">
-  <input type="text" name="search" placeholder="Invia richiesta di amicizia" id="search">
-  <button class="btn btn-search" onClick="sendRequest();">
-    <i class="fa fa-arrow-right"></i>
-  </button>
-  <button type="reset" class="btn btn-reset fa fa-times"></button>
-</div>      </div>
-<div id ="suggBox" class = "box"> 
-  <div class="suggeriti-title">Suggeriti</div> 
-  <div class="box" id = "suggested"></div>
-
-</div>
-</div>
-<div id ="amiciRequest">
-    <div class="box" id="incoming">
-    <div id = "incoming-title">Richieste entranti</div>
-    <div class="box" id="incomingR"></div>
-  </div>
-  <br>
-  <div class="box" id="outgoing">
-    <div id = "outgoing-title">Richieste uscite</div>
-    <div class="box" id="outgoingR"></div>
-  </div>
+          <div id = "topBox">
+             <div id ="searchBox" class="row">
+                <div class="sample ten">
+                   <input type="text" name="search" placeholder="Invia richiesta di amicizia" id="search">
+                   <button class="btn btn-search" onClick="sendRequest();">
+                      <i class="fa fa-arrow-right"></i>
+                   </button>
+                   <button type="reset" class="btn btn-reset fa fa-times"></button>
+                </div>
+              </div>
+              <div id ="suggBox" class = "box"> 
+                <div class="titlesAmici suggeriti-title">Suggeriti</div> 
+                <div class="box" id = "suggested"></div>
+              </div>
+            </div>
+        
+            <div id ="amiciRequest">
+              <div class="richiesta box" id="incoming">
+                <div class="titlesAmici" id = "incoming-title">Richieste entranti</div>
+                <div class="boxRichieste box" id="incomingR"></div>
+              </div>
+             <div class="richiesta box" id="outgoing">
+                <div class = "titlesAmici "id = "outgoing-title">Richieste uscite</div>
+                <div class="boxRichieste box" id="outgoingR"></div>
+              </div>
             </div>
         </div>
-    </div>
+      </div>
     </body>
     <?php 
 $username = $_SESSION['username'];

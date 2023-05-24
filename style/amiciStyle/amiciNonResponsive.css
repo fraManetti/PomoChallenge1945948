@@ -1,0 +1,351 @@
+
+.navbar {
+    background: rgba(255, 255, 255, 0.7);
+    position: fixed;
+    }
+    body {
+      padding-top: 5%;
+       background-size: cover;
+    
+     }
+
+.container {
+    display: flex;
+    grid-template-columns: 50% 50%;
+    height: 100vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
+  
+  }
+
+  
+
+
+
+  #amiciPanel {
+    border-style: solid;
+    height: 600px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #EBE8E4;
+    border-radius: 5%;
+   }
+
+ #amiciBox {
+    width: 500px;
+  }
+
+  #boxdx{
+    height: 700px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    display: grid;
+    grid-template-rows: 38% 62%;
+    }
+    #searchBox{
+      width: 500px;
+      /*margin-left: 100px;*/
+      text-align: left;
+      padding-right: 420px;
+      /*padding-left: 100px;*/
+
+    }
+    #amiciRequest{
+      width: 500px;
+    }
+
+    #suggBox {
+      border-style: solid;
+      border-color: black;
+      height: 190px;
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #EBE8E4;
+      border-radius: 15px;
+    }
+    
+    .amico {
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 500;
+      border-bottom: 1px solid #a29e9e;
+      padding-top: 4px;
+      padding-bottom: 4px;
+      display: grid;
+      /*grid-template-columns: 380px 32px 32px;*/
+      grid-template-columns: 200px 100px 100px;
+      text-align: left;
+
+    }
+
+    .amico > * {
+      margin: 4px;
+    }
+
+    #delete-friend-button {
+      font-size: 12px;
+      color: white;
+      background-color: rgb(230, 88, 88);
+      border: none;
+      border-radius: 10px;
+      padding: 2px 4px;
+      margin-left: 5%;
+      cursor: pointer;
+      width: 65px;
+    }
+
+    .lista-amici-title{
+      margin-bottom: 0;
+    
+      background-color: transparent;
+      text-align: center;
+      padding-bottom: 20px;
+
+
+    }
+    
+    .suggeriti-title{
+      text-align: center;
+      padding-bottom: 10px;
+      background-color: transparent;
+      font-size: 30px;
+      color: rgb(54, 51, 51);
+      font-weight: 500;
+    }
+
+    .suggAmico {
+      display: grid;
+      grid-template-columns: 180px 80px 50px;
+      justify-content: center;
+      border-bottom: 1px solid #a29e9e;
+      font-size: 18px;
+      font-weight: 500;
+      text-align: left;
+
+    }
+
+    .suggAmico > * {
+      margin: 4px;
+    }
+
+    .visitaProfiloButton{
+      font-size: 12px;
+      color: black;
+      background-color: rgb(229, 224, 224);
+      border: none;
+      border-radius: 10px;
+      padding: 2px 4px;
+      margin-left: 5%;
+      cursor: pointer;
+      width: 65px;
+    }
+
+    .sendRequestButton{
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      background-color: rgb(230, 88, 88);
+      border: none;
+      border-radius: 50%;
+      padding: 2px 2px;
+      padding-bottom: 6.5px;
+      margin-left: 5%;
+      cursor: pointer;
+    }
+
+    #incoming {
+      border-style: solid;
+      border-color: black;
+      height: 150px;
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #EBE8E4;
+      border-radius: 15px;
+    }
+
+    #outgoing {
+      border-style: solid;
+      border-color: black;
+      height: 150px;
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #EBE8E4;
+      border-radius: 15px;
+    }
+
+    #outgoingR {
+      display: grid;
+      overflow-y: scroll;
+      max-height: 75px;
+    }
+
+    #suggested{
+      display: grid;
+      
+    }
+
+    #amiciBox{
+      display: grid;
+      overflow-y: scroll;
+      max-height: 505px;
+    }
+
+    #incomingR{
+      display: grid;
+      overflow-y: scroll;
+      max-height: 75px;
+    }
+
+    #incoming-title{
+      padding-bottom: 10px;
+      text-align: center;
+      margin-bottom: 0;
+      /*border-bottom: 2px solid #c6c4c1;*/
+      background-color: transparent;
+      font-size: 28px;
+      color: rgb(54, 51, 51);
+      font-weight: 500;
+    }
+
+    #outgoing-title{
+      padding-bottom: 10px;
+      text-align: center;
+      margin-bottom: 0;
+      /*border-bottom: 2px solid #c6c4c1;*/
+      background-color: transparent;
+      font-size: 28px;
+      color: rgb(54, 51, 51);
+      font-weight: 500;
+    }
+
+    .request {
+      display: flex;
+      justify-content: center;
+
+    }
+
+    .request > * {
+      margin: 4px;
+    }
+
+    .delReq{
+      font-size: 12px;
+      color: white;
+      background-color: rgb(230, 88, 88);
+      border: none;
+      border-radius: 10px;
+      padding: 2px 4px;
+      margin-left: 5%;
+      cursor: pointer;
+    }
+
+    .delOutgoingReq{
+      width: 57px;
+      height: 23px;
+      font-size: 12px;
+      color: white;
+      background-color: rgb(230, 88, 88);
+      border: none;
+      width: 65px;
+      border-radius: 10px;
+      padding: 0px 4px;
+      margin-left: 5%;
+      cursor: pointer;
+      border-bottom: 1px solid #a29e9e;
+      margin-top: 2px;
+    }
+
+    .incomingReq {
+      display: grid;
+      /*grid-template-columns: 380px 32px 32px;*/
+      grid-template-columns: 200px 50px 50px;
+      font-size: 18px;
+      font-weight: 500;
+      text-align: left;
+      justify-content: center;
+      border-bottom: 1px solid #a29e9e;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+    .outgoingReq {
+      display: grid;
+      /*grid-template-columns: 380px 32px 32px;*/
+      grid-template-columns: 200px 100px;
+      font-size: 18px;
+      font-weight: 500;
+      text-align: left;
+      justify-content: center;
+      border-bottom: 1px solid #a29e9e;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+
+
+    .incomingReq > * {
+      margin: 4px;
+    }
+
+    .delIncomingReq{
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      font-weight:500;
+      color: white;
+      background-color: rgb(230, 88, 88);
+      border: none;
+      border-radius: 50%;
+      padding: 2px, 2px;
+      padding-bottom: 6.5px;
+      margin-left: 5%;
+      cursor: pointer;
+    }
+
+    .acceptIncomingReq{
+      width: 20px;
+      height: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 10px;
+      font-weight:500;
+      color: transparent;
+      text-shadow: 0 0 0 white;
+      background-color: green;
+      border: none;
+      border-radius: 50%;
+      padding: 2px 2px;
+      padding-bottom: 2px;
+      margin-left: 5%;
+      cursor: pointer;
+    }
+
+    .box::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .box::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    
+    .box::-webkit-scrollbar-thumb {
+      background-color: rgb(165, 158, 158);
+      border-radius: 20px;
+      border: 3px solid transparent;
+    }
+    
+    .box::-webkit-scrollbar-button {
+      display: none;
+    }
+    
