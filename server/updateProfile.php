@@ -41,10 +41,16 @@ switch ($type) {
         break;
     case 'deleteAccount':
         $username=$_SESSION['username'];
+        $query = "select percorso from imgutente where utente = '${username}'";
+        $res = pg_query ($query);
+        if (file_exists($filePath=pg_fetch_array($res,null,PGSQL_ASSOC)['percorso'])) {
+            unlink($filePath);
+            }        
         $query = "delete from utente where username ='${username}'";
         $res = pg_query($query);
         if($res)
-            header("location: ../model/index.html?delete=success");
+            echo("Cancellazione Riuscita!");
+        
         break;        
         default:
         # code...
@@ -55,7 +61,7 @@ $res = pg_query($db_conn,$query);
 
 
 if (!$res) {
-    header("HTTP/1.1 500 Internal Server Error");
+    //header("HTTP/1.1 500 Internal Server Error");
     exit();
 }
 ?>

@@ -50,7 +50,7 @@ function hourCharts() {
 
 function dailyQuery() {
   return new Promise((resolve, reject) => {
-    const url = "getDailyTime.php";
+    const url = "../server/getDailyTime.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -111,7 +111,7 @@ function hourCharts2(s) {
 
 function dailyQuery2(s) {
   return new Promise((resolve, reject) => {
-    const url = "increaseDayTime.php";
+    const url = "../server/increaseDayTime.php";
     const formData = new FormData();
     formData.append("parametro1", s);
     const httpRequest = new XMLHttpRequest();
@@ -318,7 +318,7 @@ function avgWeeklyCharts() {
 
 function monthQuery() {
   return new Promise((resolve, reject) => {
-    const url = "getMonthTime.php";
+    const url = "../server/getMonthTime.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -338,7 +338,7 @@ function monthQuery() {
 
 function weekQuery() {
   return new Promise((resolve, reject) => {
-    const url = "getWeekTime.php";
+    const url = "../server/getWeekTime.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -358,7 +358,7 @@ function weekQuery() {
 
 function weekQuery2(s) {
   return new Promise((resolve, reject) => {
-    const url = "increaseWeekTime.php";
+    const url = "../server/increaseWeekTime.php";
     const formData = new FormData();
     formData.append("parametro1", s);
     const httpRequest = new XMLHttpRequest();
@@ -403,7 +403,7 @@ function avgDailyQuery() {
 
 function avgWeekQuery() {
   return new Promise((resolve, reject) => {
-    const url = "avgWeekTime.php";
+    const url = "../server/avgWeekTime.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -434,7 +434,6 @@ function upTotalTime(totalTime) {
 
 
 function downloadEnded(tuple) {
-  //var totalTime = 0;
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task" data-value="${tuple.keyhash}">
     <!--
@@ -452,7 +451,7 @@ function downloadEnded(tuple) {
         <input type="text" readonly id="endedTaskname" value="${tuple.title}" maxlength="25">
        
 
-        <input type="number"  id="endedPomos" value= "${tuple.tim}" readonly  min="1">
+        <input type="text"  id="endedPomos" value= "${tuple.tim}min" readonly  min="1">
        
         <button id="optionbuton" onclick = "endedOption(event)">
             <img id = "endedOptionImg" src  = "../style/img/ellipsis-vertical-solid.png" >
@@ -466,7 +465,6 @@ function downloadEnded(tuple) {
     
     </div>
 `)
-//totalTime+= JSON.parse(tuple.tim);
 }
 
 function checkMonthsBorder() {

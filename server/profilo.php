@@ -10,7 +10,6 @@
     <title>PomoChallenge</title>
     <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
     <link rel="stylesheet" href="../style/homeStyle/clockStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/style.css">
@@ -98,6 +97,9 @@
           echo '<script>
           contaOre(' . $tuple_json . ') </script>';
   ?>
+
+  
+ 
 </html>
 <script>
 if (document.cookie.indexOf("profilepic") >= 0) {
