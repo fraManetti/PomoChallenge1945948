@@ -195,13 +195,13 @@ function handleOutClick(event) {
   });   }
    
    function resetImage() {
-    if (document.cookie.indexOf("profilepic") >= 0) {
-      var path = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('profilepic='))
-      .split('=')[1];
-      var path_decoded=decodeURIComponent(path);
-    }
+    // if (document.cookie.indexOf("profilepic") >= 0) {
+    //   var path = document.cookie
+    //   .split('; ')
+    //   .find(row => row.startsWith('profilepic='))
+    //   .split('=')[1];
+    //   var path_decoded=decodeURIComponent(path);
+    // }
     document.getElementById("mypic").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
     document.getElementById("top-picture").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
     $.ajax({
@@ -229,19 +229,26 @@ function contaOre(contaOre) {
   
 }
 function deleteAccount() {
+  if (confirm("Sicuro di voler eliminare il profilo? Questa operazione non è annullabile"))
   $.ajax({
     url: "../server/updateProfile.php",
     type: "POST",
     data: {type: "deleteAccount"},
     success: function(result) {
-        // alert(result);
-        // if(result.trim() == "Cancellazione Riuscita!") popupContainer.innerHTML = "";
-        
+        if(result.trim() == "Cancellazione Riuscita!"){
+          alert(result);
+           location.href = '../server/logOut.php';
+          }
+        else{
+          alert("Qualcosa è andato storto, riprovare!");
+        }
     },
     error: function(xhr, status, error) {
         console.error(error);
         /*qui ci metterò l'alert*/
     }
 });
+  else  
+    return;
 }
 

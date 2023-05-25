@@ -21,7 +21,7 @@ CREATE TABLE task (
     ind INT NOT NULL,
     tim INT NOT NULL,
     PRIMARY KEY (username,keyhash),
-    FOREIGN KEY (username) REFERENCES utente(username) ON UPDATE CASCADE
+    FOREIGN KEY (username) REFERENCES utente(username) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE endedtask (
@@ -34,29 +34,29 @@ CREATE TABLE endedtask (
     tim INT NOT NULL,
     ora VARCHAR(8) NOT NULL,
     PRIMARY KEY (username,keyhash),
-    FOREIGN KEY (username) REFERENCES utente(username) ON UPDATE CASCADE
+    FOREIGN KEY (username) REFERENCES utente(username) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE richieste (
     richiedente VARCHAR(40) NOT NULL,
     accettante VARCHAR(40) NOT NULL,
     PRIMARY KEY (richiedente,accettante),
-    FOREIGN KEY (richiedente) REFERENCES utente(username) ON UPDATE CASCADE,
-    FOREIGN KEY (accettante) REFERENCES utente(username) ON UPDATE CASCADE
+    FOREIGN KEY (richiedente) REFERENCES utente(username) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (accettante) REFERENCES utente(username) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE amici (
     utentea VARCHAR(40) NOT NULL,
     utenteb VARCHAR(40) NOT NULL,
     PRIMARY KEY (utentea,utenteb),
-    FOREIGN KEY (utentea) REFERENCES utente(username) ON UPDATE CASCADE,
-    FOREIGN KEY (utenteb) REFERENCES utente(username) ON UPDATE CASCADE
+    FOREIGN KEY (utentea) REFERENCES utente(username) ON UPDATE CASCADE ON DELETE CASCADE, 
+    FOREIGN KEY (utenteb) REFERENCES utente(username) ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE imgutente(
     utente VARCHAR(40) NOT NULL,
     percorso VARCHAR (255) NOT NULL,
     PRIMARY KEY (utente),
-    FOREIGN KEY (utente) REFERENCES utente(username) ON UPDATE CASCADE
+    FOREIGN KEY (utente) REFERENCES utente(username) ON UPDATE CASCADE ON DELETE CASCADE
 );
 insert into utente values ('max','Password.1=');
 insert into utente values ('max1','Password.1=');
@@ -79,18 +79,18 @@ insert into amici values('max','max6');
 
 
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
-	VALUES ('luca', '0123456778', '10-05-2023', 1, '', '12-05-2023', 3, '03:00:00' );
+	VALUES ('luca', '0123456778', '12-05-2023', 1, '', '12-05-2023', 3, '03:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
-	VALUES ('luca', '0123456781', '10-05-2023', 1, '', '12-04-2023', 3, '13:00:00' );
+	VALUES ('luca', '0123456781', '12-04-2023', 1, '', '12-04-2023', 3, '13:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
-	VALUES ('luca', '0123456782', '10-05-2023', 1, '', '12-06-2023', 3, '23:00:00' );
+	VALUES ('luca', '0123456782', '12-06-2023', 1, '', '12-06-2023', 3, '23:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
 	VALUES ('luca', '0123456783', '10-05-2023', 1, '', '10-05-2023', 3, '00:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
-	VALUES ('luca', '0123456784', '10-05-2023', 1, '', '11-05-2023', 3, '08:00:00' );
+	VALUES ('luca', '0123456784', '11-05-2023', 1, '', '11-05-2023', 3, '08:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
-	VALUES ('luca', '01234567852', '10-05-2023', 1, '', '12-05-2023', 5, '03:00:00' );
+	VALUES ('luca', '01234567852', '12-05-2023', 1, '', '12-05-2023', 5, '03:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
-	VALUES ('luca', '012345678554', '10-05-2023', 1, '', '12-05-2023', 3, '13:00:00' );
+	VALUES ('luca', '012345678554', '12-05-2023', 1, '', '12-05-2023', 3, '13:00:00' );
 
 

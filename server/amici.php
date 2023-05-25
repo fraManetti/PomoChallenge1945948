@@ -20,7 +20,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
-    <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/amiciStyle/amiciStyle.css">
     <link rel="stylesheet" href="../style/amiciStyle/amiciStyleResponsive.css">
@@ -42,9 +41,9 @@
 
 </head>
 <body>
-    
     <div id="mynavbar"></div>
-      <div class="containerAmici">
+    <div class="cnt">
+    <div class="containerAmici">
           <div id = "amiciPanel">
               <div id="titleAmici">
                   <div class="titlesAmici lista-amici-title"> I miei amici </div>
@@ -80,7 +79,8 @@
               </div>
             </div>
         </div>
-      </div>
+      </div></div>
+
     </body>
     <?php 
 $username = $_SESSION['username'];

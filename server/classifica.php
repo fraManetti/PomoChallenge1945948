@@ -12,18 +12,9 @@
     <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
 
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
-    <link rel="stylesheet" href="../style/homeStyle/clockStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/tasksStyle.css">
-    <link rel="stylesheet" href="../style/amiciStyle/amiciStyle.css">
     <link rel="stylesheet" href="../style/classificaStyle/classificaStyle.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
-    <script  src="../script/homeScript/TaskScript.js"></script>
     <script  src="../script/classifica/classifica.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <script  src="../script/defaultScript.js"></script>
@@ -38,7 +29,7 @@
 </head>
 <body>    
 <div id="newNavbar"></div>
-<div class="container">
+<div class="cnt">
   <div id="classificaPanel">
     <div id="classifica-title">Classifica</div>
     <div id = "classificaButtons">
