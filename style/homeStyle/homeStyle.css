@@ -1,0 +1,55 @@
+#infoImg {
+  height: 20px;
+  width: 10px;
+  cursor: pointer;
+  margin-left: 6px;
+  
+}
+
+#settingsImg {
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+}
+
+
+.container-fluid {
+  height: 50px;
+}
+
+.cnt {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  height: 100vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
+  padding-top: 20vh;
+}
+
+.cnt {
+  grid-template-columns: 25% 50% 25%;
+}
+#infoPop {
+  margin: 250px auto;
+}
+#infoClose{
+	position: absolute;
+	top: -20px;
+	right: -20px;
+	color: #fff;
+}
+#hiddenCustom {
+  display: none;
+  padding-bottom: 2%;
+  
+  }
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,8 +17,8 @@
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.css'>
     <link rel="stylesheet" href="../style/homeStyle/clockStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
+    <link rel="stylesheet" href="../style/homeStyle/homeStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/tasksStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -69,7 +69,7 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
 ?>
 
 <div id="mynavbar"></div>
-    <div class="container">
+    <div class="cnt">
       <div class="box"></div>
         <div class="center-box">
           <div class="box">

@@ -173,3 +173,7 @@
   border-color: transparent;
   background-color: #f7f1eb;
 }
+#pomoTaskNumber {
+  width:35px;
+  cursor:default;
+}

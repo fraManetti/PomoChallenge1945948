@@ -11,15 +11,9 @@
     <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
-    <link rel="stylesheet" href="../style/homeStyle/clockStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/tasksStyle.css">
     <link rel = "stylesheet" href = "../style/profileStyle/profile.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-    <script  src="../script/homeScript/TaskScript.js"></script>
-    <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script  src="../script/profileScript/profileScript.js"></script>
     <script  src="../script/defaultScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
@@ -35,6 +29,7 @@
 </head>
 <body>
 <div class="navbar" id="mynavbar"></div>
+<div class="cnt">
 <div class="boxDati">
   <div class="title">Informazioni personali</div>
   <div class="content">
@@ -61,7 +56,7 @@
     </div>
   </div>
 </div>
-    
+</div>
 </body>
 <?php 
 //--------------------------------------------------------------------------------------------------------------->
