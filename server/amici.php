@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/amiciStyle/amiciStyle.css">
-    
+    <link rel="stylesheet" href="../style/amiciStyle/amiciStyleResponsive.css">
+
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src="../script/amici/amiciScript.js"></script>
