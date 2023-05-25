@@ -2,16 +2,8 @@
 <!DOCTYPE html>
 <html>
     <head><?php 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
   include( 'db_conn.php');  
-  // if($_SERVER["REQUEST_METHOD"] !="POST"){
-    //     header("Location: ../model/index.html");
-    // }
-    // else{
-    //     $db_conn = pg_connect("host=localhost port=5432 dbname=pomochallenge 
-    //     user=postgres password=pomodoro") or die ('Connection error-impossibile connettersi al server' . pg_last_error());
-    // }
+  session_start();
 ?></head>
     <body>
 <?php 

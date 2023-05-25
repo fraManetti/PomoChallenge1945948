@@ -36,7 +36,7 @@
                     }
                        if(isset ($_POST['remember']))
                         setcookie("loggedUser",$user,time() + 30*24*60*6,"/");
-                       header ("Location: ./index.php");
+                       header ("Location: ../model/index.php");
 
             }
         }}

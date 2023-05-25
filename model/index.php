@@ -1,5 +1,5 @@
 <?php
-  include( 'db_conn.php');  
+  include( '../server/db_conn.php');  
   session_start(); 
 ?>
 <!DOCTYPE html>
@@ -29,23 +29,21 @@
     <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
-    <script>
-        $(function(){
-          $("#mynavbar").load("../model/newNavbar.html");
-        });
-        isLogged=true;
-    </script>
+
 
 </head>
 <body onload="setButtonState()">
-<?php         
+
+<?php
+
+if(isset($_SESSION['username']) ||( isset($_COOKIE['loggedUser']) && $_COOKIE['loggedUser'] !== null)){  
+ echo '<script> 
+ $(function(){
+  $("#mynavbar").load("../model/newNavbar.html");
+});
+ </script>';   
 $query = "SELECT keyhash, title, pomodori, note, donepomodori,tim FROM task WHERE task.username = $1 ORDER BY ind";
 $res = pg_query_params ($db_conn, $query, array($_SESSION["username"])); 
-
-
-?>
-
-<?php 
             
 if (isset($_COOKIE['taskList'])){
   if( !isset($_COOKIE["server_timestamp"]) ||(isset($_COOKIE["server_timestamp"]) and $_COOKIE["server_timestamp"]<$_COOKIE["cookie_timestamp"] ) ) {
@@ -65,7 +63,12 @@ $timestamp = time()*1000;
 setcookie("server_timestamp",$timestamp,time()+3600,"/");
 }
 
-}
+}}  else {
+echo '<script>      
+  $(function(){
+  $("#mynavbar").load("../model/oldNavbar.html");
+});
+</script>';}
 ?>
 
 <div id="mynavbar"></div>
@@ -226,6 +229,7 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
 
 
 <?php
+if(isset($_SESSION['username'])){    
 while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
     // Converte la tupla in una stringa JSON
     $tuple_json = json_encode($tuple);
@@ -237,7 +241,8 @@ while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
 }
 
 
-echo '<script> fillTaskBox(); </script>'
+echo '<script> fillTaskBox(); </script>';
+}
 ?>
 
 </body>  

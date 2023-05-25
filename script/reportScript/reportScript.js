@@ -383,7 +383,7 @@ function avgCharts(){
 
 function avgDailyQuery() {
   return new Promise((resolve, reject) => {
-    const url = "avgday.php";
+    const url = "../server/avgday.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -620,7 +620,7 @@ function load(s, e) {
     <p1> ${currentString} <br></p1>
   `);*/
     document.querySelector("#currentPeriod").innerText= currentString;
-    url = "dailyLoad.php";
+    url = "../server/dailyLoad.php";
     currentPeriodType = "day";
     currentHour = new Date().getHours();
     hourCharts(currentHour);
@@ -634,7 +634,7 @@ function load(s, e) {
   }
   else if(s == 'weekly') {
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
-    url = "weeklyLoad.php";
+    url = "../server/weeklyLoad.php";
     currentPeriodType = "week";
     weekCharts();
     document.getElementById("increaseTimePeriod").disabled = false;
@@ -648,7 +648,7 @@ function load(s, e) {
     });
   }
   else if(s == 'monthly') {
-    url = "monthlyLoad.php";
+    url = "../server/monthlyLoad.php";
     currentPeriodType = "month";
     currentMonth = currentD.getMonth()+1;
     document.querySelector("#currentPeriod").innerText= mesi[currentMonth-1];
@@ -663,7 +663,7 @@ function load(s, e) {
     });
   }
   else if(s == 'all') {
-    url = "allLoad.php";
+    url = "../server/allLoad.php";
     currentPeriodType = "none";
     document.querySelector("#currentPeriod").innerText= "Total tasks";
     document.getElementById("increaseTimePeriod").disabled = true;

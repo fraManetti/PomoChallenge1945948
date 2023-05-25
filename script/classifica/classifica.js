@@ -11,7 +11,7 @@ function downloadClassifica(tuple) {
 }
 function downloadGlobalClass(){
     document.querySelector("#classificaBox").innerHTML="";
-    var url ="getGlobalClass.php";
+    var url ="../server/getGlobalClass.php";
     var httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -31,7 +31,7 @@ function downloadGlobalClass(){
   }
 function downloadAmiciClass(){
     document.querySelector("#classificaBox").innerHTML="";
-    var url ="getAmiciClass.php";
+    var url ="../server/getAmiciClass.php";
     var httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
