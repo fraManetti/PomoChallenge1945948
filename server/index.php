@@ -159,8 +159,8 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
 
         <div id="taskBox">
           <div id="taskTag">
-        <audio id="endDing" src="../sound/ding.mp3"></audio>
-<button id="taskUse" onclick="openTaskBar();">
+            <audio id="endDing" src="../sound/ding.mp3"></audio>
+            <button id="taskUse" onclick="openTaskBar();">
               Open task panel
             </button>
           </div>
@@ -177,16 +177,19 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
                     </label>
                   </p>
                 </div>
-                  <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')" maxlength="25">
-                  <button id="push" onclick="addTask();">Add</button>
-                  <br>
-                  Quanti Pomodori?<br>
-                  <input type="number" min="1"  id="pomoTaskNumber" value="1" label> <br>
-                  Note: <br>
-        
-                  <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')" maxlength="115" ></textarea>
+                <div id="inputBox">
+                  <div id="innerInputBox">
+                    <div id = "inputRow">
+                      <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')" maxlength="35">
+                      <input type="number" min="1"  id="pomoTaskNumber" value="1" label> 
+                    </div>
+                      <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')" maxlength="115" ></textarea>
+                      <!-- Quanti Pomodori?<br> -->
+                  </div>
+                </div>
+                <button id="push" onclick="addTask();">Add</button>
               </div>
-
+              <br>
               <div id="taskTag">
                 <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
                   Swap tasks </button>
