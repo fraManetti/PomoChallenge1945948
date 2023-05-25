@@ -451,7 +451,7 @@ function downloadEnded(tuple) {
         <input type="text" readonly id="endedTaskname" value="${tuple.title}" maxlength="25">
        
 
-        <input type="text"  id="endedPomos" value= "${tuple.tim}min" readonly  min="1">
+        <input type="text"  id="endedPomos" value= "${tuple.tim} min" readonly  min="1">
        
         <button id="optionbuton" onclick = "endedOption(event)">
             <img id = "endedOptionImg" src  = "../style/img/ellipsis-vertical-solid.png" >
