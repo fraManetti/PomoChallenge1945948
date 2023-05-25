@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/classificaStyle/classificaStyle.css">
+    <link rel="stylesheet" href="../style/classificaStyle/classificaResponsiveStyle.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script  src="../script/classifica/classifica.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
@@ -36,6 +37,7 @@
     <button class= "tabClass" id="globaleClassButton" onClick ="downloadGlobalClass();">Globale</button>
     <button class= "tabClass" id="amiciClassButton" onClick="downloadAmiciClass();">Amici</button>
     </div>
+  <div id="contentPanel">
     <div id="classificaColumnTitles">
     <span class="elemClassifica">Username</span>
     <span class="elemClassifica">Tempo totale</span>
@@ -43,7 +45,8 @@
     </div>
     <div id="classificaBox"> 
     </div>
-</div>
+</div>  </div>
+
 </div>
 <?php 
       $query ="

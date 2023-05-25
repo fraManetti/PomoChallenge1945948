@@ -6,7 +6,7 @@ select * from endedtask
 DELETE FROM task where true
 INSERT INTO task values ('luca',12345,'tds',3,'prova1',1)
 CREATE TABLE utente (
-    username VARCHAR(40) NOT NULL,
+    username VARCHAR(20) NOT NULL,
     paswd VARCHAR(32) NOT NULL,
     PRIMARY KEY (username)
 );
