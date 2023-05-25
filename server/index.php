@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../style/homeStyle/homeStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/tasksStyle.css">
+    <link rel="stylesheet" href="../style/homeStyle/responsiveHomeStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
@@ -167,7 +168,7 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
           <div id = "selectTaskArea">
               <p id="pomoCount">Pomodori Rimanenti: 0</p>
               <p id="timeEstimated"> </p>
-              <div id="newtask">
+              
                 <div id = modalitaTaskRow>
                   <p id="modalitaTaskSwitch">
                     Attivare task? 
@@ -177,39 +178,41 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
                     </label>
                   </p>
                 </div>
-                <div id="inputBox">
-                  <div id="innerInputBox">
-                    <div id = "inputRow">
-                      <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')" maxlength="35">
-                      <input type="number" min="1"  id="pomoTaskNumber" value="1" label> 
+              <div id="innerContainer">
+                <div id="newtask">
+                  <div id="inputBox">
+                    <div id="innerInputBox">
+                      <div id = "inputRow">
+                        <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')" maxlength="35">
+                        <input type="number" min="1"  id="pomoTaskNumber" value="1" label> 
+                      </div>
+                        <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')" maxlength="115" ></textarea>
+                        <!-- Quanti Pomodori?<br> -->
                     </div>
-                      <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')" maxlength="115" ></textarea>
-                      <!-- Quanti Pomodori?<br> -->
                   </div>
+                  <button id="push" onclick="addTask();">Add</button>
                 </div>
-                <button id="push" onclick="addTask();">Add</button>
-              </div>
-              <br>
-              <div id="taskTag">
-                <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
-                  Swap tasks </button>
-                  <button name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
-                    Reverse tasks </button>                           
-              </div>
-              <div class="bottomTag" id="taskTag">
-                <button name = "deleteAllTaskButton" class = "roundBtnHomeBottom" id="ButtonLeft" disabled onclick="deleteAllTask();">
-                  Delete all tasks </button>  
-                <button name = "deleteEndedTaskButton" class = "roundBtnHomeBottom" id="ButtonRight" disabled onclick="deleteEndedTask();">
-                  Delete ended tasks </button>  
-                <div id = "automatic-delete">
-                <label>
-                  Automatic delete for ended tasks
-                </label>
-                <input type="checkbox" id="automaticDel" onclick="(function () {
-                    delEnded=event.currentTarget.checked;
-                  })()"> 
-                </div>  
-                  
+                <br>
+                <div id="taskTag">
+                  <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
+                    Swap tasks </button>
+                    <button name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
+                      Reverse tasks </button>                           
+                </div>
+                <div class="bottomTag" id="taskTag">
+                  <button name = "deleteAllTaskButton" class = "roundBtnHomeBottom" id="ButtonLeft" disabled onclick="deleteAllTask();">
+                    Delete all tasks </button>  
+                  <button name = "deleteEndedTaskButton" class = "roundBtnHomeBottom" id="ButtonRight" disabled onclick="deleteEndedTask();">
+                    Delete ended tasks </button>  
+                  <div id = "automatic-delete">
+                  <label>
+                    Automatic delete for ended tasks
+                  </label>
+                  <input type="checkbox" id="automaticDel" onclick="(function () {
+                      delEnded=event.currentTarget.checked;
+                    })()"> 
+                  </div>  
+                </divd>
               </div>
               <div id="tasks">
               </div>
