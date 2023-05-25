@@ -41,7 +41,7 @@ switch ($type) {
         echo "Password correttamente aggiornata";
         break;
 
-    default:
+        default:
         # code...
         break;
 }

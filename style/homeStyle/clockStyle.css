@@ -23,6 +23,7 @@
    z-index: -1;
  }
 
+
   .col-md-6 {
     flex: 0 0 auto;
     width: 33.333333333%;
@@ -47,12 +48,21 @@
     justify-content: center;
   }
   
+  
+
+  .flip-clock-wrapper ul li a div div.inn {
+    background-color: #494949;
+    color: #f7f1eb;
+  }
+
   .clock {
     margin-top: 30px;
+    
   }
   
   #buttonsArea {
     width: 500px;
+    
   }
   
   .middle {
@@ -71,28 +81,31 @@
   }
   
   .btn {
-    background-color: #333333;
-    color: #CCCCCC;
+    background-color: #494949;
+    color: #f7f1eb;
   }
   
   #sessInc, #sessDec, #breakInc, #breakDec {
     font-weight: bold;
+    
   }
   
   #stats {
-    background-color: #333333;
+    background-color: #494949;
     width: 230px;
     height: 70px;
     border-radius: 10px;
-    color: #CCCCCC;
+    color: #f7f1eb;
     font-size: 35px;
     text-align: center;
+    padding-top: 7px;
   }
   
   #statRow {
     display: flex;
     justify-content: center;
     margin-bottom: 5px;
+    
   }
 
   /*se ci dovesse servire, è la classe per le vignette a comparsa per la spiegazione di un elemento su cui passo sopra con il mouse*/

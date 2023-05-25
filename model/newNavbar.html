@@ -32,3 +32,15 @@
       </div>
     </div>
   </nav>
+  <script>
+    if (document.cookie.indexOf("profilepic") >= 0) {
+      var path = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('profilepic='))
+      .split('=')[1];
+      var path_decoded=decodeURIComponent(path);
+      if(path_decoded!="")
+      document.getElementById("top-picture").src=path_decoded;
+    } 
+    
+      </script>

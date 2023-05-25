@@ -227,7 +227,11 @@ function updateTaskTag(isRunning,isEnded){
       time+=parseInt(countB);
     time+=parseInt(countS);
   } 
-  console.log("time: ",time,countB,countS,countL);
+  if(pos =="Short Break")
+    time+=countB;
+  else if (pos =="Long Break")
+    time+=countL;
+  console.log("time: ",time,countB,countS,countL,clock.getTime()/60);
   time-=(countS-(clock.getTime()/60));
   timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
 
@@ -321,9 +325,12 @@ function openTaskBar() {
   if(selectTaskArea.style.display === "block") {
     opened = false;
     selectTaskArea.style.display = "none"
+    document.getElementById("taskUse").innerHTML="Open task panel";
+
   }
   else {
     opened = true;
+    document.getElementById("taskUse").innerHTML="Close task panel";
     selectTaskArea.style.display = "block";
   }
 }
@@ -530,7 +537,7 @@ function nascondiVignetta() {
 
 
 function updateServer(newTask,type) {
-
+console.log(newTask,type);
   if(isLogged){
   $.ajax({
     url: "updateTaskServer.php",

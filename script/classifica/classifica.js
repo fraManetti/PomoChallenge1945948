@@ -3,9 +3,9 @@ function downloadClassifica(tuple) {
     var points = tuple.points;
     document.querySelector("#classificaBox").insertAdjacentHTML('beforeend', `
         <div class="classifica-item" data-value=${user}>
-            ${user}
-            <span class="hour-value">${points}</span>
-            <button class="visitaProfiloButton">Profilo</button>
+            <span class="elemClassifica" id = "utenteClassifica">${user}</span>
+            <span class="elemClassifica" id="oreClassifica">${points}</span>
+            <button class="visitaProfiloButton" onClick=openProfilePopUp();>Profilo</button>
         </div>
     `)
 }

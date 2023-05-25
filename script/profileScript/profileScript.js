@@ -77,9 +77,9 @@ function checkNewUsername(newUsername) {
                       url: "./updateProfile.php",
                       type: "POST",
                       data: {type: "updateUsername", oldUsername: originalValue, newUsername: usernameField.value},
-                      success: function(result) {
+                      success: function(result) {   
+                        if(result.trim()!="Username Correttamente Aggiornato") usernameField.value = originalValue;
                           alert(result);
-                          if(JSON.stringify(result)!='Username Correttamente Aggiornato'  ) usernameField.value = originalValue;
                           usernameField.disabled = true;
                           editButton.innerHTML = 'Edit';
                       },
@@ -88,9 +88,14 @@ function checkNewUsername(newUsername) {
                           /*qui ci metterò l'alert*/
                       }
                   });
-              }
+              } else {
+                usernameField.disabled = true;
+                usernameField.value = originalValue;
+                editButton.innerHTML = 'Edit';
+                            }
           } else {
               usernameField.disabled = true;
+              usernameField.value = originalValue;
               editButton.innerHTML = 'Edit';
           }
       }
@@ -151,7 +156,7 @@ function handleOutClick(event) {
             data: {type: "confirmNewPassword", oldPass: oldPassword, newPass: newPassword},
             success: function(result) {
                 alert(result);
-                if(result == "Password correttamente aggiornata") popupContainer.innerHTML = "";
+                if(result.trim() == "Password correttamente aggiornata") popupContainer.innerHTML = "";
                 
             },
             error: function(xhr, status, error) {
@@ -165,36 +170,61 @@ function handleOutClick(event) {
 
   function updateImage(event) {
     file = event.target.files[0];
-    imageUrl = URL.createObjectURL(file);
-    imageElements = document.querySelectorAll('img');
-    imageElements.forEach(function(imageElement) {
-    imageElement.src = imageUrl;
-    });
-    localStorage.setItem('profileImage', imageUrl);
-   }
-   
-   window.addEventListener('load', function() {
-    savedImageUrl = localStorage.getItem('profileImage');
-    if (savedImageUrl) {
-    imageElements = document.querySelectorAll('img');
-    imageElements.forEach(function(imageElement) {
-    imageElement.src = savedImageUrl;
-    });
-    }
-   });
+
+    var form_data = new FormData();
+    form_data.append("image",file);
+    $.ajax({
+      url: "../server/uploadImg.php",
+      type: "POST",
+      dataType: 'text',
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form_data,
+      success: function(result) {
+          console.log(result);
+          document.getElementById("top-picture").src=result.trim();
+          document.getElementById("mypic").src=result.trim();      
+          document.cookie="profilepic="+result.trim()+ "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';;    
+
+      },
+      error: function(xhr, status, error) {
+          console.error(error);
+          /*qui ci metterò l'alert*/
+      }
+  });   }
    
    function resetImage() {
-    localStorage.removeItem('profileImage');
-    imageElements = document.querySelectorAll('img');
-    imageElements.forEach(function(imageElement) {
-    imageElement.src = 'https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg';
-    });
+    if (document.cookie.indexOf("profilepic") >= 0) {
+      var path = document.cookie
+      .split('; ')
+      .find(row => row.startsWith('profilepic='))
+      .split('=')[1];
+      var path_decoded=decodeURIComponent(path);
+    }
+    document.getElementById("mypic").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
+    document.getElementById("top-picture").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
+    $.ajax({
+      url: "../server/resetImage.php",
+      type: "POST",
+      data: {path: path_decoded},
+      success: function(result) {
+          console.log(result);
+          document.cookie="profilepic="+"; Thu, 01 Jan 1970 00:00:00 GMT;"+ 'path=/';    
+
+      },
+      error: function(xhr, status, error) {
+          console.error(error);
+          /*qui ci metterò l'alert*/
+      }
+  });
    }
 
    function contaAmici(contaAmici) {
     document.getElementById("amici-totali").innerHTML = contaAmici;
 }
 function contaOre(contaOre) {
-  document.getElementById("ore-studio").innerHTML = contaOre;
+  var cnt = convertMinHour(contaOre);
+  document.getElementById("ore-studio").innerHTML = cnt;
   
 }

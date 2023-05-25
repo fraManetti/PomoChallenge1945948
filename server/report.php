@@ -16,11 +16,13 @@
     <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/reportStyle/reportStyle.css">
+    <link rel="stylesheet" href="../style/reportStyle/reportStyleResponsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
     <script  src="../script/reportScript/reportScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
+    <script  src="../script/defaultScript.js"></script>
     <script>
         $(function(){
             $("#mynavbar").load("../model/newNavbar.html");
@@ -41,18 +43,18 @@
  ;?>
     
     <div class="navbar" id="mynavbar"></div>
-    <div class="container">
+    <div class="cnt">
         <div id = "reportPanel">
             
                 <div id = "selectDatePanel">
                     <button class = "tabClass active" id ="dailyButton" onclick="load('daily', event)">
-                        Daily
+                        Day
                     </button>
                     <button class = "tabClass" id ="weeklyButton" onclick="load('weekly', event)">
-                        Weekly
+                        Week
                     </button>
                     <button class = "tabClass" id ="monthlyButton" onclick="load('monthly', event)">
-                        Monthly
+                        Month
                     </button>
                     <button class = "tabClass" id ="allButton" onclick="load('all', event)">
                         All
@@ -80,7 +82,7 @@
                 </div>
 
         </div>
-        <div id = chartPanel>
+        <div id = "chartPanel">
             <div id = "avgChoicePanel">
                 <button class = "avgBtnClass active" id = "avgDay" onclick="chartLoad('avgDay', event)">
                     Average day
@@ -96,17 +98,18 @@
     </div>
     
 <?php 
-    
+    $totalTime =0 ;
     while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
      $tuple_json = json_encode($tuple);
     echo '<script> 
     currentPeriodType = "day";
     downloadEnded(' . $tuple_json . ');
     </script>';
+    $totalTime+= $tuple['tim'];
     }
     echo '<script>
         hourCharts();
-       upTotalTime(totalTime);
+       upTotalTime(' .$totalTime . ');
     </script>';
 ?>
 </body>

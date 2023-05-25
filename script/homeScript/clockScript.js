@@ -139,7 +139,6 @@ $(document).ready(function(){
       taskList[0].donepomodori=0;
       index--;
       removeTaskItem();
-      updateServer(task,"UP");
       updateTaskTag(false,false);
       updateTaskButtons();
       var tmp=countTimes;
@@ -147,7 +146,10 @@ $(document).ready(function(){
       setButtonState();  
       countTimes=tmp;
       return true;
-}}    if(taskList.length>0 && taskList.length!=1){
+} else 
+      updateServer(task,"UP");
+
+}    if(taskList.length>0 && taskList.length!=1){
         taskList[0].donepomodori+=1;
         taskList[0].tim += JSON.parse(countS-(clock.getTime()/60)); 
         var task =taskList[0];

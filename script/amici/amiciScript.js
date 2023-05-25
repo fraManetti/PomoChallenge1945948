@@ -18,7 +18,8 @@ function acceptIncomingReq(e) {
     document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
     <div class="amico" data-value=${amico}>
         ${amico}
-        <button class = "delAmico" onClick = delAmico(event);></button>
+        <button class ="visitaProfiloButton">Profilo</button>
+        <button class = "delAmico" id="delete-friend-button" onClick = delAmico(event);>Rimuovi</button>
     </div>
 `)
 }
@@ -102,10 +103,10 @@ function addFriend(e) {
             console.error(error);
         }
     });
-    document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
-        <div class="request" data-value = ${friendToAdd}>
+    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
+        <div class="outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
-            <button class ="delReq" onClick="delOutgoingReq(event);"> Annulla</button>
+            <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)}
 function sendRequest() {
@@ -124,15 +125,15 @@ function sendRequest() {
             console.error(error);
         }
     });
-    document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
-        <div class="request" data-value = ${friendToAdd}>
+    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
+        <div class="outgoingReq" data-value = ${friendToAdd}>
             ${friendToAdd}
-            <button class ="delReq" onClick="delOutgoingReq(event);"> Annulla</button>
+            <button class ="delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)
 }
 function downloadIncomingRequest(amico) {
-    document.querySelector("#incoming").insertAdjacentHTML('beforeend', `
+    document.querySelector("#incomingR").insertAdjacentHTML('beforeend', `
         <div class="incomingReq" data-value=${amico}>
             ${amico}
             <button class = "acceptIncomingReq" onClick = acceptIncomingReq(event);>&#10004;</button>
@@ -141,7 +142,8 @@ function downloadIncomingRequest(amico) {
     `)
 }
 function downloadSuggAmici(tuple) {
-    document.querySelector("#suggBox").insertAdjacentHTML('beforeend', `
+    
+    document.querySelector("#suggested").insertAdjacentHTML('beforeend', `
         <div class ="suggAmico" data-value =${tuple.utentea}>    
     <span data-value=${tuple.utentea} >${tuple.utentea}</span>
     <button class ="visitaProfiloButton" >Profilo</button>
@@ -150,9 +152,9 @@ function downloadSuggAmici(tuple) {
 `)
 }
 function downloadOutgoingRequest(amico) {
-    document.querySelector("#outgoing").insertAdjacentHTML('beforeend', `
+    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
         <div class="outgoingReq" data-value=${amico}>
             ${amico}
-            <button class = "delOutgoingReq" onClick = delOutgoingReq(event);>delete</button>
+            <button class = "delOutgoingReq" onClick = delOutgoingReq(event);>Annulla</button>
         </div>
     `)}

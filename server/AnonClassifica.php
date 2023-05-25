@@ -25,7 +25,8 @@
     <script  src="../script/homeScript/TaskScript.js"></script>
     <script  src="../script/classifica/classifica.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
-    
+    <script  src="../script/defaultScript.js"></script>
+
     <script>
         $(function(){
           $("#newNavbar").load("../model/oldNavbar.html");
@@ -38,9 +39,18 @@
 <div id="newNavbar"></div>
 <div class="container">
   <div id="classificaPanel">
-    <div id="classifica-title"> Classifica </div>
-    <div id="classificaBox"> </div>
-
+    <div id="classifica-title">Classifica</div>
+    <div id = "classificaButtons">
+    <button class= "tabClass" id="globaleClassButton">Globale</button>
+    <button class= "tabClass" id="amiciClassButtonDisabled" disabled>Amici</button>
+    </div>
+    <div id="classificaColumnTitles">
+    <span class="elemClassifica">Username</span>
+    <span class="elemClassifica">Ore totali</span>
+    <span class="elemClassifica">Profilo</span>
+    </div>
+    <div id="classificaBox"> 
+    </div>
 </div>
 </div>
 <?php 
