@@ -1,6 +1,7 @@
 @media only screen and (max-width: 576px) {
     .cnt {
         width: 100%;
+        grid-template-columns: 15% 70% 15%;
     }
 
     #taskUse {
@@ -9,6 +10,7 @@
 
     .center-box {
         width: 100%;
+        position: relative;
       }
 
     .box {
@@ -20,7 +22,7 @@
     }
 
     #taskBox {
-        width: 170%;
+        width: 130%;
     }
 
     #timeEstimated {
@@ -33,5 +35,41 @@
 
     #modalitaTaskSwitch {
         width: 100%;
+        margin-top: 5px;
     }
+
+   
+
+    #clock.row {
+        width:100%;
+        margin-left: auto;
+        margin-right: auto;
+
+    }
+
+    .flip-clock-wrapper ul li a div div.inn {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .flip-clock-wrapper {
+        height: 60%;
+    }
+
+    .btn {
+        background-color: #494949;
+        color: #f7f1eb;
+      }
+
+    .btn:hover {
+        background-color: #494949;
+        color: #f7f1eb;
+    }
+
+    #timeEstimated {
+        display: none;
+        height: fit-content;
+    }
+
+    
 }
