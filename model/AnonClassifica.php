@@ -1,5 +1,5 @@
 <?php
-  include( 'db_conn.php');  
+  include( '../server/db_conn.php');  
   session_start(); 
 ?>
 <!DOCTYPE html>
@@ -10,10 +10,10 @@
     <title>PomoChallenge</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
-
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/classificaStyle/classificaStyle.css">
+    <link rel="stylesheet" href="../style/classificaStyle/classificaResponsiveStyle.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script  src="../script/classifica/classifica.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
@@ -21,7 +21,7 @@
 
     <script>
         $(function(){
-          $("#newNavbar").load("../model/newNavbar.html");
+          $("#newNavbar").load("../model/oldNavbar.html");
         });
 
     </script>
@@ -33,16 +33,17 @@
   <div id="classificaPanel">
     <div id="classifica-title">Classifica</div>
     <div id = "classificaButtons">
-    <button class= "tabClass" id="globaleClassButton" onClick ="downloadGlobalClass();">Globale</button>
-    <button class= "tabClass" id="amiciClassButton" onClick="downloadAmiciClass();">Amici</button>
+    <button class= "tabClass" id="globaleClassButton">Globale</button>
+    <button class= "tabClass" id="amiciClassButtonDisabled" disabled>Amici</button>
     </div>
+    <div id="contentPanel">
     <div id="classificaColumnTitles">
     <span class="elemClassifica">Username</span>
     <span class="elemClassifica">Tempo totale</span>
     <span class="elemClassifica">Profilo</span>
     </div>
-    <div id="classificaBox"> 
-    </div>
+    <div id="classificaBox" class="box"> 
+    </div></div>
 </div>
 </div>
 <?php 
@@ -67,3 +68,8 @@
 ?>
 </body>
 </html>
+<style>
+  #amiciClassButtonDisabled{
+    background-color: #f2908b;
+  }
+  </style>

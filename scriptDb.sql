@@ -6,8 +6,8 @@ select * from endedtask
 DELETE FROM task where true
 INSERT INTO task values ('luca',12345,'tds',3,'prova1',1)
 CREATE TABLE utente (
-    username VARCHAR(40) NOT NULL,
-    paswd VARCHAR(32) NOT NULL,
+    username VARCHAR(20) NOT NULL,
+    paswd VARCHAR(70) NOT NULL,
     PRIMARY KEY (username)
 );
 
@@ -92,5 +92,26 @@ INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
 	VALUES ('luca', '01234567852', '12-05-2023', 1, '', '12-05-2023', 5, '03:00:00' );
 INSERT INTO endedtask(username, keyhash, title, pomodori, note, dat, tim,ora)
 	VALUES ('luca', '012345678554', '12-05-2023', 1, '', '12-05-2023', 3, '13:00:00' );
+    
+insert into utente values ('luca1','Password.1=');
+insert into utente values ('luca2','Password.1=');
+insert into utente values ('luca3','Password.1=');
+insert into utente values ('luca4','Password.1=');
+insert into utente values ('luca5','Password.1=');
+insert into utente values ('luca6','Password.1=');
+insert into utente values ('luca7','Password.1=');
+insert into utente values ('luca8','Password.1=');
+insert into utente values ('luca9','Password.1=');
+
+
+insert into amici values ('luca1','jcp');
+insert into amici values('luca2','jcp');
+insert into amici values('luca3','jcp');
+insert into amici values('luca4','jcp');
+insert into amici values('luca5','jcp');
+insert into amici values('luca6','jcp');
+insert into amici values('luca7','jcp');
+insert into amici values('luca8','jcp');
+insert into amici values('luca9','jcp');
 
 

@@ -220,23 +220,6 @@ body{
   margin-left: 5%;
 }
 
-.box::-webkit-scrollbar {
-  width: 6px;
-}
-
-.box::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.box::-webkit-scrollbar-thumb {
-  background-color: rgb(165, 158, 158);
-  border-radius: 20px;
-  border: 3px solid transparent;
-}
-
-.box::-webkit-scrollbar-button {
-  display: none;
-}
 
 /*.largeButton{
   font-weight: 500;

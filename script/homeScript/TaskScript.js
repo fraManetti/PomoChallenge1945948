@@ -542,7 +542,7 @@ function updateServer(newTask,type) {
 console.log(newTask,type);
   if(isLogged){
   $.ajax({
-    url: "updateTaskServer.php",
+    url: "../server/updateTaskServer.php",
     type: "POST",
     data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat,tim:newTask.tim,ora:newTask.ora},
     success: function(result) {

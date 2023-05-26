@@ -12,7 +12,7 @@ switch ($type) {
         $username = $_POST['oldUsername'];
         $newUsername = $_POST['newUsername'];
 
-        $newUsername= preg_replace('/\s/','',$newUsername);
+        $newUsername= trim($newUsername);
         
         $query= "select * from utente where username='${newUsername}'";
         $res = pg_query($db_conn,$query);
@@ -35,7 +35,7 @@ switch ($type) {
             echo "Password corrente inserita non corretta";
             break;} 
         $newPass = $_POST["newPass"];
-        $newPass= preg_replace('/\s/','',$newPass);
+        $newPass= trim($newPass);
         $query = "update utente set paswd='${newPass}' where paswd='${oldPass}' and username='${username}' ";
         echo "Password correttamente aggiornata";
         break;

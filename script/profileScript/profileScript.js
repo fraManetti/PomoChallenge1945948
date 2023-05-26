@@ -74,7 +74,7 @@ function checkNewUsername(newUsername) {
           if (usernameField.value !== originalValue) {
               if (checkNewUsername(usernameField.value)) {
                   $.ajax({
-                      url: "./updateProfile.php",
+                      url: "../server/updateProfile.php",
                       type: "POST",
                       data: {type: "updateUsername", oldUsername: originalValue, newUsername: usernameField.value},
                       success: function(result) {   
@@ -151,7 +151,7 @@ function handleOutClick(event) {
     
     if (checkNewPass(newPassword)) {
         $.ajax({
-            url: "./updateProfile.php",
+            url: "../server/updateProfile.php",
             type: "POST",
             data: {type: "confirmNewPassword", oldPass: oldPassword, newPass: newPassword},
             success: function(result) {
@@ -195,13 +195,7 @@ function handleOutClick(event) {
   });   }
    
    function resetImage() {
-    // if (document.cookie.indexOf("profilepic") >= 0) {
-    //   var path = document.cookie
-    //   .split('; ')
-    //   .find(row => row.startsWith('profilepic='))
-    //   .split('=')[1];
-    //   var path_decoded=decodeURIComponent(path);
-    // }
+
     document.getElementById("mypic").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
     document.getElementById("top-picture").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
     $.ajax({
