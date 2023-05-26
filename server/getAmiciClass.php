@@ -23,10 +23,10 @@ $username = $_SESSION['username'];
   while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
       array_push($result_array, $tuple);
   }
-  $query="select username, CASE WHEN sum(endedtask.tim) IS NULL THEN 0 ELSE sum(endedtask.tim) END as points
-  from endedtask
-  where username='${username}'
-  group by username
+  $query="select u.username, CASE WHEN sum(e.tim) IS NULL THEN 0 ELSE sum(e.tim) END as points
+  from utente u left join endedtask e on u.username = e.username
+  where u.username='${username}'
+  group by u.username
   ";
   $res = pg_query ($db_conn,$query);
   $tuple = pg_fetch_array($res, null, PGSQL_ASSOC);

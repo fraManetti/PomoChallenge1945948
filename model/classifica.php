@@ -43,7 +43,7 @@
     <span class="elemClassifica">Tempo totale</span>
     <span class="elemClassifica">Profilo</span>
     </div>
-    <div id="classificaBox"> 
+    <div id="classificaBox" class="box"> 
     </div>
 </div>  </div>
 

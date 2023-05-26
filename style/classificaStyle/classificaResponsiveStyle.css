@@ -10,9 +10,15 @@
         margin-left: 27%;
         margin-top: 1%;
     }
-    #classificaPanel{
+    #classificaBox{
+        overflow-y: scroll;
+        max-height: 80%;
 
     }
+    #classificaPanel {
+        width: 40%;
+    }
+    
 }
 @media screen and (max-width: 992px){
     .cnt{
