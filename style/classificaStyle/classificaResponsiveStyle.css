@@ -10,9 +10,13 @@
         margin-left: 27%;
         margin-top: 1%;
     }
-    #classificaPanel{
+
+    #classificaPanel {
+        width: 40%;
+        height: 600px;
 
     }
+    
 }
 @media screen and (max-width: 992px){
     .cnt{

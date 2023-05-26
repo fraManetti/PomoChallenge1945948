@@ -1,5 +1,5 @@
 <?php
-  include( 'db_conn.php');  
+  include( '../server/db_conn.php');  
   session_start(); 
 ?>
 <!DOCTYPE html>
@@ -103,6 +103,8 @@ if (document.cookie.indexOf("profilepic") >= 0) {
       .find(row => row.startsWith('profilepic='))
       .split('=')[1];
       var path_decoded=decodeURIComponent(path);
+      console.log(path_decoded);
+      if(path_decoded !="")
       document.getElementById("mypic").src=path_decoded;
     }
 </script>

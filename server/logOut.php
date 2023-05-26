@@ -1,3 +1,6 @@
+<script>
+    isLogged=false;
+</script>
 <?php
 session_start();
 unset($_SESSION['username']);
@@ -10,5 +13,5 @@ setcookie('cookie_timestamp', "", time() - 3600, "/");
 setcookie('server_timestamp', "", time() - 3600, "/");
 setcookie('loggedUser', "", time() - 3600, "/");
 setcookie("profilepic","",time() -3600,"/");
-header("Location: ../model/index.html");
+header("Location: ../model/index.php");
 ?>
