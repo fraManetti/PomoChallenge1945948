@@ -1,0 +1,46 @@
+@media only screen and (max-width: 576px) {
+    #signupPanel {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        z-index: initial;
+    }
+
+    .cnt {
+        padding-top: 10vh;
+    }
+
+    fieldset {
+        width: 100%;
+    }
+    
+    .imgContainer {
+        width: 100%;
+    }
+
+    input[type=text], input[type=password] {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        border-radius: 10px;
+        color: #494949;
+    
+    }
+
+    #passwordSignInput{
+        margin-left: 10%;
+        margin-right: 0%;
+    }
+
+    #visibleSignPassword {
+        width: 8%;
+        height: 8%;
+        margin: 0%;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .cnt {
+        padding-top: 20vh;
+    }
+}
