@@ -16,15 +16,72 @@
         height: 600px;
 
     }
+    #contentPanel{
+        height:70%;
+      }
     
 }
 @media screen and (max-width: 992px){
     .cnt{
-        padding-top: 12vh;
+        padding-top: 20vh;
     }
+    .largeButton {
+        font-size: 1.15vw;
+        width: 50%;
+        padding-bottom: 6%;
+        margin-left: 27%;
+        margin-top: 1%;
+    }
+
+    #classificaPanel {
+        width: 60%;
+        height: 60%;
+
+    }
+    #contentPanel{
+        height:70%;
+      }
+      #classificaBox {
+        max-height: 85%;
+    }
+
 }
 @media screen and (max-width: 576px){
     .cnt{
-        padding-top: 12vh;
+        padding-top: 20vh;
     }
+    .largeButton {
+        font-size: 2vw;
+        width: 70%;
+        padding-bottom: 6%;
+        margin-left: 27%;
+        margin-top: 1%;
+    }
+
+    #classificaPanel {
+        width: 80%;
+        height: 70%;
+
+    }
+    #classificaBox {
+        max-height: 80%;
+    }
+      #contentPanel{
+        height:70%;
+      }
+
 }
+@media screen and (max-width: 300px) {
+    .cnt{
+        padding-top: 10vh;
+    }
+    #contentPanel{
+        height:60%;
+      }
+
+      #classificaPanel {
+        width: 80%;
+        height: 70%;
+
+    }
+    }
