@@ -38,7 +38,74 @@
         margin-top: 5px;
     }
 
-   
+    .row.counter {
+        display: grid;
+        grid-template-columns: 25% 50% 25%;
+        width: 100%;
+        margin: 0px;
+        padding: 0%;
+    }
+
+    input[type='number'].params { 
+        width: 100%;
+        padding: 0%;
+        margin-left:auto;
+        margin-right: auto;
+        justify-self: center;      
+        
+    }
+    .btn-default {
+       width: 100%;
+       
+    }
+
+    .btnIncDec {
+        padding: 0%;
+        margin: 0%;
+    }
+
+    .col-md-6 {
+        width: 100%;
+        padding: 0px, 6px;
+    }
+    .col-md-4 {
+        width: 90%;
+        padding: 0%;
+        margin: 0%;
+        justify-self: center;
+    }
+
+    .col-md-2 {
+        width: 90%;
+        padding: 0%;
+        margin: 0%;
+        justify-content: center;
+        justify-self: center;
+    }
+
+    .pomodoro {
+        width: 100%;
+    }
+    #hiddenRow {
+        width: 40%;
+        padding: 0%;
+        justify-self: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        align-self: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 10px;
+        display: flex;
+    }
+
+    #hiddenCustom {
+        width: 100%;
+        padding: 0%;
+        margin-bottom: 10px;
+        margin-left: 0%;
+    }
 
     #clock.row {
         width:100%;
@@ -56,6 +123,12 @@
         height: 60%;
     }
 
+    .flip-clock-divider {
+        padding: 0%;
+        margin: 0%;
+        width: 15%;
+    }
+
     .btn {
         background-color: #494949;
         color: #f7f1eb;
@@ -71,5 +144,78 @@
         height: fit-content;
     }
 
+
+    #taskFieldInput {
+        width: 80%;
+    }
+
+    #taskNote {
+        width: 90%;
+    }
+
+    .task {
+        grid-template-columns: 8% 6% 64% 14% 8%;
+        
+    }
+
+    #tasks {
+        margin-top: 0%;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    #deleteImg {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 90%;
+    }
+
+    .indexTasks {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 90%;
+    }
+
+    .task span {
+        font-size: 13px;
+    }
+
+    #taskname {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
     
+    input[class='x'] {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding-left: 2px;
+    }
+
+    .taskOption {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+        padding: 0%;
+    }
+
+    .taskImg {
+        width: 80%;
+        height: 60%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
 }

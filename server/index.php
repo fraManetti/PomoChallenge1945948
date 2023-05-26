@@ -100,47 +100,50 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
                   <div class="timer"><div class="middle"></div></div>
                 </div>
                 <!------------------------------------------------------------------------------->
-                <div  class="row" id = "hiddenCustom">
-                  <div class="col-md-6">
-                    <div class="row"><p>Durata Pomodoro<p></div>
-                    <div class="row counter">
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="sessDec">-</button>        
-                      </div>
-                      <div class="col-md-2">
-                        <input type="number" class="params" id="session" value = "25" onblur="writeSession()"></input>
-                      </div>
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="sessInc">+</button>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="col-md-6">
-                    <div class="row"><p>Short Break<p></div>
-                    <div class="row counter">
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="breakDec">-</button>
-                      </div>
-                      <div class="col-md-2">
-                        <input type="number" class="params" id="break" value = "5" onblur="writeShortBreak()"></input>
-                      </div>
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="breakInc">+</button>        
+                <div  class="row" id = "hiddenCustom">
+                  <div id = "hiddenRow">
+                    <div class="col-md-6">
+                      <div class="row"><p class = "pclass" >Session<p></div>
+                      <div class="row counter">
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="sessDec">-</button>        
+                        </div>
+                        <div class="col-md-2">
+                          <input type="number" class="params" id="session" value = "25" onblur="writeSession()"></input>
+                        </div>
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="sessInc">+</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row"><p>Long Break<p></div>
-                    <div class="row counter">
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="longDec">-</button>        
+
+                    <div class="col-md-6">
+                      <div class="row"><p class = "pclass">Short Break<p></div>
+                      <div class="row counter">
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="breakDec">-</button>
+                        </div>
+                        <div class="col-md-2">
+                          <input type="number" class="params" id="break" value = "5" onblur="writeShortBreak()"></input>
+                        </div>
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="breakInc">+</button>        
+                        </div>
                       </div>
-                      <div class="col-md-2">
-                        <input type="number" class="params" id="longBreak" value = "15" onblur="writeLongBreak()" ></input>
-                      </div>
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="longInc">+</button>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row"><p class = "pclass">Long Break<p></div>
+                      <div class="row counter">
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="longDec">-</button>        
+                        </div>
+                        <div class="col-md-2">
+                          <input type="number"  class="params" id="longBreak" value = "15" onblur="writeLongBreak()" ></input>
+                        </div>
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="longInc">+</button>
+                        </div>
                       </div>
                     </div>
                   </div>
