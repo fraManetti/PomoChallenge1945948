@@ -82,8 +82,8 @@ echo '<script>
                       <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
                       </img>
                       <!--prima c'era onclick="InfoPopUp"-->
-                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp() "onmouseover="mostraVignetta()" onmouseout="nascondiVignetta()">
-                      <div class="vignetta">Un Pomodoro è un timer <br> che corrisponde ad una <br> sessione di lavoro. <br> Al termine di ogni Pomodoro <br> ci sarà una Short Break. <br>Ogni quattro pomodori <br> ci sarà invece una Long Break.</div>
+                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
+                      
                       </img>
                       <div class="overlay" id="infoOverlay">
                         <div class = "popup" id="infoPop">
