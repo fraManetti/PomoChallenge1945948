@@ -10,13 +10,11 @@
         margin-left: 27%;
         margin-top: 1%;
     }
-    #classificaBox{
-        overflow-y: scroll;
-        max-height: 80%;
 
-    }
     #classificaPanel {
         width: 40%;
+        height: 600px;
+
     }
     
 }
