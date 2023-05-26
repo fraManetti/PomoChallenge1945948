@@ -52,7 +52,8 @@ button.btn-search, button.btn-reset {
 .sample.nine input, .sample.ten input {
   border-radius: 15px;
   transition: all .6s ease-in-out .3s;
-  width: 250px;
+  width: 55.5%;
+  font-size: 1.1vw;
 }
 .sample.nine input:focus, .sample.ten input:focus {
   transition-delay: 0;
@@ -78,7 +79,7 @@ button.btn-search, button.btn-reset {
   background: #ccc;
   border-radius: 50%;
   height: 26px;
-  left: 222px;
+  left: 52.5%;
   top: 1px;
   transition-delay: .3s;
   width: 26px;
