@@ -42,7 +42,6 @@
 </head>
 <body>
     <div id="mynavbar"></div>
-    <div class="cnt">
     <div class="containerAmici">
           <div id = "amiciPanel">
               <div id="titleAmici">
@@ -79,7 +78,7 @@
               </div>
             </div>
         </div>
-      </div></div>
+      </div>
 
     </body>
     <?php 
