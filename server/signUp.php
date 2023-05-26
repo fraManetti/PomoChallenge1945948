@@ -17,9 +17,10 @@
             }
             else{
 
-               // $psw = password_hash( $_POST['passwordSignInput'],PASSWORD_BCRYPT,$options=['max_length'=>14]);
-                $psw =  $_POST['passwordSignInput'];
-                $psw= preg_replace('/\s/','',$psw);
+                $ClearPsw =  $_POST['passwordLogInput'];
+
+                $ClearPsw= trim($ClearPsw);
+                $psw = password_hash( $ClearPsw,PASSWORD_BCRYPT,$options=['max_length'=>14]);
                 $query ="insert into utente values ($1,$2)";
                 $res = pg_query_params($db_conn, $query, array($user,$psw));
                 if ($res){

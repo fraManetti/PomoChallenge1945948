@@ -90,7 +90,7 @@ function downloadAmici(amico) {
 }
 //Funzione per aggiungere amico cliccando sul bottone aggiungi
 function addFriend(e) {
-    var friendToAdd = e.currentTarget.parentNode.children[0].getAttribute("data-value");
+    var friendToAdd = e.currentTarget.parentNode.getAttribute("data-value");
         $.ajax({
         url: "../server/updateAmici.php",
         type: "POST",

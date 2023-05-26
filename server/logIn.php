@@ -14,13 +14,15 @@
             else{
                // $psw = password_hash( $_POST['passwordSignInput'],PASSWORD_BCRYPT,$options=['max_length'=>14]);
                 $psw =  $_POST['passwordLogInput'];
-                $psw= preg_replace('/\s/','',$psw);
-                $query ="select* from utente where username=$1 and paswd=$2";
-                $res = pg_query_params($db_conn, $query, array($user,$psw));
+               // $psw= preg_replace('/\s/','',$psw);
+                $psw = trim($psw);
+                $query ="select paswd from utente where username=$1";
+                $res = pg_query_params($db_conn, $query, array($user));
                 if (!($tuple=pg_fetch_array($res,null,PGSQL_ASSOC))){
                     header("location: ../model/loginForm.html?login=failed2");
                 }
                 else{
+                    if (password_verify($psw, trim($tuple['paswd']))){
                     session_start();
                     if(!isset($_SESSION["username"]))
                        $_SESSION["username"]=$user;
@@ -38,6 +40,9 @@
                         setcookie("loggedUser",$user,time() + 30*24*60*6,"/");
                        header ("Location: ../model/index.php");
 
-            }
+            }else{
+                echo $tuple['paswd'];
+            }}
+            
         }}
         ?>

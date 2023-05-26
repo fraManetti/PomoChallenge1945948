@@ -7,7 +7,7 @@ DELETE FROM task where true
 INSERT INTO task values ('luca',12345,'tds',3,'prova1',1)
 CREATE TABLE utente (
     username VARCHAR(20) NOT NULL,
-    paswd VARCHAR(32) NOT NULL,
+    paswd VARCHAR(70) NOT NULL,
     PRIMARY KEY (username)
 );
 
