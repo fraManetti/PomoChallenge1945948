@@ -1,14 +1,14 @@
 
 /*complessivo*/
 body{
-    padding-top: 5%;
     background-size: cover;
   }
 
 .containerAmici {
+    padding-top: 8vh;
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 100vh;
+    height: 98vh;
   }
 
   
@@ -19,16 +19,20 @@ body{
   width: 70%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #EBE8E4;
   border-radius: 5%;
   margin-top: 2.5%;
+  background-color: #494949;
   }
 
 #amiciBox{ 
+  background-color: #EBE8E4;
   display: grid;
-  width: 100%;
+  width: 95%;
   overflow-y: scroll;
-  max-height: 83%;
+  max-height: 83.5%;
+  border-radius: 2%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 
@@ -64,6 +68,7 @@ body{
 
 #searchBox {
   text-align: left;
+  height: 20%;
 }
 
 #suggBox {
@@ -73,7 +78,7 @@ body{
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #EBE8E4;
+  background-color: #494949;
   border-radius: 15px;
 }
 
@@ -88,8 +93,8 @@ body{
   background-color: transparent;
   text-align: center;
   padding-bottom: 2%;
-  color: rgb(54, 51, 51);
-  font-weight: 500;
+  color: #f7f1eb;;
+  font-weight:500;
 }
 
 
@@ -129,22 +134,42 @@ body{
   width: 100%;
   margin-left: auto;
   margin-right: auto;
-  background-color: #EBE8E4;
+  background-color: #494949;
   border-radius: 15px;
   margin-bottom: 3%;
 }
 
+#outgoingR{
+  max-height: 50%;
+}
 
 .boxRichieste{
   display: grid;
   overflow-y: scroll;
-  max-height: 50%;
+  max-height: 48%;
+  background-color: #EBE8E4;
+  border-radius: 10px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 
 
 #suggested{
   display: grid;
+  border-radius: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  height: 60%;
+  background-color: #EBE8E4;
+  padding-bottom: 1%;
   
+}
+
+#incoming-title{
+  padding-bottom: 2.5%;
 }
 
 
@@ -194,4 +219,10 @@ body{
   margin-top: 4.8%;
   margin-left: 5%;
 }
+
+
+/*.largeButton{
+  font-weight: 500;
+}*/
+
 
