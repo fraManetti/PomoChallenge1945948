@@ -1,4 +1,14 @@
 @media only screen and (max-width: 576px) {
+
+    #switchRow {
+        padding-bottom: 10px;
+        /*margin-top: 66px; */  
+        vertical-align: auto;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
     .cnt {
         width: 100%;
         grid-template-columns: 15% 70% 15%;
@@ -274,6 +284,9 @@
 
 
 @media only screen and (max-width: 992px) {
+
+    
+
     #hiddenRow {
         width: 35%;
         padding: 0%;
