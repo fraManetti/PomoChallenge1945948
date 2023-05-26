@@ -12,6 +12,8 @@
       z-index: -1;
       margin: 0;
       grid-column-gap: 40px;
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
 
@@ -104,7 +106,7 @@
     background-color: #494949;
     margin-left: auto;
     margin-right: auto;
-    height: 610px;
+    height: 78%;
     width: 100%;
     display: grid;
     grid-template-columns: 7% 86% 7%;
@@ -147,7 +149,7 @@
   #canvasPanel {
     background-color: #f7f1eb;
     height: 340px;
-    width: 540px;
+    width: 95%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 29%;
@@ -271,7 +273,10 @@
       margin-bottom: 5px;
     }
 
-    
+    #myChartCanvas {
+      width: 95%;
+      margin: 0%;
+    }
 
 
 
@@ -294,6 +299,7 @@
     margin-top: 8px;
     display: grid;
     grid-template-columns: 10% 60% 20% 10%;
+    padding: 5px;
   }
 
   #endedTaskname {
@@ -326,11 +332,12 @@
   #hiddenOption {
     display: none;
     margin: auto;
+    margin-top: 5px;
   }
 
   .hiddenNote{
     margin-left: 42px;
-    width: 343px;
+    width: 680%;
     resize:none;
     background-color: #f7f1eb;
     border-color: transparent;

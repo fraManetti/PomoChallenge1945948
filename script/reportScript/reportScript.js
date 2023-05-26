@@ -10,6 +10,7 @@ var mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
             "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
 
 var myChart = null;
+//canvas.width = window.innerWidth * 1;
 
 function hourCharts() {
   const ctx = document.getElementById('myChartCanvas');
