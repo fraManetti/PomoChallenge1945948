@@ -9,7 +9,7 @@
 <?php 
         if($db_conn){
             $user = $_POST['userSignInput'];
-            $user= preg_replace('/\s/','',$user);
+            $user= trim($user);
             $query = "select * from utente where username = $1 ";
             $res = pg_query_params($db_conn,$query,array($user));
             if ($tuple = pg_fetch_array($res,null,PGSQL_ASSOC)){
@@ -17,8 +17,7 @@
             }
             else{
 
-                $ClearPsw =  $_POST['passwordLogInput'];
-
+                $ClearPsw =  $_POST['passwordSignInput'];
                 $ClearPsw= trim($ClearPsw);
                 $psw = password_hash( $ClearPsw,PASSWORD_BCRYPT,$options=['max_length'=>14]);
                 $query ="insert into utente values ($1,$2)";
