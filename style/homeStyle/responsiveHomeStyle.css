@@ -8,6 +8,24 @@
         width: 90%;
     }
 
+    #innerInputBox {
+        padding: 10px;
+    }
+    #inputRow{
+        width: 100%;
+        height: 35px;
+        display: flex;
+    }
+
+    #pomoTaskNumber {
+        width: 18%;
+        height: 30px;
+    }
+
+    #newtask {
+        padding: 5%;
+    }
+
     .center-box {
         width: 100%;
         position: relative;
@@ -147,10 +165,11 @@
 
     #taskFieldInput {
         width: 80%;
+        margin-bottom: 5px;
     }
 
     #taskNote {
-        width: 90%;
+        width: 100%;
     }
 
     .task {
@@ -169,7 +188,7 @@
         margin-right: auto;
         margin-top: auto;
         margin-bottom: auto;
-        width: 90%;
+        width: 80%;
     }
 
     .indexTasks {
@@ -198,7 +217,7 @@
         margin-right: auto;
         margin-top: auto;
         margin-bottom: auto;
-        padding-left: 2px;
+        padding-left: 5px;
     }
 
     .taskOption {
@@ -217,5 +236,134 @@
         margin-right: auto;
         margin-top: auto;
         margin-bottom: auto;
+    }
+
+    #taskTag {
+        height: fit-content;
+    }
+
+    .popupSwap {
+        justify-content: center;
+        padding: 2px;
+    }
+
+    #index2 {
+        justify-self: center;
+       margin-left: auto;
+       margin-right: auto;
+        width: 90%;
+        box-sizing: unset;
+    }
+
+    .label {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #index1 {
+        justify-self: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+    }
+
+    #infoPop {
+        width: 90%;
+      }
+}
+
+
+@media only screen and (max-width: 992px) {
+    #hiddenRow {
+        width: 35%;
+        padding: 0%;
+        justify-self: center;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        align-self: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 10px;
+        display: flex;
+    }
+
+    #hiddenCustom {
+        width: 100%;
+        padding: 0%;
+        margin-bottom: 10px;
+        margin-left: 0%;
+    }
+
+    #buttonsArea {
+        width: 100%;
+    }
+
+    .btn-default {
+        width: 90%;
+        
+     }
+ 
+     .btnIncDec {
+         padding: 0%;
+         margin: 0%;
+     }
+ 
+     .col-md-6 {
+         width: 100%;
+         padding: 0px, 6px;
+     }
+     .col-md-4 {
+         width: 90%;
+         padding: 0%;
+         margin: 0%;
+         justify-self: center;
+     }
+ 
+     .col-md-2 {
+         width: 90%;
+         padding: 0%;
+         margin: 0%;
+         justify-content: center;
+         justify-self: center;
+     }
+ 
+     .pomodoro {
+         width: 100%;
+     }
+
+     .timer {
+        margin-bottom: 10px
+     }
+
+     .flip-clock-wrapper {
+        margin-bottom: 10px
+     }
+
+     .row.counter {
+        display: grid;
+        grid-template-columns: 30% 40% 30%;
+        width: 100%;
+        margin: 0px;
+        padding: 0%;
+    }
+
+    input[type='number'].params { 
+        width: 100%;
+        padding: 0%;
+        margin-left:auto;
+        margin-right: auto;
+        justify-self: center;      
+        
+    }
+
+    .overlay {
+        
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+
     }
 }

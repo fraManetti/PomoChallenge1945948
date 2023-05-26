@@ -88,7 +88,7 @@ echo '<script>
                       <div class="overlay" id="infoOverlay">
                         <div class = "popup" id="infoPop">
                           <p>
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
+                          Un Pomodoro è un timer <br> che corrisponde ad una <br> sessione di lavoro. <br> Al termine di ogni Pomodoro <br> ci sarà una Short Break. <br>Ogni quattro pomodori <br> ci sarà invece una Long Break. 
                           </p>
                           <span class = "close" id="infoClose" onclick="closeInfo()">
                             X

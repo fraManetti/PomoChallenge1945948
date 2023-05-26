@@ -19,7 +19,7 @@
 
 .cnt {
   display: grid;
-  grid-template-columns: 25% 50% 25%;
+  grid-template-columns: 20% 60% 20%;
   height: 100vh; /* Imposta l'altezza del contenitore alla dimensione della finestra del browser */
   padding-top: 20vh;
 }
@@ -28,7 +28,10 @@
   grid-template-columns: 25% 50% 25%;
 }
 #infoPop {
-  margin: 250px auto;
+  margin: auto auto;
+  padding: 1%;
+  height: fit-content;
+  width: 400px;
 }
 #infoClose{
 	position: absolute;
@@ -39,8 +42,19 @@
 #hiddenCustom {
   display: none;
   padding-bottom: 2%;
-  
   }
+
+#hiddenRow {
+  display: flex;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
 
 
 
