@@ -1,7 +1,7 @@
 #classificaPanel {
     border-style: solid;
-    height: 600px;
-    width: fit-content;
+    height: 35vw;
+    width: 33%;
     margin-left: auto;
     margin-right: auto;
     background-color: #EBE8E4;
@@ -20,6 +20,8 @@
 }
  #classificaBox {
     display:grid;
+    overflow-y: scroll;
+    max-height: 90%;
   }
 
 #classifica-title{
