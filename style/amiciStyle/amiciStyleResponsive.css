@@ -33,3 +33,104 @@
     width: 62%;
   }
 }
+
+@media (min-width: 1650px){
+  #boxdx{
+    grid-template-rows: 300px auto;
+  }
+
+  #suggBox{
+    height: 89%;
+  }
+
+  #amiciRequest{
+    max-height: 380px;
+  }
+
+  #amiciPanel{
+    height: 80vh;
+  }
+
+  .containerAmici{
+    padding-top: 80px;
+  }
+
+}
+
+  @media (min-width: 1650px) and (min-height: 930px){
+    #amiciPanel{
+      width: 40vw;
+    }
+
+    .largeButton{
+      width: 70%;
+      height: 70%;
+    }
+  }
+    @media (min-width: 992px) and (max-width: 1600px) and (min-height: 800px){
+      #amiciPanel{
+        width: 45vw;
+        height: 80vh;
+      }
+  
+      .largeButton{
+        width: 70%;
+        height: 70%;
+      }
+
+      #boxdx{
+        grid-template-rows: 300px auto;
+      }
+    
+      #suggBox{
+        height: 89%;
+      }
+    
+      #amiciRequest{
+        max-height: 380px;
+      }
+
+      .containerAmici{
+        padding-top: 80px;
+      }
+
+      .largeButton{
+        width: 68%;
+        height: 68%;
+      }
+
+      .containerAmici{
+        grid-template-columns: 55% 45%;
+      }
+}
+
+@media (min-width: 1750px){
+  .largeButton{
+    width: 65%;
+    height: 65%;
+  }
+}
+@media (min-width: 2000px){
+  .largeButton{
+    width: 60%;
+    height: 60%;
+}
+}
+@media (min-width: 2500px){
+  .largeButton{
+    width: 50%;
+    height: 50%;
+}
+
+  .roundRedButton{
+    margin-top: 4%;
+  }
+}
+
+@media (max-width: 576px){
+  .amiciPanel{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+}
