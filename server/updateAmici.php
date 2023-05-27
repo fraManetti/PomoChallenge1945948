@@ -1,5 +1,5 @@
 <?php
-  include( 'db_conn.php');  
+  include( '../server/db_conn.php');  
   session_start(); 
 ?>
 <?php             

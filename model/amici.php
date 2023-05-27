@@ -53,7 +53,7 @@
           <div id = "topBox">
              <div id ="searchBox" class="row">
                 <div class="sample ten">
-                   <input type="text" name="search" placeholder="Invia richiesta di amicizia" id="search">
+                   <input type="text" name="search" placeholder="Invia richiesta di amicizia" id="search" onkeypress="handleKeyPress(event, 'addFriend')">
                    <button class="btn btn-search" onClick="sendRequest();">
                       <i class="fa fa-arrow-right"></i>
                    </button>

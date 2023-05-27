@@ -26,22 +26,6 @@ function hashCode(string) {
   return hash;
 }
 
-function handleKeyPress(event, string) {
-  if (event.key === "Enter") {
-      event.preventDefault();
-      // esegui qui le azioni quando l'utente preme il tasto "Invio"
-      // ad esempio, puoi leggere il valore del campo di input e aggiungere il compito a una lista
-      if(string== 'add') {
-        document.getElementById("push").click();
-      }
-      else if(string = 'option') {
-        var field = event.currentTarget;
-        var optionBtn = field.nextElementSibling.nextElementSibling;
-        showOption({currentTarget: optionBtn});
-      }
-  }
-}
-
 
 //Serve per sapere se sono in modalità task o meno:
 function modalitaTask() {
@@ -573,7 +557,3 @@ function setButtonState() {
     checkBox.checked = false;
   }
 }
-// function confirmLeave() {
-//   if(clock.isRunning)
-//     confirm();
-// }
