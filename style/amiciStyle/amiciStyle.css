@@ -4,99 +4,140 @@ body{
     background-size: cover;
   }
 
+/*box totale*/
 .containerAmici {
-    padding-top: 8vh;
+    padding-top: 66px;
     display: grid;
     grid-template-columns: 50% 50%;
-    height: 98vh;
+    height: 100vh;
   }
 
-  
-/*pannello a sinistra*/
-#amiciPanel {
-  border-style: solid;
-  height: 68%;
-  width: 70%;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 5%;
-  margin-top: 2.5%;
+#underTitle{
+  width: 100%;
+  height: auto;
+  margin-top: 1px;
+  border-radius: 0px 0px 15px 15px;
   background-color: #494949;
-  }
-
-#amiciBox{ 
-  background-color: #EBE8E4;
-  display: grid;
-  width: 95%;
-  overflow-y: scroll;
-  max-height: 83.5%;
-  border-radius: 2%;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  align-items: center;
 }
 
+/*pannello a sinistra esterno*/
+#amiciPanel {
+  border-style: solid;
+  height: 84vh;
+  width: 35vw;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 20px;
+  margin-top: 21px;
+  background-color: #494949;
+  display: grid;
+  grid-template-rows: 10% 90% ;
+  min-height: 460px;
+  min-width: 440px;
+}
 
+/*pannello a sinistra interno*/
+#amiciBox{ 
+  background-color: #EBE8E4;
+  width: 95%;
+  height: 95%;
+  margin: auto;
+  overflow-y: scroll;
+  max-height: 95%;
+  border-radius: 12px;
+
+
+}
+
+/*struttura di ogni entry della tabella amiciBox*/
 .amico {
   grid-template-columns: 43% 20% 20%;
 }
 
-
-
+/*classe comune ad ogni entry delle tabelle della pagina*/
 .utente{
   justify-content: center;
-  font-size: 1.2vw;
+  font-size: 18px;
   font-weight: 500;
   border-bottom: 1px solid #a29e9e;
-  padding-top: 0.65%;
-  padding-bottom: 0.65%;
   width: 100%;
+  height: 40px;
+  margin: 4px 0px 4px 0px;
   display: grid;
   text-align: left;
 }
+
+/*largeButton modificato*/
+.largeButton{
+  font-size: 15px;
+  padding: 4px 4px;
+  width: 72%;
+  height: 72%;
+}
+
+#topBox{
+  display: grid;
+  grid-template-rows: 40px auto;
+}
+
 
 /*sezione destra*/
 
 #boxdx{
-  height: 69%;
-  width: 70%;
+  margin-top: 2.5%;
+  height: 83.5vh;
+  width: 35vw;
   margin-left: auto;
   margin-right: auto;
   display: grid;
-  grid-template-rows: 45% 55%;
+  grid-template-rows: 250px auto;
   align-items: left;
+  max-height: 595px ;
 }
 
 #searchBox {
   text-align: left;
-  height: 20%;
+  height: 6vh;
 }
 
 #suggBox {
   border-style: solid;
   border-color: black;
-  height: 75%;
+  height: 95%;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10px;
   background-color: #494949;
   border-radius: 15px;
+  display: grid;
+  grid-template-rows: 27.5% 72.5% ;
+  min-height: 150px;
+  min-width: 440px;
 }
 
 .suggAmico {
-  grid-template-columns: 36% 16% 10%;
+  grid-template-columns: 43% 20% 20%;
 }
 
 
 
 .titlesAmici{
-  font-size: 2.2vw;
+  width: 100%;
+  height: 60px;
+  font-size: 30px;
   background-color: transparent;
   text-align: center;
-  padding-bottom: 2%;
   color: #f7f1eb;;
   font-weight:500;
+  border-radius: 15px 15px 0px 0px;
 }
 
+#amiciRequest{
+  max-height: 350px;
+}
 
 .amico > * {
   margin: 3.6%;
@@ -107,8 +148,8 @@ body{
 }
 
 .roundRedButton{
-  width: 1.3vw;
-  height: 1.3vw;
+  width: 25px;
+  height: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,56 +161,50 @@ body{
 }
 
 .sendRequestButton{
-  font-size: 1.4vw;
+  font-size: 25px;
   padding: 2% 2%;
-  padding-bottom: 9.5%;
+  padding-bottom: 7%;
   margin-top: 9.5%;
-  margin-left: 5%;
+  margin-left: 40%;
 }
 
 .richiesta{
   border-style: solid;
   border-color: black;
-  height: 49%;
+  height: 47%;
   width: 100%;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10px;
   background-color: #494949;
   border-radius: 15px;
-  margin-bottom: 3%;
-}
-
-#outgoingR{
-  max-height: 50%;
+  display: grid;
+  grid-template-rows: 27.5% 72.5% ;
+  min-height: 150px;
+  min-width: 440px;
 }
 
 .boxRichieste{
-  display: grid;
-  overflow-y: scroll;
-  max-height: 48%;
   background-color: #EBE8E4;
-  border-radius: 10px;
-  width: 95%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 96%;
+  height: 80%;
+  margin: auto;
+  overflow-y: scroll;
+  max-height: 95%;
+  border-radius: 12px;
 }
 
 
 
 #suggested{
-  display: grid;
-  border-radius: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 95%;
-  height: 60%;
   background-color: #EBE8E4;
-  padding-bottom: 1%;
+  width: 96%;
+  height: 85%;
+  margin: auto;
+  overflow-y: scroll;
+  max-height: 95%;
+  border-radius: 12px;
   
-}
-
-#incoming-title{
-  padding-bottom: 2.5%;
 }
 
 
@@ -184,7 +219,7 @@ body{
 }
 
 .incomingReq {
-  grid-template-columns: 36% 16% 10%;;
+  grid-template-columns: 43% 20% 20%;;
 }
 
 .incomingReq > * {
@@ -192,37 +227,35 @@ body{
 }
 
 .outgoingReq {
-  grid-template-columns: 40% 20%;
-  padding-top: 1%;
+  grid-template-columns: 43% 20% 20%;
+  /*padding-top: 1%;*/
 }
 
 .delOutgoingReq{
-  margin-top: 4%;
-  padding-top: 0.5%;
+  margin-left: 20px;
+}
+
+.outgoingReq > * {
+  margin: 3.6%;
 }
 
 .delIncomingReq{
-  font-size: 1.1vw;
+  font-size: 20px;
   padding: 2% 2%;
-  padding-bottom: 9.5%;
+  padding-bottom: 6.5%;
   margin-top: 9.5%;
-  margin-left: 5%;
+  margin-left: 40%;
 }
 
 .acceptIncomingReq{
   color: transparent;
   text-shadow: 0 0 0 white;
   background-color: green;
-  font-size: 0.7vw;
-  padding: 0% 2%;
-  padding-bottom: 4%;
-  margin-top: 4.8%;
-  margin-left: 5%;
+  font-size: 12px;
+  padding: 2% 2%;
+  padding-bottom: 7%;
+  margin-top: 9.5%;
+  margin-left: 40%;
 }
-
-
-/*.largeButton{
-  font-weight: 500;
-}*/
 
 
