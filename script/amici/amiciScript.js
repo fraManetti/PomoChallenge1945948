@@ -99,6 +99,14 @@ function addFriend(e) {
             // Aggiornamento eseguito con successo
             if(result.trim()!="")
                 alert(result.trim());
+            else
+                    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
+        <div class="utente outgoingReq" data-value = ${friendToAdd}>
+            <div class="nomeAmico">${friendToAdd}</div>
+            <div></div>
+            <button class ="largeButton largeRedButton delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
+            </div>
+    `)
             console.log(result);
         },
         error: function(xhr, status, error) {
@@ -106,13 +114,7 @@ function addFriend(e) {
             console.error(error);
         }
     });
-    document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
-        <div class="utente outgoingReq" data-value = ${friendToAdd}>
-            <div class="nomeAmico">${friendToAdd}</div>
-            <div></div>
-            <button class ="largeButton largeRedButton delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
-            </div>
-    `)}
+}
 
 //Funzione per inviare richieste di amicizia dalla barra
 function sendRequest() {

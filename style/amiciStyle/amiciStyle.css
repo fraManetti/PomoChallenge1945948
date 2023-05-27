@@ -1,6 +1,8 @@
 
 /*complessivo*/
 body{
+    height: auto;
+    width:auto;
     background-size: cover;
   }
 
@@ -10,6 +12,7 @@ body{
     display: grid;
     grid-template-columns: 50% 50%;
     height: 100vh;
+    width: 100vw;
   }
 
 #underTitle{

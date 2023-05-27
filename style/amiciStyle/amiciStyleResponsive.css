@@ -1,3 +1,15 @@
+@media (max-width: 576px){
+
+  .containerAmici{
+    width: 576px;
+  }
+
+  #amiciPanel{
+    margin-left: auto;
+  }
+
+}
+
 
 @media (max-width: 992px) {
 
@@ -31,5 +43,112 @@
   .largeButton{
     height: 62%;
     width: 62%;
+  }
+}
+
+
+/*tra 992px e 1600px e altezza minima di 800px*/
+
+@media (min-width: 992px) and (max-width: 1600px) and (min-height: 800px){
+  #amiciPanel{
+    width: 45vw;
+    height: 80vh;
+  }
+
+  .largeButton{
+    width: 70%;
+    height: 70%;
+  }
+
+  #boxdx{
+    grid-template-rows: 300px auto;
+  }
+
+  #suggBox{
+    height: 89%;
+  }
+
+  #amiciRequest{
+    max-height: 380px;
+  }
+
+  .containerAmici{
+    padding-top: 80px;
+  }
+
+  .largeButton{
+    width: 68%;
+    height: 68%;
+  }
+
+  .containerAmici{
+    grid-template-columns: 55% 45%;
+  }
+}
+
+
+/*minimo 1650px*/
+@media (min-width: 1650px){
+  #boxdx{
+    grid-template-rows: 300px auto;
+  }
+
+  #suggBox{
+    height: 89%;
+  }
+
+  #amiciRequest{
+    max-height: 380px;
+  }
+
+  #amiciPanel{
+    height: 80vh;
+  }
+
+  .containerAmici{
+    padding-top: 80px;
+  }
+
+}
+
+
+/*minimo 1650px in larghezza e minimo 930px in altezza*/
+@media (min-width: 1650px) and (min-height: 930px){
+  #amiciPanel{
+    width: 40vw;
+  }
+
+  .largeButton{
+    width: 70%;
+    height: 70%;
+  }
+}
+
+
+
+
+/*SOPRA 1750*/
+
+/*dimensioni molto grandi*/
+@media (min-width: 1750px){
+  .largeButton{
+    width: 65%;
+    height: 65%;
+  }
+}
+@media (min-width: 2000px){
+  .largeButton{
+    width: 60%;
+    height: 60%;
+}
+}
+@media (min-width: 2500px){
+  .largeButton{
+    width: 50%;
+    height: 50%;
+}
+
+  .roundRedButton{
+    margin-top: 4%;
   }
 }
