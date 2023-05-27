@@ -58,6 +58,18 @@
   left: 0;
 }
 
+.rotate{
+  -moz-transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+  transition: all 0.2s linear;
+}
+
+.rotate.down{
+  -moz-transform:rotate(-90deg);
+  -webkit-transform:rotate(-90deg);
+  transform:rotate(360deg);
+}
+
 
 
 

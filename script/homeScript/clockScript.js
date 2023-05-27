@@ -20,6 +20,10 @@
  var pos = "Pomodoro";
  var clockManaged =false;
 
+ $(".rotate").click(function(){
+  $(this).toggleClass("down")  ; 
+ })
+
  function checkTimeUp() {
   if(taskOn && clock.running)
     updateTaskTag(true,false);
