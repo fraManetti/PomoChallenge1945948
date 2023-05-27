@@ -1,23 +1,33 @@
 
   
   .boxDati {
-    width: 620px;
+    width: 660px;
     height: 400px;
     margin: 0 auto;
     margin-top: 80px; 
     text-align: center;
-    background: #EBE8E4;
+    background: #494949;
+    color: #f7f1eb;
     border-radius: 20px;
+  }
+
+  #innerBoxDati {
+    margin-left: 25px;
+    margin-right: 25px;
+    height: fit-content;
+    border-radius: 20px;
+    background-color: #f7f1eb;
+    padding-bottom: 7px;
   }
   
   .title {
     font-weight: bold;
-    font-size: 35px;
+    font-size: 40px;
     text-align: left;
     padding: 20px 40px 15px 40px;
     border-bottom: solid gray thin;
-    color: #333333;
-    
+    color: #f7f1eb;
+    margin: 0%;
   }
   
   .content {
@@ -28,16 +38,23 @@
   
   .immagine-profilo {
     padding-top: 25px;
-      width: 50%;
+      width: 40%;
       text-align: center;
   }
   
+  #mypic {
+    width: 60%;
+    height: 60%;
+    margin-left: 20%;
+  }
   
   .immagine-profilo img {
     border-radius: 50%;
     width: 150px;
     height: 150px;
     object-fit: cover;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .immagine-profilo label {
@@ -49,8 +66,10 @@
   
   .dati-account {
       font-size: 19px;
-      width: 50%;
+      width: 60%;
       padding-top: 25px;
+      padding-left: 10px;
+      color: #494949;
   }
   
   .editPencil {
@@ -65,22 +84,33 @@
     border-radius: 10px;
     padding: 4px 60px;
     cursor: pointer;
+    background-color: #04AA6D;
+    color: #f7f1eb;
+    margin-bottom: 4px;
+    width: 70%;
   }
   .deleteAccountBtn{
+    width: 70%;
     font-size: 15px;
     border:none;
     border-radius: 10px;
     padding: 4px 60px;
     cursor: pointer;
+    background-color: #e7645d;
+    color: #f7f1eb;
+    margin-bottom: 4px;
   }
   .editUsername{
+    margin-left: 40px;
     font-size: 12px;
     border:none;
     border-radius: 10px;
     background-color: transparent;
     padding: 0px 4px;
     cursor: pointer;
-    color: rgb(108, 105, 105)
+    color: #f7f1eb;
+    background-color: #04AA6D;
+    width: 40px;
   }
   
   .profileField{
@@ -127,10 +157,12 @@ input[type="text"] {
     font-size: 12px;
     border-width: 1px;
     border-radius: 10px;
-    background-color: transparent;
+    background-color: #e7645d;
+    border-color: transparent;
     padding: 0px 8px;
     cursor: pointer;
-    color: rgb(108, 105, 105)
+    color: #f7f1eb;
+    margin: 0px, auto;
   }
 
   .imageButton{
@@ -140,12 +172,13 @@ input[type="text"] {
   }
 
   #usernameField:disabled {
-    background-color: #f0f0f0;
+    background-color: #f7f1eb;
    }
 
    #usernameField{
     margin-bottom: 5px;
     border-radius:10px;
+    background-color: #fdfdfd;
    }
 
    .changePass{

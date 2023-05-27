@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel = "stylesheet" href = "../style/profileStyle/profile.css">
+    <link rel = "stylesheet" href = "../style/profileStyle/responsiveProfileStyle.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script  src="../script/profileScript/profileScript.js"></script>
     <script  src="../script/defaultScript.js"></script>
@@ -32,6 +33,7 @@
 <div class="cnt">
 <div class="boxDati">
   <div class="title">Informazioni personali</div>
+  <div id = "innerBoxDati">
   <div class="content">
     <div class="immagine-profilo">
       <div class="image-container"> 
@@ -54,6 +56,7 @@
 
       <div id="popupContainer"></div>
     </div>
+  </div>
   </div>
 </div>
 </div>

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="../style/homeStyle/homeStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
     <link rel="stylesheet" href="../style/homeStyle/tasksStyle.css">
+    <link rel="stylesheet" href="../style/homeStyle/responsiveHomeStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
@@ -81,13 +82,13 @@ echo '<script>
                       <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
                       </img>
                       <!--prima c'era onclick="InfoPopUp"-->
-                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp() "onmouseover="mostraVignetta()" onmouseout="nascondiVignetta()">
-                      <div class="vignetta">Un Pomodoro è un timer <br> che corrisponde ad una <br> sessione di lavoro. <br> Al termine di ogni Pomodoro <br> ci sarà una Short Break. <br>Ogni quattro pomodori <br> ci sarà invece una Long Break.</div>
+                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
+                      
                       </img>
                       <div class="overlay" id="infoOverlay">
                         <div class = "popup" id="infoPop">
                           <p>
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
+                          Un Pomodoro è un timer <br> che corrisponde ad una <br> sessione di lavoro. <br> Al termine di ogni Pomodoro <br> ci sarà una Short Break. <br>Ogni quattro pomodori <br> ci sarà invece una Long Break. 
                           </p>
                           <span class = "close" id="infoClose" onclick="closeInfo()">
                             X
@@ -102,47 +103,50 @@ echo '<script>
                   <div class="timer"><div class="middle"></div></div>
                 </div>
                 <!------------------------------------------------------------------------------->
-                <div  class="row" id = "hiddenCustom">
-                  <div class="col-md-6">
-                    <div class="row"><p>Durata Pomodoro<p></div>
-                    <div class="row counter">
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="sessDec">-</button>        
-                      </div>
-                      <div class="col-md-2">
-                        <input type="number" class="params" id="session" value = "25" onblur="writeSession()"></input>
-                      </div>
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="sessInc">+</button>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="col-md-6">
-                    <div class="row"><p>Short Break<p></div>
-                    <div class="row counter">
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="breakDec">-</button>
-                      </div>
-                      <div class="col-md-2">
-                        <input type="number" class="params" id="break" value = "5" onblur="writeShortBreak()"></input>
-                      </div>
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="breakInc">+</button>        
+                <div  class="row" id = "hiddenCustom">
+                  <div id = "hiddenRow">
+                    <div class="col-md-6">
+                      <div class="row"><p class = "pclass" >Session<p></div>
+                      <div class="row counter">
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="sessDec">-</button>        
+                        </div>
+                        <div class="col-md-2">
+                          <input type="number" class="params" id="session" value = "25" onblur="writeSession()"></input>
+                        </div>
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="sessInc">+</button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="row"><p>Long Break<p></div>
-                    <div class="row counter">
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="longDec">-</button>        
+
+                    <div class="col-md-6">
+                      <div class="row"><p class = "pclass">Short Break<p></div>
+                      <div class="row counter">
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="breakDec">-</button>
+                        </div>
+                        <div class="col-md-2">
+                          <input type="number" class="params" id="break" value = "5" onblur="writeShortBreak()"></input>
+                        </div>
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="breakInc">+</button>        
+                        </div>
                       </div>
-                      <div class="col-md-2">
-                        <input type="number" class="params" id="longBreak" value = "15" onblur="writeLongBreak()" ></input>
-                      </div>
-                      <div class="col-md-4">
-                        <button class="btn btn-default" id="longInc">+</button>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row"><p class = "pclass">Long Break<p></div>
+                      <div class="row counter">
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="longDec">-</button>        
+                        </div>
+                        <div class="col-md-2">
+                          <input type="number"  class="params" id="longBreak" value = "15" onblur="writeLongBreak()" ></input>
+                        </div>
+                        <div class="col-md-4">
+                          <button class="btn btn-default btnIncDec" id="longInc">+</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -170,7 +174,7 @@ echo '<script>
           <div id = "selectTaskArea">
               <p id="pomoCount">Pomodori Rimanenti: 0</p>
               <p id="timeEstimated"> </p>
-              <div id="newtask">
+              
                 <div id = modalitaTaskRow>
                   <p id="modalitaTaskSwitch">
                     Attivare task? 
@@ -180,39 +184,41 @@ echo '<script>
                     </label>
                   </p>
                 </div>
-                <div id="inputBox">
-                  <div id="innerInputBox">
-                    <div id = "inputRow">
-                      <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')" maxlength="35">
-                      <input type="number" min="1"  id="pomoTaskNumber" value="1" label> 
+              <div id="innerContainer">
+                <div id="newtask">
+                  <div id="inputBox">
+                    <div id="innerInputBox">
+                      <div id = "inputRow">
+                        <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')" maxlength="35">
+                        <input type="number" min="1"  id="pomoTaskNumber" value="1" label> 
+                      </div>
+                        <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')" maxlength="115" ></textarea>
+                        <!-- Quanti Pomodori?<br> -->
                     </div>
-                      <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')" maxlength="115" ></textarea>
-                      <!-- Quanti Pomodori?<br> -->
                   </div>
+                  <button id="push" onclick="addTask();">Add</button>
                 </div>
-                <button id="push" onclick="addTask();">Add</button>
-              </div>
-              <br>
-              <div id="taskTag">
-                <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
-                  Swap tasks </button>
-                  <button name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
-                    Reverse tasks </button>                           
-              </div>
-              <div class="bottomTag" id="taskTag">
-                <button name = "deleteAllTaskButton" class = "roundBtnHomeBottom" id="ButtonLeft" disabled onclick="deleteAllTask();">
-                  Delete all tasks </button>  
-                <button name = "deleteEndedTaskButton" class = "roundBtnHomeBottom" id="ButtonRight" disabled onclick="deleteEndedTask();">
-                  Delete ended tasks </button>  
-                <div id = "automatic-delete">
-                <label>
-                  Automatic delete for ended tasks
-                </label>
-                <input type="checkbox" id="automaticDel" onclick="(function () {
-                    delEnded=event.currentTarget.checked;
-                  })()"> 
-                </div>  
-                  
+                <br>
+                <div id="taskTag">
+                  <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
+                    Swap tasks </button>
+                    <button name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
+                      Reverse tasks </button>                           
+                </div>
+                <div class="bottomTag" id="taskTag">
+                  <button name = "deleteAllTaskButton" class = "roundBtnHomeBottom" id="ButtonLeft" disabled onclick="deleteAllTask();">
+                    Delete all tasks </button>  
+                  <button name = "deleteEndedTaskButton" class = "roundBtnHomeBottom" id="ButtonRight" disabled onclick="deleteEndedTask();">
+                    Delete ended tasks </button>  
+                  <div id = "automatic-delete">
+                  <label>
+                    Automatic delete for ended tasks
+                  </label>
+                  <input type="checkbox" id="automaticDel" onclick="(function () {
+                      delEnded=event.currentTarget.checked;
+                    })()"> 
+                  </div>  
+                </divd>
               </div>
               <div id="tasks">
               </div>

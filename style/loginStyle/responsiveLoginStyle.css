@@ -1,0 +1,43 @@
+@media only screen and (max-width: 576px) {
+    .cnt {
+        width: 100%;
+        padding-top: 10%;
+    }
+
+    html {
+        width: 100%;
+        height: 100%;
+    }
+
+    .vsc-initialized {
+        width: 100%;
+        height: 100%;
+    }
+
+    #loginPanel {
+        width: 90%;
+       
+    }
+
+    .imgContainer {
+        width: 100%;
+    }
+
+    #userLogInput {
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 80%;
+    }
+
+    #passwordLogInput {
+        margin-left: 10%;
+
+        width: 80%;
+    }
+
+    #visiblePassword {
+        width: 8%;
+        height: 8%;
+        margin: 0%;
+    }
+}
