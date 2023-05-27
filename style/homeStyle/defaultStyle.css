@@ -1,6 +1,6 @@
 
 .navbar {
-    background: #f7f1eb;
+    background: #494949;
     position: fixed;
     }
     body {
@@ -89,7 +89,7 @@
 
 .dropbtn {
   background-color: transparent;
-  color: black;
+  color:  #f7f1eb;
   padding: .5rem .75rem .375rem .75rem;
   font-size: 1rem;
   border: none;
@@ -161,4 +161,20 @@
 
 .box::-webkit-scrollbar-button {
   display: none;
+}
+
+
+#pomoTitleID {
+  padding-left: 1%;
+  padding-top: 3.5%;
+  width: 300px;
+}
+
+
+.pomoTitle img {
+  max-width: 100%;
+}
+
+.navbar-nav .show > .nav-link, .navbar-nav .nav-link.active {
+  color: #f7f1eb;
 }

@@ -1,7 +1,3 @@
-
-
-html,
-
 h1 {
   margin: 10px 0 0;
   text-align: center;
@@ -42,7 +38,6 @@ button.btn-search, button.btn-reset {
 
 .sample {
   float: left;
-  height: 50px;
   position: relative;
   width: 34%;
 }
@@ -52,8 +47,7 @@ button.btn-search, button.btn-reset {
 .sample.nine input, .sample.ten input {
   border-radius: 15px;
   transition: all .6s ease-in-out .3s;
-  width: 55.5%;
-  font-size: 1.1vw;
+  width: 250px;
 }
 .sample.nine input:focus, .sample.ten input:focus {
   transition-delay: 0;
@@ -79,7 +73,7 @@ button.btn-search, button.btn-reset {
   background: #ccc;
   border-radius: 50%;
   height: 26px;
-  left: 52.5%;
+  left: 222px;
   top: 1px;
   transition-delay: .3s;
   width: 26px;
@@ -96,9 +90,6 @@ button.btn-search, button.btn-reset {
   width: 20px;
   z-index: -1;
 }
-
-
-
 
 @keyframes bounceRight {
   0% {

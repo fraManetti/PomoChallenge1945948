@@ -17,7 +17,7 @@ function acceptIncomingReq(e) {
     });
     document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
     <div class="utente amico" data-value=${amico}>
-        ${amico}
+        <div class="nomeAmico">${amico}</div>
         <button class ="largeButton largeWhiteButton visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
         <button class = "largeButton largeRedButton delAmico" id="delete-friend-button" onClick = delAmico(event);>Rimuovi</button>
     </div>
@@ -82,7 +82,7 @@ function delIncomingReq(e) {
 function downloadAmici(amico) {
     document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
         <div class="utente amico" data-value=${amico}>
-            ${amico}
+            <div class="nomeAmico">${amico}</div>
             <button class="largeButton largeWhiteButton visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
             <button class = "largeButton largeRedButton delAmico" id = "delete-friend-button" onClick = delAmico(event);> Rimuovi </button>
         </div>
@@ -108,7 +108,8 @@ function addFriend(e) {
     });
     document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
         <div class="utente outgoingReq" data-value = ${friendToAdd}>
-            ${friendToAdd}
+            <div class="nomeAmico">${friendToAdd}</div>
+            <div></div>
             <button class ="largeButton largeRedButton delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)}
@@ -131,7 +132,8 @@ function sendRequest() {
                     document.getElementById("search").value="";
     document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
         <div class="utente outgoingReq" data-value = ${friendToAdd}>
-            ${friendToAdd}
+            <div class="nomeAmico">${friendToAdd}</div>
+            <div></div>
             <button class ="largeButton largeRedButton delOutgoingReq" onClick="delOutgoingReq(event);"> Annulla</button>
             </div>
     `)
@@ -149,7 +151,7 @@ function sendRequest() {
 function downloadIncomingRequest(amico) {
     document.querySelector("#incomingR").insertAdjacentHTML('beforeend', `
         <div class="utente incomingReq" data-value=${amico}>
-            ${amico}
+            <div class="nomeAmico">${amico}</div>
             <button class = "roundRedButton acceptIncomingReq" onClick = acceptIncomingReq(event);>&#10004;</button>
             <button class = "roundRedButton delIncomingReq" onClick = delIncomingReq(event);>x</button>
         </div>
@@ -159,7 +161,7 @@ function downloadSuggAmici(tuple) {
     
     document.querySelector("#suggested").insertAdjacentHTML('beforeend', `
     <div class ="utente suggAmico" data-value =${tuple.utentea}>    
-        ${tuple.utentea}
+    <div class="nomeAmico">${tuple.utentea}</div>
     <button class ="largeButton largeWhiteButton visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
     <button class="roundRedButton sendRequestButton" onClick="addFriend(event);">+</button>
     </div>
@@ -168,7 +170,8 @@ function downloadSuggAmici(tuple) {
 function downloadOutgoingRequest(amico) {
     document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
         <div class="utente outgoingReq" data-value=${amico}>
-            ${amico}
+            <div class="nomeAmico">${amico}</div>
+            <div></div>
             <button class = "largeButton largeRedButton delOutgoingReq" onClick = delOutgoingReq(event);>Annulla</button>
         </div>
     `)}

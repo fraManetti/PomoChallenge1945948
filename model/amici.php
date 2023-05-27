@@ -44,10 +44,9 @@
     <div id="mynavbar"></div>
     <div class="containerAmici">
           <div id = "amiciPanel">
-              <div id="titleAmici">
-                  <div class="titlesAmici lista-amici-title"> I miei amici </div>
-              </div>
-              <div class = "box" id="amiciBox">
+              <div class="titlesAmici lista-amici-title"> I miei amici </div>
+              <div id="underTitle">
+                <div class = "box" id="amiciBox"></div>
               </div>
           </div>
         <div id="boxdx" > 
@@ -62,8 +61,10 @@
                 </div>
               </div>
               <div id ="suggBox" class = "box"> 
-                <div class="titlesAmici suggeriti-title">Suggeriti</div> 
+                <div class="titlesAmici suggeriti-title">Suggeriti</div>
+                <div id="underTitle"> 
                 <div class="box" id = "suggested"></div>
+                </div>
               </div>
             </div>
         
