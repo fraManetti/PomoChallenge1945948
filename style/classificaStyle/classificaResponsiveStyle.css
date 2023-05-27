@@ -35,17 +35,18 @@
 
     #classificaPanel {
         width: 60%;
-        height: 60%;
+        height: 90%;
 
     }
     #contentPanel{
-        height:70%;
+        height:60%;
       }
       #classificaBox {
         max-height: 85%;
     }
 
 }
+
 @media screen and (max-width: 576px){
     .cnt{
         padding-top: 20vh;
@@ -60,14 +61,14 @@
 
     #classificaPanel {
         width: 80%;
-        height: 70%;
+        height: 90%;
 
     }
     #classificaBox {
         max-height: 80%;
     }
       #contentPanel{
-        height:70%;
+        height:60%;
       }
 
 }
@@ -77,6 +78,7 @@
     }
     #contentPanel{
         height:60%;
+        
       }
 
       #classificaPanel {
@@ -84,4 +86,16 @@
         height: 70%;
 
     }
+    .elemClassifica{
+        font-size: 1vh;
     }
+    .tabClass{
+        font-size: 4vw;
+        width: 25%;
+        height: 5%;
+    }
+}
+@media screen and (max-height: 400px) {
+    #contentPanel{
+        height:50%;
+      }}
