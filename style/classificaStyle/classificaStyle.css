@@ -9,11 +9,13 @@
     border-color: #494949;
     background-color: #494949;
   }
+
+
 #contentPanel{
   border-radius: 2%;
   border-color:   #f7f1eb;
   background-color:   #f7f1eb;
-  height: 76%;
+  height: 80%;
   width: 95%;
   margin-left: auto;
   margin-right: auto;
