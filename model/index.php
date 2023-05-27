@@ -28,6 +28,7 @@
     <script  src="../script/homeScript/clockScript.js"></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
     <script  src="../script/homeScript/serverTaskScript.js"></script>
+    <script  src="../script/defaultScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
 
@@ -119,7 +120,7 @@ echo '<script>mergeCookie()</script>';
                           <button class="btn btn-default btnIncDec" id="sessDec">-</button>        
                         </div>
                         <div class="col-md-2">
-                          <input type="number" class="params" id="session" value = "25" onblur="writeSession()"></input>
+                          <input type="number" class="params" id="session" value = "25" onblur="writeSession()" onkeypress="handleKeyPress(event, 'writeSession')"></input>
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-default btnIncDec" id="sessInc">+</button>
@@ -134,7 +135,7 @@ echo '<script>mergeCookie()</script>';
                           <button class="btn btn-default btnIncDec" id="breakDec">-</button>
                         </div>
                         <div class="col-md-2">
-                          <input type="number" class="params" id="break" value = "5" onblur="writeShortBreak()"></input>
+                          <input type="number" class="params" id="break" value = "5" onblur="writeShortBreak()" onkeypress="handleKeyPress(event, 'writeShortBreak')"></input>
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-default btnIncDec" id="breakInc">+</button>        
@@ -148,7 +149,7 @@ echo '<script>mergeCookie()</script>';
                           <button class="btn btn-default btnIncDec" id="longDec">-</button>        
                         </div>
                         <div class="col-md-2">
-                          <input type="number"  class="params" id="longBreak" value = "15" onblur="writeLongBreak()" ></input>
+                          <input type="number"  class="params" id="longBreak" value = "15" onblur="writeLongBreak()" onkeypress="handleKeyPress(event, 'writeLongBreak')"></input>
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-default btnIncDec" id="longInc">+</button>
@@ -254,5 +255,21 @@ while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
 }
 ?>
 </body>  
-<script> fillTaskBox(); </script>
+<script> 
+  fillTaskBox(); 
+  window.onbeforeunload = function() {
+    if(pos=="Session"){    
+      var value = parseInt(clock.getTime())+1;
+      if (value != countS)
+       sessionStorage.setItem('clockTime', value);
+    }
+    else if (pos =="Pomodoro") {      
+      var value = clockManaged?parseInt(clock.getTime())+1:parseInt(clock.getTime());
+      if (value != countS)
+       sessionStorage.setItem('clockTime', value);
+    }    else
+      sessionStorage.clear();
+
+}
+</script>
 </html>

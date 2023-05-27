@@ -118,23 +118,34 @@ $username = $_SESSION['username'];
 <?php 
     $query ="
     WITH mieiAmici AS (
-        SELECT utentea AS amico FROM amici WHERE utenteb = '{$username}'
-        UNION
-        SELECT utenteb AS amico FROM amici WHERE utentea = '{$username}'
-      )
-      SELECT *
-      FROM (
-        SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != '{$username}'
-        UNION
-        SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != '{$username}'
-      ) AS pippo
-      ORDER BY random()
-      LIMIT 3;
+      SELECT utentea AS amico FROM amici WHERE utenteb = '${username}'
+      UNION
+      SELECT utenteb AS amico FROM amici WHERE utentea = '${username}'
+    )
+    SELECT *
+    FROM (
+      SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != '${username}' and utentea not in (
+    select utentea from amici 
+      where utenteb='${username}' 
+    union
+    select utenteb from amici 
+      where utentea='${username}' 		
+  )
+      UNION
+      SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != '${username}'and utenteb not in (
+    select utentea from amici 
+      where utenteb='${username}' 
+    union
+    select utenteb from amici 
+      where utentea='${username}' 		
+  )
+    ) AS pippo
+    ORDER BY random()
+    LIMIT 3;
     ";
 $res = pg_query($db_conn,$query);
 if (!$res) {
     header("HTTP/1.1 500 Internal Server Error");
-    //echo '<script> alert ("inserisci amico valido");</script>';
     exit();
   }
   while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
