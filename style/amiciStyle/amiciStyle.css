@@ -1,6 +1,8 @@
 
 /*complessivo*/
 body{
+    height: auto;
+    width:auto;
     background-size: cover;
   }
 
