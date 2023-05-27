@@ -1,12 +1,12 @@
 MIN_PLEN = 8;
 MIN_ULEN = 3;
-MAX_LEN = 40;
+MAX_LEN = 20;
 MAX_PLEN = 32;
 
 const uppercaseRegex = new RegExp('(?=.*[A-Z]).+');
 const lowercaseRegex = new RegExp('(?=.*[a-z]).+');
 const numRegex = new RegExp('.*[0-9]+.*'); 
-const specialRegex = new RegExp('(?=.*[@#$%^&+=]).+');
+const specialRegex = new RegExp('(?=.*[@#$%\\^&+=!"£/()=?\\^ì\\\\]).+');
 
 function checkNewUsername(newUsername) {
     if(newUsername.length < MIN_ULEN) {
@@ -185,12 +185,13 @@ function handleOutClick(event) {
           console.log(result);
           document.getElementById("top-picture").src=result.trim();
           document.getElementById("mypic").src=result.trim();      
-          document.cookie="profilepic="+result.trim()+ "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';;    
-
+          var date = new Date();
+          date.setMonth(date.getMonth() + 1);
+          document.cookie = "profilepic=" + result.trim() + "; expires=" + date.toUTCString() + "; path=/";
+          
       },
-      error: function(xhr, status, error) {
-          console.error(error);
-          /*qui ci metterò l'alert*/
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert(jqXHR.responseText);
       }
   });   }
    
@@ -203,7 +204,7 @@ function handleOutClick(event) {
       type: "POST",
       data: {path: path_decoded},
       success: function(result) {
-          console.log(result);
+          console.log(path_decoded);
           document.cookie="profilepic="+"; Thu, 01 Jan 1970 00:00:00 GMT;"+ 'path=/';    
 
       },
@@ -237,8 +238,8 @@ function deleteAccount() {
           alert("Qualcosa è andato storto, riprovare!");
         }
     },
-    error: function(xhr, status, error) {
-        console.error(error);
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
         /*qui ci metterò l'alert*/
     }
 });

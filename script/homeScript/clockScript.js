@@ -1,6 +1,6 @@
 //Variabili per le task:
- var taskOn = false;
  var taskList = [];
+ var taskOn = false;
  //var countCurrPom =0;
  var clock;
  var count;
@@ -18,12 +18,20 @@
  var countWB = 0;
  var countWL = 0;
  var pos = "Pomodoro";
+ var clockManaged =false;
 
-
+ function checkTimeUp() {
+  if(taskOn && clock.running)
+    updateTaskTag(true,false);
+ }
  function writeSession(){
    var oldTime = countS*60;
-   
    var sessLeng = document.getElementById("session").value;
+   if(sessLeng>99 || sessLeng<1){
+    alert("Inserire un valore <99 e >1 !");
+    document.getElementById("session").value=25;
+    return;
+   }
    countS = sessLeng;
    if(countS>oldTime){
    var delta = countS*60 - oldTime;
@@ -52,11 +60,18 @@
      if(pos == "Pomodoro") clock.setTime(countS*60);
    }
    countWS++;
+   clockManaged=true;
+   checkTimeUp();
  }
  
  function writeShortBreak(){
    oldBreak = countB*60;
    var shortLeng = document.getElementById("break").value;
+   if(shortLeng>99 || shortLeng<1){
+    alert("Inserire un valore <99 e >1 !");
+    document.getElementById("break").value=5;
+    return;
+   }   
    countB = shortLeng;
    if(countB>oldBreak){
      var delta = countB*60 - oldBreak;
@@ -77,11 +92,17 @@
      else if(countWB==0 && pos=="Short Break"){clock.setTime(newTime+1);}
    }
    countWB++;
+   checkTimeUp();
+
  }
  function writeLongBreak(){
    oldLong = countL*60;
    var longLeng = document.getElementById("longBreak").value;
-   countL = longLeng;
+   if(longLeng>99 || longLeng<1){
+    alert("Inserire un valore <99 e >1 !");
+    document.getElementById("longBreak").value=15;
+    return;
+   }      countL = longLeng;
    if(countL>oldBreak){
      var delta = countL*60 - oldLong;
      
@@ -99,8 +120,11 @@
      else if(countWL==0 && pos=="Long Break"){clock.setTime(newTime+1);}
    }
    countWL++;
+   checkTimeUp();
+
  }
 function resetClock() {
+  clockManaged=true;
  clock.stop();
  pos = "Pomodoro";
  $("#stats").html(pos);
@@ -172,7 +196,8 @@ $(document).ready(function(){
     return false;
   
 }
-clock = $(".timer").FlipClock(countS*60, {
+
+clock = $(".timer").FlipClock(sessionStorage.getItem("clockTime")!=null?sessionStorage.getItem("clockTime"):countS*60, {
   countdown: true,
   clockFace: 'MinuteCounter',
   autoStart: false,
@@ -254,6 +279,7 @@ clock = $(".timer").FlipClock(countS*60, {
  $("#sessInc").on("click", function(){
   
   if ($("#session").val() > 0){
+    clockManaged=true;
     countS = parseInt($("#session").val());
     countS+=1;
     count+=1;
@@ -268,10 +294,12 @@ clock = $(".timer").FlipClock(countS*60, {
     }
     if(pos == "Pomodoro") clock.setTime(countS*60);
   }
+  checkTimeUp();
 });
 
 $("#sessDec").on("click", function(){
   if ($("#session").val() > 1){
+    clockManaged=true;
     countS = parseInt($("#session").val());
     countS-=1;
     count-=1;
@@ -283,6 +311,7 @@ $("#sessDec").on("click", function(){
     }
     if(pos == "Pomodoro") clock.setTime(countS*60);
   }
+  checkTimeUp();
 });
 //BREAK
 $("#breakInc").on("click", function(){
@@ -296,6 +325,7 @@ $("#breakInc").on("click", function(){
       countIncB++;
     }
   }    
+  checkTimeUp();
 });
 $("#breakDec").on("click", function(){
   if ($("#break").val() > 1){
@@ -308,6 +338,7 @@ $("#breakDec").on("click", function(){
       countDecB++;
     }
   }
+  checkTimeUp();
 });
  // LONG BREAK
  $("#longInc").on("click", function(){
@@ -320,7 +351,8 @@ $("#breakDec").on("click", function(){
       else clock.setTime((clock.getTime().time)+60);
       countIncL++;
     }
-  }    
+  }  
+  checkTimeUp();  
 });
 $("#longDec").on("click", function(){
   if ($("#longBreak").val() > 1){
@@ -333,6 +365,7 @@ $("#longDec").on("click", function(){
       countDecL++;
     }
   }
+  checkTimeUp();
 });
 
 $("#skip").on("click", function(){
@@ -366,10 +399,11 @@ $("#skip").on("click", function(){
   }
 });
 $("#clear").on("click", function(){
-
 countB=5;
 countL=15;
 countS=25;
+sessionStorage.clear();
+clockManaged=true;
 
 updateTaskTag(false,false);
 clock.stop();
