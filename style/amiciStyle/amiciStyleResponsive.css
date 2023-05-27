@@ -1,14 +1,5 @@
-@media (max-width: 576px){
 
-  .containerAmici{
-    width: 576px;
-  }
 
-  #amiciPanel{
-    margin-left: auto;
-  }
-
-}
 
 
 @media (max-width: 992px) {
@@ -44,6 +35,19 @@
     height: 62%;
     width: 62%;
   }
+}
+
+@media (max-width: 576px){
+
+  .containerAmici{
+    width: 100%;
+  }
+
+  #amiciPanel{
+    margin-left: auto;
+    width: 100%;
+  }
+
 }
 
 
