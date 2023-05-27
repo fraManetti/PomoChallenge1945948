@@ -157,7 +157,7 @@ function updateTaskBox (taskItems,  cond){
 }
 
 //Aggiorno la lista delle task con le modifiche :
-function updateTaskMap(newTitle, newPomos,newNote) {
+function updateTaskMap(newTitle, newPomos,newNote,newIndex) {
   var task=[];
   task.key=currentKey;
   task.title = newTitle;
@@ -169,7 +169,7 @@ function updateTaskMap(newTitle, newPomos,newNote) {
         tuple.pomodori = newPomos;
         tuple.note = newNote;
         task.donepomodori = tuple.donepomodori;  
-        task.index = tuple.index;
+        task.index = newIndex;
         task.tim = countS-(clock.getTime()/60);
 
       }
@@ -304,8 +304,9 @@ function showOption(e) {
       var newTitle = taskItems[2].value;
       var newPomos = taskItems[3].value;
       var newNote = hiddenBox.children[0].value;
+      var newIndex = taskItems[1].getAttribute("data-value");
       if  (newTitle!= oldTitle || newPomos!=oldPomos || newNote!=oldNote )  
-        updateTaskMap(newTitle,newPomos,newNote);
+        updateTaskMap(newTitle,newPomos,newNote,newIndex);
       updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
   } else if(computedStyle.display === "none" && !anyTaskOpen) {
     hiddenBox.style.display = "block";
@@ -466,12 +467,13 @@ function addTask(){
       taskList[i1] = taskList[i2];
       taskList[i2] = temp;
 
-      tmp = taskList[i1].index;
-      taskList[i1].index=taskList[i2].index;
-      taskList[i2].index=tmp;
+      // tmp = taskList[i1].index;
+      // taskList[i1].index=taskList[i2].index;
+      // taskList[i2].index=tmp;
 
       var tasks = document.querySelectorAll('.task:not(.endedTasks)');
       tasks[i1].setAttribute("data-value",taskList[i1].key);
+      taskList[i1].index=tasks[i1].children[1].getAttribute("data-value");
       tasks[i1].children[2].value = taskList[i1].title;
       tasks[i1].children[3].value = taskList[i1].pomodori;
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
@@ -479,6 +481,7 @@ function addTask(){
       tasks[i2].children[1].value = i1;
       tasks[i2].children[2].value = taskList[i2].title;
       tasks[i2].children[3].value = taskList[i2].pomodori;
+      taskList[i2].index=tasks[i2].children[1].getAttribute("data-value");
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
       updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
       var task = taskList[i1];
@@ -570,3 +573,7 @@ function setButtonState() {
     checkBox.checked = false;
   }
 }
+// function confirmLeave() {
+//   if(clock.isRunning)
+//     confirm();
+// }

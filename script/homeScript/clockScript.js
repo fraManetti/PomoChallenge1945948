@@ -134,6 +134,7 @@ $(document).ready(function(){
     task.index=1;
     updateTaskTag(true,false);
     if (taskList[0].pomodori ==  taskList[0].donepomodori){
+        clock.stop();
             alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
 
       taskList[0].donepomodori=0;
@@ -157,6 +158,7 @@ $(document).ready(function(){
         updateServer(task,"UP");
         updateTaskTag(true,false);
         if (taskList[0].pomodori ==taskList[0].donepomodori){
+          clock.stop();
                alert("Task Finita!");
 
           taskList[0].donepomodori=0;

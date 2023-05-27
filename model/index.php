@@ -36,9 +36,12 @@
 <body onload="setButtonState()">
 
 <?php
-
-if(isset($_SESSION['username']) ||( isset($_COOKIE['loggedUser']) && $_COOKIE['loggedUser'] !== null)){  
+if (isset($_COOKIE['loggedUser']) && $_COOKIE['loggedUser'] !== null)
+  $_SESSION["username"]=$_COOKIE['loggedUser'];
+if(isset($_SESSION['username'])) {
+  
  echo '<script> 
+ isLogged =true;
  $(function(){
   $("#mynavbar").load("../model/newNavbar.html");
 });
@@ -65,11 +68,14 @@ setcookie("server_timestamp",$timestamp,time()+3600,"/");
 }
 
 }}  else {
-echo '<script>      
+echo '<script>    
+  isLogged=false;  
   $(function(){
   $("#mynavbar").load("../model/oldNavbar.html");
-});
-</script>';}
+});</script>';
+if(isset($_COOKIE['taskList']))
+echo '<script>mergeCookie()</script>';
+}
 ?>
 
 <div id="mynavbar"></div>
@@ -245,11 +251,8 @@ while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
 
 
 }
-
-
-echo '<script> fillTaskBox(); </script>';
 }
 ?>
-
 </body>  
+<script> fillTaskBox(); </script>
 </html>
