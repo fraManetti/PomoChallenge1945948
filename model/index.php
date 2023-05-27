@@ -27,6 +27,7 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
     <script  src="../script/homeScript/clockScript.js"></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
+    <script  src="../script/defaultScript.js"></script>
     <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
@@ -80,28 +81,11 @@ echo '<script>mergeCookie()</script>';
 
 <div id="mynavbar"></div>
     <div class="cnt">
-      <div class="box"></div>
+      <div class="box" id = "box1"></div>
         <div class="center-box">
           <div class="box">
             <div class="pomodoro">
-              <div id="switchRow"> 
-                      <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
-                      </img>
-                      <!--prima c'era onclick="InfoPopUp"-->
-                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
-                      
-                      </img>
-                      <div class="overlay" id="infoOverlay">
-                        <div class = "popup" id="infoPop">
-                          <p>
-                          Un Pomodoro è un timer <br> che corrisponde ad una <br> sessione di lavoro. <br> Al termine di ogni Pomodoro <br> ci sarà una Short Break. <br>Ogni quattro pomodori <br> ci sarà invece una Long Break. 
-                          </p>
-                          <span class = "close" id="infoClose" onclick="closeInfo()">
-                            X
-                          </span>
-                        </div>
-                      </div>
-              </div> 
+              
               <div class="row" id="statRow">
                 <div id="stats"></div>
               </div>                  
@@ -158,10 +142,30 @@ echo '<script>mergeCookie()</script>';
                   </div>
                 </div>
                 <div id="buttonsArea">
+                <div id="switchRow"> 
+                      <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
+                      </img>
+                      <!--prima c'era onclick="InfoPopUp"-->
+                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
+                      
+                      </img>
+                      <div class="overlay" id="infoOverlay">
+                        <div class = "popup" id="infoPop">
+                          <p>
+                          Un Pomodoro è un timer <br> che corrisponde ad una <br> sessione di lavoro. <br> Al termine di ogni Pomodoro <br> ci sarà una Short Break. <br>Ogni quattro pomodori <br> ci sarà invece una Long Break. 
+                          </p>
+                          <span class = "close" id="infoClose" onclick="closeInfo()">
+                            X
+                          </span>
+                        </div>
+                      </div>
+                    </div> 
                   <div class="" id="btns">
                     <button class="btn btn-default btn-lg" id="start">START</button>
                     <button class="btn btn-default btn-lg" id="skip">SKIP</button>
                     <button class="btn btn-default btn-lg" id="clear">CLEAR</button>
+                  </div>
+                  <div id = "finalCol">
                   </div>
                 </div>
               </div>
@@ -235,10 +239,11 @@ echo '<script>mergeCookie()</script>';
         
         </div>
       </div>
-      <div class="box">
-      </div>
+      
     </div>
-
+    <div class="box" id = "box3">
+      </div>
+                  </div>
 
 <?php
 if(isset($_SESSION['username'])){    

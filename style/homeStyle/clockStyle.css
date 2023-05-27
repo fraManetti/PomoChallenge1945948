@@ -60,9 +60,25 @@
     
   }
   
+  #switchRow {
+    justify-self: end;
+    padding-bottom: 10px;
+    /*margin-top: 66px; */  
+    vertical-align: auto;
+    width: 80px;
+    padding-top: 10px;
+    margin-right: 20px;
+   
+  }
+
+  #finalCol {
+    width: 100px;
+  }
+
   #buttonsArea {
-    width: 500px;
-    
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
   }
   
   .middle {
@@ -73,6 +89,8 @@
     display: flex;
     justify-content: center;
     padding-bottom: 3%;
+    align-self: center;
+    justify-self: center;
   }
   
   #skip {
