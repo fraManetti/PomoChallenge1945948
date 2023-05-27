@@ -91,6 +91,11 @@
         padding-top: 10px;
 
     }
+
+    
+
+
+
     #contentPanel{
         height:80%;
       }
@@ -125,6 +130,12 @@
     .cnt{
         padding-top: 10vh;
     }
+
+    .popup {
+        width: 95%;
+        height: fit-content;
+    }
+    
     #contentPanel{
         height:60%;
         
@@ -165,7 +176,11 @@
         font-size: small;
     }
 }
-@media screen and (max-height: 400px) {
+@media screen and (max-height: 700px) {
+    #classificaPanel {
+        height: 500px;
+    }
+
     #contentPanel{
-        height:50%;
+        height:80%;
       }}
