@@ -1,154 +1,205 @@
-@media (max-width: 576px){
-
+@media  (min-width: 320px) and (max-width: 400px) {
   .containerAmici{
-    width: 576px;
+    grid-template-columns: none;
+    grid-template-rows: 42% 57%;
+    height: 135vh;
   }
 
   #amiciPanel{
-    margin-left: auto;
+    width: 98vw;
+    height: 50vh;
+    min-height: 250px;
+    min-width: 250px;
+  }
+
+  #boxdx{
+    max-height: 300px;
+    width: 98vw;
+  }
+
+  #amiciRequest{
+    max-height: 200px;
+  }
+
+  #suggBox{
+    min-height: 150px;
+    min-width: 220px;
+  }
+
+  .richiesta{
+    min-height: 150px;
+    min-width: 220px;
+  }
+
+  .largeButton{
+    height: 70%;
+    width: 90%;
+  }
+}
+
+/* iPad Mini */
+@media  (min-width: 280px) and (max-width: 769px) {
+  .containerAmici{
+    grid-template-columns: none;
+    grid-template-rows: 42% 57%;
+    height: 135vh;
+  }
+
+  #amiciPanel{
+    width: 98vw;
+    height: 50vh;
+    min-height: 250px;
+    min-width: 250px;
+  }
+
+  #boxdx{
+    max-height: 300px;
+    width: 98vw;
+  }
+
+  #amiciRequest{
+    max-height: 200px;
+  }
+
+  #suggBox{
+    min-height: 150px;
+    min-width: 220px;
+  }
+
+  .richiesta{
+    min-height: 150px;
+    min-width: 220px;
+  }
+
+  .largeButton{
+    height: 75%;
+    width: 86%;
   }
 
 }
 
-
-@media (max-width: 992px) {
-
+@media (min-width:600px) and (max-width:769px){
   .containerAmici{
     grid-template-columns: none;
-    height: 170vh;
-    grid-template-rows: 45% 55%;
+    grid-template-rows: 42% 57%;
+    height: 135vh;
+  }
+
+  #amiciPanel{
+    width: 90vw;
+    height: 50vh;
+    min-height: 250px;
+    min-width: 250px;
+  }
+
+  #boxdx{
+    max-height: 300px;
+    width: 90vw;
+  }
+
+  #amiciRequest{
+    max-height: 200px;
+  }
+
+  #suggBox{
+    min-height: 150px;
+    min-width: 220px;
+  }
+
+  .richiesta{
+    min-height: 150px;
+    min-width: 220px;
+  }
+
+  .largeButton{
+    width: 60%;
+    height: 60%;
+  }
+}
+
+
+
+/* iPad Air */
+@media  (min-width: 770px) and (max-width: 1000px) {
+  .containerAmici{
+    grid-template-columns: none;
+    height: 130vh;
   }
 
   #amiciPanel{
     height: 70vh;
     width: 80vw;
-    min-height: 510px;
+    max-width: none;
+  }
+
+  .largeButton{
+    width: 58%;
+    height: 58%;
   }
 
   #boxdx{
     width: 80vw;
-    min-height: 600px;
-  }
-  
-}
 
-@media (max-height: 750px) and (max-width: 992px){
-  .containerAmici{
-    grid-template-rows: 550px auto;
-  }  
-
-}
-
-@media (min-width: 730px) and (max-width: 992px){
-  .largeButton{
-    height: 62%;
-    width: 62%;
-  }
-}
-
-
-/*tra 992px e 1600px e altezza minima di 800px*/
-
-@media (min-width: 992px) and (max-width: 1600px) and (min-height: 800px){
-  #amiciPanel{
-    width: 45vw;
-    height: 80vh;
-  }
-
-  .largeButton{
-    width: 70%;
-    height: 70%;
-  }
-
-  #boxdx{
-    grid-template-rows: 300px auto;
-  }
-
-  #suggBox{
-    height: 89%;
   }
 
   #amiciRequest{
-    max-height: 380px;
-  }
-
-  .containerAmici{
-    padding-top: 80px;
-  }
-
-  .largeButton{
-    width: 68%;
-    height: 68%;
-  }
-
-  .containerAmici{
-    grid-template-columns: 55% 45%;
+    max-height: 350px;
   }
 }
 
-
-/*minimo 1650px*/
-@media (min-width: 1650px){
-  #boxdx{
-    grid-template-rows: 300px auto;
-  }
-
-  #suggBox{
-    height: 89%;
-  }
-
-  #amiciRequest{
-    max-height: 380px;
-  }
-
-  #amiciPanel{
-    height: 80vh;
-  }
-
-  .containerAmici{
-    padding-top: 80px;
-  }
-
-}
-
-
-/*minimo 1650px in larghezza e minimo 930px in altezza*/
-@media (min-width: 1650px) and (min-height: 930px){
+/* Surface Pro */
+@media  (min-width: 1300px) and (max-width: 1480px) {
   #amiciPanel{
     width: 40vw;
   }
 
+  #boxdx{
+    width: 38vw;
+    grid-template-rows: 290px auto;
+  }
+
+  #amiciRequest{
+    max-height: 450px;
+  }
+
+}
+
+/* PC 17 pollici */
+@media  (min-width: 1600px) {
+  #amiciRequest{
+    max-height: 400px;
+  }
+
+  #amiciPanel{
+    width: 38vw;
+  }
+
+  #boxdx{
+    width: 38vw;
+    grid-template-rows: 290px auto;
+  }
+}
+
+/* PC molto grandi */
+@media  (min-width: 1920px) {
+  #amiciPanel{
+    width: 38vw;
+  }
+
+  #boxdx{
+    width: 38vw;
+    grid-template-rows: 300px auto;
+  }
+
   .largeButton{
-    width: 70%;
-    height: 70%;
+    width: 66%;
+    height: 66%;
+  }
+
+  #amiciRequest{
+    margin-top: 40px;
+    max-height: 700px;
   }
 }
 
 
-
-
-/*SOPRA 1750*/
-
-/*dimensioni molto grandi*/
-@media (min-width: 1750px){
-  .largeButton{
-    width: 65%;
-    height: 65%;
-  }
-}
-@media (min-width: 2000px){
-  .largeButton{
-    width: 60%;
-    height: 60%;
-}
-}
-@media (min-width: 2500px){
-  .largeButton{
-    width: 50%;
-    height: 50%;
-}
-
-  .roundRedButton{
-    margin-top: 4%;
-  }
-}
