@@ -90,12 +90,13 @@
 
 @media only screen and (max-height: 850px)  {
   #reportPanel {
-    height: 80vh;
+    height: 500px;
     padding: 10px;
   }
 
   #chartPanel {
-    height: 80vh;
+    height: 500px;
+    padding: 10px;
   }
 
   .cnt {
@@ -105,7 +106,7 @@
   }
 
   #innerPanel {
-    height: 80%;
+    height: 85%;
   }
 
   #tasksPanel {
@@ -113,7 +114,7 @@
   }
   #canvasPanel { 
     margin-top: 5px; 
-    height: 60vh;
+    height: 360px;
     margin-top: 60px;
     margin-bottom: auto;
   }
