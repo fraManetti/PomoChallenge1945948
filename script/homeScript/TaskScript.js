@@ -497,7 +497,12 @@ function deleteAllTask() {
   updateTaskButtons();
   updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
   document.cookie = "taskList=" + "" + "; expires=Fri, 31 Dec 1970 23:59:59 GMT;"+ 'path=/';
-
+  if(taskOn){
+    clock.stop();
+    alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
+    modalitaTask();
+    setButtonState();  
+  }
 }
 
 
