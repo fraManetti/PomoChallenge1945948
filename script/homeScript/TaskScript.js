@@ -26,31 +26,18 @@ function hashCode(string) {
   return hash;
 }
 
-function handleKeyPress(event, string) {
-  if (event.key === "Enter") {
-      event.preventDefault();
-      // esegui qui le azioni quando l'utente preme il tasto "Invio"
-      // ad esempio, puoi leggere il valore del campo di input e aggiungere il compito a una lista
-      if(string== 'add') {
-        document.getElementById("push").click();
-      }
-      else if(string = 'option') {
-        var field = event.currentTarget;
-        var optionBtn = field.nextElementSibling.nextElementSibling;
-        showOption({currentTarget: optionBtn});
-      }
-  }
-}
-
 
 //Serve per sapere se sono in modalità task o meno:
 function modalitaTask() {
   if(!taskOn){
     taskOn=true;
     updateTaskTag(false,false);
+    sessionStorage.setItem("taskStatus",true);
   }
-  else 
+  else {
     taskOn=false;
+    sessionStorage.setItem("taskStatus",false);
+  }
 }
 
 // Funzione per eliminare una task da tutto con il bottone delete:
@@ -157,7 +144,7 @@ function updateTaskBox (taskItems,  cond){
 }
 
 //Aggiorno la lista delle task con le modifiche :
-function updateTaskMap(newTitle, newPomos,newNote) {
+function updateTaskMap(newTitle, newPomos,newNote,newIndex) {
   var task=[];
   task.key=currentKey;
   task.title = newTitle;
@@ -169,7 +156,7 @@ function updateTaskMap(newTitle, newPomos,newNote) {
         tuple.pomodori = newPomos;
         tuple.note = newNote;
         task.donepomodori = tuple.donepomodori;  
-        task.index = tuple.index;
+        task.index = newIndex;
         task.tim = countS-(clock.getTime()/60);
 
       }
@@ -210,7 +197,7 @@ function updateTaskTag(isRunning,isEnded){
     pomoCount+=JSON.parse(tuple.pomodori);
     pomoCount-=JSON.parse(tuple.donepomodori);
   });
-  var textToAppend  = "Pomodori Complessivi: "+JSON.parse(pomoCount); 
+  var textToAppend  = "Pomodori Rimanenti: "+JSON.parse(pomoCount); 
   if (isRunning){  
     var nPomo=taskList[0].pomodori;
     if(!isEnded)
@@ -227,8 +214,14 @@ function updateTaskTag(isRunning,isEnded){
       time+=parseInt(countB);
     time+=parseInt(countS);
   } 
-  console.log("time: ",time,countB,countS,countL);
-  time-=(countS-(clock.getTime()/60));
+  if(pos =="Short Break")
+    time+=countB;
+  else if (pos =="Long Break")
+    time+=countL;
+  else if(pos=="Session")
+    time-=(countS-(clock.getTime()/60));
+
+  console.log("time: ",time,countB,countS,countL,clock.getTime()/60);
   timeToAppend ="Fine Tutta Programmazione Prevista Per: "+timeUpdate(time);
 
   document.getElementById("timeEstimated").innerText=timeToAppend;
@@ -298,8 +291,9 @@ function showOption(e) {
       var newTitle = taskItems[2].value;
       var newPomos = taskItems[3].value;
       var newNote = hiddenBox.children[0].value;
+      var newIndex = taskItems[1].getAttribute("data-value");
       if  (newTitle!= oldTitle || newPomos!=oldPomos || newNote!=oldNote )  
-        updateTaskMap(newTitle,newPomos,newNote);
+        updateTaskMap(newTitle,newPomos,newNote,newIndex);
       updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
   } else if(computedStyle.display === "none" && !anyTaskOpen) {
     hiddenBox.style.display = "block";
@@ -398,22 +392,12 @@ function addTask(){
       document.getElementById("taskFieldInput").value="";
       document.getElementById("taskNote").value="";
       document.getElementById("pomoTaskNumber").value = "1";
-      updateTaskTag(false,false);
+      updateTaskTag(taskOn,false);
 
       }
   }
 
-  // gestisce click fuori dal popup
-  function handleOutClick(event) {
-    popupContainer = document.getElementById("popupContainer");
-    if (!popupContainer.contains(event.target)) {
-      popupContainer.innerHTML = "";
 
-      //document.getElementById("overlay").style.display = "none";
-      document.removeEventListener("mousedown", handleOutClick);
-    }
-  }
-  
   function openSwapPopup() {
     popupContainer = document.getElementById("popupContainer");
   
@@ -460,12 +444,13 @@ function addTask(){
       taskList[i1] = taskList[i2];
       taskList[i2] = temp;
 
-      tmp = taskList[i1].index;
-      taskList[i1].index=taskList[i2].index;
-      taskList[i2].index=tmp;
+      // tmp = taskList[i1].index;
+      // taskList[i1].index=taskList[i2].index;
+      // taskList[i2].index=tmp;
 
       var tasks = document.querySelectorAll('.task:not(.endedTasks)');
       tasks[i1].setAttribute("data-value",taskList[i1].key);
+      taskList[i1].index=tasks[i1].children[1].getAttribute("data-value");
       tasks[i1].children[2].value = taskList[i1].title;
       tasks[i1].children[3].value = taskList[i1].pomodori;
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
@@ -473,6 +458,7 @@ function addTask(){
       tasks[i2].children[1].value = i1;
       tasks[i2].children[2].value = taskList[i2].title;
       tasks[i2].children[3].value = taskList[i2].pomodori;
+      taskList[i2].index=tasks[i2].children[1].getAttribute("data-value");
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
       updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
       var task = taskList[i1];
@@ -510,6 +496,8 @@ function deleteAllTask() {
   $('.task').remove();
   updateTaskButtons();
   updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
+  document.cookie = "taskList=" + "" + "; expires=Fri, 31 Dec 1970 23:59:59 GMT;"+ 'path=/';
+
 }
 
 
@@ -533,10 +521,10 @@ function nascondiVignetta() {
 
 
 function updateServer(newTask,type) {
-
+console.log(newTask,type);
   if(isLogged){
   $.ajax({
-    url: "updateTaskServer.php",
+    url: "../server/updateTaskServer.php",
     type: "POST",
     data: { key: newTask.key, title: newTask.title, pomodori: newTask.pomodori, note: newTask.note, donepomodori: newTask.donepomodori, type:type,ind:newTask.index, dat:newTask.dat,tim:newTask.tim,ora:newTask.ora},
     success: function(result) {
@@ -557,6 +545,9 @@ document.cookie= "cookie_timestamp="+timestamp+ "; expires=Fri, 31 Dec 2023 23:5
 
 }}
 function setButtonState() {
+  if(sessionStorage.getItem("taskStatus")!=null){
+    taskOn = JSON.parse(sessionStorage.getItem("taskStatus"));
+  }
   var checkBox = document.getElementById("customCheckbox");
   if (taskOn == true){
     checkBox.checked = true;

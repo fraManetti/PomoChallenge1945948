@@ -1,38 +1,134 @@
 /*----- container totale della parte task -----*/
 #taskBox{
 
-    background:  #eeeeee; 
-    border-radius: 15px;
+    
+    color: #f4e9dc;
+    border-radius: 22px;
     width: 500px;
     margin-bottom: 30px;
     }
 
+    #taskTag {
+        height: 54px;
+        text-align: center;
+      }
+    #taskBox {
+      width: 500px;
+    }
+    
+    #taskUse {
+        margin-bottom: 2px;
+        margin-top: 7px;
+        text-align: center;
+        border-radius: 15px;
+        background-color: #e85e56;
+        color: #f8f9fa;
+        height: 40px;
+        width: 490px;
+        border-color: transparent;
+        font-size: 20px;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
 
+    #pomoCount{
+    margin-top: 15px;
+    }
+      
+
+    #selectTaskArea {
+        display: none;
+        border-radius: 5%;
+        background-color: #494949;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        height: fit-content;
+        
+    }
+
+    #innerContainer {
+      background-color: #f7f1eb;
+      height: fit-content;
+      width: 92%;
+      border-radius: 2%;
+      align-self: center;
+      justify-self: center;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 20px;
+    }
 
 
 /*-------- container di input --------*/
 #newtask{
-    position: relative;
     padding: 15px 20px;
-    width: 500px;
-    
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     }
 
     #newtask input:focus{
         outline: none;
-        border-color: #0d75ec;
+        border-color: #494949;
       }
+    
+    #inputBox {
+        background-color: #f7f1eb;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    #innerInputBox {
+        border-radius: 10px;
+        background-color: #e7645d;
+        width: 95%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+
+    #inputRow {
+        margin-top: 10px;
+    }
 
 
     /*settaggio input text (box di input titolo task)*/
     input[type='text']{
         width:293px;
-        
+        background-color: #f7f1eb;
+        border-color: transparent;
+        border-radius: 7px;
     }
 
     input[type='number'].params {
         width: 45px;
         appearance: textfield;
+        background-color: #f7f1eb;
+        border-radius: 7px;
+        text-align: center;
+        justify-content: center;
+        border-color: #494949;
+    }
+
+    #taskNote {
+        resize:none;
+        justify-self: center;
+        width: 340px;
+        border-radius: 7px;
+        margin-top: 10px;
+        background-color: #f7f1eb;
+        border-color: transparent;
     }
 
     input[type=number].params::-webkit-inner-spin-button,
@@ -41,48 +137,56 @@
         margin: 0;
     }
 
-    /*settaggio input number (box di input numero pomodori)*/
-    input[class='x']{
-        width:35px;
-        cursor:default;
-        margin-left: 7px;
-    } 
+    
+
 
     /*button del pannello di input task*/
     #newtask button{
-    position: relative;
-    float: right;
-    font-weight: 500;
-    font-size: 16px;
-    background-color: #e85e56;
+    background-color: #e7645d;
     border: none;
-    color: #ffffff;
+    color: #f7f1eb;
     cursor: pointer;
     outline: none;
-    width: 22%;
+    width: 25%;
     height: 40px;
     border-radius: 7px;
     font-family: 'Poppins',sans-serif;
+    font-size: medium;
+    font-weight: 600;
+    }
+
+    #push {
+        justify-self: center;
+        display: inline-block;
+        margin-top: 10px;
     }
 
     /*----- container switch modalità task -----*/
     #modalitaTaskSwitch {
         text-align: left;
         padding-bottom: 2%;
+        width: 500px;
+        padding-left: 15px;
         }
 
         
     /*----- numero pomodori in input ------*/
     #pomoTaskNumber {
-        width: 45;
+        width: 45px;
+        border-radius: 7px;
+        border-color: transparent;
+        background-color: #f7f1eb;
+        margin-left: 5px;
       }
     /*----- pannello nuove task -----*/
     #tasks{
     border-radius: 15px;
-    width: 470p;
-    position: relative;
+    width: 470px;
+    position: static;
     background-color:  #eeeeee;
-    padding: 15px 15px;
+    padding: 0px 15px;
+    padding-bottom: 15px;
+    padding-top: 3px;
     margin-top: 40px;
     
     overflow-y: auto;
@@ -90,10 +194,10 @@
     }
 
     #automatic-delete{
-        margin-top: 13px;
-        margin-bottom: 13px;
         font-weight: 500;
-        font-size: 17px;
+        margin-top: 1%;
+        margin-bottom: 1%;
+        font-size: 80%;
         color: #3a3939
     }
 
@@ -102,12 +206,162 @@
     }
 
     .roundBtnHomeBottom{
-        border-radius: 5px;
+      
+        width: 49%;
+        border-radius: 10px;
+        background-color: #494949;
+        border-color: transparent;
+        color: #f7f1eb;
+        
+    }
+
+    .roundBtnHomeBottom:disabled {
+      opacity: 0.4;
+    }
+
+    .roundBtnHomeTop {
+      border-color: transparent;
+      display:block
+    }
+
+    .roundBtnHomeTop:disabled {
+      border-color: transparent;
+      display: none;
     }
     
     .bottomTag{
-        margin-left: 12px;
+        width: 90%;
+        margin: 0% auto;
+        height: fit-content;
+        padding: 3% 0%;
     }
 
+    #swapRow {
+      display: grid;
+      height: fit-content;
+      width: 100%;
+      margin-top: 5px;
+      justify-items: right;
+      grid-template-columns: 90% 10%;
+    }
 
-   
+    #swapImg{
+      display: block;
+      width: 23px;
+      cursor: pointer;
+      padding-top: 3px;
+    }
+
+    #swapImg:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+
+    #reverseImg:disabled{
+      
+    }
+
+    #reverseImg{
+      padding-top: 3px;
+      width: 18px;
+      cursor: pointer;
+      
+    }
+
+    .slider:after
+{
+    color: #494949;
+ content:'OFF';
+ font-size: medium;
+ display: block;
+ position: absolute;
+ transform: translate(-50%,-50%);
+ top: 50%;
+ left: 72%;
+ font-size: 11px;
+ font-weight: 500;
+ font-family: Verdana, sans-serif;
+}
+
+input:checked + .slider:after
+{  
+  content:'ON';
+  left: 25%;
+  color: white;
+  
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  z-index: 0;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f7f1eb;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "no";
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  
+}
+
+input:checked + .slider {
+  background-color: #e85e56;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #e85e56;
+  ;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  background-color: #f7f1eb;
+  
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+  background-color: #e7645d;
+}
+
+
+
+
+  

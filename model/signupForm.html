@@ -4,17 +4,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="App metodo concentrazione pomodoro">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
-    <link rel="stylesheet" href="../style/homeStyle/style.css">
-    <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
+    <link rel="stylesheet" href="../style/loginStyle/signupStyle.css" >
+    <link rel="stylesheet" href="../style/loginStyle/responsiveSignupStyle.css" >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>    
-    <link rel="stylesheet" href="../style/loginStyle/signupStyle.css" >
     <script  src="../script/loginScript/signScript.js"></script>
 
     <script>
@@ -28,6 +28,7 @@
 <body>
     <div id="mynavbar"></div>
     <!--<div class="container">-->
+        <div class="cnt">
         <div id="signupPanel">
             <FORM method="post" id="submitSignForm" action="../server/signUp.php" onsubmit="handleSubmit(event)"> 
                 <div class="imgContainer">
@@ -62,10 +63,6 @@
                         </button>
                         
                         <br>
-                        <label>
-                            <input type="checkbox" name="remember" id="rememberSignCheckbox"> 
-                            Remember me
-                        </label>
                         <p>
                             Already signed up?
                             <a href="./loginForm.html">
@@ -77,6 +74,22 @@
                 </div>
             </FORM>
         </div>
-   <!-- </div>-->
+   <!-- </div>--></div>
 </body>
 </html>
+<script>
+    window.onload = function() {
+    if (new URLSearchParams(window.location.search).get('signup') === 'failed1') {
+alert('Registrazione non riuscita, cambia username.');
+const newUrl = new URL(window.location.href);
+newUrl.searchParams.delete('signup');
+window.history.replaceState({}, '', newUrl);
+}
+if (new URLSearchParams(window.location.search).get('signup') === 'failed2') {
+alert('Registrazione non riuscita, riprova.');
+const newUrl = new URL(window.location.href);
+newUrl.searchParams.delete('signup');
+window.history.replaceState({}, '', newUrl);
+}
+}
+</script>

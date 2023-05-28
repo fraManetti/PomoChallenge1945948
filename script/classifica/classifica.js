@@ -1,17 +1,17 @@
 function downloadClassifica(tuple) {
     var user =tuple.username;
-    var points = tuple.points;
+    var points = convertMinHour( tuple.points);
     document.querySelector("#classificaBox").insertAdjacentHTML('beforeend', `
         <div class="classifica-item" data-value=${user}>
             <span class="elemClassifica" id = "utenteClassifica">${user}</span>
             <span class="elemClassifica" id="oreClassifica">${points}</span>
-            <button class="visitaProfiloButton">Profilo</button>
+            <button class="largeButton largeWhiteButton " onClick="openProfilePopUp(event);">Profilo</button>
         </div>
-    `)
+    `);
 }
 function downloadGlobalClass(){
     document.querySelector("#classificaBox").innerHTML="";
-    var url ="getGlobalClass.php";
+    var url ="../server/getGlobalClass.php";
     var httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -31,7 +31,7 @@ function downloadGlobalClass(){
   }
 function downloadAmiciClass(){
     document.querySelector("#classificaBox").innerHTML="";
-    var url ="getAmiciClass.php";
+    var url ="../server/getAmiciClass.php";
     var httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');

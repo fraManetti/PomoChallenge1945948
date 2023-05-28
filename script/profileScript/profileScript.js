@@ -1,12 +1,12 @@
 MIN_PLEN = 8;
 MIN_ULEN = 3;
-MAX_LEN = 40;
+MAX_LEN = 20;
 MAX_PLEN = 32;
 
 const uppercaseRegex = new RegExp('(?=.*[A-Z]).+');
 const lowercaseRegex = new RegExp('(?=.*[a-z]).+');
 const numRegex = new RegExp('.*[0-9]+.*'); 
-const specialRegex = new RegExp('(?=.*[@#$%^&+=]).+');
+const specialRegex = new RegExp('(?=.*[@#$%\\^&+=!"£/()=?\\^ì\\\\]).+');
 
 function checkNewUsername(newUsername) {
     if(newUsername.length < MIN_ULEN) {
@@ -74,7 +74,7 @@ function checkNewUsername(newUsername) {
           if (usernameField.value !== originalValue) {
               if (checkNewUsername(usernameField.value)) {
                   $.ajax({
-                      url: "./updateProfile.php",
+                      url: "../server/updateProfile.php",
                       type: "POST",
                       data: {type: "updateUsername", oldUsername: originalValue, newUsername: usernameField.value},
                       success: function(result) {   
@@ -151,7 +151,7 @@ function handleOutClick(event) {
     
     if (checkNewPass(newPassword)) {
         $.ajax({
-            url: "./updateProfile.php",
+            url: "../server/updateProfile.php",
             type: "POST",
             data: {type: "confirmNewPassword", oldPass: oldPassword, newPass: newPassword},
             success: function(result) {
@@ -185,23 +185,18 @@ function handleOutClick(event) {
           console.log(result);
           document.getElementById("top-picture").src=result.trim();
           document.getElementById("mypic").src=result.trim();      
-          document.cookie="profilepic="+result.trim()+ "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';;    
-
+          var date = new Date();
+          date.setMonth(date.getMonth() + 1);
+          document.cookie = "profilepic=" + result.trim() + "; expires=" + date.toUTCString() + "; path=/";
+          
       },
-      error: function(xhr, status, error) {
-          console.error(error);
-          /*qui ci metterò l'alert*/
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert(jqXHR.responseText);
       }
   });   }
    
    function resetImage() {
-    if (document.cookie.indexOf("profilepic") >= 0) {
-      var path = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('profilepic='))
-      .split('=')[1];
-      var path_decoded=decodeURIComponent(path);
-    }
+
     document.getElementById("mypic").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
     document.getElementById("top-picture").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
     $.ajax({
@@ -209,7 +204,7 @@ function handleOutClick(event) {
       type: "POST",
       data: {path: path_decoded},
       success: function(result) {
-          console.log(result);
+          console.log(path_decoded);
           document.cookie="profilepic="+"; Thu, 01 Jan 1970 00:00:00 GMT;"+ 'path=/';    
 
       },
@@ -228,3 +223,27 @@ function contaOre(contaOre) {
   document.getElementById("ore-studio").innerHTML = cnt;
   
 }
+function deleteAccount() {
+  if (confirm("Sicuro di voler eliminare il profilo? Questa operazione non è annullabile"))
+  $.ajax({
+    url: "../server/updateProfile.php",
+    type: "POST",
+    data: {type: "deleteAccount"},
+    success: function(result) {
+        if(result.trim() == "Cancellazione Riuscita!"){
+          alert(result);
+           location.href = '../server/logOut.php';
+          }
+        else{
+          alert("Qualcosa è andato storto, riprovare!");
+        }
+    },
+    error: function(jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
+        /*qui ci metterò l'alert*/
+    }
+});
+  else  
+    return;
+}
+

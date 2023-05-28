@@ -1,69 +1,192 @@
-@media only screen and (max-height: 760px) {
-  
-  #selectDatePanel {
-    width: 460px;
+
+
+@media only screen and (max-width: 1200px)  {
+  .cnt {
+    padding-top: 10vh;
+    width: 100%;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr; 
+    z-index: -1;
+    margin: 0;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   #reportPanel {
-    height: 530px;
-    width: 560px;
-    justify-self: end;
-    position: relative;
-    background-color: #494949;
-    border-radius: 5%;
-    overflow: hidden;
-    border-color: #494949;
-    z-index: -1;
+    grid-column: 1; 
+    justify-self: center;
+    width: 500px;
+    height: 50vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+  }
+  
+  #chartPanel {
+    grid-column: 1; 
+    margin-top: 20px; 
+    justify-self: center;
+    border-radius: 20px;
+    width: 500px;
+    height: fit-content;
+    padding: 10px;
+  }
+    
+  #innerPanel {width: 100%;}
+  #avgChoicePanel {
+    width: 95%; margin: 0%; 
+    justify-self: center; 
+    padding: 0%; 
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+  #canvasPanel {
+    width: 95%; 
+    height: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+
+  #myChartCanvas {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0%;
+  }
+  .incrDecrBtnPanel {width: 100%; height: 100%;}
+  #tasksPanel{width: 100%; height: 100%;  z-index: 3;}
+  #totalTime {width:100%}
+  #currentPeriod {width: 100%}
+  #selectDatePanel {width: 90%; margin: auto; font-size: 200;}
+
+
+  .tabClass {
+      width: 90%;
+      font-size: 90%;
+    }
+  .tabClass.active {width: 90%;}
+  .timePeriodBtn {width: 75%; text-align: center; padding: 0%;}
+  .avgBtnClass {width: 100%;}
+  .avgBtnClass.active {width: 100%;}
+
+
+  #endedOptionImg {width: 50%;}
+  #endedDeleteImg {
+    width: 55%;
+    height: 60%;
+    }
+
+  .task {width: 100%;}
+  #endedTaskname {width: 98%;}
+  #endedPomos {width: 100%; margin-left: 0px;}
+  #hiddenOption {width: 810%; margin-left: 0px;}
+  .hiddenNote{width: 100%; margin-left: 12%;}
+
+}
+
+@media only screen and (max-height: 850px)  {
+  #reportPanel {
+    height: 80vh;
+    padding: 10px;
   }
 
   #chartPanel {
-    z-index: -1;
-    border-style: solid;
-    height: 530px;
-    width: 560px;
-    position: relative;
-    background-color: #494949;
-    border-radius: 5%;
-    overflow: hidden;
-    border-color: #494949;
-    justify-self: start;
+    height: 80vh;
   }
 
-  #canvasPanel {
-    margin-top: 12%;
+  .cnt {
+    padding-top: 15vh;
+    width: 100%;
+    height: 100%;
   }
-  
 
   #innerPanel {
-    height: 415px;
+    height: 80%;
   }
 
-  #tasksPanel{
-    height: 415px;
-    max-height: 415px;
+  #tasksPanel {
+    height: 90%;
+  }
+  #canvasPanel { 
+    margin-top: 5px; 
+    height: 60vh;
+    margin-top: 60px;
+    margin-bottom: auto;
   }
 }
 
-@media only screen and (max-width: 1130px) {
+@media only screen and (max-width: 576px)  {
   .cnt {
     width: 100%;
     height: fit-content;
     display: grid;
-    grid-template-columns: 1fr; /* Modifica questa riga */
+    grid-template-columns: 1fr; 
     z-index: -1;
     margin: 0;
-    padding-top: 40px;
+    padding-top: 10vh;
+  }
+
+  .navbar.container-fluid{
+    height: 66px;
+    width: 100%;
+    flex-wrap:  unset;
   }
   
 
-    #reportPanel {
-      grid-column: 1; /* Imposta il pannello sulla prima colonna */
-      justify-self: center;
+  #reportPanel {
+    grid-column: 1; 
+    justify-self: center;
+    width: 90%;
+    height: 85vh;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+  }
+  
+  #chartPanel {
+    grid-column: 1; 
+    margin-top: 20px; 
+    justify-self: center;
+    width: 90%;
+    height: 250px;
+  }
+  #innerPanel {width: 100%; height: 90%;}
+  #avgChoicePanel {width: 100%; margin: 0%; justify-self: center; padding: 0%; justify-content: center;}
+  #canvasPanel {width: 95%; margin-top: 5px; height: 80%;}
+  .incrDecrBtnPanel {width: 100%}
+  #tasksPanel{width: 100%; height: 95%; max-height: fit-content; z-index: 3;}
+  #totalTime {width:100%}
+  #currentPeriod {width: 100%}
+  #selectDatePanel {width: 90%; margin: auto; font-size: 200;}
+  #myChartCanvas {
+    width: 100%;
+  
+  }
+
+  .tabClass {
+      width: 90%;
+      font-size: 90%;
     }
-    
-    #chartPanel {
-      grid-column: 1; /* Imposta il pannello sulla prima colonna */
-      margin-top: 20px; /* Aggiungi uno spazio tra i pannelli */
-      justify-self: center;
-    }
+  .tabClass.active {width: 90%;}
+  .timePeriodBtn {width: 75%; text-align: center; padding: 0%;}
+  .avgBtnClass {width: 100%;}
+  .avgBtnClass.active {width: 100%;}
+
+
+  #endedOptionImg {width: 50%;}
+  #endedDeleteImg {width: 75%;}
+
+  .task {width: 100%;}
+  #endedTaskname {width: 98%;}
+  #endedPomos {width: 100%; margin-left: 0px;}
+  #hiddenOption {width: 810%; margin-left: 0px;}
+  .hiddenNote{width: 100%; margin-left: 12%;}
 }
+
+
+
+

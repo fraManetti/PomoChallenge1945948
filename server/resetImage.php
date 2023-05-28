@@ -4,7 +4,15 @@
 ?>
 <?php 
     $username = $_SESSION['username'];
-    $filePath = $_POST['path'];
+    $query ="select percorso from imgutente where utente ='${username}'";
+    $res =pg_query($query);
+    if($tuple =pg_fetch_array($res,null,PGSQL_ASSOC))
+        {
+            $filePath =$tuple['percorso'];
+            if (file_exists($filePath)) {
+                unlink($filePath);
+                }
+        }
     $query = "delete from imgutente where utente = '${username}'";
     $res = pg_query ($query);
     if (!$res)

@@ -1,0 +1,234 @@
+@media  (min-width: 320px) and (max-width: 400px) {
+  .containerAmici{
+    grid-template-columns: none;
+    grid-template-rows: 42% 57%;
+    height: 135vh;
+  }
+
+  #amiciPanel{
+    width: 98vw;
+    height: 50vh;
+    min-height: 330px;
+    min-width: 200px;
+  }
+
+  #boxdx{
+    max-height: 300px;
+    width: 98vw;
+  }
+
+  #amiciRequest{
+    max-height: 200px;
+  }
+
+  #suggBox{
+    min-height: 150px;
+    min-width: 200px;
+  }
+
+  .richiesta{
+    min-height: 150px;
+    min-width: 200px;
+  }
+
+  .largeButton{
+    height: 70%;
+    width: 90%;
+  }
+}
+
+/* iPad Mini */
+@media  (min-width: 280px) and (max-width: 769px) {
+  .containerAmici{
+    grid-template-columns: none;
+    grid-template-rows: 42% 57%;
+    height: 135vh;
+  }
+
+  #amiciPanel{
+    width: 98vw;
+    height: 50vh;
+    min-height: 330px;
+    min-width: 200px;
+  }
+
+  #boxdx{
+    max-height: 300px;
+    width: 98vw;
+  }
+
+  #amiciRequest{
+    max-height: 200px;
+  }
+
+  #suggBox{
+    min-height: 150px;
+    min-width: 200px;
+  }
+
+  .richiesta{
+    min-height: 150px;
+    min-width: 200px;
+  }
+
+  .largeButton{
+    height: 75%;
+    width: 86%;
+  }
+
+}
+
+@media (min-width:600px) and (max-width:769px){
+  .containerAmici{
+    grid-template-columns: none;
+    grid-template-rows: 50% 50%;
+    height: 135vh;
+  }
+
+  #amiciPanel{
+    width: 90vw;
+    height: 50vh;
+    min-height: 350px;
+    min-width: 250px;
+  }
+
+  #boxdx{
+    max-height: 300px;
+    width: 90vw;
+  }
+
+  #amiciRequest{
+    max-height: 200px;
+  }
+
+  #suggBox{
+    min-height: 150px;
+    min-width: 220px;
+  }
+
+  .richiesta{
+    min-height: 150px;
+    min-width: 220px;
+  }
+
+  .largeButton{
+    width: 60%;
+    height: 60%;
+  }
+}
+
+
+
+/* iPad Air */
+@media  (min-width: 770px) and (max-width: 1000px) {
+  .containerAmici{
+    grid-template-columns: none;
+    height: 130vh;
+  }
+
+  #amiciPanel{
+    height: 70vh;
+    width: 80vw;
+    max-width: none;
+  }
+
+  .largeButton{
+    width: 58%;
+    height: 58%;
+  }
+
+  #boxdx{
+    width: 80vw;
+
+  }
+
+  #amiciRequest{
+    max-height: 350px;
+  }
+}
+
+
+/*-----------------------*/
+
+/* Surface Pro */
+@media  (min-width: 1000px) and (max-width: 1299px) {
+  #amiciPanel{
+    width: 40vw;
+  }
+
+  #boxdx{
+    width: 38vw;
+    grid-template-rows: 195px auto;
+  }
+
+  #amiciRequest{
+    max-height: 180px;
+  }
+
+}
+
+
+/* Surface Pro */
+@media  (min-width: 1300px) and (max-width: 1480px) {
+  #amiciPanel{
+    width: 40vw;
+  }
+
+  #boxdx{
+    width: 38vw;
+    grid-template-rows: 290px auto;
+  }
+
+  #amiciRequest{
+    max-height: 450px;
+  }
+
+}
+
+/* PC 17 pollici */
+@media  (min-width: 1600px) {
+  #amiciRequest{
+    max-height: 400px;
+  }
+
+  #amiciPanel{
+    width: 38vw;
+  }
+
+  #boxdx{
+    width: 38vw;
+    grid-template-rows: 290px auto;
+  }
+}
+
+/* PC molto grandi */
+@media  (min-width: 1920px) {
+  #amiciPanel{
+    width: 38vw;
+  }
+
+  #boxdx{
+    width: 38vw;
+    grid-template-rows: 300px auto;
+  }
+
+  .largeButton{
+    width: 66%;
+    height: 66%;
+  }
+
+  #amiciRequest{
+    margin-top: 40px;
+    max-height: 700px;
+  }
+}
+
+@media (min-width: 500px) and (max-width: 768px) and (max-height: 600px){
+
+  .containerAmici{
+    grid-template-rows: 400px auto;
+  }
+
+}
+
+

@@ -1,5 +1,5 @@
 <?php
-  include( 'db_conn.php');  
+  include( '../server/db_conn.php');  
   session_start(); 
 ?>
 <!DOCTYPE html>
@@ -16,18 +16,19 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css'>
-<link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="../server/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
-    <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
     <link rel="stylesheet" href="../style/amiciStyle/amiciStyle.css">
-    
+    <link rel="stylesheet" href="../style/amiciStyle/amiciStyleResponsive.css">
+
     
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src="../script/amici/amiciScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
+    <script  src="../script/defaultScript.js"></script>
 
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
 
@@ -40,48 +41,46 @@
 
 </head>
 <body>
-    
     <div id="mynavbar"></div>
-    <div class="container">
-            <div id = "amiciPanel">
-                <div id="titleAmici">
-                    <h2 class="lista-amici-title"> I miei amici </h2>
-                   
-                </div>
-                <div class = "box" id="amiciBox">
-                    
-                </div>
-        </div>
+    <div class="containerAmici">
+          <div id = "amiciPanel">
+              <div class="titlesAmici lista-amici-title"> I miei amici </div>
+              <div id="underTitle">
+                <div class = "box" id="amiciBox"></div>
+              </div>
+          </div>
         <div id="boxdx" > 
-            <div id = "topBox">
-            <div id ="searchBox" class="row">
-<div class="sample ten">
-  <input type="text" name="search" placeholder="Invia richiesta di amicizia" id="search">
-  <button class="btn btn-search" onClick="sendRequest();">
-    <i class="fa fa-arrow-right"></i>
-  </button>
-  <button type="reset" class="btn btn-reset fa fa-times"></button>
-</div>      </div>
-<div id ="suggBox" class = "box"> <div class="suggeriti-title">Suggeriti</div> </div>
-</div>
-<div id ="amiciRequest">
-    <div class="box" id="incoming">
-    <div id = "incoming-title">Richieste entranti</div>
-    <div class="box" id="incomingR"></div>
-    
-  </div>
-  <br>
-  <div class="box" id="outgoing">
-    <div id = "outgoing-title">Richieste uscite</div>
-    <!--<div id="outgoingColumnTitles">
-    <span class="elemOutgoing">Username</span>
-    <span class="elemOutgoing">Status</span>
-    </div>-->
-    <div class="box" id="outgoingR"></div>
-  </div>
+          <div id = "topBox">
+             <div id ="searchBox" class="row">
+                <div class="sample ten">
+                   <input type="text" name="search" placeholder="Invia richiesta di amicizia" id="search" onkeypress="handleKeyPress(event, 'addFriend')">
+                   <button class="btn btn-search" onClick="sendRequest();">
+                      <i class="fa fa-arrow-right"></i>
+                   </button>
+                   <button type="reset" class="btn btn-reset fa fa-times"></button>
+                </div>
+              </div>
+              <div id ="suggBox" class = "box"> 
+                <div class="titlesAmici suggeriti-title">Suggeriti</div>
+                <div id="underTitle"> 
+                <div class="box" id = "suggested"></div>
+                </div>
+              </div>
+            </div>
+        
+            <div id ="amiciRequest">
+              <div class="richiesta box" id="incoming">
+                <div class="titlesAmici" id = "incoming-title">Richieste entranti</div>
+                <div class="boxRichieste box" id="incomingR"></div>
+              </div>
+             <div class="richiesta box" id="outgoing">
+                <div class = "titlesAmici "id = "outgoing-title">Richieste uscite</div>
+                <div class="boxRichieste box" id="outgoingR"></div>
+              </div>
             </div>
         </div>
-    </div>
+      </div>
+
     </body>
     <?php 
 $username = $_SESSION['username'];
@@ -119,23 +118,34 @@ $username = $_SESSION['username'];
 <?php 
     $query ="
     WITH mieiAmici AS (
-        SELECT utentea AS amico FROM amici WHERE utenteb = '${username}'
-        UNION
-        SELECT utenteb AS amico FROM amici WHERE utentea = '${username}'
-      )
-      SELECT *
-      FROM (
-        SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != '${username}'
-        UNION
-        SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != '${username}'
-      ) AS pippo
-      ORDER BY random()
-      LIMIT 3;
+      SELECT utentea AS amico FROM amici WHERE utenteb = '${username}'
+      UNION
+      SELECT utenteb AS amico FROM amici WHERE utentea = '${username}'
+    )
+    SELECT *
+    FROM (
+      SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != '${username}' and utentea not in (
+    select utentea from amici 
+      where utenteb='${username}' 
+    union
+    select utenteb from amici 
+      where utentea='${username}' 		
+  )
+      UNION
+      SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != '${username}'and utenteb not in (
+    select utentea from amici 
+      where utenteb='${username}' 
+    union
+    select utenteb from amici 
+      where utentea='${username}' 		
+  )
+    ) AS pippo
+    ORDER BY random()
+    LIMIT 3;
     ";
 $res = pg_query($db_conn,$query);
 if (!$res) {
     header("HTTP/1.1 500 Internal Server Error");
-    //echo '<script> alert ("inserisci amico valido");</script>';
     exit();
   }
   while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {

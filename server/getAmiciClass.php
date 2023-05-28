@@ -10,17 +10,29 @@ $username = $_SESSION['username'];
         UNION
         SELECT utenteb AS amico FROM amici WHERE utentea = '${username}'
       )
-      SELECT amico as username, sum(endedtask.tim) as points
-      FROM mieiAmici join endedtask on amico = endedtask.username
+      SELECT amico as username, CASE WHEN sum(endedtask.tim) IS NULL THEN 0 ELSE sum(endedtask.tim) END as points
+      FROM mieiAmici left join endedtask on amico = endedtask.username
       group by amico
       order by points desc
       limit  15
+	  
+
       ";
   $res = pg_query($db_conn,$query);
   $result_array = array();
   while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
       array_push($result_array, $tuple);
   }
+  $query="select u.username, CASE WHEN sum(e.tim) IS NULL THEN 0 ELSE sum(e.tim) END as points
+  from utente u left join endedtask e on u.username = e.username
+  where u.username='${username}'
+  group by u.username
+  ";
+  $res = pg_query ($db_conn,$query);
+  $tuple = pg_fetch_array($res, null, PGSQL_ASSOC);
+  array_push($result_array, $tuple);
+  $points = array_column($result_array, 'points');
+  array_multisort($points,SORT_DESC,$result_array);
   echo json_encode($result_array);
 
 ?>

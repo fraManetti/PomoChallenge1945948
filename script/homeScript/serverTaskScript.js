@@ -1,8 +1,9 @@
 function fillTaskList(tuple) {
-    var newTask = { key:tuple.keyhash, title: tuple.title, pomodori: parseInt(tuple.pomodori),note: tuple.note,donepomodori: parseInt(tuple.donepomodori),tim:(tuple.tim) };
+    var newTask = { key:tuple.keyhash, title: tuple.title, pomodori: parseInt(tuple.pomodori),note: tuple.note,donepomodori: parseInt(tuple.donepomodori),tim:parseInt(tuple.tim) };
     taskList.push(newTask); 
 }
 function fillTaskBox (){
+  var nPomos=0;
     for (var i=0 ;i<taskList.length;i++){
         document.querySelector('#tasks').insertAdjacentHTML('beforeend', `
         <div  class="task" data-value="${taskList[i].key}">
@@ -26,9 +27,11 @@ function fillTaskBox (){
             </div>
         </div>
     `)
-    taskList[i].index=index;
+    nPomos+=(taskList[i].pomodori-taskList[i].donepomodori);
     index++;}
     updateTaskButtons();
+    var textToAppend = "Pomodori Rimanenti: "+JSON.stringify(nPomos);
+    document.getElementById("pomoCount").innerText=textToAppend;
 }
 function mergeCookie() {
     let cookieValue = document.cookie

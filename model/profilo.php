@@ -1,5 +1,5 @@
 <?php
-  include( 'db_conn.php');  
+  include( '../server/db_conn.php');  
   session_start(); 
 ?>
 <!DOCTYPE html>
@@ -10,17 +10,11 @@
     <title>PomoChallenge</title>
     <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
-    <link rel="stylesheet" href="../style/homeStyle/clockStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/style.css">
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
-    <link rel="stylesheet" href="../style/homeStyle/tasksStyle.css">
     <link rel = "stylesheet" href = "../style/profileStyle/profile.css">
+    <link rel = "stylesheet" href = "../style/profileStyle/responsiveProfileStyle.css">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-    <script  src="../script/homeScript/TaskScript.js"></script>
-    <script  src="../script/homeScript/serverTaskScript.js"></script>
     <script  src="../script/profileScript/profileScript.js"></script>
     <script  src="../script/defaultScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
@@ -36,8 +30,10 @@
 </head>
 <body>
 <div class="navbar" id="mynavbar"></div>
+<div class="cnt">
 <div class="boxDati">
   <div class="title">Informazioni personali</div>
+  <div id = "innerBoxDati">
   <div class="content">
     <div class="immagine-profilo">
       <div class="image-container"> 
@@ -50,18 +46,19 @@
       </div> 
     </div>
     <div class="dati-account">
-      <p class = "profileField"> 👤 <label class="profileFieldNames"> Username: </label> <input id = "usernameField" type="text"  value="<?php echo $_SESSION["username"]; ?>"  disabled> 
+      <p class = "profileField" id = "firstRow"> 👤 <label class="profileFieldNames"> Username: </label> <input id = "usernameField" type="text"  value="<?php echo $_SESSION["username"]; ?>"  disabled> 
       <button class="editUsername" onclick = "updateUsername()">Edit</button></p>
       <p class = "profileField"> ⏱️ <label class="profileFieldNames"> Totale delle ore: </label> <span id="ore-studio">0</span></p>
       <p class = "profileField"> 👫 <label class="profileFieldNames">Amici totali: </label> <span id="amici-totali">0</span></p>
       <button class="editPasswordBtn" onclick="openPopUpPassword()">Modifica password</button>
-      
+      <button class="deleteAccountBtn" onclick="deleteAccount()">Elimina Account</button>
+
 
       <div id="popupContainer"></div>
     </div>
   </div>
 </div>
-    
+</div>
 </body>
 <?php 
 //--------------------------------------------------------------------------------------------------------------->
@@ -97,6 +94,9 @@
           echo '<script>
           contaOre(' . $tuple_json . ') </script>';
   ?>
+
+  
+ 
 </html>
 <script>
 if (document.cookie.indexOf("profilepic") >= 0) {
@@ -105,6 +105,8 @@ if (document.cookie.indexOf("profilepic") >= 0) {
       .find(row => row.startsWith('profilepic='))
       .split('=')[1];
       var path_decoded=decodeURIComponent(path);
+      console.log(path_decoded);
+      if(path_decoded !="")
       document.getElementById("mypic").src=path_decoded;
     }
 </script>

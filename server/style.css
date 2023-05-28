@@ -1,9 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-html,
-
 h1 {
   margin: 10px 0 0;
   text-align: center;
@@ -44,40 +38,36 @@ button.btn-search, button.btn-reset {
 
 .sample {
   float: left;
-  height: 50px;
-  margin: 0 8%;
   position: relative;
   width: 34%;
 }
 
-
-
-.sample.nine input, .sample.ten input {
+.sample.ten input {
   border-radius: 15px;
   transition: all .6s ease-in-out .3s;
   width: 250px;
 }
-.sample.nine input:focus, .sample.ten input:focus {
+.sample.ten input:focus {
   transition-delay: 0;
   width: 350px;
 }
-.sample.nine input:focus ~ button, .sample.ten input:focus ~ button {
+.sample.ten input:focus ~ button {
   transform: rotateZ(360deg);
 }
-.sample.nine input:focus ~ button.btn-search, .sample.ten input:focus ~ button.btn-search {
+.sample.ten input:focus ~ button.btn-search {
   background: rgb(255, 105, 105);
   color: #fff;
   left: 322px;
   transition-delay: 0;
 }
-.sample.nine input:focus ~ button.btn-reset, .sample.ten input:focus ~ button.btn-reset {
+.sample.ten input:focus ~ button.btn-reset {
   left: 202px;
   transition-delay: .3s;
 }
-.sample.nine button, .sample.ten button {
+.sample.ten button {
   transition: all .6s ease-in-out;
 }
-.sample.nine button.btn-search, .sample.ten button.btn-search {
+.sample.ten button.btn-search {
   background: #ccc;
   border-radius: 50%;
   height: 26px;
@@ -86,7 +76,7 @@ button.btn-search, button.btn-reset {
   transition-delay: .3s;
   width: 26px;
 }
-.sample.nine button.btn-reset, .sample.ten button.btn-reset {
+.sample.ten button.btn-reset {
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 50%;
@@ -98,9 +88,6 @@ button.btn-search, button.btn-reset {
   width: 20px;
   z-index: -1;
 }
-
-
-
 
 @keyframes bounceRight {
   0% {

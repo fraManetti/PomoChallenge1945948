@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <meta name="description" content="App metodo concentrazione pomodoro">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="icon" type="image/x-icon" href="../style/img/tomato.png">
     <script  src="../script/loginScript/loginScript.js"></script>
@@ -11,9 +12,8 @@
     <link rel="stylesheet" href="../style/homeStyle/defaultStyle.css">
 
     <link rel="stylesheet" href="../style/loginStyle/loginStyle.css" >
+    <link rel="stylesheet" href="../style/loginStyle/responsiveLoginStyle.css">
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
-    <link rel="stylesheet" href="../style/homeStyle/style.css">
-    <link rel="stylesheet" href="../style/homeStyle/inputStyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css"  crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>    
@@ -30,6 +30,7 @@
 <body>
     <div id="mynavbar"></div>
     <!--<div class="container">-->
+        <div class="cnt">
         <div id="loginPanel">
             <FORM method="post" id="submitForm" action="../server/logIn.php"> 
                 <div class="imgContainer">
@@ -74,7 +75,7 @@
             </FORM>
         </div>
    <!-- </div>-->
-
+</div>
 </body>   
 
 </html>
@@ -90,6 +91,12 @@ if (new URLSearchParams(window.location.search).get('login') === 'failed2') {
 alert('Login non riuscita, user o psw errati.Riprova');
 const newUrl = new URL(window.location.href);
 newUrl.searchParams.delete('login');
+window.history.replaceState({}, '', newUrl);
+}
+if (new URLSearchParams(window.location.search).get('signup') === 'success') {
+alert('Registrazione correttamente riuscita.');
+const newUrl = new URL(window.location.href);
+newUrl.searchParams.delete('signup');
 window.history.replaceState({}, '', newUrl);
 }
 }

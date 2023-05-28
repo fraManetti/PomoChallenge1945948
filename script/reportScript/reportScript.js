@@ -10,6 +10,7 @@ var mesi = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
             "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
 
 var myChart = null;
+//canvas.width = window.innerWidth * 1;
 
 function hourCharts() {
   const ctx = document.getElementById('myChartCanvas');
@@ -50,7 +51,7 @@ function hourCharts() {
 
 function dailyQuery() {
   return new Promise((resolve, reject) => {
-    const url = "getDailyTime.php";
+    const url = "../server/getDailyTime.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -111,7 +112,7 @@ function hourCharts2(s) {
 
 function dailyQuery2(s) {
   return new Promise((resolve, reject) => {
-    const url = "increaseDayTime.php";
+    const url = "../server/increaseDayTime.php";
     const formData = new FormData();
     formData.append("parametro1", s);
     const httpRequest = new XMLHttpRequest();
@@ -318,7 +319,7 @@ function avgWeeklyCharts() {
 
 function monthQuery() {
   return new Promise((resolve, reject) => {
-    const url = "getMonthTime.php";
+    const url = "../server/getMonthTime.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -338,7 +339,7 @@ function monthQuery() {
 
 function weekQuery() {
   return new Promise((resolve, reject) => {
-    const url = "getWeekTime.php";
+    const url = "../server/getWeekTime.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -358,7 +359,7 @@ function weekQuery() {
 
 function weekQuery2(s) {
   return new Promise((resolve, reject) => {
-    const url = "increaseWeekTime.php";
+    const url = "../server/increaseWeekTime.php";
     const formData = new FormData();
     formData.append("parametro1", s);
     const httpRequest = new XMLHttpRequest();
@@ -383,7 +384,7 @@ function avgCharts(){
 
 function avgDailyQuery() {
   return new Promise((resolve, reject) => {
-    const url = "avgday.php";
+    const url = "../server/avgday.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -403,7 +404,7 @@ function avgDailyQuery() {
 
 function avgWeekQuery() {
   return new Promise((resolve, reject) => {
-    const url = "avgWeekTime.php";
+    const url = "../server/avgWeekTime.php";
     const httpRequest = new XMLHttpRequest();
     httpRequest.open("GET", url, true);
     httpRequest.setRequestHeader('Content-Type', 'application/json');
@@ -434,7 +435,6 @@ function upTotalTime(totalTime) {
 
 
 function downloadEnded(tuple) {
-  //var totalTime = 0;
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task" data-value="${tuple.keyhash}">
     <!--
@@ -452,7 +452,7 @@ function downloadEnded(tuple) {
         <input type="text" readonly id="endedTaskname" value="${tuple.title}" maxlength="25">
        
 
-        <input type="number"  id="endedPomos" value= "${tuple.tim}" readonly  min="1">
+        <input type="text"  id="endedPomos" value= "${tuple.tim} min" readonly  min="1">
        
         <button id="optionbuton" onclick = "endedOption(event)">
             <img id = "endedOptionImg" src  = "../style/img/ellipsis-vertical-solid.png" >
@@ -466,7 +466,6 @@ function downloadEnded(tuple) {
     
     </div>
 `)
-//totalTime+= JSON.parse(tuple.tim);
 }
 
 function checkMonthsBorder() {
@@ -622,7 +621,7 @@ function load(s, e) {
     <p1> ${currentString} <br></p1>
   `);*/
     document.querySelector("#currentPeriod").innerText= currentString;
-    url = "dailyLoad.php";
+    url = "../server/dailyLoad.php";
     currentPeriodType = "day";
     currentHour = new Date().getHours();
     hourCharts(currentHour);
@@ -636,7 +635,7 @@ function load(s, e) {
   }
   else if(s == 'weekly') {
     document.querySelector("#currentPeriod").innerText= mon + " - " + sun;
-    url = "weeklyLoad.php";
+    url = "../server/weeklyLoad.php";
     currentPeriodType = "week";
     weekCharts();
     document.getElementById("increaseTimePeriod").disabled = false;
@@ -650,7 +649,7 @@ function load(s, e) {
     });
   }
   else if(s == 'monthly') {
-    url = "monthlyLoad.php";
+    url = "../server/monthlyLoad.php";
     currentPeriodType = "month";
     currentMonth = currentD.getMonth()+1;
     document.querySelector("#currentPeriod").innerText= mesi[currentMonth-1];
@@ -665,7 +664,7 @@ function load(s, e) {
     });
   }
   else if(s == 'all') {
-    url = "allLoad.php";
+    url = "../server/allLoad.php";
     currentPeriodType = "none";
     document.querySelector("#currentPeriod").innerText= "Total tasks";
     document.getElementById("increaseTimePeriod").disabled = true;
