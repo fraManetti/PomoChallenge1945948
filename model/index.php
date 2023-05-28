@@ -144,7 +144,8 @@ echo '<script>mergeCookie()</script>';
                 </div>
                 <div id="buttonsArea">
                 <div id="switchRow"> 
-                      <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
+                      
+                      <img class = "rotate" id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
                       </img>
                       <!--prima c'era onclick="InfoPopUp"-->
                       <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
@@ -209,13 +210,7 @@ echo '<script>mergeCookie()</script>';
                   </div>
                   <button id="push" onclick="addTask();">Add</button>
                 </div>
-                <br>
-                <div id="taskTag">
-                  <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
-                    Swap tasks </button>
-                    <button name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
-                      Reverse tasks </button>                           
-                </div>
+
                 <div class="bottomTag" id="taskTag">
                   <button name = "deleteAllTaskButton" class = "roundBtnHomeBottom" id="ButtonLeft" disabled onclick="deleteAllTask();">
                     Delete all tasks </button>  
@@ -227,8 +222,18 @@ echo '<script>mergeCookie()</script>';
                   </label>
                   <input type="checkbox" id="automaticDel" onclick="(function () {
                       delEnded=event.currentTarget.checked;
-                    })()"> 
+                    })()"> </label>
                   </div>  
+                  <div id="swapRow">
+                  <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
+                    <img  id = "swapImg" src  = "../style/img/swap.png">
+                    </img>
+                  </button>
+                  <button name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
+                    <img id = "reverseImg" src  = "../style/img/reverse.png">
+                    </img>
+                  </button>                       
+                </div>
                 </divd>
               </div>
               <div id="tasks">
