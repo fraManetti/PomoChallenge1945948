@@ -36,38 +36,38 @@ button.btn-search, button.btn-reset {
   width: 30px;
 }
 
-.sample {
+.barra {
   float: left;
   position: relative;
   width: 34%;
 }
 
-.sample.ten input {
+.barra.ric input {
   border-radius: 15px;
   transition: all .6s ease-in-out .3s;
   width: 250px;
 }
-.sample.ten input:focus {
+.barra.ric input:focus {
   transition-delay: 0;
   width: 350px;
 }
-.sample.ten input:focus ~ button {
+.barra.ric input:focus ~ button {
   transform: rotateZ(360deg);
 }
-.sample.ten input:focus ~ button.btn-search {
+.barra.ric input:focus ~ button.btn-search {
   background: rgb(255, 105, 105);
   color: #fff;
   left: 322px;
   transition-delay: 0;
 }
-.sample.ten input:focus ~ button.btn-reset {
+.barra.ric input:focus ~ button.btn-reset {
   left: 202px;
   transition-delay: .3s;
 }
-.sample.ten button {
+.barra.ric button {
   transition: all .6s ease-in-out;
 }
-.sample.ten button.btn-search {
+.barra.ric button.btn-search {
   background: #ccc;
   border-radius: 50%;
   height: 26px;
@@ -76,7 +76,7 @@ button.btn-search, button.btn-reset {
   transition-delay: .3s;
   width: 26px;
 }
-.sample.ten button.btn-reset {
+.barra.ric button.btn-reset {
   background: #fff;
   border: 1px solid #ccc;
   border-radius: 50%;
