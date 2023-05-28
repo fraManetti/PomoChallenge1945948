@@ -5,6 +5,11 @@
     height: 135vh;
   }
 
+  #pomoTitleID {
+    width: 230px;
+    justify-self: left;
+  }
+
   #amiciPanel{
     width: 98vw;
     height: 50vh;
@@ -29,6 +34,10 @@
   .richiesta{
     min-height: 150px;
     min-width: 200px;
+  }
+
+  #delete-friend-button {
+    font-size: small;
   }
 
   .largeButton{

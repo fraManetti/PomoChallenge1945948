@@ -12,6 +12,11 @@
        
       }
 
+      #pomoTitleID {
+        width: 230px;
+        justify-self: left;
+      }
+
       #btns {
         width: 100%;
       }

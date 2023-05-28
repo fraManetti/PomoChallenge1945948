@@ -19,6 +19,11 @@
        
     }
 
+    #pomoTitleID {
+        width: 230px;
+        justify-self: left;
+      }
+
     .imgContainer {
         width: 100%;
     }

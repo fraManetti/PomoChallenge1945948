@@ -119,6 +119,10 @@
   }
 }
 
+
+
+
+
 @media only screen and (max-width: 576px)  {
   .cnt {
     width: 100%;
@@ -154,7 +158,7 @@
     width: 90%;
     height: 250px;
   }
-  #innerPanel {width: 100%; height: 90%;}
+  #innerPanel {width: 100%; height: 85%;}
   #avgChoicePanel {width: 100%; margin: 0%; justify-self: center; padding: 0%; justify-content: center;}
   #canvasPanel {width: 95%; margin-top: 5px; height: 80%;}
   .incrDecrBtnPanel {width: 100%}
@@ -165,6 +169,11 @@
   #myChartCanvas {
     width: 100%;
   
+  }
+
+  #pomoTitleID {
+    width: 230px;
+    justify-self: left;
   }
 
   .tabClass {

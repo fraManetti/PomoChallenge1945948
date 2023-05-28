@@ -133,6 +133,11 @@
          height: fit-content;
          padding-bottom: 20px;
      }
+
+     #pomoTitleID {
+          width: 230px;
+          justify-self: left;
+        }
  
     .title {
      width: 100%;
