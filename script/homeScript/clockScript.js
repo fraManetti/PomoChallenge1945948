@@ -167,7 +167,7 @@ $(document).ready(function(){
       updateTaskTag(false,false);
       updateTaskButtons();
       var tmp=countTimes;
-      taskOn = false;
+	  modalitaTask();
       setButtonState();  
       countTimes=tmp;
       return true;
