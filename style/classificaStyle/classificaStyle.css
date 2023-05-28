@@ -47,11 +47,11 @@
   height: fit-content;
 }
 
-#infoClose {
-  background-color: #e85e56;
-  border-radius: 5px;
-  width: fit-content;
-  padding: 3%;
+#infoClose{
+	position: absolute;
+	top: -20px;
+	right: -20px;
+	color: #fff;
 }
 
 #classificaButtons{

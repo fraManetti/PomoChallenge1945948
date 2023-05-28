@@ -47,6 +47,35 @@
 
 }
 
+.overlay {
+  
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  
+}
+
+.profilePic {
+  width: 80%;
+}
+
+#infoClose{
+	position: absolute;
+	top: -20px;
+	right: -20px;
+	color: #fff;
+}
+
+.popup {
+  border-radius: 20px;
+  width: 300px;
+  padding: 10px;
+  padding: 10px;
+  height: fit-content;
+}
+
 /*struttura di ogni entry della tabella amiciBox*/
 .amico {
   grid-template-columns: 43% 20% 20%;
