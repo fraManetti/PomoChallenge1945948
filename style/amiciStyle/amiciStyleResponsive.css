@@ -8,8 +8,8 @@
   #amiciPanel{
     width: 98vw;
     height: 50vh;
-    min-height: 250px;
-    min-width: 250px;
+    min-height: 330px;
+    min-width: 200px;
   }
 
   #boxdx{
@@ -23,12 +23,12 @@
 
   #suggBox{
     min-height: 150px;
-    min-width: 220px;
+    min-width: 200px;
   }
 
   .richiesta{
     min-height: 150px;
-    min-width: 220px;
+    min-width: 200px;
   }
 
   .largeButton{
@@ -48,8 +48,8 @@
   #amiciPanel{
     width: 98vw;
     height: 50vh;
-    min-height: 250px;
-    min-width: 250px;
+    min-height: 330px;
+    min-width: 200px;
   }
 
   #boxdx{
@@ -63,12 +63,12 @@
 
   #suggBox{
     min-height: 150px;
-    min-width: 220px;
+    min-width: 200px;
   }
 
   .richiesta{
     min-height: 150px;
-    min-width: 220px;
+    min-width: 200px;
   }
 
   .largeButton{
@@ -81,14 +81,14 @@
 @media (min-width:600px) and (max-width:769px){
   .containerAmici{
     grid-template-columns: none;
-    grid-template-rows: 42% 57%;
+    grid-template-rows: 50% 50%;
     height: 135vh;
   }
 
   #amiciPanel{
     width: 90vw;
     height: 50vh;
-    min-height: 250px;
+    min-height: 350px;
     min-width: 250px;
   }
 
@@ -147,6 +147,27 @@
   }
 }
 
+
+/*-----------------------*/
+
+/* Surface Pro */
+@media  (min-width: 1000px) and (max-width: 1299px) {
+  #amiciPanel{
+    width: 40vw;
+  }
+
+  #boxdx{
+    width: 38vw;
+    grid-template-rows: 195px auto;
+  }
+
+  #amiciRequest{
+    max-height: 180px;
+  }
+
+}
+
+
 /* Surface Pro */
 @media  (min-width: 1300px) and (max-width: 1480px) {
   #amiciPanel{
@@ -200,6 +221,14 @@
     margin-top: 40px;
     max-height: 700px;
   }
+}
+
+@media (min-width: 600px) and (max-width: 768px) and (max-height: 600px){
+
+  .containerAmici{
+    grid-template-rows: 400px auto;
+  }
+
 }
 
 
