@@ -1,3 +1,15 @@
+/* ############################################
+SCRIPT PER GESTIRE LE TASK IN AMICI.PHP
+###############################################
+*/
+
+
+
+//#######################################################################################
+//####### FUNZIONI PER GESTIRE INTERAZIONI CON BOTTONI E VERSO IL SERVER:  ##############
+//#######################################################################################
+
+//Accettare richiesta in entrata e comunicarlo al server
 function acceptIncomingReq(e) {
     var button = e.currentTarget;
     var amico = button.parentNode.getAttribute("data-value");
@@ -23,6 +35,8 @@ function acceptIncomingReq(e) {
     </div>
 `)
 }
+
+//Eliminare amico e comunicarlo al server
 function delAmico(e) {
     var button = e.currentTarget;
     var amico = button.parentNode.getAttribute("data-value");
@@ -42,6 +56,7 @@ function delAmico(e) {
     });
 }
 
+//Eliminare richiesta in uscita e comunicarlo al server
 function delOutgoingReq(e) {
     var button = e.currentTarget;
     var req = button.parentNode.getAttribute("data-value");
@@ -59,8 +74,9 @@ function delOutgoingReq(e) {
             console.error(error);
         }
     });
-
 }
+
+//Eliminare richiesta in entrata e comunicarlo al server
 function delIncomingReq(e) {
     var button = e.currentTarget;
     var req = button.parentNode.getAttribute("data-value");
@@ -79,16 +95,8 @@ function delIncomingReq(e) {
         }
     });
 }
-function downloadAmici(amico) {
-    document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
-        <div class="utente amico" data-value=${amico}>
-            <div class="nomeAmico">${amico}</div>
-            <button class="largeButton largeWhiteButton visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
-            <button class = "largeButton largeRedButton delAmico" id = "delete-friend-button" onClick = delAmico(event);> Rimuovi </button>
-        </div>
-    `)
-}
-//Funzione per aggiungere amico cliccando sul bottone aggiungi
+
+//Funzione per aggiungere amico cliccando sul bottone aggiungi dai suggeriti e comunica al server
 function addFriend(e) {
     var friendToAdd = e.currentTarget.parentNode.getAttribute("data-value");
         $.ajax({
@@ -150,6 +158,11 @@ function sendRequest() {
 
     }
 }
+
+//#################################################################
+//##########       FUNZIONI PER GESTIRE DATI DAL SERVER:  ##############
+//#################################################################
+//Inserisce richieste di amicizie entranti nel pannello 
 function downloadIncomingRequest(amico) {
     document.querySelector("#incomingR").insertAdjacentHTML('beforeend', `
         <div class="utente incomingReq" data-value=${amico}>
@@ -159,8 +172,9 @@ function downloadIncomingRequest(amico) {
         </div>
     `)
 }
+
+//Inserisce suggerimenti di amicizie nel pannello 
 function downloadSuggAmici(tuple) {
-    
     document.querySelector("#suggested").insertAdjacentHTML('beforeend', `
     <div class ="utente suggAmico" data-value =${tuple.utentea}>    
     <div class="nomeAmico">${tuple.utentea}</div>
@@ -169,6 +183,8 @@ function downloadSuggAmici(tuple) {
     </div>
 `)
 }
+
+//Inserisce richieste di amicizie uscenti nel pannello 
 function downloadOutgoingRequest(amico) {
     document.querySelector("#outgoingR").insertAdjacentHTML('beforeend', `
         <div class="utente outgoingReq" data-value=${amico}>
@@ -177,3 +193,14 @@ function downloadOutgoingRequest(amico) {
             <button class = "largeButton largeRedButton delOutgoingReq" onClick = delOutgoingReq(event);>Annulla</button>
         </div>
     `)}
+
+//Inserisce amici nel pannello 
+function downloadAmici(amico) {
+    document.querySelector("#amiciBox").insertAdjacentHTML('beforeend', `
+        <div class="utente amico" data-value=${amico}>
+            <div class="nomeAmico">${amico}</div>
+            <button class="largeButton largeWhiteButton visitaProfiloButton" onClick="openProfilePopUp(event)">Profilo</button>
+            <button class = "largeButton largeRedButton delAmico" id = "delete-friend-button" onClick = delAmico(event);> Rimuovi </button>
+        </div>
+    `)
+}

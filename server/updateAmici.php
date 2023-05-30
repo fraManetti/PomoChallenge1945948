@@ -7,10 +7,11 @@
     $username = $_SESSION['username'];
     $type = $_POST['type'];
     switch ($type) {
-        case 'delAmico':    
+        case 'delAmico': //Eliminare un amico   
             $query = "delete from amici where (utentea= '${username}' and utenteb='${amico}') or (utentea = '${amico}' and utenteb ='${username}')";
             break;
-        case 'reqAmico':
+
+        case 'reqAmico': //Invia richiesta di amicizia (sia dalla barra che dal bottone aggiungi)
             $query = "select username from utente where username ='${amico}'";
             $res = pg_query($query);
             if(!$tuple = pg_fetch_array($res,null,PGSQL_ASSOC)){
@@ -29,30 +30,31 @@
             $query="insert into richieste values ('${username}','${amico}')";
             echo "";
             break;
-        case 'delOutgoingReq':
+
+        case 'delOutgoingReq': //Elimina richiesta uscente
             $query="delete from richieste where richiedente ='${username}' and accettante= '${amico}'";
             break;
-        case 'delIncomingReq':
+
+        case 'delIncomingReq': //Elimina richiesta entrante
             $query="delete from richieste where richiedente ='${amico}' and accettante= '${username}'";
             break;
-        case 'acceptReq':
+
+        case 'acceptReq': //Accetta richiesta entrante
             $query="insert into amici values('${username}', '${amico}')";
             $res = pg_query ($db_conn,$query);
             if (!$res) {
                 header("HTTP/1.1 500 Internal Server Error");
-                //echo '<script> alert ("inserisci amico valido");</script>';
                 exit();
               }
             $query="delete from richieste where richiedente ='${amico}' and accettante= '${username}'";
-            break;        
+            break;
+
         default:
-            # code...
-        break;
+            break;
     }
     $res = pg_query ($db_conn,$query);
     if (!$res) {
-        //header("HTTP/1.1 500 Internal Server Error");
-        //echo '<script> alert ("inserisci amico valido");</script>';
+        header("HTTP/1.1 500 Internal Server Error");
         exit();
       }
 ?>
