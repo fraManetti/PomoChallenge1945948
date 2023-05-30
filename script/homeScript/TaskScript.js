@@ -1,3 +1,7 @@
+/* ############################################
+SCRIPT PER GESTIRE LE TASK IN INDEX.PHP
+###############################################
+*/
 //#################################################################
 //##########             VARIABILI:                  ##############
 //#################################################################
@@ -27,7 +31,7 @@ function hashCode(string) {
 }
 
 
-//Serve per sapere se sono in modalità task o meno:
+//Serve per aggiornare il valore di taskOn e del sessionStorage ovvero invertirlo al momento del click del togle
 function modalitaTask() {
   if(!taskOn){
     taskOn=true;
@@ -39,6 +43,20 @@ function modalitaTask() {
     sessionStorage.setItem("taskStatus",false);
   }
 }
+
+//Funzione per aggiornare il valore nella tab
+function titleTimer(clock) {
+  var timeInSeconds = clock.getTime();
+  var minutes = Math.floor(timeInSeconds / 60);
+  var seconds = timeInSeconds % 60;
+  var timeString = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  document.title = timeString + " - "+pos;
+}
+
+
+//#################################################################
+//##########  FUNZIONI PER GESTIRE AGGIORNAMENTI:    ##############
+//#################################################################
 
 // Funzione per eliminare una task da tutto con il bottone delete:
 function deleteTask(e) {
@@ -60,7 +78,6 @@ function deleteTask(e) {
   var tasks = document.querySelectorAll('.task:not(.endedTasks)');
   for(var i=0; i<tasks.length;i++){
     if (i>=deletedIndex){
-      //console.log(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1)));
         tasks[i].children[1].textContent=JSON.stringify(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1))-1)+")"; 
       }
   }
@@ -72,11 +89,6 @@ function deleteTask(e) {
   updateTaskTag(false,false);
   updateTaskButtons();
 }
-
-
-//#################################################################
-//##########  FUNZIONI PER GESTIRE AGGIORNAMENTI:    ##############
-//#################################################################
 
 //Funzione per eliminare la task da lista e marcarca come completata
 function removeTaskItem() {
@@ -118,16 +130,6 @@ function removeTaskItem() {
 }
 
 
-function titleTimer(clock) {
-  var timeInSeconds = clock.getTime();
-  var minutes = Math.floor(timeInSeconds / 60);
-  var seconds = timeInSeconds % 60;
-  var timeString = minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-  document.title = timeString + " - "+pos;
-}
-
-
-
 
 //Funzione per rendere scrivibili o leggibili i campi delle task
 function updateTaskBox (taskItems,  cond){ 
@@ -162,11 +164,10 @@ function updateTaskMap(newTitle, newPomos,newNote,newIndex) {
       }
     }
   )
-  console.log(task)
   updateServer(task,"UP");
 }
 
-//Aggiorno orario stimato per la fine:
+//Calcolo l'orario stimato per la fine:
 function timeUpdate(time){
   var date = new Date();
   var dateMillis = date.getTime();
@@ -186,7 +187,6 @@ function timeUpdate(time){
   if (hour<10)  
     hour ="0"+ JSON.stringify(hour);
   var ret = hour+":"+min;
-  //console.log(newDate.toLocaleString("it-IT",{timeStyle:"long"}));
   return ret;
 }
 
@@ -230,6 +230,7 @@ function updateTaskTag(isRunning,isEnded){
   document.getElementById("pomoCount").innerText=textToAppend;
 }
 
+// Aggiorno stato dei bottoni deleteAll,swap,reverse e deleteEnded in base a quante task ho inserito/finito
 function updateTaskButtons(){
   if(taskList.length==1){
     document.getElementsByName("deleteAllTaskButton")[0].disabled=false;
@@ -274,7 +275,7 @@ function checkCustom() {
   }
 }
 
-//Appare il pannello per modificare una task:
+//Appare e gestisce il pannello per modificare una task:
 function showOption(e) {
   //console.log(e);
   var button = e.currentTarget;
@@ -332,11 +333,55 @@ function infoPopUp() {
   overlay.style.display = "block";
 }
 
+//Chiude pannello delle info
 function closeInfo() {
   document.getElementById("infoOverlay").style.display="none";
 }
+function openSwapPopup() {
+  popupContainer = document.getElementById("popupContainer");
 
+  popupContainer.innerHTML = `
+    <div class="popupSwap">
+        <div id="closePopup">&times;</div>
+        <label> Scambia task n° 
+        <input type="number" id="index1" required min=1></label><br>
+        <label> Con task n°
+        <input type="number" id="index2" required min=1></label><br>
 
+        <button id = "swapclick" >Swap</button>
+    </div>
+  `;
+  //document.getElementById("overlay").style.display = "block";
+  
+  document.addEventListener("mousedown", handleOutClick);
+
+  //CONTINUA QUI
+  var i1;
+  var i2;
+
+  document.querySelector("#swapclick").addEventListener("click", function() {
+    i1 = document.getElementById("index1").value;
+    i2 = document.getElementById("index2").value;
+    swapTasks(i1,i2);  
+  });
+
+  document.querySelector("#closePopup").addEventListener("click", function() {
+  popupContainer.innerHTML = "";
+  });
+}
+
+//Funzione per aggiornare il valore del toggle modalità task in base al valore di taskOn salvato nel sessionStorage
+function setButtonState() {
+  if(sessionStorage.getItem("taskStatus")!=null){
+    taskOn = JSON.parse(sessionStorage.getItem("taskStatus"));
+  }
+  var checkBox = document.getElementById("customCheckbox");
+  if (taskOn == true){
+    checkBox.checked = true;
+  } else {
+    checkBox.checked = false;
+  }
+}
 // Aggiunge una nuova task:
 function addTask(){
     if(document.querySelector('#taskFieldInput').value.length == 0){
@@ -398,44 +443,12 @@ function addTask(){
   }
 
 
-  function openSwapPopup() {
-    popupContainer = document.getElementById("popupContainer");
-  
-    popupContainer.innerHTML = `
-      <div class="popupSwap">
-          <div id="closePopup">&times;</div>
-          <label> Scambia task n° 
-          <input type="number" id="index1" required min=1></label><br>
-          <label> Con task n°
-          <input type="number" id="index2" required min=1></label><br>
-
-          <button id = "swapclick" >Swap</button>
-      </div>
-    `;
-    //document.getElementById("overlay").style.display = "block";
-    
-    document.addEventListener("mousedown", handleOutClick);
-  
-    //CONTINUA QUI
-    var i1;
-    var i2;
-
-    document.querySelector("#swapclick").addEventListener("click", function() {
-      i1 = document.getElementById("index1").value;
-      i2 = document.getElementById("index2").value;
-      swapTasks(i1,i2);  
-    });
-
-    document.querySelector("#closePopup").addEventListener("click", function() {
-    popupContainer.innerHTML = "";
-    });
-  }
 
 
 //#################################################################
 //##########  FUNZIONI PER GESTIRE I BOTTONI:        ##############
 //#################################################################
-
+//Bottone di swap
   function swapTasks(i1, i2) {
     i1-=1;
     i2-=1;
@@ -443,10 +456,6 @@ function addTask(){
       var temp = taskList[i1];
       taskList[i1] = taskList[i2];
       taskList[i2] = temp;
-
-      // tmp = taskList[i1].index;
-      // taskList[i1].index=taskList[i2].index;
-      // taskList[i2].index=tmp;
 
       var tasks = document.querySelectorAll('.task:not(.endedTasks)');
       tasks[i1].setAttribute("data-value",taskList[i1].key);
@@ -472,7 +481,7 @@ function addTask(){
       alert("Inserisci degli indici validi");
     }
   }
-
+//Bottone di reverse task
   function reverseTask() {
     taskList.reverse();
     var tasks = document.querySelectorAll('.task:not(.endedTasks)');
@@ -489,6 +498,7 @@ function addTask(){
   updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
 
   }
+//Bottone delete all task
 function deleteAllTask() {
   index=1;
   updateServer(taskList[0],"ALL_DEL");
@@ -506,7 +516,7 @@ function deleteAllTask() {
 }
 
 
-
+//Bottone delete ended task
 function deleteEndedTask(){
   $('.endedTasks').remove();
   updateTaskButtons();
@@ -524,7 +534,9 @@ function nascondiVignetta() {
   vignetta.style.display = "none";
 }
 
-
+///#######################################
+//Funzione per gestire caricamenti sul server delle task
+//Nel caso in cui non si è loggati invece di caricare sul server salva i dati su un cookie che verrà poi letto dal server e analizzato in caso di login
 function updateServer(newTask,type) {
 console.log(newTask,type);
   if(isLogged){
@@ -549,14 +561,4 @@ console.log(timestamp);
 document.cookie= "cookie_timestamp="+timestamp+ "; expires=Fri, 31 Dec 2023 23:59:59 GMT;"+ 'path=/';
 
 }}
-function setButtonState() {
-  if(sessionStorage.getItem("taskStatus")!=null){
-    taskOn = JSON.parse(sessionStorage.getItem("taskStatus"));
-  }
-  var checkBox = document.getElementById("customCheckbox");
-  if (taskOn == true){
-    checkBox.checked = true;
-  } else {
-    checkBox.checked = false;
-  }
-}
+
