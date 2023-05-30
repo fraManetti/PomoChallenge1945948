@@ -17,7 +17,7 @@
     grid-column: 1; 
     justify-self: center;
     width: 500px;
-    height: 50vh;
+   
     margin-top: 20px;
     margin-bottom: 20px;
     border-radius: 20px;
@@ -58,7 +58,7 @@
     padding: 0%;
   }
   .incrDecrBtnPanel {width: 100%; height: 100%;}
-  #tasksPanel{width: 100%; height: 100%; max-height: 610px; z-index: 3;}
+  #tasksPanel{width: 100%; height: 100%;  z-index: 3;}
   #totalTime {width:100%}
   #currentPeriod {width: 100%}
   #selectDatePanel {width: 90%; margin: auto; font-size: 200;}
@@ -90,11 +90,13 @@
 
 @media only screen and (max-height: 850px)  {
   #reportPanel {
-    height: 80vh;
+    height: 500px;
+    padding: 10px;
   }
 
   #chartPanel {
-    height: 80vh;
+    height: 500px;
+    padding: 10px;
   }
 
   .cnt {
@@ -104,19 +106,23 @@
   }
 
   #innerPanel {
-    height: 70%;
+    height: 85%;
   }
 
   #tasksPanel {
-    height: 60vh;
+    height: 90%;
   }
   #canvasPanel { 
     margin-top: 5px; 
-    height: 60vh;
+    height: 360px;
     margin-top: 60px;
     margin-bottom: auto;
   }
 }
+
+
+
+
 
 @media only screen and (max-width: 576px)  {
   .cnt {
@@ -153,17 +159,22 @@
     width: 90%;
     height: 250px;
   }
-  #innerPanel {width: 100%; height: 80%;}
+  #innerPanel {width: 100%; height: 85%;}
   #avgChoicePanel {width: 100%; margin: 0%; justify-self: center; padding: 0%; justify-content: center;}
   #canvasPanel {width: 95%; margin-top: 5px; height: 80%;}
   .incrDecrBtnPanel {width: 100%}
-  #tasksPanel{width: 100%; height: 100%; max-height: 610px; z-index: 3;}
+  #tasksPanel{width: 100%; height: 95%; max-height: fit-content; z-index: 3;}
   #totalTime {width:100%}
   #currentPeriod {width: 100%}
   #selectDatePanel {width: 90%; margin: auto; font-size: 200;}
   #myChartCanvas {
     width: 100%;
   
+  }
+
+  #pomoTitleID {
+    width: 230px;
+    justify-self: left;
   }
 
   .tabClass {

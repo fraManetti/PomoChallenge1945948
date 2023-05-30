@@ -16,7 +16,6 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css'>
-<link rel="stylesheet" href="../server/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 
     <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.css" >
@@ -118,23 +117,34 @@ $username = $_SESSION['username'];
 <?php 
     $query ="
     WITH mieiAmici AS (
-        SELECT utentea AS amico FROM amici WHERE utenteb = '{$username}'
-        UNION
-        SELECT utenteb AS amico FROM amici WHERE utentea = '{$username}'
-      )
-      SELECT *
-      FROM (
-        SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != '{$username}'
-        UNION
-        SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != '{$username}'
-      ) AS pippo
-      ORDER BY random()
-      LIMIT 3;
+      SELECT utentea AS amico FROM amici WHERE utenteb = '${username}'
+      UNION
+      SELECT utenteb AS amico FROM amici WHERE utentea = '${username}'
+    )
+    SELECT *
+    FROM (
+      SELECT utentea FROM mieiAmici JOIN amici ON (utenteb = amico) WHERE utentea != '${username}' and utentea not in (
+    select utentea from amici 
+      where utenteb='${username}' 
+    union
+    select utenteb from amici 
+      where utentea='${username}' 		
+  )
+      UNION
+      SELECT utenteb FROM mieiAmici JOIN amici ON (utentea = amico) WHERE utenteb != '${username}'and utenteb not in (
+    select utentea from amici 
+      where utenteb='${username}' 
+    union
+    select utenteb from amici 
+      where utentea='${username}' 		
+  )
+    ) AS pippo
+    ORDER BY random()
+    LIMIT 3;
     ";
 $res = pg_query($db_conn,$query);
 if (!$res) {
     header("HTTP/1.1 500 Internal Server Error");
-    //echo '<script> alert ("inserisci amico valido");</script>';
     exit();
   }
   while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {

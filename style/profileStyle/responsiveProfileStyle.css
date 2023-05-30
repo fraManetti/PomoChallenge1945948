@@ -1,81 +1,238 @@
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 992px) {
+     .cnt {
+          padding-top: 15vh;
+          padding-left: 5px;
+          padding-bottom: 10px;
+      }
+  
+      .boxDati {
+       margin-top: 0px;
+          width: 80%;
+          max-width: 500px;
+          margin-left: auto;
+          margin-right: auto;
+          height: fit-content;
+          padding-bottom: 20px;
+      }
+  
+     .title {
+      width: 100%;
+      height: 10%;
+      font-size: 24px;
+      padding-left: 25px;
+       padding-top: 3%;
+       padding-bottom: 3%;
+     }
+  
+     #innerBoxDati {
+          width: auto;
+          margin-left: auto;
+          margin-right: auto;
+          display: flex;
+          margin: 0% 10px;
+     }
+  
+     .content {
+          width: 100%;
+          height: 95%;
+          display: flex;
+          flex-direction: column;
+     }
+  
+     .immagine-profilo {
+          width: 100%;
+          justify-content: center;
+          align-content: center;
+          align-items: center;
+          padding-top: 5%;
+     }
+  
+     .image-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 2px;
+     }
+  
+     #mypic {
+       width: 40%;
+      margin-left: auto;
+     }
+  
+     .resetImageBtn {
+      width: 100%;
+      margin: 0px, auto;
+      height: fit-content;
+      font-size: 17px;
+      padding: 3px;
+      justify-self: center;
+     }
+  
+     .imageButton {
+            width: 90%;
+          margin-left: auto;
+          margin-right: auto;
+          padding: 0%;
+          justify-self: auto;
+          height: fit-content;
+          justify-self: center;
+     }
+  
+  
+     .dati-account {
+      width: 100%;
+     }
+  
+     #firstRow {
+          display: grid;
+          grid-template-columns: 7% 30% 43% 20%;
+          justify-items: start;
+          height: 33%;
+          width: 100%;
+     }
+  
+     #editPasswordBtn {
+       padding: 3%;
+       margin: 0%;
+       justify-content: center;
+     }
+  
+     .editUsername {
+          margin-left: 5%;
+       width: 90%;
+       height: 90%;
+     }
+
+     #usernameField {
+          
+     }
+}
 @media only screen and (max-width: 576px) {
 
-    .cnt {
-        padding-top: 10vh;
-        padding-left: 5px;
+     .cnt {
+         padding-top: 10vh;
+         padding-left: 5px;
+         padding-bottom: 10px;
+     }
+ 
+     .boxDati {
+      margin-top: 0px;
+         width: 95%;
+         margin-left: auto;
+         margin-right: auto;
+         height: fit-content;
+         padding-bottom: 20px;
+     }
+
+     #pomoTitleID {
+          width: 230px;
+          justify-self: left;
+        }
+ 
+    .title {
+     width: 100%;
+     height: 10%;
+     font-size: 24px;
+     padding-left: 25px;
+      padding-top: 3%;
+      padding-bottom: 3%;
+    }
+ 
+    #innerBoxDati {
+         width: auto;
+         margin-left: auto;
+         margin-right: auto;
+         display: flex;
+         margin: 0% 10px;
+    }
+ 
+    .content {
+         width: 100%;
+         height: 95%;
+         display: flex;
+         flex-direction: column;
+    }
+ 
+    #firstRow {
+      display: grid;
+      grid-template-columns: 10% 32% 40% 17%;
+      justify-items: start;
+      height: 33%;
+      width: 100%;
+ }
+ 
+    .immagine-profilo {
+         width: 100%;
+         justify-content: center;
+         align-content: center;
+         align-items: center;
+         padding-top: 5%;
+    }
+ 
+    .image-container {
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     padding: 2px;
+    }
+ 
+    #mypic {
+      width: 40%;
+     margin-left: auto;
+    }
+ 
+    .resetImageBtn {
+     width: 100%;
+     margin: 0px, auto;
+     height: fit-content;
+     font-size: 17px;
+     padding: 3px;
+     justify-self: center;
+    }
+ 
+    .imageButton {
+           width: 90%;
+         margin-left: auto;
+         margin-right: auto;
+         padding: 0%;
+         justify-self: auto;
+         height: fit-content;
+         justify-self: center;
+    }
+ 
+ 
+    .dati-account {
+     width: 100%;
+    }
+ 
+    .profileField {
+     height: 33%;
+     width: 100%;
     }
 
-    .boxDati {
-        width: 95%;
-        margin-left: auto;
-        margin-right: auto;
-        height: fit-content;
-        padding-bottom: 20px;
+    .profileFieldNames {
+     font-size: smaller;
     }
-
-   .title {
-    width: 100%;
-    height: 80px;
-    font-size: 24px;
-    padding-left: 25px;
-   }
-
-   #innerBoxDati {
-        width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-   }
-
-   .content {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 40% 60%;
-   }
-
-   .immagine-profilo {
-        width: 100%;
-        justify-content: center;
-        align-content: center;
-        align-items: center;
-   }
-
-   .image-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: 2px;
-   }
-
-   #mypic {
-    margin: 0, auto;
-   }
-
-   .resetImageBtn {
-    width: 90%;
-    margin: 0px, auto;
-    height: fit-content;
-    font-size: 17px;
-    padding: 3px;
-    justify-self: center;
-   }
-
-   .imageButton {
-          width: 100%;
-        margin: 2px, auto;
-        padding: 0%;
-        justify-self: auto;
-        height: fit-content;
-        justify-self: center;
-   }
-
-
-   .dati-account {
-    width: 100%;
-   }
-
-   .profileField {
-    height: 33%;
-    width: 100%;
-   }
-
-}
+ 
+    #editPasswordBtn {
+      padding: 3%;
+      margin: 0%;
+      justify-content: center;
+    }
+ 
+    .editUsername {
+      position: relative;
+      right: 0;
+      margin-left: 0%;
+    }
+ }

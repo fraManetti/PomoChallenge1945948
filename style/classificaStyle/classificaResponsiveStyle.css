@@ -14,16 +14,19 @@
     #classificaPanel {
         width: 40%;
         height: 600px;
-
+        padding-bottom: 10px;
     }
+
+    
+
     #contentPanel{
-        height:70%;
+        
       }
     
 }
 @media screen and (max-width: 992px){
     .cnt{
-        padding-top: 20vh;
+        padding-top: 12vh;
     }
     .largeButton {
         font-size: 1.15vw;
@@ -33,23 +36,46 @@
         margin-top: 1%;
     }
 
-    #classificaPanel {
-        width: 60%;
-        height: 90%;
+    
 
+    #classifica-title {
+        height: fit-content;
+       font-size: x-large;
+        padding-bottom: 10px;
+    }
+
+    #classificaBox {
+        max-height: 80%;
+    }
+
+    .tabClass{
+        width: 40%;
+        padding-bottom: 5px;
     }
     #contentPanel{
-        height:60%;
+        height:80%;
+        
       }
-      #classificaBox {
-        max-height: 85%;
+
+    #classificaButtons {
+        height: fit-content;
+        padding-bottom: 10px;
+        margin-top: 0%;
+        margin-bottom: 0%;
+        padding-top: 7px;
     }
+
+    .elemClassifica {
+        font-size: small;
+    }
+    
+      
 
 }
 
 @media screen and (max-width: 576px){
     .cnt{
-        padding-top: 20vh;
+        padding-top: 10vh;
     }
     .largeButton {
         font-size: 2vw;
@@ -61,41 +87,103 @@
 
     #classificaPanel {
         width: 80%;
-        height: 90%;
+        height: 70vh;
+        padding-top: 10px;
 
+    }
+
+    #pomoTitleID {
+        width: 230px;
+        justify-self: left;
+      }
+
+
+
+    #contentPanel{
+        height:80%;
+      }
+
+    #classificaButtons {
+        height: 10%;
+        margin-top: 0%;
+        margin-bottom: 0%;
+        padding-top: 7px;
+    }
+
+    #classifica-title {
+        height: 10%;
+        font-size: xx-large;
     }
     #classificaBox {
         max-height: 80%;
     }
-      #contentPanel{
-        height:60%;
-      }
+
+    .tabClass{
+        width: 40%;
+        padding-bottom: 5px;
+    }
+      
+    .elemClassifica {
+        font-size: small;
+    }
+
 
 }
 @media screen and (max-width: 300px) {
     .cnt{
         padding-top: 10vh;
     }
+
+    .popup {
+        width: 95%;
+        height: fit-content;
+    }
+    
     #contentPanel{
         height:60%;
         
       }
 
-      #classificaPanel {
-        width: 80%;
-        height: 70%;
+       #classificaPanel {
+        width: 60%;
+        height: 90%;
+        padding-top: 10px;
 
     }
-    .elemClassifica{
-        font-size: 1vh;
+    #contentPanel{
+        height:80%;
+      }
+
+    #classificaButtons {
+        height: 10%;
+        margin-top: 0%;
+        margin-bottom: 0%;
+        padding-top: 7px;
     }
+
+    #classifica-title {
+        height: 10%;
+        font-size: large;
+    }
+    #classificaBox {
+        max-height: 80%;
+    }
+
     .tabClass{
-        font-size: 4vw;
-        width: 25%;
-        height: 5%;
+        width: 40%;
+        padding-bottom: 5px;
+        font-size: smaller;
+    }
+      
+    .elemClassifica {
+        font-size: small;
     }
 }
-@media screen and (max-height: 400px) {
+@media screen and (max-height: 700px) {
+    #classificaPanel {
+        height: 500px;
+    }
+
     #contentPanel{
-        height:50%;
+        height:80%;
       }}

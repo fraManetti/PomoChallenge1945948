@@ -1,12 +1,12 @@
 MIN_PLEN = 8;
 MIN_ULEN = 3;
-MAX_LEN = 40;
+MAX_LEN = 20;
 MAX_PLEN = 32;
 
 const uppercaseRegex = new RegExp('(?=.*[A-Z]).+');
 const lowercaseRegex = new RegExp('(?=.*[a-z]).+');
 const numRegex = new RegExp('.*[0-9]+.*'); 
-const specialRegex = new RegExp('(?=.*[@#$%^&+=]).+');
+const specialRegex = new RegExp('(?=.*[@#$%\\^&+=!"£/()=?\\^ì\\\\]).+');
 
 
 function showPassword() {

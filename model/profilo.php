@@ -46,7 +46,7 @@
       </div> 
     </div>
     <div class="dati-account">
-      <p class = "profileField"> 👤 <label class="profileFieldNames"> Username: </label> <input id = "usernameField" type="text"  value="<?php echo $_SESSION["username"]; ?>"  disabled> 
+      <p class = "profileField" id = "firstRow"> 👤 <label class="profileFieldNames"> Username: </label> <input id = "usernameField" type="text"  value="<?php echo $_SESSION["username"]; ?>"  disabled> 
       <button class="editUsername" onclick = "updateUsername()">Edit</button></p>
       <p class = "profileField"> ⏱️ <label class="profileFieldNames"> Totale delle ore: </label> <span id="ore-studio">0</span></p>
       <p class = "profileField"> 👫 <label class="profileFieldNames">Amici totali: </label> <span id="amici-totali">0</span></p>
@@ -56,7 +56,6 @@
 
       <div id="popupContainer"></div>
     </div>
-  </div>
   </div>
 </div>
 </div>

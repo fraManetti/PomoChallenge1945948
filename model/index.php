@@ -27,7 +27,9 @@
     <script src='https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js'></script>
     <script  src="../script/homeScript/clockScript.js"></script>
     <script  src="../script/homeScript/TaskScript.js"></script>
+    <script  src="../script/defaultScript.js"></script>
     <script  src="../script/homeScript/serverTaskScript.js"></script>
+    <script  src="../script/defaultScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
     <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
 
@@ -80,28 +82,11 @@ echo '<script>mergeCookie()</script>';
 
 <div id="mynavbar"></div>
     <div class="cnt">
-      <div class="box"></div>
+      <div class="box" id = "box1"></div>
         <div class="center-box">
           <div class="box">
             <div class="pomodoro">
-              <div id="switchRow"> 
-                      <img id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
-                      </img>
-                      <!--prima c'era onclick="InfoPopUp"-->
-                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
-                      
-                      </img>
-                      <div class="overlay" id="infoOverlay">
-                        <div class = "popup" id="infoPop">
-                          <p>
-                          Un Pomodoro è un timer <br> che corrisponde ad una <br> sessione di lavoro. <br> Al termine di ogni Pomodoro <br> ci sarà una Short Break. <br>Ogni quattro pomodori <br> ci sarà invece una Long Break. 
-                          </p>
-                          <span class = "close" id="infoClose" onclick="closeInfo()">
-                            X
-                          </span>
-                        </div>
-                      </div>
-              </div> 
+              
               <div class="row" id="statRow">
                 <div id="stats"></div>
               </div>                  
@@ -119,7 +104,7 @@ echo '<script>mergeCookie()</script>';
                           <button class="btn btn-default btnIncDec" id="sessDec">-</button>        
                         </div>
                         <div class="col-md-2">
-                          <input type="number" class="params" id="session" value = "25" onblur="writeSession()"></input>
+                          <input type="number" class="params" id="session" value = "25" onblur="writeSession()" onkeypress="handleKeyPress(event, 'writeSession')"></input>
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-default btnIncDec" id="sessInc">+</button>
@@ -134,7 +119,7 @@ echo '<script>mergeCookie()</script>';
                           <button class="btn btn-default btnIncDec" id="breakDec">-</button>
                         </div>
                         <div class="col-md-2">
-                          <input type="number" class="params" id="break" value = "5" onblur="writeShortBreak()"></input>
+                          <input type="number" class="params" id="break" value = "5" onblur="writeShortBreak()" onkeypress="handleKeyPress(event, 'writeShortBreak')"></input>
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-default btnIncDec" id="breakInc">+</button>        
@@ -148,7 +133,7 @@ echo '<script>mergeCookie()</script>';
                           <button class="btn btn-default btnIncDec" id="longDec">-</button>        
                         </div>
                         <div class="col-md-2">
-                          <input type="number"  class="params" id="longBreak" value = "15" onblur="writeLongBreak()" ></input>
+                          <input type="number"  class="params" id="longBreak" value = "15" onblur="writeLongBreak()" onkeypress="handleKeyPress(event, 'writeLongBreak')"></input>
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-default btnIncDec" id="longInc">+</button>
@@ -158,10 +143,31 @@ echo '<script>mergeCookie()</script>';
                   </div>
                 </div>
                 <div id="buttonsArea">
+                <div id="switchRow"> 
+                      
+                      <img class = "rotate" id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
+                      </img>
+                      <!--prima c'era onclick="InfoPopUp"-->
+                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
+                      
+                      </img>
+                      <div class="overlay" id="infoOverlay">
+                        <div class = "popup" id="infoPop">
+                          <p>
+                          Un Pomodoro è un timer <br> che corrisponde ad una <br> sessione di lavoro. <br> Al termine di ogni Pomodoro <br> ci sarà una Short Break. <br>Ogni quattro pomodori <br> ci sarà invece una Long Break. 
+                          </p>
+                          <span class = "close" id="infoClose" onclick="closeInfo()">
+                            X
+                          </span>
+                        </div>
+                      </div>
+                    </div> 
                   <div class="" id="btns">
                     <button class="btn btn-default btn-lg" id="start">START</button>
                     <button class="btn btn-default btn-lg" id="skip">SKIP</button>
                     <button class="btn btn-default btn-lg" id="clear">CLEAR</button>
+                  </div>
+                  <div id = "finalCol">
                   </div>
                 </div>
               </div>
@@ -204,13 +210,7 @@ echo '<script>mergeCookie()</script>';
                   </div>
                   <button id="push" onclick="addTask();">Add</button>
                 </div>
-                <br>
-                <div id="taskTag">
-                  <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
-                    Swap tasks </button>
-                    <button name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
-                      Reverse tasks </button>                           
-                </div>
+
                 <div class="bottomTag" id="taskTag">
                   <button name = "deleteAllTaskButton" class = "roundBtnHomeBottom" id="ButtonLeft" disabled onclick="deleteAllTask();">
                     Delete all tasks </button>  
@@ -222,8 +222,18 @@ echo '<script>mergeCookie()</script>';
                   </label>
                   <input type="checkbox" id="automaticDel" onclick="(function () {
                       delEnded=event.currentTarget.checked;
-                    })()"> 
+                    })()"> </label>
                   </div>  
+                  <div id="swapRow">
+                  <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
+                    <img  id = "swapImg" src  = "../style/img/swap.png">
+                    </img>
+                  </button>
+                  <button name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
+                    <img id = "reverseImg" src  = "../style/img/reverse.png">
+                    </img>
+                  </button>                       
+                </div>
                 </divd>
               </div>
               <div id="tasks">
@@ -235,10 +245,11 @@ echo '<script>mergeCookie()</script>';
         
         </div>
       </div>
-      <div class="box">
-      </div>
+      
     </div>
-
+    <div class="box" id = "box3">
+      </div>
+                  </div>
 
 <?php
 if(isset($_SESSION['username'])){    
@@ -254,5 +265,21 @@ while ($tuple = pg_fetch_array($res, null, PGSQL_ASSOC)) {
 }
 ?>
 </body>  
-<script> fillTaskBox(); </script>
+<script> 
+  fillTaskBox(); 
+  window.onbeforeunload = function() {
+    if(pos=="Session"){    
+      var value = parseInt(clock.getTime())+1;
+      if (value != countS)
+       sessionStorage.setItem('clockTime', value);
+    }
+    else if (pos =="Pomodoro") {      
+      var value = clockManaged?parseInt(clock.getTime())+1:parseInt(clock.getTime());
+      if (value != countS)
+       sessionStorage.setItem('clockTime', value);
+    }    else
+      sessionStorage.clear();
+
+}
+</script>
 </html>

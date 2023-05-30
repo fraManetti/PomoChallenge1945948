@@ -182,9 +182,11 @@
     #tasks{
     border-radius: 15px;
     width: 470px;
-    position: relative;
+    position: static;
     background-color:  #eeeeee;
-    padding: 15px 15px;
+    padding: 0px 15px;
+    padding-bottom: 15px;
+    padding-top: 3px;
     margin-top: 40px;
     
     overflow-y: auto;
@@ -204,11 +206,67 @@
     }
 
     .roundBtnHomeBottom{
-        border-radius: 5px;
+      
+        width: 49%;
+        border-radius: 10px;
+        background-color: #494949;
+        border-color: transparent;
+        color: #f7f1eb;
+        
+    }
+
+    .roundBtnHomeBottom:disabled {
+      opacity: 0.4;
+    }
+
+    .roundBtnHomeTop {
+      border-color: transparent;
+      display:block
+    }
+
+    .roundBtnHomeTop:disabled {
+      border-color: transparent;
+      display: none;
     }
     
     .bottomTag{
-        margin-left: 12px;
+        width: 90%;
+        margin: 0% auto;
+        height: fit-content;
+        padding: 3% 0%;
+    }
+
+    #swapRow {
+      display: grid;
+      height: fit-content;
+      width: 100%;
+      margin-top: 5px;
+      justify-items: right;
+      grid-template-columns: 90% 10%;
+    }
+
+    #swapImg{
+      display: block;
+      width: 23px;
+      cursor: pointer;
+      padding-top: 3px;
+    }
+
+    #swapImg:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    
+
+    #reverseImg:disabled{
+      
+    }
+
+    #reverseImg{
+      padding-top: 3px;
+      width: 18px;
+      cursor: pointer;
+      
     }
 
     .slider:after
@@ -303,14 +361,7 @@ input:checked + .slider:before {
   background-color: #e7645d;
 }
 
-#switchRow {
-    padding-bottom: 10px;
-    /*margin-top: 66px; */  
-    vertical-align: auto;
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+
 
 
   

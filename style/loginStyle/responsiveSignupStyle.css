@@ -18,6 +18,11 @@
         width: 100%;
     }
 
+    #pomoTitleID {
+        width: 230px;
+        justify-self: left;
+      }
+
     input[type=text], input[type=password] {
         width: 80%;
         margin-left: 10%;

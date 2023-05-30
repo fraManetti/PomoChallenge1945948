@@ -32,9 +32,12 @@ function modalitaTask() {
   if(!taskOn){
     taskOn=true;
     updateTaskTag(false,false);
+    sessionStorage.setItem("taskStatus",true);
   }
-  else 
+  else {
     taskOn=false;
+    sessionStorage.setItem("taskStatus",false);
+  }
 }
 
 // Funzione per eliminare una task da tutto con il bottone delete:
@@ -389,22 +392,12 @@ function addTask(){
       document.getElementById("taskFieldInput").value="";
       document.getElementById("taskNote").value="";
       document.getElementById("pomoTaskNumber").value = "1";
-      updateTaskTag(false,false);
+      updateTaskTag(taskOn,false);
 
       }
   }
 
-  // gestisce click fuori dal popup
-  function handleOutClick(event) {
-    popupContainer = document.getElementById("popupContainer");
-    if (!popupContainer.contains(event.target)) {
-      popupContainer.innerHTML = "";
 
-      //document.getElementById("overlay").style.display = "none";
-      document.removeEventListener("mousedown", handleOutClick);
-    }
-  }
-  
   function openSwapPopup() {
     popupContainer = document.getElementById("popupContainer");
   
@@ -503,6 +496,13 @@ function deleteAllTask() {
   $('.task').remove();
   updateTaskButtons();
   updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
+  document.cookie = "taskList=" + "" + "; expires=Fri, 31 Dec 1970 23:59:59 GMT;"+ 'path=/';
+  if(taskOn){
+    clock.stop();
+    alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
+    modalitaTask();
+    setButtonState();  
+  }
 }
 
 
@@ -550,6 +550,9 @@ document.cookie= "cookie_timestamp="+timestamp+ "; expires=Fri, 31 Dec 2023 23:5
 
 }}
 function setButtonState() {
+  if(sessionStorage.getItem("taskStatus")!=null){
+    taskOn = JSON.parse(sessionStorage.getItem("taskStatus"));
+  }
   var checkBox = document.getElementById("customCheckbox");
   if (taskOn == true){
     checkBox.checked = true;

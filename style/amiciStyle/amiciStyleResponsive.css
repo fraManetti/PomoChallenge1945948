@@ -5,6 +5,12 @@
     height: 135vh;
   }
 
+  
+  #pomoTitleID {
+    width: 230px;
+    justify-self: left;
+  }
+
   #amiciPanel{
     width: 98vw;
     height: 50vh;
@@ -31,6 +37,10 @@
     min-width: 200px;
   }
 
+  #delete-friend-button {
+    font-size: small;
+  }
+
   .largeButton{
     height: 70%;
     width: 90%;
@@ -50,6 +60,11 @@
     height: 50vh;
     min-height: 330px;
     min-width: 200px;
+  }
+
+  #pomoTitleID {
+    width: 250px;
+    justify-self: left;
   }
 
   #boxdx{

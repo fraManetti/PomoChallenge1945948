@@ -37,15 +37,17 @@
     <button class= "tabClass" id="globaleClassButton" onClick ="downloadGlobalClass();">Globale</button>
     <button class= "tabClass" id="amiciClassButton" onClick="downloadAmiciClass();">Amici</button>
     </div>
-  <div id="contentPanel">
-    <div id="classificaColumnTitles">
-    <span class="elemClassifica">Username</span>
-    <span class="elemClassifica">Tempo totale</span>
-    <span class="elemClassifica">Profilo</span>
-    </div>
-    <div id="classificaBox" class="box"> 
-    </div>
-</div>  </div>
+    
+      <div id="contentPanel">
+          <div id="classificaColumnTitles">
+            <span class="elemClassifica">Username</span>
+            <span class="elemClassifica">Tempo totale</span>
+            <span class="elemClassifica">Profilo</span>
+          </div>
+          <div id="classificaBox" class="box"> 
+          </div>
+      </div>  
+</div>
 
 </div>
 <?php 
