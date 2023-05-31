@@ -52,6 +52,8 @@ INSERT INTO endedtask VALUES ('ale', '01dw28', 'Task di prova', 13, 'Nota import
 INsERT INTO endedtask VALUES ('ale', '02dw0', 'Task di prova', 17, 'Nota importante', '12-02-2023', 55, '12:00');
 INSERT INTO endedtask VALUES ('ale', '0FeWDFW19', 'Task di prova', 15, 'Nota importante', '25-01-2023', 105, '12:00');
 INSERT INTO endedtask VALUES ('ale', '01dafww28', 'Task di prova', 13, 'Nota importante', '02-04-2023', 100, '09:00');
+INSERT INTO endedtask VALUES ('ale', '01dafww6a66628', 'ripasso', 2, 'Nota importante', '02-04-2023', 10, '08:00');
+INSERT INTO endedtask VALUES ('ale', '01dafww6a66628', 'ripasso', 2, 'Nota importante', '02-04-2023', 10, '08:00');
 
 
 
