@@ -52,3 +52,31 @@ INSERT INTO endedtask VALUES ('ale', '01dw28', 'Task di prova', 13, 'Nota import
 INsERT INTO endedtask VALUES ('ale', '02dw0', 'Task di prova', 17, 'Nota importante', '12-02-2023', 55, '12:00');
 INSERT INTO endedtask VALUES ('ale', '0FeWDFW19', 'Task di prova', 15, 'Nota importante', '25-01-2023', 105, '12:00');
 INSERT INTO endedtask VALUES ('ale', '01dafww28', 'Task di prova', 13, 'Nota importante', '02-04-2023', 100, '09:00');
+
+
+
+
+INSERT INTO endedtask VALUES ('ale', '01dafww28', 'Task di prova', 13, 'Nota importante', '02-04-2023', 100, '09:00');
+INSERT INTO endedtask VALUES ('groot', '01<ghtsgfehftaDra7', 'Task di prova', 11, 'Nota importante', '11-01-2023', 100005, '12:00');
+INSERT INTO endedtask VALUES ('paola', '01dafwsgsew28', 'Task di prova', 13, 'Nota importante', '02-04-2023', 6000, '09:00');
+INsERT INTO endedtask VALUES ('luca', '02segadw0', 'Task di prova', 17, 'Nota importante', '12-02-2023', 1255, '12:00');
+INSERT INTO endedtask VALUES ('mario', '0FeawwwwwwfwfWDFW19', 'Task di prova', 15, 'Nota importante', '25-01-2023', 177705, '12:00');
+INSERT INTO endedtask VALUES ('giacomo01', '0FeawwwwwawdwfwfWDFW19', 'Task di prova', 15, 'Nota importante', '25-01-2023', 175805, '12:00');
+INSERT INTO endedtask VALUES ('jcp', '01<ghawddehftra7', 'Task di prova', 11, 'Nota importante', '11-01-2023',667, '12:00');
+INSERT INTO endedtask VALUES ('mauriziosarri', '01dafsew', 'Task di prova', 13, 'Nota importante', '02-04-2023', 6000, '09:00');
+INsERT INTO endedtask VALUES ('Marilyn', '02sega674dw0', 'Task di prova', 17, 'Nota importante', '12-02-2023', 1355, '12:00');
+INSERT INTO endedtask VALUES ('mario', 'wwfwfWDFW19', 'Task di prova', 15, 'Nota importante', '25-01-2023', 17705, '12:00');
+INSERT INTO endedtask VALUES ('giacomo01', '0FeawwwwwawdDFW19', 'Task di prova', 15, 'Nota importante', '25-01-2023', 170805, '12:00');
+INSERT INTO endedtask VALUES ('anna', '01dafww666628', 'Task di prova', 13, 'Nota importante', '02-04-2023', 2450, '09:00');
+
+
+
+
+
+INSERT INTO amici VALUES ('jcp', 'gerry_scotti');
+INSERT INTO amici VALUES ('anna', 'ale');
+INSERT INTO amici VALUES ('ale', 'MichaelJJ');
+INSERT INTO amici VALUES ('jcp', 'groot');
+INSERT INTO amici VALUES ('groot', 'giacomo01');
+INSERT INTO amici VALUES ('elio', 'groot');
+INSERT INTO amici VALUES ('giovanna', 'jcp');
