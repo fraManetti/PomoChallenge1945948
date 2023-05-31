@@ -1,7 +1,15 @@
+/* ############################################
+SCRIPT PER GESTIRE LE TASK SCARICATE DAL SERVER
+###############################################
+*/
+
+// Funzione per aggiungere una nuova task alla tasklist partendo da una tupla dei risultati della query
 function fillTaskList(tuple) {
     var newTask = { key:tuple.keyhash, title: tuple.title, pomodori: parseInt(tuple.pomodori),note: tuple.note,donepomodori: parseInt(tuple.donepomodori),tim:parseInt(tuple.tim) };
     taskList.push(newTask); 
 }
+
+//Funzione per mostrare a schermo il contenuto di taskList
 function fillTaskBox (){
   var nPomos=0;
     for (var i=0 ;i<taskList.length;i++){
@@ -33,6 +41,8 @@ function fillTaskBox (){
     var textToAppend = "Pomodori Rimanenti: "+JSON.stringify(nPomos);
     document.getElementById("pomoCount").innerText=textToAppend;
 }
+
+// Funzione per leggere le task dal cookie e aggiungerle a taskList
 function mergeCookie() {
     let cookieValue = document.cookie
   .split('; ')

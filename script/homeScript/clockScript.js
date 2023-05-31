@@ -157,7 +157,6 @@ $(document).ready(function(){
   if(taskList.length==1){
     taskList[0].donepomodori+=1;
     taskList[0].tim += Math.floor(JSON.parse(countS -(clock.getTime()/60)));
-    console.log(typeof  taskList[0].tim,taskList[0].tim);
     var task =taskList[0];
     task.index=1;
     updateTaskTag(true,false);

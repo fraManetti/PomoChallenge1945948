@@ -16,23 +16,6 @@ var myChart = null;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function load(s, e) {
   var currentActiveButton = document.querySelector('.tabClass.active');
   if (currentActiveButton) {
@@ -47,6 +30,9 @@ function load(s, e) {
   var url;
     totalTime = 0 ;
   if(s == 'daily') {
+  /*  document.querySelector("#currentPeriod").insertAdjacentHTML('beforeend', `
+    <p1> ${currentString} <br></p1>
+  `);*/
     document.querySelector("#currentPeriod").innerText= currentString;
     url = "../server/dailyLoad.php";
     currentPeriodType = "day";
@@ -129,10 +115,6 @@ function load(s, e) {
 }
 
 
-
-
-
-
 function weekCharts() {
   if (myChart) {
     myChart.destroy();
@@ -140,7 +122,7 @@ function weekCharts() {
   const ctx = document.getElementById('myChartCanvas').getContext("2d");
   weekQuery().then((data) => {
     const weekLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    myChart = new myChart(ctx, {
+    myChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: weekLabels,
@@ -170,6 +152,7 @@ function weekCharts() {
 
 
 
+
 function weekQuery() {
   return new Promise((resolve, reject) => {
     const url = "../server/getWeekTime.php";
@@ -189,9 +172,6 @@ function weekQuery() {
     httpRequest.send();
   });
 }
-
-
-
 
 
 function hourCharts() {
@@ -355,8 +335,6 @@ function monthCharts(i) {
     console.error(error);
   });
 }
-
-
 
 function weekCharts2(s) {
   if (myChart) {
