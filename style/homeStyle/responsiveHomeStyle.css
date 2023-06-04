@@ -1,3 +1,9 @@
+@media only screen and (max-width: 400px){
+    .roundBtnHomeBottom{
+        width: 30vw;
+    }
+}
+
 @media only screen and (max-width: 576px) {
 
     #switchRow {
