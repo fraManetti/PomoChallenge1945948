@@ -539,7 +539,7 @@ function nascondiVignetta() {
 //Nel caso in cui non si è loggati invece di caricare sul server salva i dati su un cookie che verrà poi letto dal server e analizzato in caso di login
 function updateServer(newTask,type) {
 console.log(newTask,type);
-  if(isLogged){
+  if(isLogged && newTask!=null){
   $.ajax({
     url: "../server/updateTaskServer.php",
     type: "POST",
