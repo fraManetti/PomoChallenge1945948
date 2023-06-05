@@ -559,10 +559,10 @@ function downloadEnded(tuple) {
         -->
         <img class = "taskImg" id ="endedDeleteImg" src = "../style/img/trash-can-solid.png"   onClick="deleteEndedTask(event);">
         </img>
-        <input type="text" readonly id="endedTaskname" value="${tuple.title}" maxlength="25">
+        <input type="text" readonly class="endedTaskname" value="${tuple.title}" maxlength="25">
        
 
-        <input type="text"  id="endedPomos" value= "${tuple.tim} min" readonly  min="1">
+        <input type="text"  class="endedPomos" value= "${tuple.tim} min" readonly  min="1">
        
         <button id="optionbuton" onclick = "endedOption(event)">
             <img id = "endedOptionImg" src  = "../style/img/ellipsis-vertical-solid.png" >

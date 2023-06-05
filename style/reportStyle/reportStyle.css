@@ -302,7 +302,7 @@
     padding: 5px;
   }
 
-  #endedTaskname {
+  .endedTaskname {
     width: 270;
     height : 30px;
     margin-top: 4px;
@@ -315,7 +315,7 @@
     cursor: context-menu;
   }
 
-  #endedPomos {
+  .endedPomos {
     width: 70px;
     height : 30px;
     margin-left: 7px;

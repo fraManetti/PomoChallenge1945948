@@ -104,7 +104,7 @@
 
 
     /*settaggio input text (box di input titolo task)*/
-    input[type='text']{
+    #taskFieldInput{
         width:293px;
         background-color: #f7f1eb;
         border-color: transparent;

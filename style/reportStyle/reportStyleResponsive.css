@@ -81,8 +81,8 @@
     }
 
   .task {width: 100%;}
-  #endedTaskname {width: 98%;}
-  #endedPomos {width: 100%; margin-left: 0px;}
+  .endedTaskname {width: 98%;}
+  .endedPomos {width: 100%; margin-left: 0px;}
   #hiddenOption {width: 810%; margin-left: 0px;}
   .hiddenNote{width: 100%; margin-left: 12%;}
 
@@ -191,8 +191,8 @@
   #endedDeleteImg {width: 75%;}
 
   .task {width: 100%;}
-  #endedTaskname {width: 98%;}
-  #endedPomos {width: 100%; margin-left: 0px;}
+  .endedTaskname {width: 98%;}
+  .endedPomos {width: 100%; margin-left: 0px;}
   #hiddenOption {width: 810%; margin-left: 0px;}
   .hiddenNote{width: 100%; margin-left: 12%;}
 }
