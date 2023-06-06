@@ -1,14 +1,16 @@
+//MACRO
 MIN_PLEN = 8;
 MIN_ULEN = 3;
 MAX_LEN = 20;
 MAX_PLEN = 32;
 
+//Espressioni regolari
 const uppercaseRegex = new RegExp('(?=.*[A-Z]).+');
 const lowercaseRegex = new RegExp('(?=.*[a-z]).+');
 const numRegex = new RegExp('.*[0-9]+.*'); 
 const specialRegex = new RegExp('(?=.*[@#$%\\^&+=!"£/()=?\\^ì\\\\]).+');
 
-
+//Funzione per gestire la visibilità della password
 function showPassword() {
     var x = document.getElementById("passwordSignInput");
     var y = document.getElementById("confirmPasswordSignInput");
@@ -23,11 +25,13 @@ function showPassword() {
     }
    }
 
+//Funzione per resettare campi
 function resetField() {
     document.getElementById("userSignInput").value = "";
     document.getElementById("passwordSignInput").value = "";
 }
 
+//Funzione per inviare all'invio da tastiera
 function handleKeyPress(e) {
   if (e.key === "Enter") {
     e.preventDefault();
@@ -35,6 +39,7 @@ function handleKeyPress(e) {
   }
 }
 
+//Funzione per controllare le sottomissioni
 function handleSubmit(e) {
   var pass = document.getElementById("passwordSignInput").value;
   var conf = document.getElementById("confirmPasswordSignInput").value;
@@ -49,7 +54,7 @@ function handleSubmit(e) {
   
 }
 
-
+//Funzione per il controllo delle password inserite
 function checkPass() {
   var pass = document.getElementById("passwordSignInput");
   var conf = document.getElementById("confirmPasswordSignInput");
@@ -86,6 +91,7 @@ function checkPass() {
   }
 }
 
+//Funzione per il controllo dello username inserito
 function checkUsername() {
   var user = document.getElementById("userSignInput");
   if(user.value.length < MIN_ULEN) {
