@@ -1,8 +1,10 @@
+//MACRO utilizzate
 MIN_PLEN = 8;
 MIN_ULEN = 3;
 MAX_LEN = 20;
 MAX_PLEN = 32;
 
+//Espressioni regolari utilizzate per i controlli su Username e Password
 const uppercaseRegex = new RegExp('(?=.*[A-Z]).+');
 const lowercaseRegex = new RegExp('(?=.*[a-z]).+');
 const numRegex = new RegExp('.*[0-9]+.*'); 
@@ -24,6 +26,7 @@ function checkNewUsername(newUsername) {
     else return true;
   }
 
+  //Funzione di controllo della nuova password inserita
   function checkNewPass(newPassword) {
     if(newPassword.length < MIN_PLEN) {
       alert("La password deve contenere almeno " + MIN_PLEN + " caratteri");
@@ -54,12 +57,9 @@ function checkNewUsername(newUsername) {
     }
   }
 
-  //-------------------------------------------------------------------------------------------------------------------
-
-
-
   var originalValue;
 
+  /*Funzione di aggiornamento degli Username*/
   function updateUsername() {
       var usernameField = document.getElementById('usernameField');
       if (!originalValue) {
@@ -85,7 +85,6 @@ function checkNewUsername(newUsername) {
                       },
                       error: function(xhr, status, error) {
                           console.error(error);
-                          /*qui ci metterò l'alert*/
                       }
                   });
               } else {
@@ -108,12 +107,11 @@ function handleOutClick(event) {
     popupContainer = document.getElementById("popupContainer");
     if (!popupContainer.contains(event.target)) {
       popupContainer.innerHTML = "";
-
-      //document.getElementById("overlay").style.display = "none";
       document.removeEventListener("mousedown", handleOutClick);
     }
   }
   
+  //Funzione di apertura del Pop Up per cambiare la password
   function openPopUpPassword() {
     popupContainer = document.getElementById("popupContainer");
   
@@ -129,11 +127,9 @@ function handleOutClick(event) {
       </div>
     `;
     
-    //document.getElementById("overlay").style.display = "block";
     
     document.addEventListener("mousedown", handleOutClick);
   
-    //CONTINUA QUI
     var i1;
     var i2;
 
@@ -142,6 +138,7 @@ function handleOutClick(event) {
     });
   }
 
+  /*Funzione per aggiornare la password sul server*/
   function confirmNewPassword() {
     var oldPassword = document.getElementById("oldPass").value;
     var newPassword = document.getElementById("newPass").value;
@@ -161,13 +158,12 @@ function handleOutClick(event) {
             },
             error: function(xhr, status, error) {
                 console.error(error);
-                /*qui ci metterò l'alert*/
             }
         });
     }
 }
 
-
+  // Funzione di aggiornamento dell'immagine profilo
   function updateImage(event) {
     file = event.target.files[0];
 
@@ -195,6 +191,7 @@ function handleOutClick(event) {
       }
   });   }
    
+    //Funzione per reimpostare l'immagine profilo predefinita
    function resetImage() {
 
     document.getElementById("mypic").src="https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg";
@@ -210,19 +207,23 @@ function handleOutClick(event) {
       },
       error: function(xhr, status, error) {
           console.error(error);
-          /*qui ci metterò l'alert*/
       }
   });
    }
 
-   function contaAmici(contaAmici) {
+//Funzione per impostare la conta degli amici totali
+function contaAmici(contaAmici) {
     document.getElementById("amici-totali").innerHTML = contaAmici;
 }
+
+//Funzione per impostare la conta delle ore totali
 function contaOre(contaOre) {
   var cnt = convertMinHour(contaOre);
   document.getElementById("ore-studio").innerHTML = cnt;
   
 }
+
+//Funzione di eliminazione dell'account sul server
 function deleteAccount() {
   if (confirm("Sicuro di voler eliminare il profilo? Questa operazione non è annullabile"))
   $.ajax({
@@ -240,7 +241,6 @@ function deleteAccount() {
     },
     error: function(jqXHR, textStatus, errorThrown) {
         console.error(errorThrown);
-        /*qui ci metterò l'alert*/
     }
 });
   else  

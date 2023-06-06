@@ -21,22 +21,19 @@
  var pos = "Pomodoro";
  var clockManaged =false;
 
- $(".rotate").click(function(){
-  $(this).toggleClass("down")  ; 
- })
+//#################################################################
+//##########             FUNZIONI AUSILIARIE:        ##############
+//#################################################################
 
+ /*Funzione per controllare se devo aggiornare il tempo stimato in corrispondenza della modifica delle durate di Session/Short Break/Long Break*/
  function checkTimeUp() {
   if(taskOn && clock.running)
     updateTaskTag(true,false);
  }
 
- /*Nota: nel seguente codice abbiamo adottato degli accorgimenti per compensare la perdita di 1 secondo registrata all'invocazione della funzione
-         getTime() della libreria FlipClock utilizzata per l'orologio.
- */
-
- //#################################################################
- //##########             FUNZIONI AUSILIARIE:        ##############
- //#################################################################
+/*Nota: nel seguente codice abbiamo adottato degli accorgimenti per compensare la perdita di 1 secondo registrata all'invocazione della funzione
+        getTime() della libreria FlipClock utilizzata per l'orologio.
+*/
 
  /*Funzione per scrivere da tastiera la durata del Pomodoro personalizzata*/
  function writeSession(){
