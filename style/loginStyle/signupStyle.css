@@ -54,7 +54,7 @@ html {
 .imgContainer {
     text-align: center;
     justify-content: center;
-    width: 400px;
+    width: 100%;
 }
 
 .imgAvatar {
