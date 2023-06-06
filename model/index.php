@@ -147,7 +147,6 @@ echo '<script>mergeCookie()</script>';
                       
                       <img class = "rotate" id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
                       </img>
-                      <!--prima c'era onclick="InfoPopUp"-->
                       <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
                       
                       </img>
@@ -239,8 +238,6 @@ echo '<script>mergeCookie()</script>';
               <div id="tasks">
               </div>
               <div id="popupContainer"></div>
-              <!-- Crea un elemento div per l'overlay > se lo vogliamo fare -->
-              <div id="overlay"></div>
           </div>
         
         </div>
