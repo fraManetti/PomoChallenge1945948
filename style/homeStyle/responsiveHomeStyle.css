@@ -104,10 +104,6 @@
         width: 130%;
     }
 
-    #timeEstimated {
-        padding: 25px;
-    }
-
     #selectTaskArea {
         border-radius: 20px;
     }
@@ -222,7 +218,6 @@
     }
 
     #timeEstimated {
-        display: none;
         height: fit-content;
     }
 

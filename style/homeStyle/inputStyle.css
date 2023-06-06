@@ -187,7 +187,7 @@
     padding: 0px 15px;
     padding-bottom: 15px;
     padding-top: 3px;
-    margin-top: 40px;
+    margin-top: 50px;
     
     overflow-y: auto;
     max-height: 300px;
@@ -241,6 +241,7 @@
       height: fit-content;
       width: 100%;
       margin-top: 5px;
+      margin-bottom: 10px;
       justify-items: right;
       grid-template-columns: 90% 10%;
     }
