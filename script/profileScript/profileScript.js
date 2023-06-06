@@ -104,15 +104,7 @@ function checkNewUsername(newUsername) {
 
 
 
-function handleOutClick(event) {
-    popupContainer = document.getElementById("popupContainer");
-    if (!popupContainer.contains(event.target)) {
-      popupContainer.innerHTML = "";
 
-      //document.getElementById("overlay").style.display = "none";
-      document.removeEventListener("mousedown", handleOutClick);
-    }
-  }
   
   function openPopUpPassword() {
     popupContainer = document.getElementById("popupContainer");

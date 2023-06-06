@@ -18,7 +18,6 @@
     <script  src="../script/profileScript/profileScript.js"></script>
     <script  src="../script/defaultScript.js"></script>
     <script src="../bootstrap/dist/js/bootstrap.bundle.min.js" ></script>
-    <!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous" referrerpolicy="no-referrer" ></script>  -->
 
     <script>
         $(function(){
@@ -62,6 +61,7 @@
 </body>
 <?php 
 //--------------------------------------------------------------------------------------------------------------->
+//Scarico dati dal server
         $username = $_SESSION['username'];
         $query = "select amiciC.utente, sum(amiciC.contaAmici) as totale
         from (
@@ -99,6 +99,7 @@
  
 </html>
 <script>
+  //Se ho una foto profilo, che ho salvato localmente nel cookie, assegnala al box dell'immagine
 if (document.cookie.indexOf("profilepic") >= 0) {
       var path = document.cookie
       .split('; ')

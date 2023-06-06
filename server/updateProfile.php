@@ -61,7 +61,7 @@ $res = pg_query($db_conn,$query);
 
 
 if (!$res) {
-    //header("HTTP/1.1 500 Internal Server Error");
+    header("HTTP/1.1 500 Internal Server Error");
     exit();
 }
 ?>

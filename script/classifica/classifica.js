@@ -1,3 +1,9 @@
+/* ############################################
+SCRIPT PER GESTIRE CLASSIFICA
+###############################################
+*/
+
+// Inserisco a schermo la classifica 
 function downloadClassifica(tuple) {
     var user =tuple.username;
     var points = convertMinHour( tuple.points);
@@ -9,6 +15,7 @@ function downloadClassifica(tuple) {
         </div>
     `);
 }
+//Scarico dal server classifica globale 
 function downloadGlobalClass(){
     document.querySelector("#classificaBox").innerHTML="";
     var url ="../server/getGlobalClass.php";
@@ -29,6 +36,8 @@ function downloadGlobalClass(){
     };
     httpRequest.send();
   }
+
+// Scarico dal server classifica amici
 function downloadAmiciClass(){
     document.querySelector("#classificaBox").innerHTML="";
     var url ="../server/getAmiciClass.php";

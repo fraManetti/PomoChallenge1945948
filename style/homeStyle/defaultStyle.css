@@ -67,12 +67,6 @@
     height: 35px;
     object-fit: cover;
   }
-  /* .profilePic{    
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  } */
 
   .popup {
     position: fixed;
@@ -161,7 +155,12 @@
 .box::-webkit-scrollbar-button {
   display: none;
 }
-
+.box{ 
+  border-color: #bd0101;
+  /* versione scrollbar per firefox*/
+  scrollbar-width: thin; 
+  scrollbar-color: rgb(165, 158, 158); 
+}
 
 #pomoTitleID {
   padding-left: 1%;

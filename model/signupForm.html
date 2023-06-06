@@ -78,18 +78,19 @@
 </body>
 </html>
 <script>
+    // Script per gestire i redirect del server a causa di errori
     window.onload = function() {
     if (new URLSearchParams(window.location.search).get('signup') === 'failed1') {
 alert('Registrazione non riuscita, cambia username.');
 const newUrl = new URL(window.location.href);
 newUrl.searchParams.delete('signup');
-window.history.replaceState({}, '', newUrl);
+window.history.replaceState({}, '', newUrl); //pulisci url
 }
 if (new URLSearchParams(window.location.search).get('signup') === 'failed2') {
 alert('Registrazione non riuscita, riprova.');
 const newUrl = new URL(window.location.href);
 newUrl.searchParams.delete('signup');
-window.history.replaceState({}, '', newUrl);
+window.history.replaceState({}, '', newUrl);//pulisci url
 }
 }
 </script>
