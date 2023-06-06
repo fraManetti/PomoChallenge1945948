@@ -47,7 +47,7 @@
 } 
 
 
-  #taskname {
+input[class='taskname'] {
     background-color: #f7f1eb;
     border-radius: 7px;
     border-color: transparent;
@@ -186,9 +186,9 @@
   margin-top: 2px;
 } 
 
-#hiddenNote {
+.hiddenNote {
   margin-top: 5px;;
-  margin-left: 58px;
+  margin-left: 55px;
   width: 985%;
   resize: none;
   border-radius: 7px;

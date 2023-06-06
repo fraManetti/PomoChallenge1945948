@@ -21,7 +21,7 @@ function fillTaskBox (){
               </img>
             <!-- </button>   -->
             <span class="indexTasks" data-value="${index}">${index})</span>
-            <input type="text" readOnly id="taskname"  value="${taskList[i].title}" onkeypress="handleKeyPress(event, 'options')" maxlength="25">
+            <input type="text" readOnly class="taskname"  value="${taskList[i].title}" onkeypress="handleKeyPress(event, 'options')" maxlength="25">
 
 
             <input type="number" value="${taskList[i].pomodori}" class="x" readonly  min="1">
@@ -31,7 +31,7 @@ function fillTaskBox (){
                 </img>
             </button>
             <div class="hiddenOption" display = none>
-              <textarea name="taskNote" id="hiddenNote" cols="40" rows="3" placeholder="updateNote" maxlength="115">${taskList[i].note}</textarea>
+              <textarea name="taskNote" class="hiddenNote" cols="40" rows="3" placeholder="updateNote" maxlength="115">${taskList[i].note}</textarea>
             </div>
         </div>
     `)
