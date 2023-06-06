@@ -224,6 +224,8 @@
       display:block
     }
 
+button#defaultOrderButton {}
+
     .roundBtnHomeTop:disabled {
       border-color: transparent;
       display: none;
