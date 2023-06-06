@@ -257,6 +257,14 @@
       opacity: 0.5;
       pointer-events: none;
     }
+
+    #swap {
+      background-color: transparent;
+    }
+
+    #reverse {
+      background-color: transparent;
+    }
     
 
     #reverseImg:disabled{

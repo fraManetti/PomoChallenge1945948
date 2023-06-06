@@ -224,11 +224,11 @@ echo '<script>mergeCookie()</script>';
                     })()"> </label>
                   </div>  
                   <div id="swapRow">
-                  <button  title = "swap" name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
+                  <button  title = "swap" name = "swapTasksButton" class = "roundBtnHomeTop" id="swap" disabled onclick="openSwapPopup()">
                     <img  alt = "swap" id = "swapImg" src  = "../style/img/swap.png">
                     </img>
                   </button>
-                  <button title = "reverse" name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
+                  <button title = "reverse" name = "reverseTasksButton" class = "roundBtnHomeTop" id="reverse" disabled onclick="reverseTask();">
                     <img alt = "reverse" id = "reverseImg" src  = "../style/img/reverse.png">
                     </img>
                   </button>                       
