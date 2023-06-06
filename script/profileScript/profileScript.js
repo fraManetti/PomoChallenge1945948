@@ -10,6 +10,7 @@ const lowercaseRegex = new RegExp('(?=.*[a-z]).+');
 const numRegex = new RegExp('.*[0-9]+.*'); 
 const specialRegex = new RegExp('(?=.*[@#$%\\^&+=!"£/()=?\\^ì\\\\]).+');
 
+//Funzione di controllo del nuovo username inserito
 function checkNewUsername(newUsername) {
     if(newUsername.length < MIN_ULEN) {
       alert("L'username deve contenere almeno " + MIN_ULEN + " caratteri");
