@@ -1,7 +1,8 @@
-//Variabili per le task:
+//#################################################################
+//##########             VARIABILI:                  ##############
+//#################################################################
  var taskList = [];
  var taskOn = false;
- //var countCurrPom =0;
  var clock;
  var count;
  var countS;
@@ -20,14 +21,21 @@
  var pos = "Pomodoro";
  var clockManaged =false;
 
- $(".rotate").click(function(){
-  $(this).toggleClass("down")  ; 
- })
+//#################################################################
+//##########             FUNZIONI AUSILIARIE:        ##############
+//#################################################################
 
+ /*Funzione per controllare se devo aggiornare il tempo stimato in corrispondenza della modifica delle durate di Session/Short Break/Long Break*/
  function checkTimeUp() {
   if(taskOn && clock.running)
     updateTaskTag(true,false);
  }
+
+/*Nota: nel seguente codice abbiamo adottato degli accorgimenti per compensare la perdita di 1 secondo registrata all'invocazione della funzione
+        getTime() della libreria FlipClock utilizzata per l'orologio.
+*/
+
+ /*Funzione per scrivere da tastiera la durata del Pomodoro personalizzata*/
  function writeSession(){
    var oldTime = countS*60;
    var sessLeng = document.getElementById("session").value;
@@ -68,6 +76,7 @@
    checkTimeUp();
  }
  
+ /*Funzione per scrivere da tastiera la durata della Short Break personalizzata*/
  function writeShortBreak(){
    oldBreak = countB*60;
    var shortLeng = document.getElementById("break").value;
@@ -99,6 +108,8 @@
    checkTimeUp();
 
  }
+
+  /*Funzione per scrivere da tastiera la durata della Long Break personalizzata*/
  function writeLongBreak(){
    oldLong = countL*60;
    var longLeng = document.getElementById("longBreak").value;
@@ -127,6 +138,8 @@
    checkTimeUp();
 
  }
+
+/*Funzione per resettare orologio nella configurazione standard*/
 function resetClock() {
   clockManaged=true;
  clock.stop();
@@ -146,12 +159,12 @@ $(document).ready(function(){
  countL = 15;
  $("#break").val(countB);
  $("#longBreak").val(countL);
- //var pos = "Pomodoro";
  var countLama;
  var posLama;
    $("#stats").html(pos);
 
 
+  /*Funzione che gestisce lo stato delle task in relazione allo stato dell'orologio*/
   function checkCurrentTask() {
 
   if(taskList.length==1){
@@ -200,6 +213,7 @@ $(document).ready(function(){
   
 }
 
+/*Inizializzazione dei timer a seconda dello stato attuale del Pomodoro (Session, Short Break o Long Break)*/
 clock = $(".timer").FlipClock(sessionStorage.getItem("clockTime")!=null?sessionStorage.getItem("clockTime"):countS*60, {
   countdown: true,
   clockFace: 'MinuteCounter',
@@ -241,6 +255,7 @@ clock = $(".timer").FlipClock(sessionStorage.getItem("clockTime")!=null?sessionS
   })
 
 
+  /*Gestione dei click sul tasto START*/
   $("#start").on("click", function(){
     
     if(taskOn && taskList.length>0)updateTaskTag(true,false);
@@ -273,12 +288,11 @@ clock = $(".timer").FlipClock(sessionStorage.getItem("clockTime")!=null?sessionS
         }
         else{
           alert("Non hai ancora inserito task!");
-          //clock.stop();
         }
     }
   });
 
- //SESSION
+ //Gestione degli incrementi della durata di Session cliccando sul tasto +
  $("#sessInc").on("click", function(){
   
   if ($("#session").val() > 0){
@@ -300,6 +314,7 @@ clock = $(".timer").FlipClock(sessionStorage.getItem("clockTime")!=null?sessionS
   checkTimeUp();
 });
 
+ //Gestione dei decrementi della durata di Session cliccando sul tasto -
 $("#sessDec").on("click", function(){
   if ($("#session").val() > 1){
     clockManaged=true;
@@ -316,7 +331,9 @@ $("#sessDec").on("click", function(){
   }
   checkTimeUp();
 });
-//BREAK
+
+ //Gestione degli incrementi della durata di Short Break cliccando sul tasto +
+
 $("#breakInc").on("click", function(){
   if ($("#break").val() > 0){
     countB = parseInt($("#break").val());
@@ -330,6 +347,9 @@ $("#breakInc").on("click", function(){
   }    
   checkTimeUp();
 });
+
+ //Gestione dei decrementi della durata di Short Break cliccando sul tasto -
+
 $("#breakDec").on("click", function(){
   if ($("#break").val() > 1){
     countB = parseInt($("#break").val());
@@ -343,7 +363,9 @@ $("#breakDec").on("click", function(){
   }
   checkTimeUp();
 });
- // LONG BREAK
+
+  //Gestione degli incrementi della durata di Long Break cliccando sul tasto +
+
  $("#longInc").on("click", function(){
   if ($("#longBreak").val() > 0){
     countL = parseInt($("#longBreak").val());
@@ -357,6 +379,9 @@ $("#breakDec").on("click", function(){
   }  
   checkTimeUp();  
 });
+
+  //Gestione dei decrementi della durata di Long Break cliccando sul tasto -
+
 $("#longDec").on("click", function(){
   if ($("#longBreak").val() > 1){
     countL = parseInt($("#longBreak").val());
@@ -371,6 +396,7 @@ $("#longDec").on("click", function(){
   checkTimeUp();
 });
 
+// Gestione del click sul tasto SKIP
 $("#skip").on("click", function(){
   var isEnded;
   if (pos == "Session"){
@@ -401,6 +427,8 @@ $("#skip").on("click", function(){
     else updateTaskTag(false,false);
   }
 });
+
+// Gestione del click sul tasto CLEAR
 $("#clear").on("click", function(){
 countB=5;
 countL=15;
@@ -420,7 +448,6 @@ $("#session").val("25");
 $("#longBreak").val("15");
 $("#break").val("5");
 
-//titleTimer(clock)
 
 });
 })

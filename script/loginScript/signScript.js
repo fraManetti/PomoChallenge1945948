@@ -39,11 +39,6 @@ function handleSubmit(e) {
   var pass = document.getElementById("passwordSignInput").value;
   var conf = document.getElementById("confirmPasswordSignInput").value;
   var username = document.getElementById("userSignInput").value;
-
-  /* if(pass == ""  || conf == "" || username == "") {
-    alert("Inserire dati nei campi");
-    e.preventDefault;
-  } */
    if(checkPass() && checkUsername()) {
     console.log("connessione");
   }
