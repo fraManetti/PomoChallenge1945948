@@ -15,7 +15,7 @@ var myChart = null;
 
 
 
-
+// funzione che gestisce la gestione dei quattro pulsanti del pannello di sinistra
 function load(s, e) {
   var currentActiveButton = document.querySelector('.tabClass.active');
   if (currentActiveButton) {
@@ -114,7 +114,7 @@ function load(s, e) {
   httpRequest.send();
 }
 
-
+// gestione caricamento del grafico della settimana corrente
 function weekCharts() {
   if (myChart) {
     myChart.destroy();
@@ -152,7 +152,7 @@ function weekCharts() {
 
 
 
-
+// richiesta http per il grafico della settimana corrente
 function weekQuery() {
   return new Promise((resolve, reject) => {
     const url = "../server/getWeekTime.php";
@@ -173,7 +173,7 @@ function weekQuery() {
   });
 }
 
-
+// gestione caricamento del grafico della giornata corrente
 function hourCharts() {
   const ctx = document.getElementById('myChartCanvas');
   dailyQuery().then((data) => {
@@ -212,6 +212,7 @@ function hourCharts() {
   });
 }
 
+// richiesta http per il grafico della giornata corrente
 function dailyQuery() {
   return new Promise((resolve, reject) => {
     const url = "../server/getDailyTime.php";
@@ -232,6 +233,7 @@ function dailyQuery() {
   });
 }
 
+// gestione caricamento del grafico della giornata richiesta
 function hourCharts2(s) {
   if (myChart) {
     myChart.destroy();
@@ -273,6 +275,7 @@ function hourCharts2(s) {
   });
 }
 
+// richiesta http per il grafico della giornata richiesta
 function dailyQuery2(s) {
   return new Promise((resolve, reject) => {
     const url = "../server/increaseDayTime.php";
@@ -294,6 +297,7 @@ function dailyQuery2(s) {
   });
 }
 
+// gestione caricamento del grafico dei mesi
 function monthCharts(i) {
   if (myChart) {
     myChart.destroy();
@@ -336,6 +340,7 @@ function monthCharts(i) {
   });
 }
 
+// gestione caricamento del grafico della settimana richiesta
 function weekCharts2(s) {
   if (myChart) {
     myChart.destroy();
@@ -371,6 +376,7 @@ function weekCharts2(s) {
   });
 }
 
+// gestione caricamento del grafico della giornata media
 function avgDailyCharts() {
   if (myChart) {
     myChart.destroy();
@@ -410,6 +416,7 @@ function avgDailyCharts() {
   });
 }
 
+// gestione caricamento del grafico della settimana media
 function avgWeeklyCharts() {
   if (myChart) {
     myChart.destroy();
@@ -445,6 +452,7 @@ function avgWeeklyCharts() {
   });
 }
 
+// richiesta http per il grafico dei mesi
 function monthQuery() {
   return new Promise((resolve, reject) => {
     const url = "../server/getMonthTime.php";
@@ -466,7 +474,7 @@ function monthQuery() {
 }
 
 
-
+// richiesta http per il grafico della settimana richiesta
 function weekQuery2(s) {
   return new Promise((resolve, reject) => {
     const url = "../server/increaseWeekTime.php";
@@ -488,10 +496,12 @@ function weekQuery2(s) {
   });
 }
 
+
 function avgCharts(){
   avgDailyCharts()
 }
 
+// richiesta http per il grafico della giornata media
 function avgDailyQuery() {
   return new Promise((resolve, reject) => {
     const url = "../server/avgday.php";
@@ -512,6 +522,7 @@ function avgDailyQuery() {
   });
 }
 
+// richiesta http per il grafico della settimana media
 function avgWeekQuery() {
   return new Promise((resolve, reject) => {
     const url = "../server/avgWeekTime.php";
@@ -532,18 +543,20 @@ function avgWeekQuery() {
   });
 }
 
+//passaggio da stringa a Date
 function parseDate(str) {
   var parts = str.split("-");
   return new Date(parts[2], parts[1] - 1, parts[0]);
   
 }
 
+//appende tempo totale a schermo
 function upTotalTime(totalTime) {
   var total = convertMinHour(totalTime);
   document.getElementById("totalTime").innerHTML="Tempo Totale : "+total;
 }
 
-
+//appende a schermo le task finite
 function downloadEnded(tuple) {
     document.querySelector('#tasksPanel').insertAdjacentHTML('beforeend', `
     <div  class="task" data-value="${tuple.keyhash}">
@@ -564,7 +577,7 @@ function downloadEnded(tuple) {
 
         <input type="text"  class="endedPomos" value= "${tuple.tim} min" readonly  min="1">
        
-        <button id="optionbuton" onclick = "endedOption(event)">
+        <button title = "optionButton" class="optionbuton" onclick = "endedOption(event)">
             <img id = "endedOptionImg" src  = "../style/img/ellipsis-vertical-solid.png" >
             </img>
         </button>
@@ -578,6 +591,7 @@ function downloadEnded(tuple) {
 `)
 }
 
+//controllo che i soli mesi visualizzabili siano dell'anno corrente
 function checkMonthsBorder() {
   cMonth = currentD.getMonth();
   if(cMonth == 0) { 
@@ -595,6 +609,7 @@ function checkMonthsBorder() {
   }
 }
 
+//controllo che i soli mesi visualizzabili siano della settimana
 function checkWeekBorder() {
   var monD = parseDate(mon);
   var sunD = parseDate(sun);
@@ -626,6 +641,7 @@ function checkWeekBorder() {
   sun = dateToString(sunD);
 }
 
+//controllo che i soli mesi visualizzabili siano del giorno corrente
 function checkDayBorder() {
   date = currentString;
   var parts = date.split("-");
@@ -644,6 +660,7 @@ function checkDayBorder() {
   }
 } 
 
+//passsaggio da data a stringa
 function dateToString(d) {
   var day = JSON.parse(d.getDate());
   var month = JSON.parse(d.getMonth()+1);
@@ -656,7 +673,7 @@ function dateToString(d) {
     return s;
 }
 
-
+//controllo di luned' e domenica della settimana corrente
 function weekInterval(d) {
   var today = d;
   var currentDayOfWeek = today.getDay();
@@ -669,6 +686,7 @@ function weekInterval(d) {
   sun = dateToString(sunD);
 }
 
+//cancellazione task
 function deleteEndedTask(e) {
   var url ="deleteTask.php";
   var button = e.currentTarget;
@@ -701,6 +719,7 @@ function deleteEndedTask(e) {
 });
 }
 
+//funzione che gestisce il pulasnte che fa visualizzare la Note della task
 function endedOption(e) {
     var button = e.currentTarget;
     var hiddenBox = button.nextElementSibling;
@@ -714,7 +733,7 @@ function endedOption(e) {
 }
 
 
-
+//gestione caricamento del grafico della settimana corrente o giornta corrente
 function chartLoad(s, e) {
   var currentActiveButton = document.querySelector('.avgBtnClass.active');
   if (currentActiveButton) {
@@ -730,6 +749,7 @@ function chartLoad(s, e) {
   }
 }
 
+//gestione incremento e decremento della giornata richiesta
 function increaseDay(s) {
   if(s == "+") {
     currentD.setDate(currentD.getDate() + 1);
@@ -748,6 +768,7 @@ function increaseDay(s) {
   currentString = day+"-"+month+"-"+year;
 }
 
+//gestione incremento e decremento della settimana richiesta
 function increaseWeek(s) {
   if(s == "+") {
     currentD.setDate(currentD.getDate() + 7);
@@ -766,6 +787,7 @@ function increaseWeek(s) {
   currentString = day+"-"+month+"-"+year;
 }
 
+//gestione incremento e decremento del mese richiesta
 function increaseMonth(s) {
   
   if(s == "+") {
@@ -785,6 +807,7 @@ function increaseMonth(s) {
   currentString = day+"-"+month+"-"+year;
 }
 
+//gestione pulsante "+" del pannello di sinistra. incrementa di un giorno, una settimana o un mese a seconda del periodo selezionato
 function increase() {
   document.getElementById("tasksPanel").innerHTML = '';
   upTotalTime(0);
@@ -847,6 +870,7 @@ function increase() {
   }
 }
 
+//gestione pulsante "-" del pannello di sinistra. decrementa di un giorno, una settimana o un mese a seconda del periodo selezionato
 function decrease() {
   document.getElementById("tasksPanel").innerHTML = '';
   upTotalTime(0);
@@ -908,6 +932,7 @@ function decrease() {
   }
 }
 
+//gestione del pulsante "+"  e "-" tenuto premuto
 function startInterval(s) {
   if(s == "-") intervalId = setInterval(decrease, 100); 
   else if(s == "+") intervalId = setInterval(increase, 100); 
@@ -915,6 +940,7 @@ function startInterval(s) {
   canCharge = false;
 }
 
+//gestione del pulsante "+"  e "-" rilasciato
 function stopInterval() {
   clearInterval(intervalId); 
   canCharge = true;

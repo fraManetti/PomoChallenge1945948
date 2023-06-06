@@ -53,10 +53,10 @@
              <div id ="searchBox" class="row">
                 <div class="barra ric">
                    <input type="text" name="search" placeholder="Invia richiesta di amicizia" id="search" onkeypress="handleKeyPress(event, 'addFriend')">
-                   <button class="btn btn-search" onClick="sendRequest();">
+                   <button title = "search" class="btn btn-search" onClick="sendRequest();">
                       <i class="fa fa-arrow-right"></i>
                    </button>
-                   <button type="reset" class="btn btn-reset fa fa-times"></button>
+                   <button title = "reset" type="reset" class="btn btn-reset fa fa-times"></button>
                 </div>
               </div>
               <div id ="suggBox" class = "box"> 
