@@ -104,7 +104,8 @@ echo '<script>mergeCookie()</script>';
                           <button class="btn btn-default btnIncDec" id="sessDec">-</button>        
                         </div>
                         <div class="col-md-2">
-                          <input type="number" class="params" id="session" value = "25" onblur="writeSession()" onkeypress="handleKeyPress(event, 'writeSession')"></input>
+                        
+                          <input type="number" placeholder='session' class="params" id="session" value = "25" onblur="writeSession()" onkeypress="handleKeyPress(event, 'writeSession')"></input>
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-default btnIncDec" id="sessInc">+</button>
@@ -119,7 +120,7 @@ echo '<script>mergeCookie()</script>';
                           <button class="btn btn-default btnIncDec" id="breakDec">-</button>
                         </div>
                         <div class="col-md-2">
-                          <input type="number" class="params" id="break" value = "5" onblur="writeShortBreak()" onkeypress="handleKeyPress(event, 'writeShortBreak')"></input>
+                          <input type="number" placeholder='break' class="params" id="break" value = "5" onblur="writeShortBreak()" onkeypress="handleKeyPress(event, 'writeShortBreak')"></input>
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-default btnIncDec" id="breakInc">+</button>        
@@ -133,7 +134,7 @@ echo '<script>mergeCookie()</script>';
                           <button class="btn btn-default btnIncDec" id="longDec">-</button>        
                         </div>
                         <div class="col-md-2">
-                          <input type="number"  class="params" id="longBreak" value = "15" onblur="writeLongBreak()" onkeypress="handleKeyPress(event, 'writeLongBreak')"></input>
+                          <input type="number" placeholder='longbreak' class="params" id="longBreak" value = "15" onblur="writeLongBreak()" onkeypress="handleKeyPress(event, 'writeLongBreak')"></input>
                         </div>
                         <div class="col-md-4">
                           <button class="btn btn-default btnIncDec" id="longInc">+</button>
@@ -145,9 +146,9 @@ echo '<script>mergeCookie()</script>';
                 <div id="buttonsArea">
                 <div id="switchRow"> 
                       
-                      <img class = "rotate" id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
+                      <img class = "rotate"  alt = "settings" id = "settingsImg" src  = "../style/img/gearsolid.png" onclick="checkCustom()">
                       </img>
-                      <img id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
+                      <img alt = "settings" id = "infoImg" src  = "../style/img/info-solid.png" onclick="infoPopUp()">
                       
                       </img>
                       <div class="overlay" id="infoOverlay">
@@ -190,7 +191,7 @@ echo '<script>mergeCookie()</script>';
                   <p id="modalitaTaskSwitch">
                     Attivare task? 
                     <label class="switch" data-on="ON" data-off="OFF">
-                      <input type="checkbox" id = "customCheckbox" onclick="modalitaTask(); resetClock();">
+                      <input type="checkbox" placeholder='customcheckbox' id = "customCheckbox" onclick="modalitaTask(); resetClock();">
                       <span class="slider round"></span>
                     </label>
                   </p>
@@ -201,7 +202,7 @@ echo '<script>mergeCookie()</script>';
                     <div id="innerInputBox">
                       <div id = "inputRow">
                         <input type="text" placeholder="Add task title" id="taskFieldInput" onkeypress="handleKeyPress(event, 'add')" maxlength="35">
-                        <input type="number" min="1"  id="pomoTaskNumber" value="1" label> 
+                        <input type="number" placeholder='pomotasknumber' min="1"  id="pomoTaskNumber" value="1" label> 
                       </div>
                         <textarea id="taskNote" placeholder="Add a note..." " cols="40" rows="3" onkeypress="handleKeyPress(event, 'add')" maxlength="115" ></textarea>
                         <!-- Quanti Pomodori?<br> -->
@@ -219,17 +220,17 @@ echo '<script>mergeCookie()</script>';
                   <label>
                     Automatic delete for ended tasks
                   </label>
-                  <input type="checkbox" id="automaticDel" onclick="(function () {
+                  <input type="checkbox" placeholder='automaticDel' id="automaticDel" onclick="(function () {
                       delEnded=event.currentTarget.checked;
                     })()"> </label>
                   </div>  
                   <div id="swapRow">
-                  <button name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
-                    <img  id = "swapImg" src  = "../style/img/swap.png">
+                  <button  title = "swap" name = "swapTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="openSwapPopup()">
+                    <img  alt = "swap" id = "swapImg" src  = "../style/img/swap.png">
                     </img>
                   </button>
-                  <button name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
-                    <img id = "reverseImg" src  = "../style/img/reverse.png">
+                  <button title = "reverse" name = "reverseTasksButton" class = "roundBtnHomeTop" id="defaultOrderButton" disabled onclick="reverseTask();">
+                    <img alt = "reverse" id = "reverseImg" src  = "../style/img/reverse.png">
                     </img>
                   </button>                       
                 </div>

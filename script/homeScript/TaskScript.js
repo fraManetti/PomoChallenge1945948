@@ -413,7 +413,7 @@ function addTask(){
 
               <input type="number" value="" class="x" readonly  min="1">
               
-              <button type="button" class="taskOption" onClick= "showOption(event);" >
+              <button type="button" title = "taskoption" class="taskOption" onClick= "showOption(event);" >
                   <img class = "taskImg" src  = "../style/img/sliders-solid.png">
                   </img>
               </button>
