@@ -136,6 +136,7 @@ function updateTaskBox (taskItems,  cond){
   if (!cond){
     taskItems[2].setAttribute("readonly","readonly");
     taskItems[3].setAttribute("readonly","readonly");
+    taskItems[5].children[0].setAttribute("readonly","readonly");
 
   }
   else{
@@ -287,6 +288,7 @@ function showOption(e) {
       hiddenBox.style.display = "none";
       anyTaskOpen = false;
       //       taskBox.classList.toggle("taskShowed");
+      
       updateTaskBox(taskItems,false);
       button.children[0].setAttribute("src","../style/img/sliders-solid.png");
       var newTitle = taskItems[2].value;
@@ -301,7 +303,7 @@ function showOption(e) {
     anyTaskOpen = true;
     button.children[0].setAttribute("src", "../style/img/floppy-disk-solid.png");
     //       taskBox.classList.toggle("taskShowed");
-    updateTaskBox(taskItems,taskBox.style.backgroundColor!="grey");
+    updateTaskBox(taskItems,!taskBox.classList.contains('endedTasks'));
     oldTitle= taskItems[2].value;
     oldPomos= taskItems[3].value;
     oldNote = hiddenBox.children[0].value;
