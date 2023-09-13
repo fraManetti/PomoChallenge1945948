@@ -85,8 +85,10 @@ function deleteTask(e) {
     resetClock();
     document.getElementById("customCheckbox").checked=false;
     alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
-      }
-  updateTaskTag(false,false);
+    updateTaskTag(false,false);
+  }
+  else
+    updateTaskTag(true,false);
   updateTaskButtons();
 }
 
