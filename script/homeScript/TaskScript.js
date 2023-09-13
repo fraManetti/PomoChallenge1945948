@@ -136,8 +136,8 @@ function updateTaskBox (taskItems,  cond){
   if (!cond){
     taskItems[2].setAttribute("readonly","readonly");
     taskItems[3].setAttribute("readonly","readonly");
-    taskItems[5].children[0].setAttribute("readonly","readonly");
-
+    if (taskItems[1].outerText=="0)")
+      taskItems[5].children[0].setAttribute("readonly","readonly");
   }
   else{
     taskItems[2].removeAttribute("readonly");
