@@ -116,6 +116,9 @@ function removeTaskItem() {
   console.log(typeof hour,hour);
   updateServer(task,"FYN");
   taskList.shift();
+  taskList.forEach(task => {
+    task.index--;
+  });
   var tasks= document.getElementsByClassName("task");
   for (var i=0; i<tasks.length;i++){
     if (tasks[i].getAttribute("data-value")==key){
@@ -125,7 +128,9 @@ function removeTaskItem() {
         deleteEndedTask();
 
     }
-    else if (!tasks[i].classList.contains("endedTasks")){
+  }
+  for(var i=0; i<tasks.length;i++)    {
+    if (!tasks[i].classList.contains("endedTasks")){
       tasks[i].children[1].textContent=JSON.stringify(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1))-1)+")"; 
     }
   }
