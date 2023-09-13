@@ -472,7 +472,10 @@ function addTask(){
       tasks[i2].children[2].value = taskList[i2].title;
       tasks[i2].children[3].value = taskList[i2].pomodori;
       taskList[i2].index=tasks[i2].children[1].getAttribute("data-value");
+      console.log(taskList[i1].note);
+      console.log(tasks[i1].children[4].nextElementSibling.children[0]);
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
+      tasks[i2].children[4].nextElementSibling.children[0].value=taskList[i2].note;
       updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
       var task = taskList[i1];
       task.ora = "00:00:00";
