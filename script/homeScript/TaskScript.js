@@ -85,8 +85,10 @@ function deleteTask(e) {
     resetClock();
     document.getElementById("customCheckbox").checked=false;
     alert("Finite tutte le task! Per riprenderne altre riattivare la modalità task!");
-      }
-  updateTaskTag(false,false);
+    updateTaskTag(false,false);
+  }
+  else
+    updateTaskTag(true,false);
   updateTaskButtons();
 }
 
@@ -114,6 +116,9 @@ function removeTaskItem() {
   console.log(typeof hour,hour);
   updateServer(task,"FYN");
   taskList.shift();
+  taskList.forEach(task => {
+    task.index--;
+  });
   var tasks= document.getElementsByClassName("task");
   for (var i=0; i<tasks.length;i++){
     if (tasks[i].getAttribute("data-value")==key){
@@ -123,7 +128,9 @@ function removeTaskItem() {
         deleteEndedTask();
 
     }
-    else if (!tasks[i].classList.contains("endedTasks")){
+  }
+  for(var i=0; i<tasks.length;i++)    {
+    if (!tasks[i].classList.contains("endedTasks")){
       tasks[i].children[1].textContent=JSON.stringify(JSON.parse(tasks[i].children[1].textContent.slice(0,tasks[i].children[1].textContent.length-1))-1)+")"; 
     }
   }
@@ -136,7 +143,8 @@ function updateTaskBox (taskItems,  cond){
   if (!cond){
     taskItems[2].setAttribute("readonly","readonly");
     taskItems[3].setAttribute("readonly","readonly");
-
+    if (taskItems[1].outerText=="0)")
+      taskItems[5].children[0].setAttribute("readonly","readonly");
   }
   else{
     taskItems[2].removeAttribute("readonly");
@@ -287,6 +295,7 @@ function showOption(e) {
       hiddenBox.style.display = "none";
       anyTaskOpen = false;
       //       taskBox.classList.toggle("taskShowed");
+      
       updateTaskBox(taskItems,false);
       button.children[0].setAttribute("src","../style/img/sliders-solid.png");
       var newTitle = taskItems[2].value;
@@ -301,7 +310,7 @@ function showOption(e) {
     anyTaskOpen = true;
     button.children[0].setAttribute("src", "../style/img/floppy-disk-solid.png");
     //       taskBox.classList.toggle("taskShowed");
-    updateTaskBox(taskItems,taskBox.style.backgroundColor!="grey");
+    updateTaskBox(taskItems,!taskBox.classList.contains('endedTasks'));
     oldTitle= taskItems[2].value;
     oldPomos= taskItems[3].value;
     oldNote = hiddenBox.children[0].value;
@@ -468,7 +477,10 @@ function addTask(){
       tasks[i2].children[2].value = taskList[i2].title;
       tasks[i2].children[3].value = taskList[i2].pomodori;
       taskList[i2].index=tasks[i2].children[1].getAttribute("data-value");
+      console.log(taskList[i1].note);
+      console.log(tasks[i1].children[4].nextElementSibling.children[0]);
       tasks[i1].children[4].nextElementSibling.children[0].value=taskList[i1].note;
+      tasks[i2].children[4].nextElementSibling.children[0].value=taskList[i2].note;
       updateTaskTag(taskOn && taskList.length>0 && clock.getTime()!=0,false);
       var task = taskList[i1];
       task.ora = "00:00:00";
