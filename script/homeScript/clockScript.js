@@ -76,38 +76,33 @@
    checkTimeUp();
  }
  
- /*Funzione per scrivere da tastiera la durata della Short Break personalizzata*/
+  /*Funzione per scrivere da tastiera la durata della Short Break personalizzata*/
  function writeShortBreak(){
-   oldBreak = countB*60;
-   var shortLeng = document.getElementById("break").value;
-   if(shortLeng>99 || shortLeng<1){
-    alert("Inserire un valore <99 e >1 !");
-    document.getElementById("break").value=5;
-    return;
-   }   
-   countB = shortLeng;
-   if(countB>oldBreak){
-     var delta = countB*60 - oldBreak;
-     
-     
-     var newTime = clock.getTime().time + delta;
-     
-     if(countWB!=0 && pos=="Short Break") clock.setTime(newTime+1);
-     else if(countWB==0 && pos=="Short Break"){clock.setTime(newTime+1);}
-   }
-   else{
-     var delta = oldBreak-countB*60;
-     
-    
-     var newTime = clock.getTime().time - delta;
-     
-     if(countWB!=0 && pos=="Short Break") clock.setTime(newTime+1);
-     else if(countWB==0 && pos=="Short Break"){clock.setTime(newTime+1);}
-   }
-   countWB++;
-   checkTimeUp();
+  oldBreak = countB*60; 
+  var shortLeng = document.getElementById("break").value; 
+  if(shortLeng>99 || shortLeng<1){
+   alert("Inserire un valore <99 e >1 !");
+   document.getElementById("break").value=5;
+   return;
+  }   
+  countB = shortLeng; 
+  var delta = 0;
+  var newTime = 0;
 
- }
+  if(countB>oldBreak){
+    delta = countB*60 - oldBreak;
+    newTime = clock.getTime().time + delta;
+  }
+  else{
+      delta = oldBreak-countB*60;
+      newTime = clock.getTime().time - delta;
+  }
+    
+    if(pos=="Short Break") {
+      clock.setTime(newTime+1);
+    }
+  checkTimeUp();
+}
 
   /*Funzione per scrivere da tastiera la durata della Long Break personalizzata*/
  function writeLongBreak(){
